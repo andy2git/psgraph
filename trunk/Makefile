@@ -73,9 +73,6 @@ sort.o:	sort.c
 dynamic.o:	dynamic.c
 	$(CC) $(CFLAGS) dynamic.c
 
-union.o:	union.c
-	$(CC) $(CFLAGS) union.c
-
 loadseq.o:	loadseq.c
 	$(CC) $(CFLAGS) loadseq.c
 
@@ -84,9 +81,6 @@ spmaster.o:	spmaster.c
 
 cslib.o:	cslib.c
 	$(CC) $(CFLAGS) cslib.c
-
-csque.o:	csque.c
-	$(CC) $(CFLAGS) csque.c
 
 rpool.o:	rpool.c
 	$(CC) $(CFLAGS) rpool.c
