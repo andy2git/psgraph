@@ -58,7 +58,7 @@
 #define CS_TOGO 1
 #define CS_SENT 2
 
-/* seq. stat */
+/* seq. str. stat */
 #define SEQ_N 0  /* seq. str is empty */
 #define SEQ_S 1  /* statically cached locally */
 #define SEQ_R 2  /* req. sent out already */
@@ -72,12 +72,17 @@ enum {FALSE = 0, TRUE = 1};
 
 #include <mpi.h>
 
+/* NOTE: if you are changing this struct,
+   make sure to change the dtype.h accordingly
+ */
 typedef struct msg {
     char tag;    /* 'P', 'C', 'E' or 'A' */
     int id1;     /* s1 & rank */
     int id2;     /* s2 & status */
 }MSG;
 
+/* pair buffer to hold pairs in supermaster, producer, master, and consumer.
+   It is a circular buffer. */
 typedef struct pbuf{
     int head;
     int tail;
@@ -94,13 +99,6 @@ typedef struct cReq{
     struct req *queue;
     struct req *stMem; /* pre-allocated static mem */
 }CREQ;
-
-/* consumers struct on super master */
-typedef struct csm{
-    int id;
-    struct csm *next;
-}CSM;
-
 
 /**
  * lookup table, used to represent suffix of 
@@ -121,6 +119,9 @@ typedef struct stnode{
     struct suff *lset[SIGMA];    /* subtree's nodes branched according to left characters */
 }STNODE;
 
+/**
+ * forest structure to hold a batch of suffix trees loaded from disk
+ */
 typedef struct forest{
     int stSize;
     int maxDepth;         /* maxium depth of stree used for couting sort */
@@ -134,19 +135,21 @@ typedef struct forest{
 typedef struct seq{
     
     /* isReady TAG
-     * ------------------
-     * 0: not ready
-     * 1: precached
-     * 2: req. sent out
-     * 3: seq. str ready */
+     * ----------------------------------------------------------------
+       0: not ready       #define SEQ_N 0  - seq. str is empty
+       1: precached       #define SEQ_S 1  - statically cached locally
+       2: req. sent out   #define SEQ_R 2  - req. sent out already
+       3: seq. str ready  #define SEQ_F 3  - seq. str fetched locally
+     */
     char stat;      /* seq string is ready for not? */
     char *str;      /* actual string of fasta file */
     int strLen;     /* string length */
     int cnt;        /* counter for seq usage */
 }SEQ;
 
+
 /**
- * CELL for dynamic alignment
+ * CELL for dynamic alignment result
  */
 typedef struct cell{
     int score;           /* alignment score */
@@ -164,11 +167,21 @@ typedef struct param{
     int OS;              /* OptimalScoreOverSelfScore */
 }PARAM;
 
+
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+              STARTING OF POOL RESOURCE MANAGEMENT
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /**
  * pool of seq. reqs resources
  */
 typedef struct sreq{
-    char stat;        /* if this *ids is used or not? */
+    /* #define SREQ_FREE 0
+       #define SREQ_TOGO 1
+       #define SREQ_SENT 2
+     */
+    char stat;        /* if this *ids (res. used for sending req.) is used or not? */
     int *ids;         /* list of requested seq ids */
     int cnt;          /* #(requested ids) */
     MPI_Request req;  /* associated with each *ids */
@@ -207,13 +220,7 @@ typedef struct cpool{
     struct csreq *pool;
 }CPOOL;
 
-
-/**
- * statistics packed in struct 
- */
-typedef struct work{
-    int nAlign;
-    int nPairs;
-}WORK;
-
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+                   END OF POOL RESOURCE MANAGEMEN
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #endif /* end of type.h */
