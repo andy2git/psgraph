@@ -1,6 +1,8 @@
 #ifndef TYPE_H_
 #define TYPE_H_
 
+#include <mpi.h>
+
 #define COLOR_PD 0
 #define COLOR_SM 1
 #define COLOR_MS 2
@@ -12,9 +14,18 @@
 #define MSG_SM_TAG 4
 #define MSG_PS_TAG 5
 #define MSG_SP_TAG 6
-
 #define MSG_CR_TAG 7   /* seq request tag */
 #define MSG_CS_TAG 8   /* seq string tag */
+
+
+/* tag to differentiate msg flowing in the system */
+#define TAG_P 'P'  /* pair workload from producer */
+#define TAG_C 'C'  /* Job request from consumer */
+#define TAG_E 'E'  /* ending of pairs */
+#define TAG_S 'S'  /* stop signal for program */
+#define TAG_T 'T'  /* ending signal of subgroup */
+#define TAG_F 'F'  /* end signal for tree file */
+#define TAG_K 'K'  /* final end singla */
 
 
 /* for consumer request */
@@ -29,34 +40,9 @@
 #define SIGMA 26   /* size of alphabet, '*'->'J' */
 
 
-#define TAG_P 'P'  /* pair workload from producer */
-#define TAG_C 'C'  /* Job request from consumer */
-#define TAG_E 'E'  /* ending of pairs */
-#define TAG_S 'S'  /* stop signal for program */
-#define TAG_T 'T'  /* ending signal of subgroup */
-#define TAG_F 'F'  /* end signal for tree file */
-#define TAG_K 'K'  /* final end singla */
-
 #define MAX_FILENAME_LEN 200
 #define FILE_STOP -1
 
-#define MAX_FASTA_LINE_LEN 100000
-#define FASTA_TAG '>'
-
-/* seq. req. stat */
-#define SREQ_FREE 0
-#define SREQ_TOGO 1
-#define SREQ_SENT 2
-
-/* seq. str. stat */
-#define STR_FREE 0
-#define STR_TOGO 1
-#define STR_SENT 2
-
-/* cs stat */
-#define CS_FREE 0
-#define CS_TOGO 1
-#define CS_SENT 2
 
 /* seq. str. stat */
 #define SEQ_N 0  /* seq. str is empty */
@@ -70,7 +56,6 @@ typedef unsigned long long u64;
 enum {NO = 0, YES = 1};
 enum {FALSE = 0, TRUE = 1};
 
-#include <mpi.h>
 
 /* NOTE: if you are changing this struct,
    make sure to change the dtype.h accordingly
@@ -80,15 +65,6 @@ typedef struct msg {
     int id1;     /* s1 & rank */
     int id2;     /* s2 & status */
 }MSG;
-
-/* pair buffer to hold pairs in supermaster, producer, master, and consumer.
-   It is a circular buffer. */
-typedef struct pbuf{
-    int head;
-    int tail;
-    int data;
-    struct msg *buf;
-}PBUF;
 
 
 /**
@@ -111,16 +87,6 @@ typedef struct stnode{
 }STNODE;
 
 /**
- * forest structure to hold a batch of suffix trees loaded from disk
- */
-typedef struct forest{
-    int stSize;
-    int maxDepth;         /* maxium depth of stree used for couting sort */
-    struct stnode *stree;
-    struct suff *sf; 
-}FOREST;
-
-/**
  * seq info for fasta file
  */
 typedef struct seq{
@@ -138,80 +104,4 @@ typedef struct seq{
     int cnt;        /* counter for seq usage */
 }SEQ;
 
-
-/**
- * CELL for dynamic alignment result
- */
-typedef struct cell{
-    int score;           /* alignment score */
-    int ndig;            /* #(matches) */
-    int alen;            /* alignment length */
-}CELL;
-
-
-/**
- * parameters packed in struct
- */
-typedef struct param{
-    int AOL;             /* AlignOverLongerSeq */
-    int SIM;             /* MatchSimilarity */
-    int OS;              /* OptimalScoreOverSelfScore */
-}PARAM;
-
-
-
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
-              STARTING OF POOL RESOURCE MANAGEMENT
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/**
- * pool of seq. reqs resources
- */
-typedef struct sreq{
-    /* #define SREQ_FREE 0
-       #define SREQ_TOGO 1
-       #define SREQ_SENT 2
-     */
-    char stat;        /* if this *ids (res. used for sending req.) is used or not? */
-    int *ids;         /* list of requested seq ids */
-    int cnt;          /* #(requested ids) */
-    MPI_Request req;  /* associated with each *ids */
-}SREQ;  
-
-typedef struct rpool{
-    int space;
-    struct sreq *pool;
-}RPOOL;
-
-
-/**
- * pool of str resource for sending strings
- */
-typedef struct str{
-    char stat;
-    char *str;
-    MPI_Request req;  /* associated with each *str */
-}STR;
-
-typedef struct spool{
-    int space;
-    struct str *pool;
-}SPOOL;
-
-/* Pool for consumer status report to master
- */
-typedef struct csreq{
-    char stat;
-    MSG msg;
-    MPI_Request req;
-}CSREQ;
-
-typedef struct cpool{
-    int space;
-    struct csreq *pool;
-}CPOOL;
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
-                   END OF POOL RESOURCE MANAGEMEN
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #endif /* end of type.h */
