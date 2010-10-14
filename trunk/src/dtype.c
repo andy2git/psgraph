@@ -5,6 +5,7 @@
  *
  * Copyright 2010 Washington State University. All rights reserved.
  * ----------------------------------------------------------------
+ * This file will build derived datatype for mpi environment!
  *
  */
 
