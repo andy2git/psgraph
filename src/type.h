@@ -90,15 +90,6 @@ typedef struct pbuf{
     struct msg *buf;
 }PBUF;
 
-typedef struct req{
-    int rank;
-    struct req *next;
-}REQ;
-
-typedef struct cReq{
-    struct req *queue;
-    struct req *stMem; /* pre-allocated static mem */
-}CREQ;
 
 /**
  * lookup table, used to represent suffix of 
