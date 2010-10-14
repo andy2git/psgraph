@@ -28,6 +28,27 @@ enum{OPEN = -10, GAP = -1};
 
 #define MIN_VAL (-20000000)
 
+
+
+/**
+ * CELL for dynamic alignment result
+ */
+typedef struct cell{
+    int score;           /* alignment score */
+    int ndig;            /* #(matches) */
+    int alen;            /* alignment length */
+}CELL;
+
+/**
+ * parameters packed in struct
+ */
+typedef struct param{
+    int AOL;             /* AlignOverLongerSeq */
+    int SIM;             /* MatchSimilarity */
+    int OS;              /* OptimalScoreOverSelfScore */
+}PARAM;
+
+
 void initMap(int nAA);
 int selfScore(char *s, int ns);
 

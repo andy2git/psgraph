@@ -10,6 +10,8 @@
 #include "elib.h"
 #include "lib.h"
 
+#define MAX_FASTA_LINE_LEN 100000
+#define FASTA_TAG '>'
 
 int loadStaticSeqs(int rank, int sRank, char *seqFile, SEQ *seqs, int nSeqs, int maxSeqRange, int *maxSeqLen);
 void freeSeqs(SEQ *seqs, int nSeqs, int tag);
