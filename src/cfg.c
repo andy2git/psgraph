@@ -14,7 +14,7 @@
 #include "cfg.h"
 
 /* -----------------------------------------------------
- * Read cFile and return the value corresponding key
+ * fetch value from 'cFile' based on the given key
  *
  * @param cFile - configure file
  * @param key   - configure key name
@@ -48,7 +48,7 @@ int getCfgVal(char *cFile, char *key){
     }
 
     fclose(fp);
-    printf("Error: cannot find config value for key: [%s]\n", key);
+    fprintf(stderr, "Error: cannot find config value for key: [%s]\n", key);
     exit(EXIT_FAILURE);
 
     return -1;
