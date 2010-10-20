@@ -5,7 +5,7 @@
  *
  * Copyright 2010 Washington State University. All rights reserved.
  * ----------------------------------------------------------------
- *
+ * help functions for consumer.c
  */
 
 #include "cslib.h"
@@ -43,7 +43,7 @@ int maxRangeSum(SEQ *seqs, int size, int range){
  *################################################*/
 
 /* ----------------------------------------------*
- *
+ * After recv msg[msgSize] pairs, s
  *
  * @param mapSize - groupSize
  * ----------------------------------------------*/
@@ -254,6 +254,13 @@ void upackStr(char *rvStr, int rvStrSize, SEQ *seqs, int nSeqs, char *upBuf, u64
     }
 
 }
+
+/* ----------------------------------------------------------*
+ * 
+ * @param rank - rank of calling consumer in each subgroup
+ * @param master - master node rank in each subgroup
+ * @param stat - status indicator for #pairs on consumer
+ * ----------------------------------------------------------*/ 
 
 void sendStat(int rank, int master, int stat, CPOOL *cPool, int cPoolSize, MPI_Datatype msgMdt, MPI_Comm *comm){
     int cInd; 
