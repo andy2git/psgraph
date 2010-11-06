@@ -1,0 +1,232 @@
+\documentclass[conference]{IEEEtran}
+\input{psfig}
+\usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{paralist}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{threeparttable}
+\usepackage{rotating}
+%\usepackage{arydshln}
+\usepackage{caption}
+\usepackage{algorithmic}
+
+% copied out from other place
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{problem}{Problem}
+\newtheorem{observation}{Observation}
+\newtheorem{definition}{Definition}
+
+\def\colrule{\\[-7pt]\hline\\[-6pt]}
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+%\title{Supplementary Material }
+
+
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+%\author{\IEEEauthorblockN{Changjun Wu, Ananth Kalyanaraman}
+%\IEEEauthorblockA{School of Electrical Engineering and Computer Science\\
+%Washington State University\\Pullman, WA 99164-2752\\
+%Email {\it cwu2@eecs.wsu.edu, ananth@eecs.wsu.edu}}}
+
+% make the title area
+%\maketitle
+
+%%%% PAGE LIMIT FOR NAR %%%%%%%%%%%%%
+
+%%%% Formula Estimated #pages = (word count/925) + (#figures+tables)/2.8
+
+%%%%%%  Rough target  6000 words, 8 figs + tables (full)
+
+%%%%%	EQUATES TO 
+
+%	10 PAGE LIMIT 
+%	10 PT, DOUBLE COLUMN, SINGLE LINE SPACING
+
+%OR
+
+%	20 PAGE LIMIT 
+%	>= 10 PT, DOUBLE LINE SPACING
+
+
+
+
+\IEEEpeerreviewmaketitle
+
+\begin{algorithm}
+\caption{Super Master}
+\label{sp}
+\begin{algorithmic}
+	\STATE Let $P=\{p_1, p_2, ...\}$ be the set of active producers
+	\STATE Let $M=\{m_1, m_2, ...\}$ be the set of masters
+
+	\WHILE{$|P| \neq 0$}
+	    \STATE Post a non-blocking receive for producers
+	    \IF{$|P_{buf}| > 0$}
+		    \STATE Poll all masters in a round-robin way to check any posted send was completed
+		    \IF {$isSd_{i}$ is \TRUE}
+		        \STATE Extract at most $B$ pairs from $pBuf$
+		        \STATE Send extracted pairs to $m_i$ in a non-blocking way
+	 	    \ENDIF
+           	\IF{$P_{buf}$ is FULL}
+		        \STATE {\bf continue}
+		    \ENDIF
+           	\STATE Test previous non-blocking receive
+		    \IF{$isRv$ is \TRUE}
+		        \IF{$R$ is file request from $p_i$}
+		            \STATE Send next file to $p_i$ if it has any or send a END file
+		        \ELSE 
+			        \STATE Insert received pairs in $pBuf$
+		        \ENDIF
+		        \STATE Post a non-blocking receive for producers
+		    \ENDIF
+	    \ELSE
+		    \STATE Waiting for pairs or file request from producers
+		    \IF{$R$ is file request from $p_i$}
+		        \STATE Send next file to $p_i$ if it has any or send a END file
+		    \ELSE
+		        \STATE Insert received pairs into $pBuf$
+		    \ENDIF
+		    \STATE Post a non-block receive for producers
+	    \ENDIF
+    \ENDWHILE
+
+	\STATE Send the rest of pairs to all masters with $\frac{B}{2}$ in a round-robin way
+	\STATE Send END signal to all masters
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Producer}
+\label{pd}
+\begin{algorithmic}
+    \STATE /* Pair generation */
+    \STATE Request a batch of subtrees from supermaster
+    \WHILE{\TRUE}
+        \STATE $T_i \leftarrow$ received subtrees from supermaster 
+        \IF{$T_i = \emptyset$}
+            \STATE {break while loop}
+        \ENDIF
+        \REPEAT
+            \IF{$P_{buf}$ is not FULL}
+                \STATE Generate at most $b_1$ pairs from $T_i$
+                \STATE Insert new pairs into $P_{buf}$
+            \ENDIF
+            \IF{$send_{P->M}$ completed}
+                \STATE Extact at most $b_1$ pairs from $P_{buf}$
+                \STATE $send_{P->M}\leftarrow$ {\it Isend} extracted pairs to master
+            \ENDIF
+        \UNTIL{$T_i = \emptyset$}
+        \STATE Request a batch of subtrees from supermaster
+    \ENDWHILE
+    \STATE /* Flush remaining pairs */
+    \WHILE {$P_{buf} \neq \emptyset$}
+        \STATE Extract at most $b_1$ pairs from $P_{buf}$
+        \IF{$send_{P->M}$ completed}
+            \STATE $send_{P->M}\leftarrow$ {\it Isend} extracted pairs to master
+        \ENDIF
+        \IF{$send_{P->S}$ completed}
+            \STATE $send_{P->S}\leftarrow$ {\it Isend} extracted pairs to supermaster
+        \ENDIF
+    \ENDWHILE
+    \STATE Send END signal to supermaster
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{Master}
+\label{ms}
+\begin{algorithmic}
+
+    \STATE $\tau$: buffer limit set on master node
+    \STATE $C=\{c_1, c_2, ...\}$: consumers in the subgroup
+    \STATE $Q$: priority queue for consumers
+
+    \WHILE{\TRUE}
+        \STATE /* Recv messages */
+        \IF{$|M_{buf}| > \tau$}
+            \STATE $msg\leftarrow$ post {\it Recv} for consumers
+        \ELSE 
+            \STATE $msg\leftarrow$ post open {\it Recv}
+            \IF {$msg \equiv$ pairs}
+                \STATE Insert pairs into $M_{buf}$
+                \IF {$msg \equiv$ END signal from supermaster}
+                    \STATE {break while loop}
+                \ENDIF
+            \ELSIF {$msg \equiv$ request from consumer}
+                \STATE Place consumer in the appropriate priority queue
+            \ENDIF
+        \ENDIF
+        
+        \STATE /* Process consumer requests */
+        \WHILE {$|M_{buf}|>0$ \AND $|Q|>0$}
+            \STATE Extract a highest priority consumer, and send appropriate amount of pairs
+        \ENDWHILE
+    \ENDWHILE
+    \STATE /* Flush remaining pairs to consumers */
+    \WHILE{$|M_{buf}|>0$}
+             \IF {$|Q|>0$}
+                \STATE Extract a highest priority consumer, and send appropriate amount of pairs
+            \ELSE
+                \STATE Waiting consumer requests
+            \ENDIF
+    \ENDWHILE
+    \STATE Send END signal to consumers
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Consumer}
+\label{cs}
+\begin{algorithmic}
+
+    \STATE $\tau$: buffer limit on consumer node.
+    \STATE {EMPTY, HALF, QUARTER}: $0$, $\frac{\tau}{2}$ and $\frac{\tau}{4}$ buffer status
+    
+    \STATE $Recv_{M->C}\leftarrow$post non-blocking receive for master
+    \WHILE {\TRUE} 
+        \IF {$|C_{buf}|>0$} 
+            \STATE Pre-load missed fasta sequences for next batch of pairs
+            \IF {END signal from master}
+                \STATE {break while loop}
+            \ELSE 
+                \STATE Align a pair
+            \ENDIF
+        \ENDIF
+        
+        \IF {$|C_{buf}|=0$ \AND $Recv_{M->C}$ NOT completed}
+            \STATE Send {\bf EMPTY} request to its master
+            \STATE Wait for pairs from master
+        \ENDIF
+
+        \IF {$Recv_{M->C}$ NOT completed}
+            \IF {$|C_{buf}| = \frac{\tau}{2}$}
+                \STATE Send {\bf HALF} request to its master
+            \ELSIF {$|C_{buf}| = \frac{\tau}{4}$}
+                \STATE Send {\bf QUARTER} request to its master
+            \ENDIF
+        \ELSE
+            \STATE Insert received pairs into $C_{buf}$
+        \ENDIF
+    \ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
