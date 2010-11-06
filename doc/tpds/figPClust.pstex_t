@@ -1,0 +1,41 @@
+\begin{picture}(0,0)%
+\includegraphics{figPClust.pstex}%
+\end{picture}%
+\setlength{\unitlength}{3947sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(5802,3804)(736,-3073)
+\put(3781,-1441){\rotatebox{90.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\rmdefault}{\mddefault}{\updefault}...}}}}}
+\put(4486,-2551){\rotatebox{90.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}...}}}}}
+\put(3901,239){\rotatebox{20.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}status}}}}}
+\put(1726,-1036){\rotatebox{45.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}trees}}}}}
+\put(2401,-1261){\rotatebox{20.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}pairs}}}}}
+\put(5101,-286){\rotatebox{90.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}...}}}}}
+\put(5551,-286){\rotatebox{90.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}...}}}}}
+\put(2926,-211){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}pairs}}}}
+\put(5101,-2461){\rotatebox{90.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}...}}}}}
+\put(4126,-61){\rotatebox{20.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}pairs}}}}}
+\put(2221,539){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}\underline{$Subgroup_1$:}}}}}
+\put(4726,-886){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\bfdefault}{\updefault}Consumers}}}}
+\put(2626,-2836){\makebox(0,0)[b]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\bfdefault}{\updefault}Producer}}}}
+\put(3526,-2836){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\bfdefault}{\updefault}Master}}}}
+\put(4726,-2986){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\bfdefault}{\updefault}Consumers}}}}
+\put(2326,-661){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\bfdefault}{\updefault}Producer}}}}
+\put(3526,-661){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\bfdefault}{\updefault}Master}}}}
+\put(4576,464){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}compute alignment}}}}
+\put(2251, 89){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}pair generation}}}}
+\put(5551,164){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}output edges}}}}
+\put(5551,-436){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}output edges}}}}
+\put(5776,-661){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}to file}}}}
+\put(5776,-61){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}to file}}}}
+\put(1126,-886){\rotatebox{50.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}request trees,}}}}}
+\put(1126,-1111){\rotatebox{50.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}redistribute pairs}}}}}
+\put(2176,-1861){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}\underline{$Subgroup_m$:}}}}}
+\put(2701,-2011){\rotatebox{340.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}pairs}}}}}
+\put(751,-1936){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\bfdefault}{\updefault}Supermaster}}}}
+\end{picture}%

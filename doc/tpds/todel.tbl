@@ -1,0 +1,22 @@
+\begin{table*}[thb]
+\begin{center}
+\begin{tabular}{cccccccc||c}
+\colrule
+Input number & \multicolumn{7}{c||}{Number of processors ($p$)}& Number of pairs\\[2pt]  \cline{2-8} \\[-7pt]
+\multicolumn{1}{c}{of sequences($n$)} & 16 & 32 & 64 & 128 & 256 & 512 & 1,024 &  (in millions)\\
+ \colrule
+ 20K & 445 & 215 & 106 & 53 & 26 & 15 & - & 6.5  \\
+ 40K & 1,406 & 677 & 332  & 164 & 83 & 42 &  21 & 16.9\\
+ 80K & -  & 10,224  & 5,042 & 2,516 & 1,277 & 674 & 360 &48.5  \\
+ 160K & -  & - & 8,795 & 4,401 & 2,221  & 1,165  & 600 &125.6 \\
+ 320K & - & - &  - & 9,804 & 4,914 & 2,476 & 1,301 &365.7 \\
+ 640K & - & - & - & 15,278 & 7,709  & 3,935  & 2,064 &590.1 \\
+ \colrule
+\end{tabular}
+\end{center}
+\caption{\label{tabRuntime}
+The run-time of \emph{pClust} on various input and processor sizes. An entry `-' means that the corresponding run was not performed.
+%\vspace*{-0.2in}
+}
+\end{table*}
+
