@@ -20,7 +20,7 @@ plot "speedup.dat" using 1:($2*100/$10) title "n=20K" w lp lw 3 pt 1, \
 "" using 1:($5*100/$10) title "n=160K" w lp lw 3 pt 4, \
 "" using 1:($6*100/$10) title "n=320K" w lp lw 3 pt 5, \
 "" using 1:($7*100/$10) title "n=640K" w lp lw 3 pt 6, \
-"" using 1:($8*100/$10) title "n=1280K" w lp lw 3 pt 7, \
-"" using 1:($9*100/$10) title "n=2560K" w lp lw 3 pt 8, \
+"" using 1:($8*100/$10) title "n=1,280K" w lp lw 3 pt 7, \
+"" using 1:($9*100/$10) title "n=2,560K" w lp lw 3 pt 8, \
 "" using 1:($10*100/$10) title "ideal" w lp lw 3 pt 9
 
