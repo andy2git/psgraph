@@ -17,7 +17,7 @@ set bmargin 3
 set lmargin 5
 set tmargin 0
 plot "subgroups.dat.sp" using 1:2 title "With pairs redistribution" w lp lw 3 pt 1, \
-"sg.dat.nosp" using 1:2 title "Without pairs redistribution" w lp lw 3 pt 4
+"subgroups.dat.nosp" using 1:2 title "Without pairs redistribution" w lp lw 3 pt 4
 set yrange [6000:13000]
 set ytics (8000, 10000, 12000)
 set label 1 "#pairs (in thousands)"
@@ -28,6 +28,6 @@ set bmargin 0
 set lmargin 5
 set tmargin 3
 plot "subgroups.dat.sp" using 1:($3/1000) title "Pairs aligned" w lp lw 3 pt 1, \
-"sg.dat.nosp" using 1:($3/1000) title "Pairs generated" w lp lw 3 pt 4
+"subgroups.dat.nosp" using 1:($3/1000) title "Pairs generated" w lp lw 3 pt 4
 set nomultiplot
 
