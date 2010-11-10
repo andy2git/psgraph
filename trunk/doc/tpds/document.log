@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2010.5.22)  3 NOV 2010 21:48
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2007.5.18)  10 NOV 2010 15:02
 entering extended mode
  %&-line parsing enabled.
 **document.tex
@@ -23,7 +23,7 @@ Document Class: IEEEtran 2007/03/05 V1.7a by Michael Shell
 -- Using IEEE Computer Society mode.
 LaTeX Font Info:    Try loading font information for OT1+ppl on input line 366.
 
-(/usr/share/texmf/tex/latex/psnfss/ot1ppl.fd
+(/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 -- Using 8.5in x 11in (letter) paper.
@@ -96,38 +96,38 @@ LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <24> not available
 \@IEEEtmpitemindent=\dimen116
 \c@IEEEbiography=\count90
 \@IEEEtranrubishbin=\box26
-) (/usr/share/texmf/tex/generic/oberdiek/ifpdf.sty
+) (/usr/local/texlive/2007/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2006/02/20 v1.4 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in pdf mode not detected.
 )
-(/usr/share/texmf/tex/latex/tools/verbatim.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks15
 \verbatim@line=\toks16
 \verbatim@in@stream=\read1
 )
-(/usr/share/texmf/tex/latex/graphics/epsfig.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/epsfig.sty
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
 
-(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf/tex/latex/graphics/keyval.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks17
 )
-(/usr/share/texmf/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf/tex/latex/graphics/trig.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texmf/tex/latex/config/graphics.cfg
+(/usr/local/texlive/2007/texmf/tex/latex/config/graphics.cfg
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: dvips.def on input line 90.
 
-(/usr/share/texmf/tex/latex/graphics/dvips.def
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/dvips.def
 File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
 \Gin@req@height=\dimen117
@@ -136,17 +136,18 @@ File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 \epsfxsize=\dimen119
 \epsfysize=\dimen120
 )
-(/usr/share/texmf/tex/latex/paralist/paralist.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/paralist/paralist.sty
 Package: paralist 2002/03/18 v2.3b Extended list environments (BS)
 \pltopsep=\skip44
 \plpartopsep=\skip45
 \plitemsep=\skip46
 \plparsep=\skip47
 \pl@lab=\toks18
-) (./algorithmic.sty
+)
+(./algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 
-(/usr/share/texmf/tex/latex/base/ifthen.sty
+(/usr/local/texlive/2007/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \c@ALC@unique=\count91
@@ -155,11 +156,11 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \c@ALC@depth=\count94
 \ALC@tlm=\skip48
 \algorithmicindent=\skip49
-) (./algorithm.sty
+)
+(./algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
-
-(/usr/share/texmf/tex/latex/float/float.sty
+ (/usr/local/texlive/2007/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count95
 \float@exts=\toks19
@@ -169,8 +170,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 )
 \@float@every@algorithm=\toks21
 \c@algorithm=\count96
-)
-(/usr/share/texmf/tex/latex/ltxmisc/url.sty
+) (/usr/local/texlive/2007/texmf-dist/tex/latex/ltxmisc/url.sty
 \Urlmuskip=\muskip10
 Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
 )
@@ -179,7 +179,8 @@ Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
 \c@definition=\count99
 \c@observation=\count100
 \c@constraint=\count101
- (./document.aux)
+
+(./document.aux)
 \openout1 = `document.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 370.
@@ -196,8 +197,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 370.
 LaTeX Font Info:    ... okay on input line 370.
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 447.
 
-
-(/usr/share/texmf/tex/latex/psnfss/ot1phv.fd
+ (/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
@@ -212,7 +212,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5.5> on input line 447.
 LaTeX Font Info:    Try loading font information for U+pzd on input line 447.
-(/usr/share/texmf/tex/latex/psnfss/upzd.fd
+(/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/upzd.fd
 File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
 ** ATTENTION: \keywords is deprecated (line 447). Use \IEEEkeywords instead.
@@ -224,7 +224,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 447.
 LaTeX Font Info:    Try loading font information for OMS+ppl on input line 447.
 
-(/usr/share/texmf/tex/latex/psnfss/omsppl.fd
+(/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/omsppl.fd
 File: omsppl.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ppl/m/it' in size <8> not available
@@ -233,15 +233,125 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 459.
 LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <12> not available
 (Font)              Font shape `OT1/phv/b/sc' tried instead on input line 459.
+
+
+LaTeX Warning: Citation `Kriventseva01' on page 1 undefined on input line 464.
+
+
+LaTeX Warning: Citation `Handelsman04' on page 1 undefined on input line 466.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 1 undefined on input line 466.
+
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 466.
- [1
+
+LaTeX Warning: Citation `Apweiler04' on page 1 undefined on input line 468.
+
+
+LaTeX Warning: Citation `Bateman04' on page 1 undefined on input line 468.
+
+
+LaTeX Warning: Citation `Enright02' on page 1 undefined on input line 468.
+
+
+LaTeX Warning: Citation `Kriventseva01' on page 1 undefined on input line 468.
+
+
+LaTeX Warning: Citation `Olman07' on page 1 undefined on input line 468.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 1 undefined on input line 468.
+
+
+LaTeX Warning: Citation `Wu08' on page 1 undefined on input line 468.
+
+
+LaTeX Warning: Citation `Smith81' on page 1 undefined on input line 473.
+
+
+LaTeX Warning: Reference `secResults' on page 1 undefined on input line 473.
+
+
+LaTeX Warning: Citation `Weiner73' on page 1 undefined on input line 473.
+
+
+LaTeX Warning: Citation `Altschul90' on page 1 undefined on input line 473.
+
+
+LaTeX Warning: Citation `Wu08' on page 1 undefined on input line 473.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 1 undefined on input line 473.
+
+
+LaTeX Warning: Reference `secResults' on page 1 undefined on input line 473.
+
+[1
 
 
 ]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 476.
- [2]
+
+
+LaTeX Warning: Reference `secRelatedWork' on page 2 undefined on input line 483
+.
+
+
+LaTeX Warning: Reference `secMethods' on page 2 undefined on input line 483.
+
+
+LaTeX Warning: Reference `secResults' on page 2 undefined on input line 483.
+
+
+LaTeX Warning: Reference `secConclusions' on page 2 undefined on input line 483
+.
+
+
+LaTeX Warning: Citation `Needleman70' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Smith81' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Altschul90' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Apweiler04' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Bateman04' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Enright02' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Kriventseva01' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Olman07' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 2 undefined on input line 491.
+
+
+LaTeX Warning: Citation `Wu08' on page 2 undefined on input line 493.
+
+
+LaTeX Warning: Citation `Wu08' on page 2 undefined on input line 493.
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 2 undefined on input line 493.
+
+
+
+LaTeX Warning: Citation `Venter01' on page 2 undefined on input line 495.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 2 undefined on input line 495.
+
+[2]
 LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 501.
 
@@ -260,16 +370,62 @@ Underfull \hbox (badness 10000) in paragraph at lines 503--504
 
  []
 
+
+LaTeX Warning: Citation `Wu08' on page 3 undefined on input line 505.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 3 undefined on input line 505.
+
+
+LaTeX Warning: Reference `secGeneratingPairs' on page 3 undefined on input line
+ 505.
+
+
+LaTeX Warning: Reference `secMasterSlave' on page 3 undefined on input line 505
+.
+
 File: icppFram.eps Graphic file (type eps)
 <icppFram.eps>
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 523.
- (./figPClust.pstex_t
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 3 undefined on input line 526.
+
+
+
+LaTeX Warning: Citation `Wu08' on page 3 undefined on input line 526.
+
+
+LaTeX Warning: Reference `figFramework' on page 3 undefined on input line 526.
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 3 undefined on input line 528.
+
+
+
+LaTeX Warning: Citation `Weiner73' on page 3 undefined on input line 528.
+
+
+LaTeX Warning: Reference `secResults' on page 3 undefined on input line 528.
+
+(./figPClust.pstex_t
 File: figPClust.pstex Graphic file (type eps)
- <figPClust.pstex>) [3]
+ <figPClust.pstex>)
+
+LaTeX Warning: Reference `figPClust' on page 3 undefined on input line 554.
+
+[3]
 Underfull \hbox (badness 10000) in paragraph at lines 558--566
 
  []
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 4 undefined on input line 569.
+
+
+
+LaTeX Warning: Reference `pd' on page 4 undefined on input line 571.
 
 
 Underfull \hbox (badness 1466) in paragraph at lines 571--572
@@ -286,6 +442,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 571--572
 
  []
 
+
+LaTeX Warning: Reference `ms' on page 4 undefined on input line 615.
+
 [4]
 Underfull \hbox (badness 2213) in paragraph at lines 619--620
 []\OT1/ppl/m/n/10 As for serv-ing con-sumers, the mas-ter main-tains
@@ -297,6 +456,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 619--620
  []
 
 
+LaTeX Warning: Citation `Smith81' on page 5 undefined on input line 676.
+
+
+LaTeX Warning: Reference `cs' on page 5 undefined on input line 676.
+
+
 Underfull \hbox (badness 1838) in paragraph at lines 678--679
 \OT1/ppl/m/n/10 to en-sure that the se-quences needed are avail-able
  []
@@ -306,18 +471,58 @@ Underfull \hbox (badness 10000) in paragraph at lines 678--679
 
  []
 
-[5] [6]
+
+LaTeX Warning: Reference `sp' on page 5 undefined on input line 730.
+
+[5]
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 6 undefined on input line 790.
+
+
+[6]
 File: speedup.eps Graphic file (type eps)
  <speedup.eps>
 File: efficiency.eps Graphic file (type eps)
  <efficiency.eps>
-File: csBreak.eps Graphic file (type eps)
- <csBreak.eps>
-File: msBreak.eps Graphic file (type eps)
- <msBreak.eps>
-File: Group.pBuf.eps Graphic file (type eps)
 
-<Group.pBuf.eps> [7]
+LaTeX Warning: Reference `tabRuntime' on page 7 undefined on input line 838.
+
+
+LaTeX Warning: Reference `figSpeedup' on page 7 undefined on input line 838.
+
+
+LaTeX Warning: Reference `figSpeedup' on page 7 undefined on input line 840.
+
+
+LaTeX Warning: Reference `tabRuntime' on page 7 undefined on input line 842.
+
+
+LaTeX Warning: Reference `tabRuntime' on page 7 undefined on input line 842.
+
+
+LaTeX Warning: Reference `figConsumerBreakdown' on page 7 undefined on input li
+ne 850.
+
+File: csBreak.eps Graphic file (type eps)
+<csBreak.eps>
+
+LaTeX Warning: Reference `figMasterBreakdown' on page 7 undefined on input line
+ 863.
+
+File: msBreak.eps Graphic file (type eps)
+<msBreak.eps>
+
+LaTeX Warning: Reference `figMBuffer' on page 7 undefined on input line 877.
+
+File: Group.pBuf.eps Graphic file (type eps)
+<Group.pBuf.eps>
+
+LaTeX Warning: Reference `figProducer' on page 7 undefined on input line 891.
+
+
+LaTeX Warning: Reference `figProducer' on page 7 undefined on input line 891.
+
+[7]
 Underfull \vbox (badness 1953) has occurred while \output is active []
 
 
@@ -327,17 +532,46 @@ Underfull \vbox (badness 3323) has occurred while \output is active []
 File: producer.eps Graphic file (type eps)
 
 <producer.eps>
+
+LaTeX Warning: Reference `figSupermasterBreakdown' on page 9 undefined on input
+ line 906.
+
 File: spBreak.eps Graphic file (type eps)
- <spBreak.eps>
+<spBreak.eps>
+
+LaTeX Warning: Reference `figSPvalue' on page 9 undefined on input line 921.
+
+
+LaTeX Warning: Reference `figSPvalue' on page 9 undefined on input line 921.
+
+
+LaTeX Warning: Reference `figSPvalue' on page 9 undefined on input line 923.
+
 File: subgroups.eps Graphic file (type eps)
- <subgroups.eps> [9] [10] (./document.aux) ) 
+<subgroups.eps>
+
+LaTeX Warning: Reference `tabRuntime' on page 9 undefined on input line 941.
+
+[9]
+
+LaTeX Warning: Reference `tabBatchsize' on page 10 undefined on input line 945.
+
+
+[10] (./document.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1977 strings out of 256217
- 29076 string characters out of 1917095
+ 1977 strings out of 94074
+ 29800 string characters out of 1163007
  88928 words of memory out of 1500000
- 5257 multiletter control sequences out of 10000+200000
+ 5257 multiletter control sequences out of 10000+50000
  29150 words of font info for 74 fonts, out of 1200000 for 2000
  648 hyphenation exceptions out of 8191
- 32i,12n,24p,2186b,604s stack positions out of 5000i,500n,6000p,200000b,15000s
+ 32i,12n,24p,2186b,604s stack positions out of 5000i,500n,6000p,200000b,5000s
 
-Output written on document.dvi (10 pages, 73672 bytes).
+Output written on document.dvi (10 pages, 74008 bytes).
