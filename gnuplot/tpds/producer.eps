@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: producer.eps
-%%Creator: gnuplot 4.2 patchlevel 0
-%%CreationDate: Thu Nov 11 15:35:16 2010
+%%Creator: gnuplot 4.4 patchlevel 2
+%%CreationDate: Sat Nov 13 09:37:39 2010
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -11,8 +11,8 @@
 /gnudict 256 dict def
 gnudict begin
 %
-% The following 6 true/false flags may be edited by hand if required
-% The unit line width may also be changed
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
 %
 /Color true def
 /Blacktext false def
@@ -21,9 +21,11 @@ gnudict begin
 /Landscape true def
 /Level1 false def
 /Rounded false def
+/ClipToBoundingBox false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
+/Gamma 1.0 def
 %
 /vshift -46 def
 /dl1 {
@@ -46,16 +48,24 @@ systemdict /pdfmark known not {
 SDict begin [
   /Title (producer.eps)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 4.2 patchlevel 0)
-  /Author (Andy Wu)
+  /Creator (gnuplot 4.4 patchlevel 2)
+  /Author (Andy)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu Nov 11 15:35:16 2010)
+  /CreationDate (Sat Nov 13 09:37:39 2010)
   /DOCINFO pdfmark
 end
 } ifelse
+/doclip {
+  ClipToBoundingBox {
+    newpath 50 50 moveto 554 50 lineto 554 770 lineto 50 770 lineto closepath
+    clip
+  } if
+} def
 %
-% Gnuplot Prolog Version 4.2 (August 2006)
+% Gnuplot Prolog Version 4.4 (August 2010)
+%
+%/SuppressPDFMark true def
 %
 /M {moveto} bind def
 /L {lineto} bind def
@@ -65,6 +75,8 @@ end
 /Z {closepath} bind def
 /C {setrgbcolor} bind def
 /f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
@@ -85,6 +97,7 @@ end
 	dup 1 lt {pop 1} if 10 mul /udl exch def} def
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
 % Default Line colors
 /LCw {1 1 1} def
 /LCb {0 0 0} def
@@ -305,7 +318,7 @@ end
   ColR ColG ColB setrgbcolor} def
 /BoxColFill {gsave Rec PolyFill} def
 /PolyFill {gsave Density fill grestore grestore} def
-/h {rlineto rlineto rlineto gsave fill grestore} bind def
+/h {rlineto rlineto rlineto gsave closepath fill grestore} bind def
 %
 % PostScript Level 1 Pattern Fill routine for rectangles
 % Usage: x y w h s a XX PatternFill
@@ -427,6 +440,7 @@ end
 %%Page: 1 1
 gnudict begin
 gsave
+doclip
 50 50 translate
 0.100 0.100 scale
 90 rotate
@@ -438,16 +452,32 @@ newpath
 LTb
 1.000 UL
 LTa
-420 905 M
-6542 0 V
+420 519 M
+3776 0 V
+2667 0 R
+84 0 V
 stroke
 LTb
-420 905 M
+420 519 M
 63 0 V
-6479 0 R
+6464 0 R
 -63 0 V
-336 905 M
-( 500) Rshow
+336 519 M
+( 1000) Rshow
+1.000 UL
+LTb
+1.000 UL
+LTa
+420 1016 M
+6527 0 V
+stroke
+LTb
+420 1016 M
+63 0 V
+6464 0 R
+-63 0 V
+-6548 0 R
+( 1500) Rshow
 1.000 UL
 LTb
 1.000 UL
@@ -466,179 +496,179 @@ LTb
 LTb
 1.000 UL
 LTa
-466 420 M
+671 420 M
 0 1092 V
 stroke
 LTb
-466 420 M
+671 420 M
 0 63 V
 0 1029 R
 0 -63 V
-466 280 M
+671 280 M
 ( 5) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-513 420 M
+922 420 M
 0 1092 V
 stroke
 LTb
-513 420 M
+922 420 M
 0 63 V
 0 1029 R
 0 -63 V
-513 280 M
+922 280 M
 ( 10) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-559 420 M
+1173 420 M
 0 1092 V
 stroke
 LTb
-559 420 M
+1173 420 M
 0 63 V
 0 1029 R
 0 -63 V
-559 280 M
+0 -1169 R
 ( 15) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-606 420 M
+1424 420 M
 0 1092 V
 stroke
 LTb
-606 420 M
+1424 420 M
 0 63 V
 0 1029 R
 0 -63 V
-606 280 M
+0 -1169 R
 ( 20) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-652 420 M
+1675 420 M
 0 1092 V
 stroke
 LTb
-652 420 M
+1675 420 M
 0 63 V
 0 1029 R
 0 -63 V
-652 280 M
+0 -1169 R
 ( 25) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-698 420 M
+1926 420 M
 0 1092 V
 stroke
 LTb
-698 420 M
+1926 420 M
 0 63 V
 0 1029 R
 0 -63 V
-698 280 M
+0 -1169 R
 ( 30) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-745 420 M
+2177 420 M
 0 1092 V
 stroke
 LTb
-745 420 M
+2177 420 M
 0 63 V
 0 1029 R
 0 -63 V
-745 280 M
+0 -1169 R
 ( 35) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-791 420 M
+2428 420 M
 0 1092 V
 stroke
 LTb
-791 420 M
+2428 420 M
 0 63 V
 0 1029 R
 0 -63 V
-791 280 M
+0 -1169 R
 ( 40) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-838 420 M
+2679 420 M
 0 1092 V
 stroke
 LTb
-838 420 M
+2679 420 M
 0 63 V
 0 1029 R
 0 -63 V
-838 280 M
+0 -1169 R
 ( 45) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-884 420 M
+2930 420 M
 0 1092 V
 stroke
 LTb
-884 420 M
+2930 420 M
 0 63 V
 0 1029 R
 0 -63 V
-884 280 M
+0 -1169 R
 ( 50) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-930 420 M
+3181 420 M
 0 1092 V
 stroke
 LTb
-930 420 M
+3181 420 M
 0 63 V
 0 1029 R
 0 -63 V
-930 280 M
+0 -1169 R
 ( 55) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-977 420 M
+3432 420 M
 0 1092 V
 stroke
 LTb
-977 420 M
+3432 420 M
 0 63 V
 0 1029 R
 0 -63 V
-977 280 M
+0 -1169 R
 ( 60) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1023 420 M
+3684 420 M
 0 1092 V
 stroke
 LTb
-1023 420 M
+3684 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -648,11 +678,11 @@ LTb
 LTb
 1.000 UL
 LTa
-1070 420 M
+3935 420 M
 0 1092 V
 stroke
 LTb
-1070 420 M
+3935 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -662,11 +692,11 @@ LTb
 LTb
 1.000 UL
 LTa
-1116 420 M
+4186 420 M
 0 1092 V
 stroke
 LTb
-1116 420 M
+4186 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -676,11 +706,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1162 420 M
-0 1092 V
+4437 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1162 420 M
+4437 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -690,11 +722,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1209 420 M
-0 1092 V
+4688 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1209 420 M
+4688 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -704,11 +738,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1255 420 M
-0 1092 V
+4939 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1255 420 M
+4939 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -718,11 +754,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1302 420 M
-0 1092 V
+5190 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1302 420 M
+5190 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -732,11 +770,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1348 420 M
-0 1092 V
+5441 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1348 420 M
+5441 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -746,11 +786,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1394 420 M
-0 1092 V
+5692 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1394 420 M
+5692 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -760,11 +802,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1441 420 M
-0 1092 V
+5943 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1441 420 M
+5943 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -774,11 +818,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1487 420 M
-0 1092 V
+6194 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1487 420 M
+6194 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -788,11 +834,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1534 420 M
-0 1092 V
+6445 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1534 420 M
+6445 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -802,11 +850,13 @@ LTb
 LTb
 1.000 UL
 LTa
-1580 420 M
-0 1092 V
+6696 420 M
+0 63 V
+0 140 R
+0 889 V
 stroke
 LTb
-1580 420 M
+6696 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -816,11 +866,11 @@ LTb
 LTb
 1.000 UL
 LTa
-1626 420 M
+6947 420 M
 0 1092 V
 stroke
 LTb
-1626 420 M
+6947 420 M
 0 63 V
 0 1029 R
 0 -63 V
@@ -829,3134 +879,300 @@ LTb
 1.000 UL
 LTb
 1.000 UL
-LTa
-1673 420 M
-0 1092 V
-stroke
-LTb
-1673 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 135) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1719 420 M
-0 1092 V
-stroke
-LTb
-1719 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 140) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1766 420 M
-0 1092 V
-stroke
-LTb
-1766 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 145) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1812 420 M
-0 1092 V
-stroke
-LTb
-1812 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 150) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1858 420 M
-0 1092 V
-stroke
-LTb
-1858 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 155) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1905 420 M
-0 1092 V
-stroke
-LTb
-1905 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 160) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1951 420 M
-0 1092 V
-stroke
-LTb
-1951 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 165) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1998 420 M
-0 1092 V
-stroke
-LTb
-1998 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 170) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2044 420 M
-0 1092 V
-stroke
-LTb
-2044 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 175) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2090 420 M
-0 1092 V
-stroke
-LTb
-2090 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 180) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2137 420 M
-0 1092 V
-stroke
-LTb
-2137 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 185) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2183 420 M
-0 1092 V
-stroke
-LTb
-2183 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 190) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2229 420 M
-0 1092 V
-stroke
-LTb
-2229 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 195) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2276 420 M
-0 1092 V
-stroke
-LTb
-2276 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 200) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2322 420 M
-0 1092 V
-stroke
-LTb
-2322 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 205) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2369 420 M
-0 1092 V
-stroke
-LTb
-2369 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 210) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2415 420 M
-0 1092 V
-stroke
-LTb
-2415 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 215) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2461 420 M
-0 1092 V
-stroke
-LTb
-2461 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 220) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2508 420 M
-0 1092 V
-stroke
-LTb
-2508 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 225) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2554 420 M
-0 1092 V
-stroke
-LTb
-2554 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 230) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2601 420 M
-0 1092 V
-stroke
-LTb
-2601 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 235) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2647 420 M
-0 1092 V
-stroke
-LTb
-2647 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 240) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2693 420 M
-0 1092 V
-stroke
-LTb
-2693 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 245) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2740 420 M
-0 1092 V
-stroke
-LTb
-2740 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 250) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2786 420 M
-0 1092 V
-stroke
-LTb
-2786 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 255) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2833 420 M
-0 1092 V
-stroke
-LTb
-2833 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 260) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2879 420 M
-0 1092 V
-stroke
-LTb
-2879 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 265) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2925 420 M
-0 1092 V
-stroke
-LTb
-2925 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 270) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2972 420 M
-0 1092 V
-stroke
-LTb
-2972 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 275) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3018 420 M
-0 1092 V
-stroke
-LTb
-3018 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 280) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3065 420 M
-0 1092 V
-stroke
-LTb
-3065 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 285) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3111 420 M
-0 1092 V
-stroke
-LTb
-3111 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 290) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3157 420 M
-0 1092 V
-stroke
-LTb
-3157 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 295) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3204 420 M
-0 1092 V
-stroke
-LTb
-3204 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 300) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3250 420 M
-0 1092 V
-stroke
-LTb
-3250 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 305) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3297 420 M
-0 1092 V
-stroke
-LTb
-3297 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 310) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3343 420 M
-0 1092 V
-stroke
-LTb
-3343 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 315) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3389 420 M
-0 1092 V
-stroke
-LTb
-3389 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 320) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3436 420 M
-0 1092 V
-stroke
-LTb
-3436 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 325) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3482 420 M
-0 1092 V
-stroke
-LTb
-3482 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 330) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3529 420 M
-0 1092 V
-stroke
-LTb
-3529 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 335) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3575 420 M
-0 1092 V
-stroke
-LTb
-3575 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 340) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3621 420 M
-0 1092 V
-stroke
-LTb
-3621 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 345) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3668 420 M
-0 1092 V
-stroke
-LTb
-3668 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 350) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3714 420 M
-0 1092 V
-stroke
-LTb
-3714 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 355) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3761 420 M
-0 1092 V
-stroke
-LTb
-3761 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 360) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3807 420 M
-0 1092 V
-stroke
-LTb
-3807 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 365) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3853 420 M
-0 1092 V
-stroke
-LTb
-3853 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 370) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3900 420 M
-0 1092 V
-stroke
-LTb
-3900 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 375) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3946 420 M
-0 1092 V
-stroke
-LTb
-3946 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 380) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3993 420 M
-0 1092 V
-stroke
-LTb
-3993 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 385) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4039 420 M
-0 1092 V
-stroke
-LTb
-4039 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 390) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4085 420 M
-0 1092 V
-stroke
-LTb
-4085 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 395) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4132 420 M
-0 1092 V
-stroke
-LTb
-4132 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 400) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4178 420 M
-0 1092 V
-stroke
-LTb
-4178 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 405) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4225 420 M
-0 1092 V
-stroke
-LTb
-4225 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 410) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4271 420 M
-0 1092 V
-stroke
-LTb
-4271 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 415) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4317 420 M
-0 1092 V
-stroke
-LTb
-4317 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 420) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4364 420 M
-0 1092 V
-stroke
-LTb
-4364 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 425) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4410 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4410 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 430) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4457 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4457 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 435) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4503 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4503 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 440) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4549 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4549 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 445) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4596 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4596 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 450) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4642 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4642 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 455) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4689 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4689 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 460) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4735 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4735 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 465) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4781 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4781 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 470) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4828 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4828 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 475) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4874 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4874 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 480) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4921 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4921 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 485) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4967 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4967 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 490) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5013 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5013 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 495) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5060 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5060 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 500) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5106 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5106 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 505) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5153 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5153 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 510) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5199 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5199 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 515) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5245 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5245 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 520) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5292 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5292 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 525) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5338 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5338 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 530) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5384 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5384 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 535) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5431 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5431 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 540) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5477 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5477 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 545) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5524 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5524 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 550) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5570 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5570 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 555) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5616 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5616 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 560) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5663 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5663 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 565) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5709 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5709 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 570) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5756 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5756 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 575) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5802 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5802 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 580) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5848 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5848 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 585) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5895 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5895 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 590) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5941 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5941 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 595) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5988 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5988 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 600) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6034 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6034 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 605) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6080 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6080 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 610) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6127 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6127 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 615) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6173 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6173 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 620) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6220 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6220 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 625) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6266 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6266 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 630) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6312 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6312 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 635) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6359 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6359 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 640) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6405 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6405 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 645) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6452 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6452 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 650) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6498 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6498 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 655) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6544 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6544 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 660) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6591 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6591 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 665) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6637 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6637 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 670) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6684 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6684 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 675) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6730 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6730 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 680) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6776 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6776 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 685) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6823 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6823 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 690) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6869 420 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6869 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 695) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6916 420 M
-0 1092 V
-stroke
-LTb
-6916 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 700) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6962 420 M
-0 1092 V
-stroke
-LTb
-6962 420 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 705) Cshow
-1.000 UL
-LTb
-1.000 UL
 LTb
 420 1512 N
 420 420 L
-6542 0 V
+6527 0 V
 0 1092 V
--6542 0 V
+-6527 0 V
 Z stroke
 LCb setrgbcolor
-3691 70 M
+3683 70 M
 (Producer ID) Cshow
 LTb
 1.000 UP
-0 966 M
-currentpoint gsave translate 90 rotate 0 0 M
+-232 966 M
+currentpoint gsave translate -270 rotate 0 0 M
 (#trees) Cshow
 grestore
 1.000 UL
 LTb
+% Begin plot #1
 1.000 UP
 3.000 UL
 LT0
-LTb
-6311 553 M
-(Number of fetched seqs.) Rshow
+LCb setrgbcolor
+6296 553 M
+(Number of processed trees) Rshow
 LT0
-6395 553 M
+6380 553 M
 399 0 V
-429 470 M
-10 554 V
-9 488 V
-9 -977 V
-9 272 V
-9 -387 V
-4 0 R
-6 90 V
-9 193 V
-10 376 V
-9 58 V
-9 -110 V
-9 -603 V
-10 160 V
-9 557 V
-9 -319 V
-9 308 V
-578 771 L
-9 -39 V
-9 29 V
-10 420 V
-9 -293 V
-9 29 V
-9 275 V
-10 -117 V
-9 -88 V
-9 301 V
-671 596 L
-9 -73 V
-9 573 V
-9 230 V
-708 919 L
-9 -489 V
-1 -10 V
-10 0 R
-8 368 V
-9 129 V
-9 32 V
-9 22 V
-10 -91 V
-9 -328 V
-9 459 V
-9 -140 V
-810 649 L
-9 535 V
-9 147 V
-838 809 L
-9 451 V
-9 -584 V
-9 391 V
-10 83 V
-9 197 V
-9 -514 V
-903 464 L
-4 -44 V
-33 0 R
-9 1003 V
-9 -753 V
-9 176 V
-977 661 L
-9 418 V
-9 -469 V
-10 533 V
-9 -118 V
-9 -393 V
-9 299 V
-10 244 V
-9 57 V
-9 -279 V
-10 -91 V
-9 275 V
-9 -264 V
-9 -295 V
-10 330 V
-9 62 V
-9 -184 V
-10 233 V
-9 -102 V
-9 199 V
-9 -88 V
-10 107 V
-9 -508 V
-6 -207 V
-5 0 R
-7 436 V
-10 -178 V
-9 283 V
-9 -541 V
-10 0 R
-9 135 V
-9 764 V
-9 -112 V
-10 -364 V
-7 -423 V
-13 0 R
-8 522 V
-9 -20 V
-9 -49 V
-7 -453 V
-24 0 R
-6 301 V
-7 -301 V
-23 0 R
-7 518 V
-8 -518 V
-3 0 R
-8 604 V
-9 -475 V
-9 -100 V
-10 613 V
-9 -226 V
-9 -416 V
-19 1092 R
-9 -724 V
-9 -266 V
-10 651 V
-9 -491 V
-9 477 V
-8 353 V
-2 0 R
-9 -983 V
-9 871 V
-9 -309 V
-10 -428 V
-9 450 V
-9 273 V
-9 -158 V
-10 -400 V
-9 413 V
-9 -435 V
-10 -261 V
-9 446 V
-9 273 V
-9 -189 V
-10 -229 V
-9 209 V
-9 270 V
-10 -206 V
-9 -314 V
-9 206 V
-9 76 V
-10 -182 V
-9 322 V
-9 -279 V
-10 182 V
-9 -89 V
-9 -318 V
-9 253 V
-10 -441 V
-9 464 V
-9 42 V
-9 -58 V
-10 223 V
-9 -786 V
-1 0 R
-8 624 V
-10 -167 V
-9 577 V
-9 -733 V
-9 152 V
-10 122 V
-9 73 V
-9 41 V
-10 -344 V
-1942 1030 L
-9 -153 V
-9 220 V
-10 -409 V
-9 176 V
-9 271 V
-10 -226 V
-9 -53 V
-9 -116 V
-9 -71 V
-10 185 V
-9 -116 V
-9 250 V
-9 -9 V
-9 533 V
-1 0 R
-9 -289 V
-8 -803 V
-6 0 R
-5 137 V
-9 842 V
-9 -269 V
-9 -106 V
-10 71 V
-9 69 V
-9 -598 V
-10 291 V
-9 168 V
-9 -230 V
-9 -291 V
-10 524 V
-9 172 V
-9 -497 V
-9 81 V
-10 357 V
-9 -447 V
-9 373 V
-10 -498 V
-9 574 V
-9 -431 V
-7 -292 V
-4 0 R
-8 533 V
-9 -60 V
-9 94 V
-10 208 V
-8 -775 V
-22 0 R
-7 374 V
-9 440 V
-9 -81 V
-10 -206 V
-9 109 V
-9 -149 V
-9 -33 V
-10 11 V
-9 136 V
-9 208 V
-9 -365 V
-10 -85 V
-9 248 V
-9 -111 V
-10 54 V
-9 -105 V
-8 -445 V
-2 0 R
-8 421 V
-10 373 V
-9 -759 V
-9 729 V
-10 264 V
-9 -334 V
-9 36 V
-9 -52 V
-10 57 V
-9 15 V
-9 -307 V
-10 88 V
-9 -407 V
-9 486 V
-9 -70 V
-10 36 V
-9 -86 V
-9 106 V
-9 -88 V
-10 33 V
-9 -524 V
-9 632 V
-10 302 V
-9 -217 V
-9 -394 V
-9 358 V
-10 -8 V
-9 336 V
-9 -222 V
-10 70 V
-9 -96 V
-9 -77 V
-9 -139 V
-10 24 V
-9 -45 V
-9 27 V
-9 -387 V
-10 354 V
-9 -201 V
-2888 772 L
-10 224 V
-9 111 V
-9 -46 V
-9 -248 V
-10 104 V
-9 170 V
-9 -91 V
-10 -242 V
-9 -248 V
-9 9 V
-9 478 V
-10 -10 V
-9 -389 V
-7 -174 V
-6 0 R
-6 76 V
-9 233 V
-9 357 V
-9 85 V
-10 240 V
-9 -396 V
-8 -595 V
-2 0 R
-8 652 V
-10 -418 V
-8 -234 V
-1 0 R
-9 763 V
-10 -119 V
-9 0 V
-9 -42 V
-9 36 V
-10 -456 V
-9 499 V
-9 -298 V
-10 -162 V
-9 301 V
-9 -23 V
-9 106 V
-10 -299 V
-9 233 V
-9 -25 V
-10 -89 V
-9 -165 V
-9 224 V
-9 513 V
-10 -296 V
-9 73 V
-9 -306 V
-9 282 V
-10 -300 V
-9 157 V
-9 -5 V
-10 52 V
-9 -641 V
-3 -13 V
-8 0 R
-7 169 V
-10 2 V
-9 504 V
-9 -55 V
-10 -4 V
-9 -40 V
-9 55 V
-9 -6 V
-10 -325 V
-9 312 V
-9 31 V
-9 -186 V
-10 453 V
-9 -377 V
-9 -19 V
-10 72 V
-9 360 V
-9 -706 V
-9 231 V
-10 377 V
-9 -490 V
-9 306 V
-10 163 V
-9 -300 V
-9 162 V
-9 -124 V
-10 338 V
-9 -726 V
-9 413 V
-10 137 V
-9 -39 V
-9 -152 V
-9 55 V
-10 -17 V
-9 137 V
-9 19 V
-9 22 V
-10 108 V
-9 -166 V
-9 239 V
-10 -228 V
-9 177 V
-9 -638 V
-9 41 V
-10 123 V
-9 404 V
-9 -84 V
-3826 945 L
-9 181 V
-9 -213 V
-9 64 V
-10 -328 V
-9 359 V
-9 78 V
-10 -349 V
-9 435 V
-9 -752 V
-9 844 V
-10 -31 V
-9 229 V
-9 -492 V
-9 -4 V
-10 -184 V
-9 77 V
-9 -388 V
-10 439 V
-9 -198 V
-9 282 V
-9 279 V
-9 -853 V
-1 0 R
-9 525 V
-9 125 V
-10 -86 V
-9 -126 V
-9 12 V
-9 -90 V
-10 623 V
-9 -563 V
-9 142 V
-9 -48 V
-10 127 V
-9 70 V
-9 -280 V
-10 466 V
-9 -288 V
-9 -212 V
-9 24 V
-10 -377 V
-9 581 V
-9 -123 V
-8 -502 V
-3 0 R
-8 586 V
-9 -429 V
-9 447 V
-10 45 V
-9 -293 V
-9 162 V
-10 -30 V
-9 196 V
-9 111 V
-9 -335 V
-10 0 V
-9 256 V
-9 -154 V
-9 -276 V
-10 481 V
-9 -767 V
-4 0 R
-5 53 V
-10 650 V
-9 -297 V
-9 -3 V
-9 8 V
-10 444 V
-9 -430 V
-9 97 V
-10 -433 V
-9 482 V
-9 -55 V
-8 -516 V
-11 0 R
-9 716 V
-9 -23 V
-10 -214 V
-9 -92 V
-9 226 V
-9 -321 V
-10 579 V
-9 -156 V
-9 -163 V
-9 -228 V
-10 426 V
-9 -282 V
-9 -160 V
-10 193 V
-9 -30 V
-9 -96 V
-9 244 V
-10 18 V
-8 -637 V
-12 0 R
-8 645 V
-9 -86 V
-9 -201 V
-9 -297 V
-10 804 V
-9 -449 V
-9 191 V
-9 -120 V
-10 290 V
-4772 467 L
-9 208 V
-10 365 V
-9 -80 V
-9 39 V
-9 -554 V
-10 494 V
-9 -219 V
-9 253 V
-10 1 V
-9 -268 V
-9 77 V
-9 222 V
-10 249 V
-9 228 V
-9 -988 V
-10 847 V
-9 -529 V
-9 374 V
-9 -140 V
-10 -228 V
-9 15 V
-9 548 V
-9 -16 V
-10 -27 V
-9 -271 V
-9 180 V
-8 -827 V
-3 0 R
-8 836 V
-9 -284 V
-9 217 V
-10 -467 V
-9 74 V
-9 198 V
-10 6 V
-9 -457 V
-9 535 V
-9 -425 V
-10 255 V
-9 205 V
-9 207 V
-10 -137 V
-9 113 V
-9 -101 V
-9 -96 V
-10 -121 V
-9 176 V
-9 11 V
-9 -263 V
-10 172 V
-9 -183 V
-9 -420 V
-10 229 V
-9 227 V
-9 316 V
-9 -332 V
-10 271 V
-9 -199 V
-9 7 V
-10 100 V
-9 -379 V
-9 52 V
-9 141 V
-10 377 V
-9 -87 V
-9 -141 V
-9 -633 V
-1 0 R
-9 455 V
-9 -19 V
-9 313 V
-10 -128 V
-9 -195 V
-9 47 V
-9 -275 V
-10 143 V
-9 -146 V
-9 289 V
-10 186 V
-9 -109 V
-9 218 V
-9 -650 V
-10 6 V
-9 404 V
-9 236 V
-8 -775 V
-5 0 R
-6 203 V
-9 165 V
-9 24 V
-10 114 V
-9 388 V
-9 -6 V
-9 -355 V
-10 199 V
-9 -97 V
-9 137 V
-10 205 V
-9 -430 V
-9 -200 V
-9 229 V
-10 -122 V
-9 -447 V
-9 399 V
-5719 1036 L
-9 -213 V
-9 613 V
-9 -430 V
-10 84 V
-8 -670 V
-2 0 R
-8 499 V
-10 117 V
-9 210 V
-9 -324 V
-9 52 V
-10 -224 V
-9 -56 V
-9 496 V
-8 -770 V
-3 0 R
-8 505 V
-9 205 V
-9 119 V
-10 -444 V
-9 496 V
-9 -261 V
-9 -28 V
-10 -132 V
-8 -460 V
-1 0 R
-9 1074 V
-10 -516 V
-9 -301 V
-9 414 V
-9 -302 V
-10 195 V
-9 470 V
-9 -277 V
-9 -490 V
-10 534 V
-9 -506 V
-9 297 V
-10 -193 V
-9 126 V
-9 -36 V
-9 231 V
-10 -226 V
-7 -494 V
-3 0 R
-8 720 V
-8 372 V
-3 0 R
-8 -487 V
-9 61 V
-9 198 V
-10 -385 V
-7 -479 V
-4 0 R
-7 391 V
-10 347 V
-9 -493 V
-9 399 V
-9 -267 V
-10 -81 V
-9 592 V
-9 -679 V
-9 106 V
-10 265 V
-9 -112 V
-9 -32 V
-10 292 V
-9 -245 V
-9 104 V
-9 -228 V
-10 279 V
-9 56 V
-9 -212 V
-10 9 V
-9 168 V
-9 -189 V
-9 91 V
-10 -55 V
-9 155 V
-9 -96 V
-10 5 V
-9 -127 V
-9 13 V
-9 -6 V
-10 -127 V
-9 19 V
-9 45 V
-9 343 V
-10 -303 V
-9 259 V
-9 -89 V
-10 133 V
-9 -251 V
-9 215 V
-9 -81 V
-10 45 V
-9 -319 V
-9 390 V
-10 -150 V
-9 111 V
-9 -508 V
-9 192 V
-10 145 V
-9 89 V
-6637 956 L
-9 33 V
-10 155 V
-9 -354 V
-9 433 V
-10 -475 V
-9 485 V
-9 -108 V
-9 131 V
-10 -307 V
-9 -97 V
-9 445 V
-10 -750 V
-9 276 V
-9 115 V
-9 168 V
-10 -686 V
-9 86 V
-9 925 V
-10 -545 V
-9 374 V
-9 -111 V
-9 -358 V
-10 697 V
-9 -646 V
-9 -79 V
-9 72 V
-10 -1 V
-9 -39 V
-9 -72 V
-10 262 V
-9 -390 V
-9 659 V
-9 -182 V
-10 -21 V
-429 470 Pls
-439 1024 Pls
-457 535 Pls
-466 807 Pls
-485 510 Pls
-494 703 Pls
-504 1079 Pls
-513 1137 Pls
-522 1027 Pls
-531 424 Pls
-541 584 Pls
-550 1141 Pls
-559 822 Pls
-568 1130 Pls
-578 771 Pls
-587 732 Pls
-596 761 Pls
-606 1181 Pls
-615 888 Pls
-624 917 Pls
-633 1192 Pls
-643 1075 Pls
-652 987 Pls
-661 1288 Pls
-671 596 Pls
-680 523 Pls
-689 1096 Pls
-698 1326 Pls
-708 919 Pls
-717 430 Pls
-736 788 Pls
-745 917 Pls
-754 949 Pls
-763 971 Pls
-773 880 Pls
-782 552 Pls
-791 1011 Pls
-800 871 Pls
-810 649 Pls
-819 1184 Pls
-828 1331 Pls
-838 809 Pls
-847 1260 Pls
-856 676 Pls
-865 1067 Pls
-875 1150 Pls
-884 1347 Pls
-893 833 Pls
-903 464 Pls
-949 1423 Pls
-958 670 Pls
-967 846 Pls
-977 661 Pls
-986 1079 Pls
-995 610 Pls
-1005 1143 Pls
-1014 1025 Pls
-1023 632 Pls
-1032 931 Pls
-1042 1175 Pls
-1051 1232 Pls
-1060 953 Pls
-1070 862 Pls
-1079 1137 Pls
-1088 873 Pls
-1097 578 Pls
-1107 908 Pls
-1116 970 Pls
-1125 786 Pls
-1135 1019 Pls
-1144 917 Pls
-1153 1116 Pls
-1162 1028 Pls
-1172 1135 Pls
-1181 627 Pls
-1199 856 Pls
-1209 678 Pls
-1218 961 Pls
-1246 555 Pls
-1255 1319 Pls
-1264 1207 Pls
-1274 843 Pls
-1302 942 Pls
-1311 922 Pls
-1320 873 Pls
-1357 721 Pls
-1394 938 Pls
-1413 1024 Pls
-1422 549 Pls
-1431 449 Pls
-1441 1062 Pls
-1450 836 Pls
-1487 788 Pls
-1496 522 Pls
-1506 1173 Pls
-1515 682 Pls
-1524 1159 Pls
-1543 529 Pls
-1552 1400 Pls
-1561 1091 Pls
-1571 663 Pls
-1580 1113 Pls
-1589 1386 Pls
-1598 1228 Pls
-1608 828 Pls
-1617 1241 Pls
-1626 806 Pls
-1636 545 Pls
-1645 991 Pls
-1654 1264 Pls
-1663 1075 Pls
-1673 846 Pls
-1682 1055 Pls
-1691 1325 Pls
-1701 1119 Pls
-1710 805 Pls
-1719 1011 Pls
-1728 1087 Pls
-1738 905 Pls
-1747 1227 Pls
-1756 948 Pls
-1766 1130 Pls
-1775 1041 Pls
-1784 723 Pls
-1793 976 Pls
-1803 535 Pls
-1812 999 Pls
-1821 1041 Pls
-1830 983 Pls
-1840 1206 Pls
-1858 1044 Pls
-1868 877 Pls
-1877 1454 Pls
-1886 721 Pls
-1895 873 Pls
-1905 995 Pls
-1914 1068 Pls
-1923 1109 Pls
-1933 765 Pls
-1942 1030 Pls
-1951 877 Pls
-1960 1097 Pls
-1970 688 Pls
-1979 864 Pls
-1988 1135 Pls
-1998 909 Pls
-2007 856 Pls
-2016 740 Pls
-2025 669 Pls
-2035 854 Pls
-2044 738 Pls
-2053 988 Pls
-2062 979 Pls
-2081 1223 Pls
-2100 557 Pls
-2109 1399 Pls
-2118 1130 Pls
-2127 1024 Pls
-2137 1095 Pls
-2146 1164 Pls
-2155 566 Pls
-2165 857 Pls
-2174 1025 Pls
-2183 795 Pls
-2192 504 Pls
-2202 1028 Pls
-2211 1200 Pls
-2220 703 Pls
-2229 784 Pls
-2239 1141 Pls
-2248 694 Pls
-2257 1067 Pls
-2267 569 Pls
-2276 1143 Pls
-2285 712 Pls
-2304 953 Pls
-2313 893 Pls
-2322 987 Pls
-2332 1195 Pls
-2369 794 Pls
-2378 1234 Pls
-2387 1153 Pls
-2397 947 Pls
-2406 1056 Pls
-2415 907 Pls
-2424 874 Pls
-2434 885 Pls
-2443 1021 Pls
-2452 1229 Pls
-2461 864 Pls
-2471 779 Pls
-2480 1027 Pls
-2489 916 Pls
-2499 970 Pls
-2508 865 Pls
-2526 841 Pls
-2536 1214 Pls
-2545 455 Pls
-2554 1184 Pls
-2564 1448 Pls
-2573 1114 Pls
-2582 1150 Pls
-2591 1098 Pls
-2601 1155 Pls
-2610 1170 Pls
-2619 863 Pls
-2629 951 Pls
-2638 544 Pls
-2647 1030 Pls
-2656 960 Pls
-2666 996 Pls
-2675 910 Pls
-2684 1016 Pls
-2693 928 Pls
-2703 961 Pls
-2712 437 Pls
-2721 1069 Pls
-2731 1371 Pls
-2740 1154 Pls
-2749 760 Pls
-2758 1118 Pls
-2768 1110 Pls
-2777 1446 Pls
-2786 1224 Pls
-2796 1294 Pls
-2805 1198 Pls
-2814 1121 Pls
-2823 982 Pls
-2833 1006 Pls
-2842 961 Pls
-2851 988 Pls
-2860 601 Pls
-2870 955 Pls
-2879 754 Pls
-2888 772 Pls
-2898 996 Pls
-2907 1107 Pls
-2916 1061 Pls
-2925 813 Pls
-2935 917 Pls
-2944 1087 Pls
-2953 996 Pls
-2963 754 Pls
-2972 506 Pls
-2981 515 Pls
-2990 993 Pls
-3000 983 Pls
-3009 594 Pls
-3028 496 Pls
-3037 729 Pls
-3046 1086 Pls
-3055 1171 Pls
-3065 1411 Pls
-3074 1015 Pls
-3092 1072 Pls
-3102 654 Pls
-3120 1183 Pls
-3130 1064 Pls
-3139 1064 Pls
-3148 1022 Pls
-3157 1058 Pls
-3167 602 Pls
-3176 1101 Pls
-3185 803 Pls
-3195 641 Pls
-3204 942 Pls
-3213 919 Pls
-3222 1025 Pls
-3232 726 Pls
-3241 959 Pls
-3250 934 Pls
-3260 845 Pls
-3269 680 Pls
-3278 904 Pls
-3287 1417 Pls
-3297 1121 Pls
-3306 1194 Pls
-3315 888 Pls
-3324 1170 Pls
-3334 870 Pls
-3343 1027 Pls
-3352 1022 Pls
-3362 1074 Pls
-3371 433 Pls
-3389 589 Pls
-3399 591 Pls
-3408 1095 Pls
-3417 1040 Pls
-3427 1036 Pls
-3436 996 Pls
-3445 1051 Pls
-3454 1045 Pls
-3464 720 Pls
-3473 1032 Pls
-3482 1063 Pls
-3491 877 Pls
-3501 1330 Pls
-3510 953 Pls
-3519 934 Pls
-3529 1006 Pls
-3538 1366 Pls
-3547 660 Pls
-3556 891 Pls
-3566 1268 Pls
-3575 778 Pls
-3584 1084 Pls
-3594 1247 Pls
-3603 947 Pls
-3612 1109 Pls
-3621 985 Pls
-3631 1323 Pls
-3640 597 Pls
-3649 1010 Pls
-3659 1147 Pls
-3668 1108 Pls
-3677 956 Pls
-3686 1011 Pls
-3696 994 Pls
-3705 1131 Pls
-3714 1150 Pls
-3723 1172 Pls
-3733 1280 Pls
-3742 1114 Pls
-3751 1353 Pls
-3761 1125 Pls
-3770 1302 Pls
-3779 664 Pls
-3788 705 Pls
-3798 828 Pls
-3807 1232 Pls
-3816 1148 Pls
-3826 945 Pls
-3835 1126 Pls
-3844 913 Pls
-3853 977 Pls
-3863 649 Pls
-3872 1008 Pls
-3881 1086 Pls
-3891 737 Pls
-3900 1172 Pls
-3918 1264 Pls
-3928 1233 Pls
-3937 1462 Pls
-3946 970 Pls
-3955 966 Pls
-3965 782 Pls
-3974 859 Pls
-3983 471 Pls
-3993 910 Pls
-4002 712 Pls
-4011 994 Pls
-4020 1273 Pls
-4039 945 Pls
-4048 1070 Pls
-4058 984 Pls
-4067 858 Pls
-4076 870 Pls
-4085 780 Pls
-4095 1403 Pls
-4104 840 Pls
-4113 982 Pls
-4122 934 Pls
-4132 1061 Pls
-4141 1131 Pls
-4150 851 Pls
-4160 1317 Pls
-4169 1029 Pls
-4178 817 Pls
-4187 841 Pls
-4197 464 Pls
-4206 1045 Pls
-4215 922 Pls
-4234 1006 Pls
-4243 577 Pls
-4252 1024 Pls
-4262 1069 Pls
-4271 776 Pls
-4280 938 Pls
-4290 908 Pls
-4299 1104 Pls
-4308 1215 Pls
-4317 880 Pls
-4327 880 Pls
-4336 1136 Pls
-4345 982 Pls
-4354 706 Pls
-4364 1187 Pls
-4382 473 Pls
-4392 1123 Pls
-4401 826 Pls
-4410 823 Pls
-4419 831 Pls
-4429 1275 Pls
-4438 845 Pls
-4447 942 Pls
-4457 509 Pls
-4466 991 Pls
-4475 936 Pls
-4503 1136 Pls
-4512 1113 Pls
-4522 899 Pls
-4531 807 Pls
-4540 1033 Pls
-4549 712 Pls
-4559 1291 Pls
-4568 1135 Pls
-4577 972 Pls
-4586 744 Pls
-4596 1170 Pls
-4605 888 Pls
-4614 728 Pls
-4624 921 Pls
-4633 891 Pls
-4642 795 Pls
-4651 1039 Pls
-4661 1057 Pls
-4689 1065 Pls
-4698 979 Pls
-4707 778 Pls
-4716 481 Pls
-4726 1285 Pls
-4735 836 Pls
-4744 1027 Pls
-4753 907 Pls
-4763 1197 Pls
-4772 467 Pls
-4781 675 Pls
-4791 1040 Pls
-4800 960 Pls
-4809 999 Pls
-4818 445 Pls
-4828 939 Pls
-4837 720 Pls
-4846 973 Pls
-4856 974 Pls
-4865 706 Pls
-4874 783 Pls
-4883 1005 Pls
-4893 1254 Pls
-4902 1482 Pls
-4911 494 Pls
-4921 1341 Pls
-4930 812 Pls
-4939 1186 Pls
-4948 1046 Pls
-4958 818 Pls
-4967 833 Pls
-4976 1381 Pls
-4985 1365 Pls
-4995 1338 Pls
-5004 1067 Pls
-5013 1247 Pls
-5032 1256 Pls
-5041 972 Pls
-5050 1189 Pls
-5060 722 Pls
-5069 796 Pls
-5078 994 Pls
-5088 1000 Pls
-5097 543 Pls
-5106 1078 Pls
-5115 653 Pls
-5125 908 Pls
-5134 1113 Pls
-5143 1320 Pls
-5153 1183 Pls
-5162 1296 Pls
-5171 1195 Pls
-5180 1099 Pls
-5190 978 Pls
-5199 1154 Pls
-5208 1165 Pls
-5217 902 Pls
-5227 1074 Pls
-5236 891 Pls
-5245 471 Pls
-5255 700 Pls
-5264 927 Pls
-5273 1243 Pls
-5282 911 Pls
-5292 1182 Pls
-5301 983 Pls
-5310 990 Pls
-5320 1090 Pls
-5329 711 Pls
-5338 763 Pls
-5347 904 Pls
-5357 1281 Pls
-5366 1194 Pls
-5375 1053 Pls
-5394 875 Pls
-5403 856 Pls
-5412 1169 Pls
-5422 1041 Pls
-5431 846 Pls
-5440 893 Pls
-5449 618 Pls
-5459 761 Pls
-5468 615 Pls
-5477 904 Pls
-5487 1090 Pls
-5496 981 Pls
-5505 1199 Pls
-5514 549 Pls
-5524 555 Pls
-5533 959 Pls
-5542 1195 Pls
-5561 623 Pls
-5570 788 Pls
-5579 812 Pls
-5589 926 Pls
-5598 1314 Pls
-5607 1308 Pls
-5616 953 Pls
-5626 1152 Pls
-5635 1055 Pls
-5644 1192 Pls
-5654 1397 Pls
-5663 967 Pls
-5672 767 Pls
-5681 996 Pls
-5691 874 Pls
-5700 427 Pls
-5709 826 Pls
-5719 1036 Pls
-5728 823 Pls
-5737 1436 Pls
-5746 1006 Pls
-5756 1090 Pls
-5774 919 Pls
-5784 1036 Pls
-5793 1246 Pls
-5802 922 Pls
-5811 974 Pls
-5821 750 Pls
-5830 694 Pls
-5839 1190 Pls
-5858 925 Pls
-5867 1130 Pls
-5876 1249 Pls
-5886 805 Pls
-5895 1301 Pls
-5904 1040 Pls
-5913 1012 Pls
-5923 880 Pls
-5941 1494 Pls
-5951 978 Pls
-5960 677 Pls
-5969 1091 Pls
-5978 789 Pls
-5988 984 Pls
-5997 1454 Pls
-6006 1177 Pls
-6015 687 Pls
-6025 1221 Pls
-6034 715 Pls
-6043 1012 Pls
-6053 819 Pls
-6062 945 Pls
-6071 909 Pls
-6080 1140 Pls
-6090 914 Pls
-6108 1140 Pls
-6127 1025 Pls
-6136 1086 Pls
-6145 1284 Pls
-6155 899 Pls
-6173 811 Pls
-6183 1158 Pls
-6192 665 Pls
-6201 1064 Pls
-6210 797 Pls
-6220 716 Pls
-6229 1308 Pls
-6238 629 Pls
-6247 735 Pls
-6257 1000 Pls
-6266 888 Pls
-6275 856 Pls
-6285 1148 Pls
-6294 903 Pls
-6303 1007 Pls
-6312 779 Pls
-6322 1058 Pls
-6331 1114 Pls
-6340 902 Pls
-6350 911 Pls
-6359 1079 Pls
-6368 890 Pls
-6377 981 Pls
-6387 926 Pls
-6396 1081 Pls
-6405 985 Pls
-6415 990 Pls
-6424 863 Pls
-6433 876 Pls
-6442 870 Pls
-6452 743 Pls
-6461 762 Pls
-6470 807 Pls
-6479 1150 Pls
-6489 847 Pls
-6498 1106 Pls
-6507 1017 Pls
-6517 1150 Pls
-6526 899 Pls
-6535 1114 Pls
-6544 1033 Pls
-6554 1078 Pls
-6563 759 Pls
-6572 1149 Pls
-6582 999 Pls
-6591 1110 Pls
-6600 602 Pls
-6609 794 Pls
-6619 939 Pls
-6628 1028 Pls
-6637 956 Pls
-6646 989 Pls
-6656 1144 Pls
-6665 790 Pls
-6674 1223 Pls
-6684 748 Pls
-6693 1233 Pls
-6702 1125 Pls
-6711 1256 Pls
-6721 949 Pls
-6730 852 Pls
-6739 1297 Pls
-6749 547 Pls
-6758 823 Pls
-6767 938 Pls
-6776 1106 Pls
-6795 506 Pls
-6804 1431 Pls
-6814 886 Pls
-6823 1260 Pls
-6832 1149 Pls
-6841 791 Pls
-6851 1488 Pls
-6860 842 Pls
-6869 763 Pls
-6878 835 Pls
-6888 834 Pls
-6897 795 Pls
-6906 723 Pls
-6916 985 Pls
-6925 595 Pls
-6934 1254 Pls
-6943 1072 Pls
-6953 1051 Pls
-6594 553 Pls
+470 1073 M
+520 665 L
+51 -40 V
+50 162 V
+50 0 V
+50 -40 V
+50 81 V
+51 -80 V
+50 161 V
+50 -81 V
+50 -80 V
+50 -1 V
+51 163 V
+50 -81 V
+50 41 V
+50 -204 V
+51 162 V
+50 -80 V
+50 39 V
+50 -162 V
+50 367 V
+51 -407 V
+50 243 V
+50 123 V
+50 -203 V
+50 -204 V
+51 285 V
+50 -122 V
+50 121 V
+50 1 V
+50 243 V
+51 -284 V
+50 244 V
+50 -245 V
+50 41 V
+50 1 V
+51 -122 V
+50 80 V
+50 41 V
+50 -80 V
+51 81 V
+50 -123 V
+50 164 V
+50 407 V
+50 -693 V
+51 285 V
+50 -122 V
+50 123 V
+50 -245 V
+50 204 V
+51 81 V
+50 41 V
+50 -245 V
+50 244 V
+50 327 V
+51 0 V
+50 -529 V
+50 -42 V
+50 488 V
+50 -406 V
+51 -41 V
+50 -162 V
+50 365 V
+50 -203 V
+51 40 V
+50 0 V
+50 -121 V
+50 203 V
+50 -40 V
+51 -81 V
+50 203 V
+50 -408 V
+50 205 V
+50 -82 V
+51 82 V
+50 0 V
+50 -41 V
+50 162 V
+50 -367 V
+51 327 V
+50 -1 V
+50 -41 V
+50 -40 V
+50 -81 V
+51 325 V
+50 -284 V
+50 284 V
+50 -121 V
+50 -83 V
+51 83 V
+50 -122 V
+50 121 V
+50 -284 V
+51 365 V
+50 -202 V
+50 -1 V
+50 162 V
+50 82 V
+51 82 V
+50 -82 V
+50 -162 V
+50 80 V
+50 41 V
+51 -41 V
+50 -122 V
+50 326 V
+stroke 5742 1113 M
+50 -122 V
+50 1 V
+51 -245 V
+50 40 V
+50 83 V
+50 244 V
+50 -163 V
+51 -1 V
+50 -163 V
+50 0 V
+50 82 V
+51 447 V
+50 -569 V
+50 0 V
+50 -41 V
+50 -121 V
+51 365 V
+50 -121 V
+50 80 V
+50 -121 V
+50 0 V
+51 -41 V
+470 1073 Pls
+520 665 Pls
+571 625 Pls
+621 787 Pls
+671 787 Pls
+721 747 Pls
+771 828 Pls
+822 748 Pls
+872 909 Pls
+922 828 Pls
+972 748 Pls
+1022 747 Pls
+1073 910 Pls
+1123 829 Pls
+1173 870 Pls
+1223 666 Pls
+1274 828 Pls
+1324 748 Pls
+1374 787 Pls
+1424 625 Pls
+1474 992 Pls
+1525 585 Pls
+1575 828 Pls
+1625 951 Pls
+1675 748 Pls
+1725 544 Pls
+1776 829 Pls
+1826 707 Pls
+1876 828 Pls
+1926 829 Pls
+1976 1072 Pls
+2027 788 Pls
+2077 1032 Pls
+2127 787 Pls
+2177 828 Pls
+2227 829 Pls
+2278 707 Pls
+2328 787 Pls
+2378 828 Pls
+2428 748 Pls
+2479 829 Pls
+2529 706 Pls
+2579 870 Pls
+2629 1277 Pls
+2679 584 Pls
+2730 869 Pls
+2780 747 Pls
+2830 870 Pls
+2880 625 Pls
+2930 829 Pls
+2981 910 Pls
+3031 951 Pls
+3081 706 Pls
+3131 950 Pls
+3181 1277 Pls
+3232 1277 Pls
+3282 748 Pls
+3332 706 Pls
+3382 1194 Pls
+3432 788 Pls
+3483 747 Pls
+3533 585 Pls
+3583 950 Pls
+3633 747 Pls
+3684 787 Pls
+3734 787 Pls
+3784 666 Pls
+3834 869 Pls
+3884 829 Pls
+3935 748 Pls
+3985 951 Pls
+4035 543 Pls
+4085 748 Pls
+4135 666 Pls
+4186 748 Pls
+4236 748 Pls
+4286 707 Pls
+4336 869 Pls
+4386 502 Pls
+4437 829 Pls
+4487 828 Pls
+4537 787 Pls
+4587 747 Pls
+4637 666 Pls
+4688 991 Pls
+4738 707 Pls
+4788 991 Pls
+4838 870 Pls
+4888 787 Pls
+4939 870 Pls
+4989 748 Pls
+5039 869 Pls
+5089 585 Pls
+5140 950 Pls
+5190 748 Pls
+5240 747 Pls
+5290 909 Pls
+5340 991 Pls
+5391 1073 Pls
+5441 991 Pls
+5491 829 Pls
+5541 909 Pls
+5591 950 Pls
+5642 909 Pls
+5692 787 Pls
+5742 1113 Pls
+5792 991 Pls
+5842 992 Pls
+5893 747 Pls
+5943 787 Pls
+5993 870 Pls
+6043 1114 Pls
+6093 951 Pls
+6144 950 Pls
+6194 787 Pls
+6244 787 Pls
+6294 869 Pls
+6345 1316 Pls
+6395 747 Pls
+6445 747 Pls
+6495 706 Pls
+6545 585 Pls
+6596 950 Pls
+6646 829 Pls
+6696 909 Pls
+6746 788 Pls
+6796 788 Pls
+6847 747 Pls
+6579 553 Pls
+% End plot #1
 1.000 UL
 LTb
 420 1512 N
 420 420 L
-6542 0 V
+6527 0 V
 0 1092 V
--6542 0 V
+-6527 0 V
 Z stroke
 1.000 UP
 1.000 UL
@@ -3965,3535 +1181,733 @@ LTb
 LTb
 1.000 UL
 LTa
+420 2016 M
+6527 0 V
+stroke
+LTb
+420 2016 M
+63 0 V
+6464 0 R
+-63 0 V
+-6548 0 R
+( 4000) Rshow
+1.000 UL
+LTb
+1.000 UL
+LTa
+420 2268 M
+6527 0 V
+stroke
+LTb
+420 2268 M
+63 0 V
+6464 0 R
+-63 0 V
+-6548 0 R
+( 4500) Rshow
+1.000 UL
+LTb
+1.000 UL
+LTa
 420 2520 M
-6542 0 V
+6527 0 V
 stroke
 LTb
 420 2520 M
 63 0 V
-6479 0 R
+6464 0 R
 -63 0 V
--6563 0 R
-( 250) Rshow
+-6548 0 R
+( 5000) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
 420 1512 M
-0 2016 V
+0 2015 V
 stroke
 LTb
 420 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 0) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-466 1512 M
-0 2016 V
+671 1512 M
+0 2015 V
 stroke
 LTb
-466 1512 M
+671 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 5) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-513 1512 M
-0 2016 V
+922 1512 M
+0 2015 V
 stroke
 LTb
-513 1512 M
+922 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 10) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-559 1512 M
-0 2016 V
+1173 1512 M
+0 2015 V
 stroke
 LTb
-559 1512 M
+1173 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 15) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-606 1512 M
-0 2016 V
+1424 1512 M
+0 2015 V
 stroke
 LTb
-606 1512 M
+1424 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 20) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-652 1512 M
-0 2016 V
+1675 1512 M
+0 2015 V
 stroke
 LTb
-652 1512 M
+1675 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 25) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-698 1512 M
-0 2016 V
+1926 1512 M
+0 2015 V
 stroke
 LTb
-698 1512 M
+1926 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 30) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-745 1512 M
-0 2016 V
+2177 1512 M
+0 2015 V
 stroke
 LTb
-745 1512 M
+2177 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 35) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-791 1512 M
-0 2016 V
+2428 1512 M
+0 2015 V
 stroke
 LTb
-791 1512 M
+2428 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 40) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-838 1512 M
-0 2016 V
+2679 1512 M
+0 2015 V
 stroke
 LTb
-838 1512 M
+2679 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 45) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-884 1512 M
-0 2016 V
+2930 1512 M
+0 2015 V
 stroke
 LTb
-884 1512 M
+2930 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 50) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-930 1512 M
-0 2016 V
+3181 1512 M
+0 2015 V
 stroke
 LTb
-930 1512 M
+3181 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 55) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-977 1512 M
-0 2016 V
+3432 1512 M
+0 2015 V
 stroke
 LTb
-977 1512 M
+3432 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 60) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1023 1512 M
-0 2016 V
+3684 1512 M
+0 2015 V
 stroke
 LTb
-1023 1512 M
+3684 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 65) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1070 1512 M
-0 2016 V
+3935 1512 M
+0 2015 V
 stroke
 LTb
-1070 1512 M
+3935 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 70) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1116 1512 M
-0 2016 V
+4186 1512 M
+0 2015 V
 stroke
 LTb
-1116 1512 M
+4186 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 75) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1162 1512 M
-0 2016 V
+4437 1512 M
+0 2015 V
 stroke
 LTb
-1162 1512 M
+4437 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 80) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1209 1512 M
-0 2016 V
+4688 1512 M
+0 2015 V
 stroke
 LTb
-1209 1512 M
+4688 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 85) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1255 1512 M
-0 2016 V
+4939 1512 M
+0 2015 V
 stroke
 LTb
-1255 1512 M
+4939 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 90) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1302 1512 M
-0 2016 V
+5190 1512 M
+0 63 V
+0 140 R
+0 1812 V
 stroke
 LTb
-1302 1512 M
+5190 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 95) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1348 1512 M
-0 2016 V
+5441 1512 M
+0 63 V
+0 140 R
+0 1812 V
 stroke
 LTb
-1348 1512 M
+5441 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 100) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1394 1512 M
-0 2016 V
+5692 1512 M
+0 63 V
+0 140 R
+0 1812 V
 stroke
 LTb
-1394 1512 M
+5692 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 105) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1441 1512 M
-0 2016 V
+5943 1512 M
+0 63 V
+0 140 R
+0 1812 V
 stroke
 LTb
-1441 1512 M
+5943 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 110) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1487 1512 M
-0 2016 V
+6194 1512 M
+0 63 V
+0 140 R
+0 1812 V
 stroke
 LTb
-1487 1512 M
+6194 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 115) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1534 1512 M
-0 2016 V
+6445 1512 M
+0 63 V
+0 140 R
+0 1812 V
 stroke
 LTb
-1534 1512 M
+6445 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 120) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1580 1512 M
-0 2016 V
+6696 1512 M
+0 63 V
+0 140 R
+0 1812 V
 stroke
 LTb
-1580 1512 M
+6696 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 125) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1626 1512 M
-0 2016 V
+6947 1512 M
+0 2015 V
 stroke
 LTb
-1626 1512 M
+6947 1512 M
 0 63 V
-0 1953 R
+0 1952 R
 0 -63 V
-0 -2093 R
+0 -2092 R
 ( 130) Cshow
 1.000 UL
 LTb
 1.000 UL
-LTa
-1673 1512 M
-0 2016 V
-stroke
 LTb
-1673 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 135) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1719 1512 M
-0 2016 V
-stroke
-LTb
-1719 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 140) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1766 1512 M
-0 2016 V
-stroke
-LTb
-1766 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 145) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1812 1512 M
-0 2016 V
-stroke
-LTb
-1812 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 150) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1858 1512 M
-0 2016 V
-stroke
-LTb
-1858 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 155) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1905 1512 M
-0 2016 V
-stroke
-LTb
-1905 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 160) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1951 1512 M
-0 2016 V
-stroke
-LTb
-1951 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 165) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1998 1512 M
-0 2016 V
-stroke
-LTb
-1998 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 170) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2044 1512 M
-0 2016 V
-stroke
-LTb
-2044 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 175) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2090 1512 M
-0 2016 V
-stroke
-LTb
-2090 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 180) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2137 1512 M
-0 2016 V
-stroke
-LTb
-2137 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 185) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2183 1512 M
-0 2016 V
-stroke
-LTb
-2183 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 190) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2229 1512 M
-0 2016 V
-stroke
-LTb
-2229 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 195) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2276 1512 M
-0 2016 V
-stroke
-LTb
-2276 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 200) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2322 1512 M
-0 2016 V
-stroke
-LTb
-2322 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 205) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2369 1512 M
-0 2016 V
-stroke
-LTb
-2369 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 210) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2415 1512 M
-0 2016 V
-stroke
-LTb
-2415 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 215) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2461 1512 M
-0 2016 V
-stroke
-LTb
-2461 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 220) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2508 1512 M
-0 2016 V
-stroke
-LTb
-2508 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 225) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2554 1512 M
-0 2016 V
-stroke
-LTb
-2554 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 230) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2601 1512 M
-0 2016 V
-stroke
-LTb
-2601 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 235) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2647 1512 M
-0 2016 V
-stroke
-LTb
-2647 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 240) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2693 1512 M
-0 2016 V
-stroke
-LTb
-2693 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 245) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2740 1512 M
-0 2016 V
-stroke
-LTb
-2740 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 250) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2786 1512 M
-0 2016 V
-stroke
-LTb
-2786 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 255) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2833 1512 M
-0 2016 V
-stroke
-LTb
-2833 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 260) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2879 1512 M
-0 2016 V
-stroke
-LTb
-2879 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 265) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2925 1512 M
-0 2016 V
-stroke
-LTb
-2925 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 270) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2972 1512 M
-0 2016 V
-stroke
-LTb
-2972 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 275) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3018 1512 M
-0 2016 V
-stroke
-LTb
-3018 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 280) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3065 1512 M
-0 2016 V
-stroke
-LTb
-3065 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 285) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3111 1512 M
-0 2016 V
-stroke
-LTb
-3111 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 290) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3157 1512 M
-0 2016 V
-stroke
-LTb
-3157 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 295) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3204 1512 M
-0 2016 V
-stroke
-LTb
-3204 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 300) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3250 1512 M
-0 2016 V
-stroke
-LTb
-3250 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 305) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3297 1512 M
-0 2016 V
-stroke
-LTb
-3297 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 310) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3343 1512 M
-0 2016 V
-stroke
-LTb
-3343 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 315) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3389 1512 M
-0 2016 V
-stroke
-LTb
-3389 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 320) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3436 1512 M
-0 2016 V
-stroke
-LTb
-3436 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 325) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3482 1512 M
-0 2016 V
-stroke
-LTb
-3482 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 330) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3529 1512 M
-0 2016 V
-stroke
-LTb
-3529 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 335) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3575 1512 M
-0 2016 V
-stroke
-LTb
-3575 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 340) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3621 1512 M
-0 2016 V
-stroke
-LTb
-3621 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 345) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3668 1512 M
-0 2016 V
-stroke
-LTb
-3668 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 350) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3714 1512 M
-0 2016 V
-stroke
-LTb
-3714 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 355) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3761 1512 M
-0 2016 V
-stroke
-LTb
-3761 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 360) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3807 1512 M
-0 2016 V
-stroke
-LTb
-3807 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 365) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3853 1512 M
-0 2016 V
-stroke
-LTb
-3853 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 370) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3900 1512 M
-0 2016 V
-stroke
-LTb
-3900 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 375) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3946 1512 M
-0 2016 V
-stroke
-LTb
-3946 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 380) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3993 1512 M
-0 2016 V
-stroke
-LTb
-3993 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 385) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4039 1512 M
-0 2016 V
-stroke
-LTb
-4039 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 390) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4085 1512 M
-0 2016 V
-stroke
-LTb
-4085 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 395) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4132 1512 M
-0 2016 V
-stroke
-LTb
-4132 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 400) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4178 1512 M
-0 2016 V
-stroke
-LTb
-4178 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 405) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4225 1512 M
-0 2016 V
-stroke
-LTb
-4225 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 410) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4271 1512 M
-0 2016 V
-stroke
-LTb
-4271 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 415) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4317 1512 M
-0 2016 V
-stroke
-LTb
-4317 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 420) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4364 1512 M
-0 2016 V
-stroke
-LTb
-4364 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 425) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4410 1512 M
-0 2016 V
-stroke
-LTb
-4410 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 430) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4457 1512 M
-0 2016 V
-stroke
-LTb
-4457 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 435) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4503 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4503 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 440) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4549 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4549 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 445) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4596 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4596 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 450) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4642 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4642 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 455) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4689 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4689 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 460) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4735 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4735 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 465) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4781 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4781 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 470) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4828 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4828 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 475) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4874 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4874 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 480) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4921 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4921 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 485) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4967 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-4967 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 490) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5013 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5013 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 495) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5060 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5060 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 500) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5106 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5106 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 505) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5153 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5153 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 510) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5199 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5199 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 515) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5245 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5245 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 520) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5292 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5292 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 525) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5338 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5338 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 530) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5384 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5384 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 535) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5431 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5431 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 540) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5477 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5477 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 545) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5524 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5524 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 550) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5570 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5570 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 555) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5616 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5616 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 560) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5663 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5663 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 565) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5709 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5709 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 570) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5756 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5756 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 575) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5802 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5802 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 580) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5848 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5848 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 585) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5895 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5895 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 590) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5941 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5941 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 595) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5988 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-5988 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 600) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6034 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6034 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 605) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6080 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6080 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 610) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6127 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6127 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 615) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6173 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6173 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 620) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6220 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6220 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 625) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6266 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6266 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 630) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6312 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6312 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 635) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6359 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6359 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 640) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6405 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6405 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 645) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6452 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6452 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 650) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6498 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6498 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 655) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6544 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6544 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 660) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6591 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6591 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 665) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6637 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6637 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 670) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6684 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6684 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 675) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6730 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6730 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 680) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6776 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6776 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 685) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6823 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6823 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 690) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6869 1512 M
-0 63 V
-0 140 R
-0 1813 V
-stroke
-LTb
-6869 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 695) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6916 1512 M
-0 2016 V
-stroke
-LTb
-6916 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 700) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6962 1512 M
-0 2016 V
-stroke
-LTb
-6962 1512 M
-0 63 V
-0 1953 R
-0 -63 V
-0 -2093 R
-( 705) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTb
-420 3528 N
-0 -2016 V
-6542 0 V
-0 2016 V
--6542 0 V
+420 3527 N
+0 -2015 V
+6527 0 V
+0 2015 V
+-6527 0 V
 Z stroke
 LCb setrgbcolor
-3691 1162 M
+3683 1162 M
 ( ) Cshow
 LTb
 1.000 UP
-0 2520 M
-currentpoint gsave translate 90 rotate 0 0 M
+-232 2520 M
+currentpoint gsave translate -270 rotate 0 0 M
 (#pairs \(in thousands\)) Cshow
 grestore
 1.000 UL
 LTb
+% Begin plot #1
 1.000 UP
 3.000 UL
 LT0
-LTb
-6311 1645 M
-(Number of cached seqs.) Rshow
+LCb setrgbcolor
+6296 1645 M
+(Generated pairs) Rshow
 LT0
-6395 1645 M
+6380 1645 M
 399 0 V
-437 3528 M
-2 -923 V
-9 -109 V
-9 -520 V
-9 -16 V
-8 1568 V
-3 0 R
-8 -1835 V
-9 392 V
-10 1092 V
-9 -887 V
-9 -189 V
-9 -589 V
-7 2016 V
-6 0 R
-6 -1524 V
-9 161 V
-9 -270 V
-10 165 V
-9 -294 V
-9 48 V
-10 351 V
-6 1363 V
-5 0 R
-7 -2008 V
-9 609 V
-10 234 V
-9 -440 V
-9 -52 V
-10 12 V
-9 581 V
-9 -952 V
-9 742 V
-10 -44 V
-9 620 V
-2 698 V
-12 0 R
-5 -1831 V
-9 -185 V
-9 649 V
-9 -109 V
-10 730 V
-9 -1270 V
-9 790 V
-9 -209 V
-10 -541 V
-9 190 V
-9 403 V
-10 -488 V
-9 706 V
-9 -609 V
-9 685 V
-10 -153 V
-9 -24 V
-9 56 V
-10 -383 V
-9 375 V
-9 -431 V
-9 89 V
-10 -142 V
-9 476 V
-9 980 V
-7 246 V
-3 0 R
-9 -1520 V
-9 -145 V
-9 -198 V
-10 299 V
-9 362 V
-9 -370 V
-9 -57 V
-10 698 V
-9 -581 V
-9 65 V
-10 818 V
-9 -810 V
-9 693 V
-2 746 V
-14 0 R
-3 -1782 V
-9 621 V
-9 -129 V
-10 665 V
-9 -1234 V
-9 1093 V
-9 -532 V
-10 250 V
-9 -799 V
-2 1847 V
-15 0 R
-1 -1568 V
-10 0 V
-9 870 V
-1 698 V
-15 0 R
-3 -2016 V
-3 2016 V
-13 0 R
-2 -1189 V
-9 -605 V
-10 -20 V
-2 1814 V
-23 0 R
-1302 2113 L
-9 1197 V
-9 -1076 V
-2 1294 V
-33 0 R
-2 -1859 V
-2 1859 V
-34 0 R
-1 -1117 V
-4 1117 V
-11 0 R
-4 -1286 V
-9 -730 V
-9 0 V
-10 439 V
-9 -185 V
-9 331 V
-10 161 V
-9 -97 V
-8 1367 V
-2 0 R
-8 -2016 V
-10 923 V
-9 -121 V
-9 -205 V
-10 165 V
-9 73 V
-9 -412 V
-9 283 V
-10 -597 V
-9 532 V
-9 -153 V
-9 28 V
-10 -145 V
-9 -206 V
-9 1045 V
-10 -1109 V
-9 209 V
-9 335 V
-9 44 V
-6 1327 V
-7 0 R
-6 -1673 V
-9 -61 V
-10 198 V
-9 137 V
-9 -270 V
-9 -186 V
-10 258 V
-9 -177 V
-9 645 V
-10 -387 V
-9 149 V
-9 -568 V
-9 1274 V
-10 -956 V
-9 -310 V
-9 665 V
-9 -290 V
-10 536 V
-9 -1000 V
-9 1060 V
-10 -673 V
-9 161 V
-9 1210 V
-9 -601 V
-10 -44 V
-9 -464 V
-9 -395 V
-7 1762 V
-7 0 R
-5 -863 V
-9 -1056 V
-9 306 V
-10 -125 V
-9 -278 V
-9 1165 V
-10 -802 V
-9 1109 V
-9 -1125 V
-9 24 V
-10 -331 V
-9 202 V
-9 218 V
-9 363 V
-10 -109 V
-9 568 V
-1 734 V
-22 0 R
-5 -1706 V
-9 525 V
-9 -125 V
-10 -275 V
-9 654 V
-6 927 V
-5 0 R
-8 -1605 V
-9 1311 V
-9 -1012 V
-9 -710 V
-10 306 V
-9 642 V
-9 -706 V
-9 222 V
-10 -85 V
-2248 2028 L
-9 173 V
-10 -645 V
-9 125 V
-9 -169 V
-9 0 V
-10 32 V
-5 1984 V
-9 0 R
-4 -1133 V
-10 -157 V
-1 1290 V
-33 0 R
-3 -1887 V
-9 891 V
-9 524 V
-10 -609 V
-9 -447 V
-9 383 V
-9 -347 V
-10 -185 V
-9 463 V
-9 109 V
-9 -431 V
-10 540 V
-9 254 V
-9 -730 V
-10 -28 V
-9 -435 V
-9 705 V
-9 -697 V
-10 246 V
-9 -234 V
-9 1584 V
-10 -1278 V
-9 85 V
-9 403 V
-9 -633 V
-10 460 V
-9 52 V
-9 -621 V
-10 89 V
-9 -210 V
-9 1480 V
-9 -935 V
-10 117 V
-9 -335 V
-9 153 V
-9 -16 V
-10 -28 V
-2 1548 V
-15 0 R
-1 -964 V
-10 -604 V
-9 254 V
-9 -702 V
-9 476 V
-10 -178 V
-9 271 V
-9 0 V
-10 -230 V
-9 193 V
-9 331 V
-9 -61 V
-10 -451 V
-9 891 V
-9 -678 V
-9 150 V
-10 -408 V
-9 77 V
-9 -383 V
-10 742 V
-9 -347 V
-9 -85 V
-9 1182 V
-10 -440 V
-9 -479 V
-9 161 V
-10 -686 V
-9 -48 V
-9 0 V
-9 548 V
-10 -28 V
-9 -520 V
-9 0 V
-10 0 V
-9 875 V
-9 -194 V
-9 -12 V
-10 77 V
-9 1254 V
-9 -2000 V
-9 528 V
-10 -278 V
-2 1766 V
-15 0 R
-1 -1242 V
-10 -443 V
-9 270 V
-9 -117 V
-9 955 V
-10 -1084 V
-9 125 V
-9 -109 V
-10 290 V
-3204 2068 L
-9 -451 V
-9 762 V
-10 -863 V
-9 734 V
-9 673 V
-10 -1403 V
-9 327 V
-9 379 V
-9 -496 V
-10 189 V
-9 303 V
-9 488 V
-9 -823 V
-10 -266 V
-9 665 V
-9 -242 V
-10 -411 V
-9 -121 V
-9 331 V
-9 1495 V
-1 190 V
-14 0 R
-4 -1254 V
-9 -161 V
-10 705 V
-9 -967 V
-9 709 V
-9 -693 V
-10 334 V
-9 -342 V
-9 -37 V
-9 206 V
-10 262 V
-9 460 V
-9 -484 V
-10 -375 V
-9 286 V
-9 93 V
-9 246 V
-10 194 V
-9 407 V
-9 -782 V
-10 -17 V
-9 533 V
-9 -650 V
-9 -205 V
-10 286 V
-9 -266 V
-9 -48 V
-10 4 V
-9 492 V
-9 572 V
-9 -830 V
-10 564 V
-9 -790 V
-9 145 V
-9 165 V
-10 -64 V
-9 -319 V
-9 311 V
-10 -432 V
-9 69 V
-6 1673 V
-6 0 R
-6 -1794 V
-10 419 V
-9 532 V
-9 -729 V
-10 -335 V
-9 1907 V
-9 -448 V
-9 -342 V
-3 790 V
-15 0 R
-1 -222 V
-9 -32 V
-10 -1423 V
-9 834 V
-9 -1173 V
-9 633 V
-10 -56 V
-9 -105 V
-9 540 V
-9 -625 V
-10 186 V
-9 -174 V
-9 -56 V
-10 673 V
-7 1000 V
-3 0 R
-8 -1347 V
-9 178 V
-10 -847 V
-9 1000 V
-9 -423 V
-10 72 V
-9 -629 V
-9 1698 V
-9 -1351 V
-10 387 V
-9 335 V
-9 -311 V
-9 -226 V
-10 -108 V
-4141 2193 L
-9 996 V
-10 -1157 V
-9 -97 V
-9 613 V
-9 -971 V
-10 28 V
-9 363 V
-9 677 V
-1 883 V
-17 0 R
-1 -972 V
-9 -725 V
-9 0 V
-10 -57 V
-9 -206 V
-9 267 V
-10 282 V
-9 645 V
-9 -544 V
-9 -117 V
-9 1427 V
-2 0 R
-8 -1286 V
-9 -109 V
-9 -565 V
-10 654 V
-9 -710 V
-9 0 V
-10 1125 V
-9 -488 V
-9 1375 V
-9 -1835 V
-10 932 V
-9 887 V
-9 -1573 V
-5 1593 V
-10 0 R
-4 -1270 V
-9 -270 V
-4 1540 V
-18 0 R
-6 -1528 V
-9 -40 V
-10 -299 V
-9 1432 V
-9 -996 V
-9 -359 V
-10 145 V
-9 427 V
-9 25 V
-9 250 V
-10 584 V
-9 -1613 V
-9 1190 V
-10 -327 V
-9 -314 V
-9 1294 V
-9 -1327 V
-10 238 V
-9 -798 V
-2 2016 V
-14 0 R
-3 -1774 V
-9 218 V
-9 608 V
-9 -1068 V
-10 399 V
-9 -93 V
-9 400 V
-9 1125 V
-10 -1396 V
-6 1581 V
-6 0 R
-6 -1702 V
-10 117 V
-9 -40 V
-9 903 V
-9 -1246 V
-10 1569 V
-9 -1202 V
-9 77 V
-10 48 V
-5 1476 V
-7 0 R
-6 -1629 V
-9 145 V
-10 -64 V
-9 -97 V
-9 -177 V
-10 80 V
-9 57 V
-9 -29 V
-9 690 V
-10 -387 V
-9 528 V
-9 -609 V
-9 89 V
-10 -242 V
-9 1072 V
-9 -713 V
-2 1286 V
-15 0 R
-2 -1193 V
-9 104 V
-5049 3528 L
-2 0 R
-9 -1387 V
-9 60 V
-9 -282 V
-10 234 V
-4 1375 V
-10 0 R
-4 -1637 V
-9 1472 V
-10 -1129 V
-9 443 V
-9 -476 V
-10 646 V
-9 157 V
-9 -508 V
-9 -391 V
-10 544 V
-9 -472 V
-9 403 V
-9 -161 V
-10 -326 V
-9 -271 V
-9 -310 V
-10 814 V
-9 -16 V
-9 -455 V
-9 -93 V
-10 895 V
-9 307 V
-9 -424 V
-10 -568 V
-9 -85 V
-9 173 V
-9 238 V
-10 -419 V
-9 177 V
-9 379 V
-9 -923 V
-10 847 V
-9 -266 V
-9 -8 V
-10 -61 V
-9 839 V
-9 -819 V
-9 206 V
-10 -214 V
-9 -484 V
-9 472 V
-10 -85 V
-9 347 V
-9 -141 V
-9 -633 V
-10 0 V
-9 379 V
-9 238 V
-10 -597 V
-9 226 V
-9 1278 V
-9 444 V
-10 -1916 V
-9 815 V
-9 -149 V
-9 -315 V
-10 613 V
-9 -375 V
-9 -282 V
-10 310 V
-9 101 V
-9 -714 V
-9 468 V
-10 710 V
-1 782 V
-14 0 R
-3 -2016 V
-10 585 V
-9 20 V
-9 153 V
-9 -218 V
-10 -12 V
-3 1488 V
-11 0 R
-4 -1742 V
-10 157 V
-9 53 V
-9 -53 V
-9 883 V
-10 -1004 V
-9 1037 V
-9 -65 V
-1 734 V
-17 0 R
-1 -710 V
-9 -818 V
-9 411 V
-10 613 V
-9 -802 V
-9 -299 V
-9 250 V
-10 -201 V
-9 -97 V
-9 447 V
-10 -92 V
-9 -367 V
-9 189 V
-5978 2040 L
-10 1117 V
-9 -956 V
-9 791 V
-9 -270 V
-10 64 V
-9 -1064 V
-9 -65 V
-10 89 V
-9 423 V
-9 -266 V
-9 -105 V
-10 -109 V
-9 -177 V
-9 1290 V
-10 -911 V
-9 206 V
-9 -206 V
-9 -290 V
-10 334 V
-2 1593 V
-16 0 R
-0 -282 V
-10 -1101 V
-9 -508 V
-9 516 V
-9 -89 V
-10 1166 V
-9 -1117 V
-9 -492 V
-9 -109 V
-10 524 V
-9 246 V
-9 -460 V
-10 174 V
-9 -415 V
-9 508 V
-5 1439 V
-10 0 R
-4 -1210 V
-9 41 V
-9 -662 V
-10 1746 V
-9 -1419 V
-9 552 V
-9 -16 V
-10 -580 V
-9 705 V
-9 -403 V
-10 169 V
-9 -193 V
-9 161 V
-9 585 V
-10 -907 V
-9 -146 V
-9 -68 V
-9 488 V
-10 439 V
-9 -524 V
-9 -254 V
-10 -185 V
-9 322 V
-9 -326 V
-9 496 V
-10 8 V
-9 -710 V
-9 157 V
-10 77 V
-9 1109 V
-2 548 V
-11 0 R
-5 -2016 V
-10 423 V
-9 85 V
-9 673 V
-9 -979 V
-10 1314 V
-9 -1077 V
-9 37 V
-10 -16 V
-9 613 V
-9 -323 V
-9 0 V
-10 77 V
-9 -230 V
-9 -440 V
-10 746 V
-4 1113 V
-8 0 R
-6 -1867 V
-9 246 V
-10 -395 V
-9 0 V
-9 915 V
-6 1101 V
-6 0 R
-7 -1806 V
-9 185 V
-9 77 V
-10 -182 V
-9 1174 V
-9 -1258 V
-9 250 V
-10 1209 V
-9 -520 V
-6906 1564 L
-10 908 V
-9 -258 V
-9 -57 V
-9 -270 V
-10 -12 V
-439 2605 Crs
-448 2496 Crs
-457 1976 Crs
-466 1960 Crs
-485 1693 Crs
-494 2085 Crs
-504 3177 Crs
-513 2290 Crs
-522 2101 Crs
-531 1512 Crs
-550 2004 Crs
-559 2165 Crs
-568 1895 Crs
-578 2060 Crs
-587 1766 Crs
-596 1814 Crs
-606 2165 Crs
-624 1520 Crs
-633 2129 Crs
-643 2363 Crs
-652 1923 Crs
-661 1871 Crs
-671 1883 Crs
-680 2464 Crs
-689 1512 Crs
-698 2254 Crs
-708 2210 Crs
-717 2830 Crs
-736 1697 Crs
-745 1512 Crs
-754 2161 Crs
-763 2052 Crs
-773 2782 Crs
-782 1512 Crs
-791 2302 Crs
-800 2093 Crs
-810 1552 Crs
-819 1742 Crs
-828 2145 Crs
-838 1657 Crs
-847 2363 Crs
-856 1754 Crs
-865 2439 Crs
-875 2286 Crs
-884 2262 Crs
-893 2318 Crs
-903 1935 Crs
-912 2310 Crs
-921 1879 Crs
-930 1968 Crs
-940 1826 Crs
-949 2302 Crs
-958 3282 Crs
-977 2008 Crs
-986 1863 Crs
-995 1665 Crs
-1005 1964 Crs
-1014 2326 Crs
-1023 1956 Crs
-1032 1899 Crs
-1042 2597 Crs
-1051 2016 Crs
-1060 2081 Crs
-1070 2899 Crs
-1079 2089 Crs
-1088 2782 Crs
-1107 1746 Crs
-1116 2367 Crs
-1125 2238 Crs
-1135 2903 Crs
-1144 1669 Crs
-1153 2762 Crs
-1162 2230 Crs
-1172 2480 Crs
-1181 1681 Crs
-1199 1960 Crs
-1209 1960 Crs
-1218 2830 Crs
-1237 1512 Crs
-1255 2339 Crs
-1264 1734 Crs
-1274 1714 Crs
-1302 2113 Crs
-1311 3310 Crs
-1320 2234 Crs
-1357 1669 Crs
-1394 2411 Crs
-1413 2242 Crs
-1422 1512 Crs
-1431 1512 Crs
-1441 1951 Crs
-1450 1766 Crs
-1459 2097 Crs
-1469 2258 Crs
-1478 2161 Crs
-1496 1512 Crs
-1506 2435 Crs
-1515 2314 Crs
-1524 2109 Crs
-1534 2274 Crs
-1543 2347 Crs
-1552 1935 Crs
-1561 2218 Crs
-1571 1621 Crs
-1580 2153 Crs
-1589 2000 Crs
-1598 2028 Crs
-1608 1883 Crs
-1617 1677 Crs
-1626 2722 Crs
-1636 1613 Crs
-1645 1822 Crs
-1654 2157 Crs
-1663 2201 Crs
-1682 1855 Crs
-1691 1794 Crs
-1701 1992 Crs
-1710 2129 Crs
-1719 1859 Crs
-1728 1673 Crs
-1738 1931 Crs
-1747 1754 Crs
-1756 2399 Crs
-1766 2012 Crs
-1775 2161 Crs
-1784 1593 Crs
-1793 2867 Crs
-1803 1911 Crs
-1812 1601 Crs
-1821 2266 Crs
-1830 1976 Crs
-1840 2512 Crs
-1849 1512 Crs
-1858 2572 Crs
-1868 1899 Crs
-1877 2060 Crs
-1886 3270 Crs
-1895 2669 Crs
-1905 2625 Crs
-1914 2161 Crs
-1923 1766 Crs
-1942 2665 Crs
-1951 1609 Crs
-1960 1915 Crs
-1970 1790 Crs
-1979 1512 Crs
-1988 2677 Crs
-1998 1875 Crs
-2007 2984 Crs
-2016 1859 Crs
-2025 1883 Crs
-2035 1552 Crs
-2044 1754 Crs
-2053 1972 Crs
-2062 2335 Crs
-2072 2226 Crs
-2081 2794 Crs
-2109 1822 Crs
-2118 2347 Crs
-2127 2222 Crs
-2137 1947 Crs
-2146 2601 Crs
-2165 1923 Crs
-2174 3234 Crs
-2183 2222 Crs
-2192 1512 Crs
-2202 1818 Crs
-2211 2460 Crs
-2220 1754 Crs
-2229 1976 Crs
-2239 1891 Crs
-2248 2028 Crs
-2257 2201 Crs
-2267 1556 Crs
-2276 1681 Crs
-2285 1512 Crs
-2294 1512 Crs
-2304 1544 Crs
-2322 2395 Crs
-2332 2238 Crs
-2369 1641 Crs
-2378 2532 Crs
-2387 3056 Crs
-2397 2447 Crs
-2406 2000 Crs
-2415 2383 Crs
-2424 2036 Crs
-2434 1851 Crs
-2443 2314 Crs
-2452 2423 Crs
-2461 1992 Crs
-2471 2532 Crs
-2480 2786 Crs
-2489 2056 Crs
-2499 2028 Crs
-2508 1593 Crs
-2517 2298 Crs
-2526 1601 Crs
-2536 1847 Crs
-2545 1613 Crs
-2554 3197 Crs
-2564 1919 Crs
-2573 2004 Crs
-2582 2407 Crs
-2591 1774 Crs
-2601 2234 Crs
-2610 2286 Crs
-2619 1665 Crs
-2629 1754 Crs
-2638 1544 Crs
-2647 3024 Crs
-2656 2089 Crs
-2666 2206 Crs
-2675 1871 Crs
-2684 2024 Crs
-2693 2008 Crs
-2703 1980 Crs
-2721 2564 Crs
-2731 1960 Crs
-2740 2214 Crs
-2749 1512 Crs
-2758 1988 Crs
-2768 1810 Crs
-2777 2081 Crs
-2786 2081 Crs
-2796 1851 Crs
-2805 2044 Crs
-2814 2375 Crs
-2823 2314 Crs
-2833 1863 Crs
-2842 2754 Crs
-2851 2076 Crs
-2860 2226 Crs
-2870 1818 Crs
-2879 1895 Crs
-2888 1512 Crs
-2898 2254 Crs
-2907 1907 Crs
-2916 1822 Crs
-2925 3004 Crs
-2935 2564 Crs
-2944 2085 Crs
-2953 2246 Crs
-2963 1560 Crs
-2972 1512 Crs
-2981 1512 Crs
-2990 2060 Crs
-3000 2032 Crs
-3009 1512 Crs
-3018 1512 Crs
-3028 1512 Crs
-3037 2387 Crs
-3046 2193 Crs
-3055 2181 Crs
-3065 2258 Crs
-3074 3512 Crs
-3083 1512 Crs
-3092 2040 Crs
-3102 1762 Crs
-3120 2286 Crs
-3130 1843 Crs
-3139 2113 Crs
-3148 1996 Crs
-3157 2951 Crs
-3167 1867 Crs
-3176 1992 Crs
-3185 1883 Crs
-3195 2173 Crs
-3204 2068 Crs
-3213 1617 Crs
-3222 2379 Crs
-3232 1516 Crs
-3241 2250 Crs
-3250 2923 Crs
-3260 1520 Crs
-3269 1847 Crs
-3278 2226 Crs
-3287 1730 Crs
-3297 1919 Crs
-3306 2222 Crs
-3315 2710 Crs
-3324 1887 Crs
-3334 1621 Crs
-3343 2286 Crs
-3352 2044 Crs
-3362 1633 Crs
-3371 1512 Crs
-3380 1843 Crs
-3389 3338 Crs
-3408 2274 Crs
-3417 2113 Crs
-3427 2818 Crs
-3436 1851 Crs
-3445 2560 Crs
-3454 1867 Crs
-3464 2201 Crs
-3473 1859 Crs
-3482 1822 Crs
-3491 2028 Crs
-3501 2290 Crs
-3510 2750 Crs
-3519 2266 Crs
-3529 1891 Crs
-3538 2177 Crs
-3547 2270 Crs
-3556 2516 Crs
-3566 2710 Crs
-3575 3117 Crs
-3584 2335 Crs
-3594 2318 Crs
-3603 2851 Crs
-3612 2201 Crs
-3621 1996 Crs
-3631 2282 Crs
-3640 2016 Crs
-3649 1968 Crs
-3659 1972 Crs
-3668 2464 Crs
-3677 3036 Crs
-3686 2206 Crs
-3696 2770 Crs
-3705 1980 Crs
-3714 2125 Crs
-3723 2290 Crs
-3733 2226 Crs
-3742 1907 Crs
-3751 2218 Crs
-3761 1786 Crs
-3770 1855 Crs
-3788 1734 Crs
-3798 2153 Crs
-3807 2685 Crs
-3816 1956 Crs
-3826 1621 Crs
-3835 3528 Crs
-3844 3080 Crs
-3853 2738 Crs
-3872 3306 Crs
-3881 3274 Crs
-3891 1851 Crs
-3900 2685 Crs
-3909 1512 Crs
-3918 2145 Crs
-3928 2089 Crs
-3937 1984 Crs
-3946 2524 Crs
-3955 1899 Crs
-3965 2085 Crs
-3974 1911 Crs
-3983 1855 Crs
-3993 2528 Crs
-4011 2181 Crs
-4020 2359 Crs
-4030 1512 Crs
-4039 2512 Crs
-4048 2089 Crs
-4058 2161 Crs
-4067 1532 Crs
-4076 3230 Crs
-4085 1879 Crs
-4095 2266 Crs
-4104 2601 Crs
-4113 2290 Crs
-4122 2064 Crs
-4132 1956 Crs
-4141 2193 Crs
-4150 3189 Crs
-4160 2032 Crs
-4169 1935 Crs
-4178 2548 Crs
-4187 1577 Crs
-4197 1605 Crs
-4206 1968 Crs
-4215 2645 Crs
-4234 2556 Crs
-4243 1831 Crs
-4252 1831 Crs
-4262 1774 Crs
-4271 1568 Crs
-4280 1835 Crs
-4290 2117 Crs
-4299 2762 Crs
-4308 2218 Crs
-4317 2101 Crs
-4336 2242 Crs
-4345 2133 Crs
-4354 1568 Crs
-4364 2222 Crs
-4373 1512 Crs
-4382 1512 Crs
-4392 2637 Crs
-4401 2149 Crs
-4410 3524 Crs
-4419 1689 Crs
-4429 2621 Crs
-4438 3508 Crs
-4447 1935 Crs
-4466 2258 Crs
-4475 1988 Crs
-4503 2000 Crs
-4512 1960 Crs
-4522 1661 Crs
-4531 3093 Crs
-4540 2097 Crs
-4549 1738 Crs
-4559 1883 Crs
-4568 2310 Crs
-4577 2335 Crs
-4586 2585 Crs
-4596 3169 Crs
-4605 1556 Crs
-4614 2746 Crs
-4624 2419 Crs
-4633 2105 Crs
-4642 3399 Crs
-4651 2072 Crs
-4661 2310 Crs
-4670 1512 Crs
-4689 1754 Crs
-4698 1972 Crs
-4707 2580 Crs
-4716 1512 Crs
-4726 1911 Crs
-4735 1818 Crs
-4744 2218 Crs
-4753 3343 Crs
-4763 1947 Crs
-4781 1826 Crs
-4791 1943 Crs
-4800 1903 Crs
-4809 2806 Crs
-4818 1560 Crs
-4828 3129 Crs
-4837 1927 Crs
-4846 2004 Crs
-4856 2052 Crs
-4874 1899 Crs
-4883 2044 Crs
-4893 1980 Crs
-4902 1883 Crs
-4911 1706 Crs
-4921 1786 Crs
-4930 1843 Crs
-4939 1814 Crs
-4948 2504 Crs
-4958 2117 Crs
-4967 2645 Crs
-4976 2036 Crs
-4985 2125 Crs
-4995 1883 Crs
-5004 2955 Crs
-5013 2242 Crs
-5032 2335 Crs
-5041 2439 Crs
-5060 2141 Crs
-5069 2201 Crs
-5078 1919 Crs
-5088 2153 Crs
-5106 1891 Crs
-5115 3363 Crs
-5125 2234 Crs
-5134 2677 Crs
-5143 2201 Crs
-5153 2847 Crs
-5162 3004 Crs
-5171 2496 Crs
-5180 2105 Crs
-5190 2649 Crs
-5199 2177 Crs
-5208 2580 Crs
-5217 2419 Crs
-5227 2093 Crs
-5236 1822 Crs
-5245 1512 Crs
-5255 2326 Crs
-5264 2310 Crs
-5273 1855 Crs
-5282 1762 Crs
-5292 2657 Crs
-5301 2964 Crs
-5310 2540 Crs
-5320 1972 Crs
-5329 1887 Crs
-5338 2060 Crs
-5347 2298 Crs
-5357 1879 Crs
-5366 2056 Crs
-5375 2435 Crs
-5384 1512 Crs
-5394 2359 Crs
-5403 2093 Crs
-5412 2085 Crs
-5422 2024 Crs
-5431 2863 Crs
-5440 2044 Crs
-5449 2250 Crs
-5459 2036 Crs
-5468 1552 Crs
-5477 2024 Crs
-5487 1939 Crs
-5496 2286 Crs
-5505 2145 Crs
-5514 1512 Crs
-5524 1512 Crs
-5533 1891 Crs
-5542 2129 Crs
-5552 1532 Crs
-5561 1758 Crs
-5570 3036 Crs
-5579 3480 Crs
-5589 1564 Crs
-5598 2379 Crs
-5607 2230 Crs
-5616 1915 Crs
-5626 2528 Crs
-5635 2153 Crs
-5644 1871 Crs
-5654 2181 Crs
-5663 2282 Crs
-5672 1568 Crs
-5681 2036 Crs
-5691 2746 Crs
-5709 1512 Crs
-5719 2097 Crs
-5728 2117 Crs
-5737 2270 Crs
-5746 2052 Crs
-5756 2040 Crs
-5774 1786 Crs
-5784 1943 Crs
-5793 1996 Crs
-5802 1943 Crs
-5811 2826 Crs
-5821 1822 Crs
-5830 2859 Crs
-5839 2794 Crs
-5858 2818 Crs
-5867 2000 Crs
-5876 2411 Crs
-5886 3024 Crs
-5895 2222 Crs
-5904 1923 Crs
-5913 2173 Crs
-5923 1972 Crs
-5932 1875 Crs
-5941 2322 Crs
-5951 2230 Crs
-5960 1863 Crs
-5969 2052 Crs
-5978 2040 Crs
-5988 3157 Crs
-5997 2201 Crs
-6006 2992 Crs
-6015 2722 Crs
-6025 2786 Crs
-6034 1722 Crs
-6043 1657 Crs
-6053 1746 Crs
-6062 2169 Crs
-6071 1903 Crs
-6080 1798 Crs
-6090 1689 Crs
-6099 1512 Crs
-6108 2802 Crs
-6118 1891 Crs
-6127 2097 Crs
-6136 1891 Crs
-6145 1601 Crs
-6155 1935 Crs
-6173 3246 Crs
-6183 2145 Crs
-6192 1637 Crs
-6201 2153 Crs
-6210 2064 Crs
-6220 3230 Crs
-6229 2113 Crs
-6238 1621 Crs
-6247 1512 Crs
-6257 2036 Crs
-6266 2282 Crs
-6275 1822 Crs
-6285 1996 Crs
-6294 1581 Crs
-6303 2089 Crs
-6322 2318 Crs
-6331 2359 Crs
-6340 1697 Crs
-6350 3443 Crs
-6359 2024 Crs
-6368 2576 Crs
-6377 2560 Crs
-6387 1980 Crs
-6396 2685 Crs
-6405 2282 Crs
-6415 2451 Crs
-6424 2258 Crs
-6433 2419 Crs
-6442 3004 Crs
-6452 2097 Crs
-6461 1951 Crs
-6470 1883 Crs
-6479 2371 Crs
-6489 2810 Crs
-6498 2286 Crs
-6507 2032 Crs
-6517 1847 Crs
-6526 2169 Crs
-6535 1843 Crs
-6544 2339 Crs
-6554 2347 Crs
-6563 1637 Crs
-6572 1794 Crs
-6582 1871 Crs
-6591 2980 Crs
-6609 1512 Crs
-6619 1935 Crs
-6628 2020 Crs
-6637 2693 Crs
-6646 1714 Crs
-6656 3028 Crs
-6665 1951 Crs
-6674 1988 Crs
-6684 1972 Crs
-6693 2585 Crs
-6702 2262 Crs
-6711 2262 Crs
-6721 2339 Crs
-6730 2109 Crs
-6739 1669 Crs
-6749 2415 Crs
-6767 1661 Crs
-6776 1907 Crs
-6786 1512 Crs
-6795 1512 Crs
-6804 2427 Crs
-6823 1722 Crs
-6832 1907 Crs
-6841 1984 Crs
-6851 1802 Crs
-6860 2976 Crs
-6869 1718 Crs
-6878 1968 Crs
-6888 3177 Crs
-6897 2657 Crs
-6906 1564 Crs
-6916 2472 Crs
-6925 2214 Crs
-6934 2157 Crs
-6943 1887 Crs
-6953 1875 Crs
-6594 1645 Crs
+470 2825 M
+50 -797 V
+51 65 V
+50 256 V
+50 -64 V
+50 -120 V
+50 196 V
+51 -123 V
+50 228 V
+50 -65 V
+50 -288 V
+50 45 V
+51 293 V
+50 -177 V
+50 -5 V
+50 -269 V
+51 324 V
+50 -115 V
+50 63 V
+50 -306 V
+50 680 V
+51 -771 V
+50 469 V
+50 171 V
+50 -352 V
+50 -350 V
+51 468 V
+50 -169 V
+50 185 V
+50 133 V
+50 310 V
+51 -437 V
+50 317 V
+50 -404 V
+50 -52 V
+50 161 V
+51 -299 V
+50 262 V
+50 177 V
+50 -319 V
+51 237 V
+50 -255 V
+50 314 V
+50 777 V
+50 -1367 V
+51 547 V
+50 -177 V
+50 233 V
+50 -540 V
+50 442 V
+51 27 V
+50 139 V
+50 -387 V
+50 361 V
+50 664 V
+51 33 V
+50 -984 V
+50 139 V
+50 767 V
+50 -980 V
+51 -36 V
+50 -195 V
+50 542 V
+50 -318 V
+51 161 V
+50 -101 V
+50 -231 V
+50 365 V
+50 89 V
+51 -191 V
+50 334 V
+50 -669 V
+50 242 V
+50 -147 V
+51 146 V
+50 -61 V
+50 19 V
+50 394 V
+50 -680 V
+51 629 V
+50 -139 V
+50 -21 V
+50 -154 V
+50 -155 V
+51 675 V
+50 -480 V
+50 349 V
+50 -80 V
+50 -234 V
+51 118 V
+50 -201 V
+50 236 V
+50 -459 V
+51 664 V
+50 -426 V
+50 -20 V
+50 385 V
+50 17 V
+51 146 V
+50 -19 V
+50 -322 V
+50 161 V
+50 11 V
+stroke 5591 2480 M
+51 -49 V
+50 -203 V
+50 640 V
+50 -236 V
+50 1 V
+51 -440 V
+50 32 V
+50 194 V
+50 373 V
+50 -261 V
+51 -35 V
+50 -352 V
+50 184 V
+50 123 V
+51 744 V
+50 -1083 V
+50 31 V
+50 -13 V
+50 -226 V
+51 679 V
+50 -347 V
+50 302 V
+50 -86 V
+50 47 V
+51 -376 V
+470 2825 Crs
+520 2028 Crs
+571 2093 Crs
+621 2349 Crs
+671 2285 Crs
+721 2165 Crs
+771 2361 Crs
+822 2238 Crs
+872 2466 Crs
+922 2401 Crs
+972 2113 Crs
+1022 2158 Crs
+1073 2451 Crs
+1123 2274 Crs
+1173 2269 Crs
+1223 2000 Crs
+1274 2324 Crs
+1324 2209 Crs
+1374 2272 Crs
+1424 1966 Crs
+1474 2646 Crs
+1525 1875 Crs
+1575 2344 Crs
+1625 2515 Crs
+1675 2163 Crs
+1725 1813 Crs
+1776 2281 Crs
+1826 2112 Crs
+1876 2297 Crs
+1926 2430 Crs
+1976 2740 Crs
+2027 2303 Crs
+2077 2620 Crs
+2127 2216 Crs
+2177 2164 Crs
+2227 2325 Crs
+2278 2026 Crs
+2328 2288 Crs
+2378 2465 Crs
+2428 2146 Crs
+2479 2383 Crs
+2529 2128 Crs
+2579 2442 Crs
+2629 3219 Crs
+2679 1852 Crs
+2730 2399 Crs
+2780 2222 Crs
+2830 2455 Crs
+2880 1915 Crs
+2930 2357 Crs
+2981 2384 Crs
+3031 2523 Crs
+3081 2136 Crs
+3131 2497 Crs
+3181 3161 Crs
+3232 3194 Crs
+3282 2210 Crs
+3332 2349 Crs
+3382 3116 Crs
+3432 2136 Crs
+3483 2100 Crs
+3533 1905 Crs
+3583 2447 Crs
+3633 2129 Crs
+3684 2290 Crs
+3734 2189 Crs
+3784 1958 Crs
+3834 2323 Crs
+3884 2412 Crs
+3935 2221 Crs
+3985 2555 Crs
+4035 1886 Crs
+4085 2128 Crs
+4135 1981 Crs
+4186 2127 Crs
+4236 2066 Crs
+4286 2085 Crs
+4336 2479 Crs
+4386 1799 Crs
+4437 2428 Crs
+4487 2289 Crs
+4537 2268 Crs
+4587 2114 Crs
+4637 1959 Crs
+4688 2634 Crs
+4738 2154 Crs
+4788 2503 Crs
+4838 2423 Crs
+4888 2189 Crs
+4939 2307 Crs
+4989 2106 Crs
+5039 2342 Crs
+5089 1883 Crs
+5140 2547 Crs
+5190 2121 Crs
+5240 2101 Crs
+5290 2486 Crs
+5340 2503 Crs
+5391 2649 Crs
+5441 2630 Crs
+5491 2308 Crs
+5541 2469 Crs
+5591 2480 Crs
+5642 2431 Crs
+5692 2228 Crs
+5742 2868 Crs
+5792 2632 Crs
+5842 2633 Crs
+5893 2193 Crs
+5943 2225 Crs
+5993 2419 Crs
+6043 2792 Crs
+6093 2531 Crs
+6144 2496 Crs
+6194 2144 Crs
+6244 2328 Crs
+6294 2451 Crs
+6345 3195 Crs
+6395 2112 Crs
+6445 2143 Crs
+6495 2130 Crs
+6545 1904 Crs
+6596 2583 Crs
+6646 2236 Crs
+6696 2538 Crs
+6746 2452 Crs
+6796 2499 Crs
+6847 2123 Crs
+6579 1645 Crs
+% End plot #1
 1.000 UL
 LTb
-420 3528 N
-0 -2016 V
-6542 0 V
-0 2016 V
--6542 0 V
+420 3527 N
+0 -2015 V
+6527 0 V
+0 2015 V
+-6527 0 V
 Z stroke
 1.000 UP
 1.000 UL
@@ -7502,3540 +1916,723 @@ LTb
 LTb
 1.000 UL
 LTa
-420 4333 M
-6542 0 V
+420 3801 M
+6527 0 V
 stroke
 LTb
-420 4333 M
+420 3801 M
 63 0 V
-6479 0 R
+6464 0 R
 -63 0 V
--6563 0 R
-( 1500) Rshow
+-6548 0 R
+( 385) Rshow
+1.000 UL
+LTb
+1.000 UL
+LTa
+420 4346 M
+6527 0 V
+stroke
+LTb
+420 4346 M
+63 0 V
+6464 0 R
+-63 0 V
+-6548 0 R
+( 395) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
 420 3528 M
-0 1092 V
+0 1091 V
 stroke
 LTb
 420 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 0) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-466 3528 M
-0 1092 V
+671 3528 M
+0 1091 V
 stroke
 LTb
-466 3528 M
+671 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 5) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-513 3528 M
-0 1092 V
+922 3528 M
+0 1091 V
 stroke
 LTb
-513 3528 M
+922 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 10) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-559 3528 M
-0 1092 V
+1173 3528 M
+0 1091 V
 stroke
 LTb
-559 3528 M
+1173 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 15) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-606 3528 M
-0 1092 V
+1424 3528 M
+0 1091 V
 stroke
 LTb
-606 3528 M
+1424 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 20) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-652 3528 M
-0 1092 V
+1675 3528 M
+0 1091 V
 stroke
 LTb
-652 3528 M
+1675 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 25) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-698 3528 M
-0 1092 V
+1926 3528 M
+0 1091 V
 stroke
 LTb
-698 3528 M
+1926 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 30) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-745 3528 M
-0 1092 V
+2177 3528 M
+0 1091 V
 stroke
 LTb
-745 3528 M
+2177 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 35) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-791 3528 M
-0 1092 V
+2428 3528 M
+0 1091 V
 stroke
 LTb
-791 3528 M
+2428 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 40) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-838 3528 M
-0 1092 V
+2679 3528 M
+0 1091 V
 stroke
 LTb
-838 3528 M
+2679 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 45) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-884 3528 M
-0 1092 V
+2930 3528 M
+0 1091 V
 stroke
 LTb
-884 3528 M
+2930 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 50) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-930 3528 M
-0 1092 V
+3181 3528 M
+0 1091 V
 stroke
 LTb
-930 3528 M
+3181 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 55) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-977 3528 M
-0 1092 V
+3432 3528 M
+0 1091 V
 stroke
 LTb
-977 3528 M
+3432 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 60) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1023 3528 M
-0 1092 V
+3684 3528 M
+0 1091 V
 stroke
 LTb
-1023 3528 M
+3684 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 65) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1070 3528 M
-0 1092 V
+3935 3528 M
+0 1091 V
 stroke
 LTb
-1070 3528 M
+3935 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 70) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1116 3528 M
-0 1092 V
+4186 3528 M
+0 1091 V
 stroke
 LTb
-1116 3528 M
+4186 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 75) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1162 3528 M
-0 1092 V
+4437 3528 M
+0 1091 V
 stroke
 LTb
-1162 3528 M
+4437 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 80) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1209 3528 M
-0 1092 V
+4688 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1209 3528 M
+4688 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 85) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1255 3528 M
-0 1092 V
+4939 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1255 3528 M
+4939 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 90) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1302 3528 M
-0 1092 V
+5190 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1302 3528 M
+5190 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 95) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1348 3528 M
-0 1092 V
+5441 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1348 3528 M
+5441 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 100) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1394 3528 M
-0 1092 V
+5692 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1394 3528 M
+5692 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 105) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1441 3528 M
-0 1092 V
+5943 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1441 3528 M
+5943 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 110) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1487 3528 M
-0 1092 V
+6194 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1487 3528 M
+6194 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 115) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1534 3528 M
-0 1092 V
+6445 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1534 3528 M
+6445 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 120) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1580 3528 M
-0 1092 V
+6696 3528 M
+0 63 V
+0 140 R
+0 888 V
 stroke
 LTb
-1580 3528 M
+6696 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 125) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1626 3528 M
-0 1092 V
+6947 3528 M
+0 1091 V
 stroke
 LTb
-1626 3528 M
+6947 3528 M
 0 63 V
-0 1029 R
+0 1028 R
 0 -63 V
-0 -1169 R
+0 -1168 R
 ( 130) Cshow
 1.000 UL
 LTb
 1.000 UL
-LTa
-1673 3528 M
-0 1092 V
-stroke
 LTb
-1673 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 135) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1719 3528 M
-0 1092 V
-stroke
-LTb
-1719 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 140) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1766 3528 M
-0 1092 V
-stroke
-LTb
-1766 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 145) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1812 3528 M
-0 1092 V
-stroke
-LTb
-1812 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 150) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1858 3528 M
-0 1092 V
-stroke
-LTb
-1858 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 155) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1905 3528 M
-0 1092 V
-stroke
-LTb
-1905 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 160) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1951 3528 M
-0 1092 V
-stroke
-LTb
-1951 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 165) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-1998 3528 M
-0 1092 V
-stroke
-LTb
-1998 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 170) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2044 3528 M
-0 1092 V
-stroke
-LTb
-2044 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 175) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2090 3528 M
-0 1092 V
-stroke
-LTb
-2090 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 180) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2137 3528 M
-0 1092 V
-stroke
-LTb
-2137 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 185) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2183 3528 M
-0 1092 V
-stroke
-LTb
-2183 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 190) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2229 3528 M
-0 1092 V
-stroke
-LTb
-2229 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 195) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2276 3528 M
-0 1092 V
-stroke
-LTb
-2276 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 200) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2322 3528 M
-0 1092 V
-stroke
-LTb
-2322 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 205) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2369 3528 M
-0 1092 V
-stroke
-LTb
-2369 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 210) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2415 3528 M
-0 1092 V
-stroke
-LTb
-2415 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 215) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2461 3528 M
-0 1092 V
-stroke
-LTb
-2461 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 220) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2508 3528 M
-0 1092 V
-stroke
-LTb
-2508 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 225) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2554 3528 M
-0 1092 V
-stroke
-LTb
-2554 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 230) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2601 3528 M
-0 1092 V
-stroke
-LTb
-2601 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 235) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2647 3528 M
-0 1092 V
-stroke
-LTb
-2647 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 240) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2693 3528 M
-0 1092 V
-stroke
-LTb
-2693 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 245) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2740 3528 M
-0 1092 V
-stroke
-LTb
-2740 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 250) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2786 3528 M
-0 1092 V
-stroke
-LTb
-2786 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 255) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2833 3528 M
-0 1092 V
-stroke
-LTb
-2833 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 260) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2879 3528 M
-0 1092 V
-stroke
-LTb
-2879 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 265) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2925 3528 M
-0 1092 V
-stroke
-LTb
-2925 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 270) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-2972 3528 M
-0 1092 V
-stroke
-LTb
-2972 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 275) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3018 3528 M
-0 1092 V
-stroke
-LTb
-3018 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 280) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3065 3528 M
-0 1092 V
-stroke
-LTb
-3065 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 285) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3111 3528 M
-0 1092 V
-stroke
-LTb
-3111 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 290) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3157 3528 M
-0 1092 V
-stroke
-LTb
-3157 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 295) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3204 3528 M
-0 1092 V
-stroke
-LTb
-3204 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 300) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3250 3528 M
-0 1092 V
-stroke
-LTb
-3250 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 305) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3297 3528 M
-0 1092 V
-stroke
-LTb
-3297 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 310) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3343 3528 M
-0 1092 V
-stroke
-LTb
-3343 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 315) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3389 3528 M
-0 1092 V
-stroke
-LTb
-3389 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 320) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3436 3528 M
-0 1092 V
-stroke
-LTb
-3436 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 325) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3482 3528 M
-0 1092 V
-stroke
-LTb
-3482 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 330) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3529 3528 M
-0 1092 V
-stroke
-LTb
-3529 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 335) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3575 3528 M
-0 1092 V
-stroke
-LTb
-3575 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 340) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3621 3528 M
-0 1092 V
-stroke
-LTb
-3621 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 345) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3668 3528 M
-0 1092 V
-stroke
-LTb
-3668 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 350) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3714 3528 M
-0 1092 V
-stroke
-LTb
-3714 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 355) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3761 3528 M
-0 1092 V
-stroke
-LTb
-3761 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 360) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3807 3528 M
-0 1092 V
-stroke
-LTb
-3807 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 365) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3853 3528 M
-0 1092 V
-stroke
-LTb
-3853 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 370) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3900 3528 M
-0 1092 V
-stroke
-LTb
-3900 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 375) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3946 3528 M
-0 1092 V
-stroke
-LTb
-3946 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 380) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-3993 3528 M
-0 1092 V
-stroke
-LTb
-3993 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 385) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4039 3528 M
-0 1092 V
-stroke
-LTb
-4039 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 390) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4085 3528 M
-0 1092 V
-stroke
-LTb
-4085 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 395) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4132 3528 M
-0 1092 V
-stroke
-LTb
-4132 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 400) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4178 3528 M
-0 1092 V
-stroke
-LTb
-4178 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 405) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4225 3528 M
-0 1092 V
-stroke
-LTb
-4225 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 410) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4271 3528 M
-0 1092 V
-stroke
-LTb
-4271 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 415) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4317 3528 M
-0 1092 V
-stroke
-LTb
-4317 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 420) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4364 3528 M
-0 1092 V
-stroke
-LTb
-4364 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 425) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4410 3528 M
-0 1092 V
-stroke
-LTb
-4410 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 430) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4457 3528 M
-0 1092 V
-stroke
-LTb
-4457 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 435) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4503 3528 M
-0 1092 V
-stroke
-LTb
-4503 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 440) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4549 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4549 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 445) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4596 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4596 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 450) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4642 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4642 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 455) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4689 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4689 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 460) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4735 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4735 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 465) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4781 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4781 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 470) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4828 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4828 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 475) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4874 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4874 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 480) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4921 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4921 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 485) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-4967 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-4967 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 490) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5013 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5013 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 495) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5060 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5060 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 500) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5106 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5106 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 505) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5153 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5153 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 510) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5199 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5199 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 515) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5245 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5245 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 520) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5292 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5292 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 525) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5338 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5338 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 530) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5384 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5384 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 535) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5431 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5431 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 540) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5477 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5477 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 545) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5524 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5524 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 550) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5570 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5570 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 555) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5616 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5616 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 560) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5663 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5663 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 565) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5709 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5709 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 570) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5756 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5756 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 575) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5802 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5802 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 580) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5848 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5848 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 585) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5895 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5895 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 590) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5941 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5941 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 595) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-5988 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-5988 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 600) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6034 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6034 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 605) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6080 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6080 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 610) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6127 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6127 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 615) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6173 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6173 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 620) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6220 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6220 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 625) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6266 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6266 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 630) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6312 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6312 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 635) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6359 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6359 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 640) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6405 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6405 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 645) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6452 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6452 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 650) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6498 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6498 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 655) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6544 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6544 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 660) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6591 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6591 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 665) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6637 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6637 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 670) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6684 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6684 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 675) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6730 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6730 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 680) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6776 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6776 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 685) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6823 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6823 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 690) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6869 3528 M
-0 63 V
-0 140 R
-0 889 V
-stroke
-LTb
-6869 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 695) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6916 3528 M
-0 1092 V
-stroke
-LTb
-6916 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 700) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTa
-6962 3528 M
-0 1092 V
-stroke
-LTb
-6962 3528 M
-0 63 V
-0 1029 R
-0 -63 V
-0 -1169 R
-( 705) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTb
-420 4620 N
-0 -1092 V
-6542 0 V
-0 1092 V
--6542 0 V
+420 4619 N
+0 -1091 V
+6527 0 V
+0 1091 V
+-6527 0 V
 Z stroke
 LCb setrgbcolor
-3691 3178 M
+3683 3178 M
 ( ) Cshow
 LTb
 1.000 UP
-0 4074 M
-currentpoint gsave translate 90 rotate 0 0 M
+-232 4074 M
+currentpoint gsave translate -270 rotate 0 0 M
 (Run time \(secs\)) Cshow
 grestore
 1.000 UL
 LTb
+% Begin plot #1
 1.000 UP
 3.000 UL
 LT0
-LTb
-6311 3661 M
-(Number of saved seqs.) Rshow
+LCb setrgbcolor
+6296 3661 M
+(Pair generation time) Rshow
 LT0
-6395 3661 M
+6380 3661 M
 399 0 V
-429 3690 M
-10 431 V
-5 499 V
-10 0 R
-3 -178 V
-9 -127 V
-10 -84 V
-9 263 V
-9 -147 V
-10 -334 V
-9 99 V
-9 79 V
-9 370 V
-10 -499 V
-9 89 V
-9 128 V
-9 -107 V
-10 146 V
-9 61 V
-9 -21 V
-10 -249 V
-9 -134 V
-9 351 V
-9 -217 V
-10 22 V
-9 105 V
-9 -136 V
-10 326 V
-9 -48 V
-9 -136 V
-9 -215 V
-10 200 V
-9 143 V
-9 -323 V
-10 315 V
-9 -35 V
-9 -108 V
-9 6 V
-10 -61 V
-9 336 V
-9 -330 V
-9 96 V
-10 182 V
-9 -280 V
-9 -127 V
-10 316 V
-9 -313 V
-9 363 V
-9 -283 V
-10 -18 V
-9 -89 V
-9 235 V
-10 229 V
-9 -13 V
-9 100 V
-9 -23 V
-10 19 V
-9 -589 V
-9 217 V
-9 -135 V
-10 320 V
-9 -177 V
-9 250 V
-10 -294 V
-9 4 V
-9 239 V
-9 -134 V
-10 -215 V
-9 56 V
-9 123 V
-10 -73 V
-9 -15 V
-9 26 V
-9 -471 V
-10 602 V
-9 -118 V
-9 106 V
-10 -206 V
-9 224 V
-9 -250 V
-9 118 V
-10 -86 V
-9 354 V
-9 -912 V
-1 0 R
-8 764 V
-10 84 V
-9 -258 V
-9 -590 V
-1 0 R
-9 1040 V
-9 -933 V
-9 384 V
-9 139 V
-10 175 V
-9 -805 V
-1 0 R
-8 187 V
-10 515 V
-9 -162 V
-9 177 V
-9 -717 V
-20 0 R
-1357 4398 L
-9 -870 V
-20 0 R
-8 661 V
-10 -151 V
-9 134 V
-9 330 V
-9 47 V
-10 -353 V
-9 133 V
-9 166 V
-10 0 V
-9 -553 V
-9 125 V
-9 447 V
-10 -440 V
-9 250 V
-9 -197 V
-10 -227 V
-9 492 V
-9 -354 V
-9 106 V
-10 288 V
-9 -289 V
-9 -108 V
-9 71 V
-10 211 V
-9 -167 V
-9 57 V
-10 282 V
-9 -241 V
-9 -177 V
-9 83 V
-10 -221 V
-9 280 V
-9 -119 V
-10 69 V
-9 129 V
-9 -59 V
-9 -10 V
-10 50 V
-9 -127 V
-9 40 V
-10 -31 V
-9 21 V
-9 231 V
-9 -301 V
-10 345 V
-9 -175 V
-9 -115 V
-9 69 V
-10 -182 V
-9 536 V
-9 -468 V
-10 175 V
-9 -296 V
-9 174 V
-9 14 V
-10 -52 V
-9 32 V
-9 37 V
-10 -209 V
-9 118 V
-9 223 V
-9 -148 V
-10 212 V
-9 -44 V
-9 -294 V
-10 221 V
-9 -133 V
-9 215 V
-9 31 V
-10 -41 V
-9 26 V
-9 -149 V
-9 -48 V
-10 -245 V
-9 64 V
-8 -471 V
-2 0 R
-9 470 V
-9 56 V
-9 53 V
-9 68 V
-10 6 V
-9 -126 V
-9 82 V
-10 160 V
-9 -267 V
-9 254 V
-9 239 V
-10 -292 V
-9 -173 V
-9 336 V
-9 -70 V
-10 -157 V
-9 192 V
-9 -201 V
-10 328 V
-9 -290 V
-9 228 V
-9 185 V
-10 -303 V
-9 -477 V
-9 339 V
-2332 4092 L
-8 -564 V
-20 0 R
-9 839 V
-9 -336 V
-9 -36 V
-10 185 V
-9 12 V
-9 16 V
-9 65 V
-10 21 V
-9 -130 V
-9 -115 V
-9 235 V
-10 -37 V
-9 -153 V
-9 156 V
-10 -21 V
-9 111 V
-9 130 V
-9 -120 V
-10 -211 V
-9 392 V
-9 -571 V
-10 58 V
-9 146 V
-9 -75 V
-9 115 V
-10 -93 V
-9 -14 V
-9 234 V
-10 -55 V
-9 223 V
-9 -441 V
-9 167 V
-10 -34 V
-9 88 V
-9 -72 V
-9 44 V
-10 -11 V
-9 -668 V
-9 533 V
-10 -57 V
-9 67 V
-9 287 V
-9 -238 V
-10 29 V
-9 -198 V
-9 105 V
-10 0 V
-9 18 V
-9 -11 V
-9 75 V
-10 53 V
-9 -106 V
-9 84 V
-9 162 V
-10 -110 V
-9 85 V
-9 46 V
-10 -212 V
-9 -3 V
-9 34 V
-9 -51 V
-10 13 V
-9 -12 V
-9 20 V
-10 213 V
-9 124 V
-9 -4 V
-9 -305 V
-10 9 V
-9 258 V
-9 103 V
-10 -57 V
-9 -235 V
-9 -141 V
-9 -39 V
-10 -124 V
-9 9 V
-9 596 V
-9 -413 V
-10 237 V
-9 -887 V
-9 562 V
-10 119 V
-9 -38 V
-9 36 V
-9 -153 V
-10 371 V
-9 -254 V
-9 156 V
-10 36 V
-9 -128 V
-9 75 V
-9 -159 V
-10 265 V
-9 -215 V
-9 -84 V
-10 242 V
-9 32 V
-9 -161 V
-9 -172 V
-10 113 V
-9 -77 V
-3315 4170 L
-9 -16 V
-10 180 V
-9 -169 V
-9 37 V
-10 34 V
-9 320 V
-9 -25 V
-9 -309 V
-10 -268 V
-9 180 V
-9 49 V
-10 -99 V
-9 157 V
-9 -127 V
-9 102 V
-10 106 V
-9 -99 V
-9 -9 V
-9 58 V
-10 -251 V
-9 113 V
-9 77 V
-10 20 V
-9 -212 V
-9 322 V
-9 -145 V
-10 -206 V
-9 174 V
-9 -33 V
-10 -75 V
-9 66 V
-9 16 V
-9 88 V
-10 -201 V
-9 382 V
-9 -189 V
-10 -65 V
-9 -52 V
-9 -10 V
-9 93 V
-10 -73 V
-9 48 V
-9 -30 V
-9 -34 V
-10 -42 V
-9 124 V
-9 -157 V
-10 170 V
-9 -94 V
-9 -38 V
-9 338 V
-10 -118 V
-9 -267 V
-9 143 V
-10 144 V
-9 -357 V
-9 165 V
-9 18 V
-10 -243 V
-9 147 V
-9 -32 V
-10 368 V
-9 -325 V
-9 524 V
-9 -491 V
-10 23 V
-9 -93 V
-9 156 V
-9 91 V
-10 61 V
-9 -12 V
-9 192 V
-10 -305 V
-9 -79 V
-9 89 V
-9 -157 V
-10 545 V
-9 -412 V
-9 1 V
-10 31 V
-9 149 V
-9 -248 V
-9 236 V
-10 -350 V
-9 218 V
-9 -23 V
-9 55 V
-10 -44 V
-9 -67 V
-9 -10 V
-10 -55 V
-9 150 V
-9 13 V
-9 127 V
-10 175 V
-9 -327 V
-9 -39 V
-9 -635 V
-1 0 R
-9 608 V
-9 307 V
-9 -212 V
-10 -13 V
-9 168 V
-4280 4271 L
-10 -26 V
-9 -185 V
-9 25 V
-9 176 V
-10 -232 V
-9 90 V
-9 89 V
-9 211 V
-10 -321 V
-9 482 V
-9 -43 V
-10 -468 V
-9 210 V
-9 -194 V
-9 257 V
-10 -343 V
-9 78 V
-9 178 V
-10 -251 V
-9 181 V
-9 65 V
-9 -254 V
-10 135 V
-9 23 V
-9 17 V
-10 143 V
-9 -160 V
-9 35 V
-9 203 V
-10 -295 V
-9 13 V
-9 74 V
-9 72 V
-10 -285 V
-9 363 V
-9 -93 V
-10 -45 V
-9 59 V
-9 -139 V
-9 74 V
-10 -43 V
-9 433 V
-9 -1052 V
-1 0 R
-9 694 V
-9 10 V
-9 9 V
-9 293 V
-10 -438 V
-9 226 V
-9 -147 V
-9 -104 V
-10 62 V
-9 2 V
-9 262 V
-10 -190 V
-9 44 V
-9 -147 V
-9 440 V
-10 -458 V
-9 275 V
-9 -131 V
-10 -7 V
-9 -226 V
-9 339 V
-9 -126 V
-10 -109 V
-9 -94 V
-9 493 V
-10 -413 V
-9 243 V
-9 -173 V
-9 -32 V
-10 163 V
-9 -82 V
-9 -173 V
-9 -6 V
-10 48 V
-9 -25 V
-9 17 V
-9 -539 V
-2 0 R
-8 521 V
-9 120 V
-9 -278 V
-10 439 V
-9 -44 V
-9 -53 V
-10 -37 V
-9 -240 V
-9 241 V
-9 -9 V
-10 41 V
-9 -161 V
-9 -30 V
-10 -27 V
-9 -76 V
-9 120 V
-9 101 V
-10 -20 V
-9 -16 V
-9 -63 V
-9 148 V
-10 -35 V
-5236 4295 L
-9 243 V
-10 -224 V
-9 -106 V
-9 -84 V
-9 170 V
-10 -256 V
-9 51 V
-9 57 V
-10 34 V
-9 191 V
-9 -49 V
-9 -101 V
-10 -119 V
-9 16 V
-9 13 V
-9 446 V
-10 -351 V
-9 47 V
-9 -147 V
-10 69 V
-9 -27 V
-9 95 V
-9 101 V
-10 -38 V
-9 138 V
-9 -204 V
-10 -76 V
-9 3 V
-9 -84 V
-9 399 V
-10 -3 V
-9 -246 V
-9 -146 V
-10 499 V
-9 -175 V
-9 -260 V
-9 -75 V
-10 219 V
-9 -300 V
-9 25 V
-9 213 V
-10 -182 V
-9 100 V
-9 -25 V
-10 -142 V
-9 190 V
-9 196 V
-9 -175 V
-10 -43 V
-9 -546 V
-9 744 V
-10 -183 V
-9 99 V
-9 -313 V
-9 235 V
-10 -38 V
-9 -204 V
-9 321 V
-10 -78 V
-9 -107 V
-9 161 V
-9 -150 V
-10 249 V
-9 -121 V
-9 -226 V
-8 -487 V
-2 0 R
-9 609 V
-9 20 V
-9 -115 V
-10 123 V
-9 -121 V
-9 166 V
-9 -22 V
-10 91 V
-9 250 V
-9 -591 V
-10 258 V
-9 195 V
-9 -223 V
-9 145 V
-10 -252 V
-9 -86 V
-9 18 V
-9 271 V
-10 -262 V
-9 391 V
-9 -132 V
-10 79 V
-9 -120 V
-9 55 V
-9 -94 V
-10 122 V
-9 306 V
-9 -571 V
-10 -96 V
-9 250 V
-9 1 V
-9 -52 V
-10 134 V
-8 -747 V
-2 0 R
-8 602 V
-10 -7 V
-6192 4429 L
-9 -263 V
-9 139 V
-10 -128 V
-9 -121 V
-9 392 V
-9 -35 V
-10 -200 V
-9 18 V
-9 81 V
-10 -163 V
-9 175 V
-9 -122 V
-9 -327 V
-10 270 V
-9 -32 V
-9 195 V
-10 -254 V
-9 123 V
-9 11 V
-9 -40 V
-10 108 V
-9 -174 V
-9 103 V
-10 -27 V
-9 88 V
-9 -29 V
-9 -80 V
-10 189 V
-9 12 V
-9 -12 V
-9 -232 V
-10 81 V
-9 -48 V
-9 79 V
-10 -37 V
-9 73 V
-9 -55 V
-9 -33 V
-10 -22 V
-9 252 V
-9 -207 V
-10 60 V
-9 -211 V
-9 -39 V
-9 399 V
-10 -130 V
-9 -54 V
-9 -62 V
-9 124 V
-10 -261 V
-9 322 V
-9 -211 V
-10 228 V
-9 -317 V
-9 97 V
-9 -62 V
-10 134 V
-9 79 V
-9 -148 V
-10 248 V
-9 -437 V
-9 360 V
-9 -115 V
-10 385 V
-9 -44 V
-9 -569 V
-10 20 V
-9 162 V
-9 26 V
-9 158 V
-10 -304 V
-9 139 V
-9 217 V
-9 -70 V
-10 -172 V
-9 93 V
-9 189 V
-10 -253 V
-9 222 V
-9 -304 V
-9 124 V
-10 12 V
-429 3690 Star
-439 4121 Star
-457 4442 Star
-466 4315 Star
-476 4231 Star
-485 4494 Star
-494 4347 Star
-504 4013 Star
-513 4112 Star
-522 4191 Star
-531 4561 Star
-541 4062 Star
-550 4151 Star
-559 4279 Star
-568 4172 Star
-578 4318 Star
-587 4379 Star
-596 4358 Star
-606 4109 Star
-615 3975 Star
-624 4326 Star
-633 4109 Star
-643 4131 Star
-652 4236 Star
-661 4100 Star
-671 4426 Star
-680 4378 Star
-689 4242 Star
-698 4027 Star
-708 4227 Star
-717 4370 Star
-726 4047 Star
-736 4362 Star
-745 4327 Star
-754 4219 Star
-763 4225 Star
-773 4164 Star
-782 4500 Star
-791 4170 Star
-800 4266 Star
-810 4448 Star
-819 4168 Star
-828 4041 Star
-838 4357 Star
-847 4044 Star
-856 4407 Star
-865 4124 Star
-875 4106 Star
-884 4017 Star
-893 4252 Star
-903 4481 Star
-912 4468 Star
-921 4568 Star
-930 4545 Star
-940 4564 Star
-949 3975 Star
-958 4192 Star
-967 4057 Star
-977 4377 Star
-986 4200 Star
-995 4450 Star
-1005 4156 Star
-1014 4160 Star
-1023 4399 Star
-1032 4265 Star
-1042 4050 Star
-1051 4106 Star
-1060 4229 Star
-1070 4156 Star
-1079 4141 Star
-1088 4167 Star
-1097 3696 Star
-1107 4298 Star
-1116 4180 Star
-1125 4286 Star
-1135 4080 Star
-1144 4304 Star
-1153 4054 Star
-1162 4172 Star
-1172 4086 Star
-1181 4440 Star
-1199 4292 Star
-1209 4376 Star
-1218 4118 Star
-1237 4568 Star
-1246 3635 Star
-1255 4019 Star
-1264 4158 Star
-1274 4333 Star
-1292 3715 Star
-1302 4230 Star
-1311 4068 Star
-1320 4245 Star
-1357 4398 Star
-1394 4189 Star
-1404 4038 Star
-1413 4172 Star
-1422 4502 Star
-1431 4549 Star
-1441 4196 Star
-1450 4329 Star
-1459 4495 Star
-1469 4495 Star
-1478 3942 Star
-1487 4067 Star
-1496 4514 Star
-1506 4074 Star
-1515 4324 Star
-1524 4127 Star
-1534 3900 Star
-1543 4392 Star
-1552 4038 Star
-1561 4144 Star
-1571 4432 Star
-1580 4143 Star
-1589 4035 Star
-1598 4106 Star
-1608 4317 Star
-1617 4150 Star
-1626 4207 Star
-1636 4489 Star
-1645 4248 Star
-1654 4071 Star
-1663 4154 Star
-1673 3933 Star
-1682 4213 Star
-1691 4094 Star
-1701 4163 Star
-1710 4292 Star
-1719 4233 Star
-1728 4223 Star
-1738 4273 Star
-1747 4146 Star
-1756 4186 Star
-1766 4155 Star
-1775 4176 Star
-1784 4407 Star
-1793 4106 Star
-1803 4451 Star
-1812 4276 Star
-1821 4161 Star
-1830 4230 Star
-1840 4048 Star
-1849 4584 Star
-1858 4116 Star
-1868 4291 Star
-1877 3995 Star
-1886 4169 Star
-1895 4183 Star
-1905 4131 Star
-1914 4163 Star
-1923 4200 Star
-1933 3991 Star
-1942 4109 Star
-1951 4332 Star
-1960 4184 Star
-1970 4396 Star
-1979 4352 Star
-1988 4058 Star
-1998 4279 Star
-2007 4146 Star
-2016 4361 Star
-2025 4392 Star
-2035 4351 Star
-2044 4377 Star
-2053 4228 Star
-2062 4180 Star
-2072 3935 Star
-2081 3999 Star
-2100 3998 Star
-2109 4054 Star
-2118 4107 Star
-2127 4175 Star
-2137 4181 Star
-2146 4055 Star
-2155 4137 Star
-2165 4297 Star
-2174 4030 Star
-2183 4284 Star
-2192 4523 Star
-2202 4231 Star
-2211 4058 Star
-2220 4394 Star
-2229 4324 Star
-2239 4167 Star
-2248 4359 Star
-2257 4158 Star
-2267 4486 Star
-2276 4196 Star
-2285 4424 Star
-2294 4609 Star
-2304 4306 Star
-2313 3829 Star
-2322 4168 Star
-2332 4092 Star
-2369 4367 Star
-2378 4031 Star
-2387 3995 Star
-2397 4180 Star
-2406 4192 Star
-2415 4208 Star
-2424 4273 Star
-2434 4294 Star
-2443 4164 Star
-2452 4049 Star
-2461 4284 Star
-2471 4247 Star
-2480 4094 Star
-2489 4250 Star
-2499 4229 Star
-2508 4340 Star
-2517 4470 Star
-2526 4350 Star
-2536 4139 Star
-2545 4531 Star
-2554 3960 Star
-2564 4018 Star
-2573 4164 Star
-2582 4089 Star
-2591 4204 Star
-2601 4111 Star
-2610 4097 Star
-2619 4331 Star
-2629 4276 Star
-2638 4499 Star
-2647 4058 Star
-2656 4225 Star
-2666 4191 Star
-2675 4279 Star
-2684 4207 Star
-2693 4251 Star
-2703 4240 Star
-2712 3572 Star
-2721 4105 Star
-2731 4048 Star
-2740 4115 Star
-2749 4402 Star
-2758 4164 Star
-2768 4193 Star
-2777 3995 Star
-2786 4100 Star
-2796 4100 Star
-2805 4118 Star
-2814 4107 Star
-2823 4182 Star
-2833 4235 Star
-2842 4129 Star
-2851 4213 Star
-2860 4375 Star
-2870 4265 Star
-2879 4350 Star
-2888 4396 Star
-2898 4184 Star
-2907 4181 Star
-2916 4215 Star
-2925 4164 Star
-2935 4177 Star
-2944 4165 Star
-2953 4185 Star
-2963 4398 Star
-2972 4522 Star
-2981 4518 Star
-2990 4213 Star
-3000 4222 Star
-3009 4480 Star
-3018 4583 Star
-3028 4526 Star
-3037 4291 Star
-3046 4150 Star
-3055 4111 Star
-3065 3987 Star
-3074 3996 Star
-3083 4592 Star
-3092 4179 Star
-3102 4416 Star
-3111 3529 Star
-3120 4091 Star
-3130 4210 Star
-3139 4172 Star
-3148 4208 Star
-3157 4055 Star
-3167 4426 Star
-3176 4172 Star
-3185 4328 Star
-3195 4364 Star
-3204 4236 Star
-3213 4311 Star
-3222 4152 Star
-3232 4417 Star
-3241 4202 Star
-3250 4118 Star
-3260 4360 Star
-3269 4392 Star
-3278 4231 Star
-3287 4059 Star
-3297 4172 Star
-3306 4095 Star
-3315 4170 Star
-3324 4154 Star
-3334 4334 Star
-3343 4165 Star
-3352 4202 Star
-3362 4236 Star
-3371 4556 Star
-3380 4531 Star
-3389 4222 Star
-3399 3954 Star
-3408 4134 Star
-3417 4183 Star
-3427 4084 Star
-3436 4241 Star
-3445 4114 Star
-3454 4216 Star
-3464 4322 Star
-3473 4223 Star
-3482 4214 Star
-3491 4272 Star
-3501 4021 Star
-3510 4134 Star
-3519 4211 Star
-3529 4231 Star
-3538 4019 Star
-3547 4341 Star
-3556 4196 Star
-3566 3990 Star
-3575 4164 Star
-3584 4131 Star
-3594 4056 Star
-3603 4122 Star
-3612 4138 Star
-3621 4226 Star
-3631 4025 Star
-3640 4407 Star
-3649 4218 Star
-3659 4153 Star
-3668 4101 Star
-3677 4091 Star
-3686 4184 Star
-3696 4111 Star
-3705 4159 Star
-3714 4129 Star
-3723 4095 Star
-3733 4053 Star
-3742 4177 Star
-3751 4020 Star
-3761 4190 Star
-3770 4096 Star
-3779 4058 Star
-3788 4396 Star
-3798 4278 Star
-3807 4011 Star
-3816 4154 Star
-3826 4298 Star
-3835 3941 Star
-3844 4106 Star
-3853 4124 Star
-3863 3881 Star
-3872 4028 Star
-3881 3996 Star
-3891 4364 Star
-3900 4039 Star
-3909 4563 Star
-3918 4072 Star
-3928 4095 Star
-3937 4002 Star
-3946 4158 Star
-3955 4249 Star
-3965 4310 Star
-3974 4298 Star
-3983 4490 Star
-3993 4185 Star
-4002 4106 Star
-4011 4195 Star
-4020 4038 Star
-4030 4583 Star
-4039 4171 Star
-4048 4172 Star
-4058 4203 Star
-4067 4352 Star
-4076 4104 Star
-4085 4340 Star
-4095 3990 Star
-4104 4208 Star
-4113 4185 Star
-4122 4240 Star
-4132 4196 Star
-4141 4129 Star
-4150 4119 Star
-4160 4064 Star
-4169 4214 Star
-4178 4227 Star
-4187 4354 Star
-4197 4529 Star
-4206 4202 Star
-4215 4163 Star
-4234 4136 Star
-4243 4443 Star
-4252 4231 Star
-4262 4218 Star
-4271 4386 Star
-4280 4271 Star
-4290 4245 Star
-4299 4060 Star
-4308 4085 Star
-4317 4261 Star
-4327 4029 Star
-4336 4119 Star
-4345 4208 Star
-4354 4419 Star
-4364 4098 Star
-4373 4580 Star
-4382 4537 Star
-4392 4069 Star
-4401 4279 Star
-4410 4085 Star
-4419 4342 Star
-4429 3999 Star
-4438 4077 Star
-4447 4255 Star
-4457 4004 Star
-4466 4185 Star
-4475 4250 Star
-4484 3996 Star
-4494 4131 Star
-4503 4154 Star
-4512 4171 Star
-4522 4314 Star
-4531 4154 Star
-4540 4189 Star
-4549 4392 Star
-4559 4097 Star
-4568 4110 Star
-4577 4184 Star
-4586 4256 Star
-4596 3971 Star
-4605 4334 Star
-4614 4241 Star
-4624 4196 Star
-4633 4255 Star
-4642 4116 Star
-4651 4190 Star
-4661 4147 Star
-4670 4580 Star
-4689 4222 Star
-4698 4232 Star
-4707 4241 Star
-4716 4534 Star
-4726 4096 Star
-4735 4322 Star
-4744 4175 Star
-4753 4071 Star
-4763 4133 Star
-4772 4135 Star
-4781 4397 Star
-4791 4207 Star
-4800 4251 Star
-4809 4104 Star
-4818 4544 Star
-4828 4086 Star
-4837 4361 Star
-4846 4230 Star
-4856 4223 Star
-4865 3997 Star
-4874 4336 Star
-4883 4210 Star
-4893 4101 Star
-4902 4007 Star
-4911 4500 Star
-4921 4087 Star
-4930 4330 Star
-4939 4157 Star
-4948 4125 Star
-4958 4288 Star
-4967 4206 Star
-4976 4033 Star
-4985 4027 Star
-4995 4075 Star
-5004 4050 Star
-5013 4067 Star
-5032 4049 Star
-5041 4169 Star
-5050 3891 Star
-5060 4330 Star
-5069 4286 Star
-5078 4233 Star
-5088 4196 Star
-5097 3956 Star
-5106 4197 Star
-5115 4188 Star
-5125 4229 Star
-5134 4068 Star
-5143 4038 Star
-5153 4011 Star
-5162 3935 Star
-5171 4055 Star
-5180 4156 Star
-5190 4136 Star
-5199 4120 Star
-5208 4057 Star
-5217 4205 Star
-5227 4170 Star
-5236 4295 Star
-5245 4538 Star
-5255 4314 Star
-5264 4208 Star
-5273 4124 Star
-5282 4294 Star
-5292 4038 Star
-5301 4089 Star
-5310 4146 Star
-5320 4180 Star
-5329 4371 Star
-5338 4322 Star
-5347 4221 Star
-5357 4102 Star
-5366 4118 Star
-5375 4131 Star
-5384 4577 Star
-5394 4226 Star
-5403 4273 Star
-5412 4126 Star
-5422 4195 Star
-5431 4168 Star
-5440 4263 Star
-5449 4364 Star
-5459 4326 Star
-5468 4464 Star
-5477 4260 Star
-5487 4184 Star
-5496 4187 Star
-5505 4103 Star
-5514 4502 Star
-5524 4499 Star
-5533 4253 Star
-5542 4107 Star
-5552 4606 Star
-5561 4431 Star
-5570 4171 Star
-5579 4096 Star
-5589 4315 Star
-5598 4015 Star
-5607 4040 Star
-5616 4253 Star
-5626 4071 Star
-5635 4171 Star
-5644 4146 Star
-5654 4004 Star
-5663 4194 Star
-5672 4390 Star
-5681 4215 Star
-5691 4172 Star
-5700 3626 Star
-5709 4370 Star
-5719 4187 Star
-5728 4286 Star
-5737 3973 Star
-5746 4208 Star
-5756 4170 Star
-5765 3966 Star
-5774 4287 Star
-5784 4209 Star
-5793 4102 Star
-5802 4263 Star
-5811 4113 Star
-5821 4362 Star
-5830 4241 Star
-5839 4015 Star
-5858 4137 Star
-5867 4157 Star
-5876 4042 Star
-5886 4165 Star
-5895 4044 Star
-5904 4210 Star
-5913 4188 Star
-5923 4279 Star
-5932 4529 Star
-5941 3938 Star
-5951 4196 Star
-5960 4391 Star
-5969 4168 Star
-5978 4313 Star
-5988 4061 Star
-5997 3975 Star
-6006 3993 Star
-6015 4264 Star
-6025 4002 Star
-6034 4393 Star
-6043 4261 Star
-6053 4340 Star
-6062 4220 Star
-6071 4275 Star
-6080 4181 Star
-6090 4303 Star
-6099 4609 Star
-6108 4038 Star
-6118 3942 Star
-6127 4192 Star
-6136 4193 Star
-6145 4141 Star
-6155 4275 Star
-6173 4130 Star
-6183 4123 Star
-6192 4429 Star
-6201 4166 Star
-6210 4305 Star
-6220 4177 Star
-6229 4056 Star
-6238 4448 Star
-6247 4413 Star
-6257 4213 Star
-6266 4231 Star
-6275 4312 Star
-6285 4149 Star
-6294 4324 Star
-6303 4202 Star
-6312 3875 Star
-6322 4145 Star
-6331 4113 Star
-6340 4308 Star
-6350 4054 Star
-6359 4177 Star
-6368 4188 Star
-6377 4148 Star
-6387 4256 Star
-6396 4082 Star
-6405 4185 Star
-6415 4158 Star
-6424 4246 Star
-6433 4217 Star
-6442 4137 Star
-6452 4326 Star
-6461 4338 Star
-6470 4326 Star
-6479 4094 Star
-6489 4175 Star
-6498 4127 Star
-6507 4206 Star
-6517 4169 Star
-6526 4242 Star
-6535 4187 Star
-6544 4154 Star
-6554 4132 Star
-6563 4384 Star
-6572 4177 Star
-6582 4237 Star
-6591 4026 Star
-6600 3987 Star
-6609 4386 Star
-6619 4256 Star
-6628 4202 Star
-6637 4140 Star
-6646 4264 Star
-6656 4003 Star
-6665 4325 Star
-6674 4114 Star
-6684 4342 Star
-6693 4025 Star
-6702 4122 Star
-6711 4060 Star
-6721 4194 Star
-6730 4273 Star
-6739 4125 Star
-6749 4373 Star
-6758 3936 Star
-6767 4296 Star
-6776 4181 Star
-6786 4566 Star
-6795 4522 Star
-6804 3953 Star
-6814 3973 Star
-6823 4135 Star
-6832 4161 Star
-6841 4319 Star
-6851 4015 Star
-6860 4154 Star
-6869 4371 Star
-6878 4301 Star
-6888 4129 Star
-6897 4222 Star
-6906 4411 Star
-6916 4158 Star
-6925 4380 Star
-6934 4076 Star
-6943 4200 Star
-6953 4212 Star
-6594 3661 Star
+470 3817 M
+50 355 V
+51 -371 V
+50 234 V
+50 143 V
+50 45 V
+50 94 V
+51 -326 V
+50 43 V
+50 121 V
+50 -135 V
+50 364 V
+51 -573 V
+50 -47 V
+50 41 V
+50 271 V
+51 320 V
+50 -502 V
+50 391 V
+50 -376 V
+50 26 V
+51 115 V
+50 219 V
+50 -466 V
+50 200 V
+50 64 V
+51 -195 V
+50 -29 V
+50 180 V
+50 -115 V
+50 122 V
+51 -51 V
+50 246 V
+50 0 V
+50 119 V
+50 -361 V
+51 -77 V
+50 481 V
+50 -321 V
+50 -234 V
+51 -59 V
+50 552 V
+50 -350 V
+50 -190 V
+50 514 V
+51 -288 V
+50 395 V
+50 -493 V
+50 -81 V
+50 -15 V
+51 124 V
+50 -41 V
+50 469 V
+50 -375 V
+50 -210 V
+51 -24 V
+50 93 V
+50 520 V
+50 -227 V
+50 -221 V
+51 488 V
+50 -512 V
+50 224 V
+50 234 V
+51 -110 V
+50 -91 V
+50 -87 V
+50 225 V
+50 -509 V
+51 90 V
+50 -30 V
+50 399 V
+50 -462 V
+50 136 V
+51 102 V
+50 -198 V
+50 39 V
+50 484 V
+50 163 V
+51 -599 V
+50 169 V
+50 99 V
+50 -35 V
+50 -287 V
+51 153 V
+50 -85 V
+50 340 V
+50 -304 V
+50 126 V
+51 -162 V
+50 -62 V
+50 293 V
+50 -222 V
+51 66 V
+50 -165 V
+50 428 V
+50 -133 V
+50 155 V
+51 -476 V
+50 459 V
+50 -350 V
+50 282 V
+50 -46 V
+stroke 5591 4154 M
+51 -62 V
+50 -51 V
+50 -137 V
+50 129 V
+50 -202 V
+51 306 V
+50 -9 V
+50 -337 V
+50 10 V
+50 118 V
+51 373 V
+50 -84 V
+50 -101 V
+50 46 V
+51 9 V
+50 24 V
+50 40 V
+50 -108 V
+50 -148 V
+51 67 V
+50 -48 V
+50 164 V
+50 -285 V
+50 -76 V
+51 434 V
+470 3817 Star
+520 4172 Star
+571 3801 Star
+621 4035 Star
+671 4178 Star
+721 4223 Star
+771 4317 Star
+822 3991 Star
+872 4034 Star
+922 4155 Star
+972 4020 Star
+1022 4384 Star
+1073 3811 Star
+1123 3764 Star
+1173 3805 Star
+1223 4076 Star
+1274 4396 Star
+1324 3894 Star
+1374 4285 Star
+1424 3909 Star
+1474 3935 Star
+1525 4050 Star
+1575 4269 Star
+1625 3803 Star
+1675 4003 Star
+1725 4067 Star
+1776 3872 Star
+1826 3843 Star
+1876 4023 Star
+1926 3908 Star
+1976 4030 Star
+2027 3979 Star
+2077 4225 Star
+2127 4225 Star
+2177 4344 Star
+2227 3983 Star
+2278 3906 Star
+2328 4387 Star
+2378 4066 Star
+2428 3832 Star
+2479 3773 Star
+2529 4325 Star
+2579 3975 Star
+2629 3785 Star
+2679 4299 Star
+2730 4011 Star
+2780 4406 Star
+2830 3913 Star
+2880 3832 Star
+2930 3817 Star
+2981 3941 Star
+3031 3900 Star
+3081 4369 Star
+3131 3994 Star
+3181 3784 Star
+3232 3760 Star
+3282 3853 Star
+3332 4373 Star
+3382 4146 Star
+3432 3925 Star
+3483 4413 Star
+3533 3901 Star
+3583 4125 Star
+3633 4359 Star
+3684 4249 Star
+3734 4158 Star
+3784 4071 Star
+3834 4296 Star
+3884 3787 Star
+3935 3877 Star
+3985 3847 Star
+4035 4246 Star
+4085 3784 Star
+4135 3920 Star
+4186 4022 Star
+4236 3824 Star
+4286 3863 Star
+4336 4347 Star
+4386 4510 Star
+4437 3911 Star
+4487 4080 Star
+4537 4179 Star
+4587 4144 Star
+4637 3857 Star
+4688 4010 Star
+4738 3925 Star
+4788 4265 Star
+4838 3961 Star
+4888 4087 Star
+4939 3925 Star
+4989 3863 Star
+5039 4156 Star
+5089 3934 Star
+5140 4000 Star
+5190 3835 Star
+5240 4263 Star
+5290 4130 Star
+5340 4285 Star
+5391 3809 Star
+5441 4268 Star
+5491 3918 Star
+5541 4200 Star
+5591 4154 Star
+5642 4092 Star
+5692 4041 Star
+5742 3904 Star
+5792 4033 Star
+5842 3831 Star
+5893 4137 Star
+5943 4128 Star
+5993 3791 Star
+6043 3801 Star
+6093 3919 Star
+6144 4292 Star
+6194 4208 Star
+6244 4107 Star
+6294 4153 Star
+6345 4162 Star
+6395 4186 Star
+6445 4226 Star
+6495 4118 Star
+6545 3970 Star
+6596 4037 Star
+6646 3989 Star
+6696 4153 Star
+6746 3868 Star
+6796 3792 Star
+6847 4226 Star
+6579 3661 Star
+% End plot #1
 1.000 UL
 LTb
-420 4620 N
-0 -1092 V
-6542 0 V
-0 1092 V
--6542 0 V
+420 4619 N
+0 -1091 V
+6527 0 V
+0 1091 V
+-6527 0 V
 Z stroke
 1.000 UP
 1.000 UL
