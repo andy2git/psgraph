@@ -12,6 +12,6 @@ set xlabel "Number of processors"
 set style data histograms
 set style histogram rowstacked
 set style fill pattern 1
-set boxwidth 0.2
-plot newhistogram "I/O version", "csBreak.dat" using 2:xtic(1) ti 2, '' u 3 ti 3, '' u 4 ti 4, '' u 5 ti 5,\
-    newhistogram "Non-blocking version", '' u 6:xtic(1) ti 6, '' u 7 ti 7, '' u 8 ti 8
+set boxwidth 0.5
+set xtic rotate by -45 scale 0
+plot "csBreak.dat" using 2:xtic(1) title "Align time", '' u 3 title "Idle time", '' u 4 title "I/O time", '' u 5 title  "A2A overhead", '' u 6 title "Comm. time"
