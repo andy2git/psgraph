@@ -15,6 +15,6 @@ set ylabel "Average run time (secs)"
 set xlabel "Number of processors"
 set style data histograms
 set style histogram rowstacked
-set style fill pattern 1
+set style fill pattern 2
 set boxwidth 0.5
 plot "msBreak.dat" using 2:xtic(1) title "Idle time", '' u 3 title "Comm. time", '' u 4 title "Comp. time"

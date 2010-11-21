@@ -1,9 +1,9 @@
 %!PS-Adobe-2.0
 %%Title: speedup.eps
-%%Creator: gnuplot 4.2 patchlevel 4 
-%%CreationDate: Thu Oct 21 20:50:56 2010
+%%Creator: gnuplot 4.4 patchlevel 2
+%%CreationDate: Sat Nov 13 10:08:18 2010
 %%DocumentFonts: (atend)
-%%BoundingBox: 201 50 554 553
+%%BoundingBox: 201 50 554 554
 %%Orientation: Landscape
 %%Pages: (atend)
 %%EndComments
@@ -11,8 +11,8 @@
 /gnudict 256 dict def
 gnudict begin
 %
-% The following 6 true/false flags may be edited by hand if required
-% The unit line width may also be changed
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
 %
 /Color true def
 /Blacktext false def
@@ -21,9 +21,11 @@ gnudict begin
 /Landscape true def
 /Level1 false def
 /Rounded false def
+/ClipToBoundingBox false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
+/Gamma 1.0 def
 %
 /vshift -46 def
 /dl1 {
@@ -46,16 +48,24 @@ systemdict /pdfmark known not {
 SDict begin [
   /Title (speedup.eps)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 4.2 patchlevel 4 )
-  /Author (Andy W.)
+  /Creator (gnuplot 4.4 patchlevel 2)
+  /Author (Andy)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu Oct 21 20:50:56 2010)
+  /CreationDate (Sat Nov 13 10:08:18 2010)
   /DOCINFO pdfmark
 end
 } ifelse
+/doclip {
+  ClipToBoundingBox {
+    newpath 201 50 moveto 554 50 lineto 554 554 lineto 201 554 lineto closepath
+    clip
+  } if
+} def
 %
-% Gnuplot Prolog Version 4.2 (August 2006)
+% Gnuplot Prolog Version 4.4 (August 2010)
+%
+%/SuppressPDFMark true def
 %
 /M {moveto} bind def
 /L {lineto} bind def
@@ -65,6 +75,8 @@ end
 /Z {closepath} bind def
 /C {setrgbcolor} bind def
 /f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
@@ -85,6 +97,7 @@ end
 	dup 1 lt {pop 1} if 10 mul /udl exch def} def
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
 % Default Line colors
 /LCw {1 1 1} def
 /LCb {0 0 0} def
@@ -427,6 +440,7 @@ end
 %%Page: 1 1
 gnudict begin
 gsave
+doclip
 50 50 translate
 0.100 0.100 scale
 90 rotate
@@ -438,222 +452,222 @@ newpath
 LTb
 1.000 UL
 LTa
-966 492 M
-3919 0 V
+770 492 M
+4017 0 V
 stroke
 LTb
-966 492 M
+770 492 M
 63 0 V
-3856 0 R
+3954 0 R
 -63 0 V
-882 492 M
+686 492 M
 ( 32) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-966 625 M
-3919 0 V
+770 625 M
+4017 0 V
 stroke
 LTb
-966 625 M
+770 625 M
 63 0 V
-3856 0 R
+3954 0 R
 -63 0 V
-882 625 M
+686 625 M
 ( 128) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-966 803 M
-3919 0 V
+770 803 M
+4017 0 V
 stroke
 LTb
-966 803 M
+770 803 M
 63 0 V
-3856 0 R
+3954 0 R
 -63 0 V
-882 803 M
+686 803 M
 ( 256) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-966 1158 M
-3919 0 V
+770 1158 M
+4017 0 V
 stroke
 LTb
-966 1158 M
+770 1158 M
 63 0 V
-3856 0 R
+3954 0 R
 -63 0 V
--3940 0 R
+-4038 0 R
 ( 512) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-966 1868 M
-3919 0 V
+770 1867 M
+4017 0 V
 stroke
 LTb
-966 1868 M
+770 1867 M
 63 0 V
-3856 0 R
+3954 0 R
 -63 0 V
--3940 0 R
+-4038 0 R
 ( 1024) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-966 3288 M
+770 3287 M
 84 0 V
-1155 0 R
-2680 0 V
+1239 0 R
+2694 0 V
 stroke
 LTb
-966 3288 M
+770 3287 M
 63 0 V
-3856 0 R
+3954 0 R
 -63 0 V
--3940 0 R
+-4038 0 R
 ( 2048) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1401 448 M
-0 1589 V
+1216 448 M
+0 1588 V
 0 1260 R
 0 63 V
 stroke
 LTb
-1401 448 M
+1216 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (16) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-1837 448 M
-0 1589 V
+1663 448 M
+0 1588 V
 0 1260 R
 0 63 V
 stroke
 LTb
-1837 448 M
+1663 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (32) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-2272 448 M
-0 2912 V
+2109 448 M
+0 2911 V
 stroke
 LTb
-2272 448 M
+2109 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (64) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-2708 448 M
-0 2912 V
+2555 448 M
+0 2911 V
 stroke
 LTb
-2708 448 M
+2555 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (128) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-3143 448 M
-0 2912 V
+3002 448 M
+0 2911 V
 stroke
 LTb
-3143 448 M
+3002 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (256) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-3579 448 M
-0 2912 V
+3448 448 M
+0 2911 V
 stroke
 LTb
-3579 448 M
+3448 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (512) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-4014 448 M
-0 2912 V
+3894 448 M
+0 2911 V
 stroke
 LTb
-4014 448 M
+3894 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (1024) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTa
-4450 448 M
-0 2912 V
+4341 448 M
+0 2911 V
 stroke
 LTb
-4450 448 M
+4341 448 M
 0 63 V
-0 2849 R
+0 2848 R
 0 -63 V
-0 -2989 R
+0 -2988 R
 (2048) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-966 3360 N
-966 448 L
-3919 0 V
-0 2912 V
--3919 0 V
+770 3359 N
+770 448 L
+4017 0 V
+0 2911 V
+-4017 0 V
 Z stroke
 LCb setrgbcolor
-308 1904 M
-currentpoint gsave translate 90 rotate 0 0 M
+112 1903 M
+currentpoint gsave translate -270 rotate 0 0 M
 (Speedup) Cshow
 grestore
 LTb
 LCb setrgbcolor
-2925 98 M
+2778 98 M
 (Number of processors) Cshow
 LTb
 1.000 UP
@@ -661,228 +675,244 @@ LTb
 LTb
 1.000 UL
 LTb
-1050 2037 N
+854 2036 N
 0 1260 V
-1155 0 V
+1239 0 V
 0 -1260 V
--1155 0 V
+-1239 0 V
 Z stroke
-1050 3297 M
-1155 0 V
+854 3296 M
+1239 0 V
+% Begin plot #1
 1.000 UP
 stroke
 3.000 UL
 LT0
-LTb
-1638 3227 M
+LCb setrgbcolor
+1526 3226 M
 (n=20K) Rshow
 LT0
-1722 3227 M
+1610 3226 M
 399 0 V
-1401 470 M
-436 24 V
-435 48 V
-436 87 V
-435 165 V
-436 275 V
-435 294 V
-1401 470 Pls
-1837 494 Pls
-2272 542 Pls
-2708 629 Pls
-3143 794 Pls
-3579 1069 Pls
-4014 1363 Pls
-1921 3227 Pls
+1216 470 M
+447 24 V
+446 48 V
+446 87 V
+447 165 V
+446 274 V
+446 295 V
+1216 470 Pls
+1663 494 Pls
+2109 542 Pls
+2555 629 Pls
+3002 794 Pls
+3448 1068 Pls
+3894 1363 Pls
+1809 3226 Pls
+% End plot #1
+% Begin plot #2
 1.000 UP
 3.000 UL
 LT1
-LTb
-1638 3087 M
+LCb setrgbcolor
+1526 3086 M
 (n=40K) Rshow
 LT1
-1722 3087 M
+1610 3086 M
 399 0 V
-1401 470 M
-436 24 V
-435 48 V
-436 95 V
-435 179 V
-436 353 V
-435 617 V
-1401 470 Crs
-1837 494 Crs
-2272 542 Crs
-2708 637 Crs
-3143 816 Crs
-3579 1169 Crs
-4014 1786 Crs
-1921 3087 Crs
+1216 470 M
+447 24 V
+446 48 V
+446 95 V
+447 179 V
+446 353 V
+446 617 V
+1216 470 Crs
+1663 494 Crs
+2109 542 Crs
+2555 637 Crs
+3002 816 Crs
+3448 1169 Crs
+3894 1786 Crs
+1809 3086 Crs
+% End plot #2
+% Begin plot #3
 1.000 UP
 3.000 UL
 LT2
-LTb
-1638 2947 M
+LCb setrgbcolor
+1526 2946 M
 (n=80K) Rshow
 LT2
-1722 2947 M
+1610 2946 M
 399 0 V
-1401 470 M
-436 25 V
-435 49 V
-436 96 V
-435 184 V
-436 323 V
-435 455 V
-436 585 V
-1401 470 Star
-1837 495 Star
-2272 544 Star
-2708 640 Star
-3143 824 Star
-3579 1147 Star
-4014 1602 Star
-4450 2187 Star
-1921 2947 Star
+1216 470 M
+447 25 V
+446 49 V
+446 96 V
+447 184 V
+446 323 V
+446 454 V
+1216 470 Star
+1663 495 Star
+2109 544 Star
+2555 640 Star
+3002 824 Star
+3448 1147 Star
+3894 1601 Star
+1809 2946 Star
+% End plot #3
+% Begin plot #4
 1.000 UP
 3.000 UL
 LT3
-LTb
-1638 2807 M
+LCb setrgbcolor
+1526 2806 M
 (n=160K) Rshow
 LT3
-1722 2807 M
+1610 2806 M
 399 0 V
-2272 537 M
-436 88 V
-435 167 V
-436 329 V
-435 512 V
-436 727 V
-2272 537 Box
-2708 625 Box
-3143 792 Box
-3579 1121 Box
-4014 1633 Box
-4450 2360 Box
-1921 2807 Box
+2109 537 M
+446 88 V
+447 167 V
+446 329 V
+446 511 V
+447 728 V
+2109 537 Box
+2555 625 Box
+3002 792 Box
+3448 1121 Box
+3894 1632 Box
+4341 2360 Box
+1809 2806 Box
+% End plot #4
+% Begin plot #5
 1.000 UP
 3.000 UL
 LT4
-LTb
-1638 2667 M
+LCb setrgbcolor
+1526 2666 M
 (n=320K) Rshow
 LT4
-1722 2667 M
+1610 2666 M
 399 0 V
-2272 537 M
-436 90 V
-435 177 V
-436 338 V
-435 669 V
-436 956 V
-2272 537 BoxF
-2708 627 BoxF
-3143 804 BoxF
-3579 1142 BoxF
-4014 1811 BoxF
-4450 2767 BoxF
-1921 2667 BoxF
+2109 537 M
+446 90 V
+447 177 V
+446 338 V
+446 669 V
+447 955 V
+2109 537 BoxF
+2555 627 BoxF
+3002 804 BoxF
+3448 1142 BoxF
+3894 1811 BoxF
+4341 2766 BoxF
+1809 2666 BoxF
+% End plot #5
+% Begin plot #6
 1.000 UP
 3.000 UL
 LT5
-LTb
-1638 2527 M
+LCb setrgbcolor
+1526 2526 M
 (n=640K) Rshow
 LT5
-1722 2527 M
+1610 2526 M
 399 0 V
-2272 537 M
-436 90 V
-435 178 V
-436 340 V
-435 616 V
-436 982 V
-2272 537 Circle
-2708 627 Circle
-3143 805 Circle
-3579 1145 Circle
-4014 1761 Circle
-4450 2743 Circle
-1921 2527 Circle
+2109 537 M
+446 90 V
+447 178 V
+446 340 V
+446 615 V
+447 982 V
+2109 537 Circle
+2555 627 Circle
+3002 805 Circle
+3448 1145 Circle
+3894 1760 Circle
+4341 2742 Circle
+1809 2526 Circle
+% End plot #6
+% Begin plot #7
 1.000 UP
 3.000 UL
 LT6
-LTb
-1638 2387 M
-(n=1280k) Rshow
+LCb setrgbcolor
+1526 2386 M
+(n=1,280K) Rshow
 LT6
-1722 2387 M
+1610 2386 M
 399 0 V
-2708 625 M
-435 178 V
-436 356 V
-435 703 V
-436 1344 V
-2708 625 CircleF
-3143 803 CircleF
-3579 1159 CircleF
-4014 1862 CircleF
-4450 3206 CircleF
-1921 2387 CircleF
+2555 625 M
+447 178 V
+446 356 V
+446 702 V
+447 1344 V
+2555 625 CircleF
+3002 803 CircleF
+3448 1159 CircleF
+3894 1861 CircleF
+4341 3205 CircleF
+1809 2386 CircleF
+% End plot #7
+% Begin plot #8
 1.000 UP
 3.000 UL
 LT7
-LTb
-1638 2247 M
-(n=2560k) Rshow
+LCb setrgbcolor
+1526 2246 M
+(n=2,560K) Rshow
 LT7
-1722 2247 M
+1610 2246 M
 399 0 V
-2708 625 M
-435 179 V
-436 357 V
-435 704 V
-436 1362 V
-2708 625 TriU
-3143 804 TriU
-3579 1161 TriU
-4014 1865 TriU
-4450 3227 TriU
-1921 2247 TriU
+2555 625 M
+447 179 V
+446 356 V
+446 705 V
+447 1361 V
+2555 625 TriU
+3002 804 TriU
+3448 1160 TriU
+3894 1865 TriU
+4341 3226 TriU
+1809 2246 TriU
+% End plot #8
+% Begin plot #9
 1.000 UP
 3.000 UL
 LT8
-LTb
-1638 2107 M
+LCb setrgbcolor
+1526 2106 M
 (ideal) Rshow
 LT8
-1722 2107 M
+1610 2106 M
 399 0 V
-1401 470 M
-436 22 V
-435 45 V
-436 88 V
-435 178 V
-436 355 V
-435 710 V
-436 1420 V
-1401 470 TriUF
-1837 492 TriUF
-2272 537 TriUF
-2708 625 TriUF
-3143 803 TriUF
-3579 1158 TriUF
-4014 1868 TriUF
-4450 3288 TriUF
-1921 2107 TriUF
+1216 470 M
+447 22 V
+446 45 V
+446 88 V
+447 178 V
+446 355 V
+446 709 V
+447 1420 V
+1216 470 TriUF
+1663 492 TriUF
+2109 537 TriUF
+2555 625 TriUF
+3002 803 TriUF
+3448 1158 TriUF
+3894 1867 TriUF
+4341 3287 TriUF
+1809 2106 TriUF
+% End plot #9
 1.000 UL
 LTb
-966 3360 N
-966 448 L
-3919 0 V
-0 2912 V
--3919 0 V
+770 3359 N
+770 448 L
+4017 0 V
+0 2911 V
+-4017 0 V
 Z stroke
 1.000 UP
 1.000 UL
