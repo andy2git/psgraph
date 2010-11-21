@@ -785,14 +785,6 @@ The {\it pGraph} code was implemented in C/MPI. All parameters described in the 
 
 \subsection{Experimental setup} 
 
-Our parallel algorithm, {\it pGraph}, was tested on a set of 640,000 randomly sampled protein sequences from the ocean metagenomic data set (downloaded from the CAMERA portal). This sequence data set has a total of $1.6\times 10^8$ amino acid residues. The mean$\pm\sigma$ sequence length is $255\pm 195$ residues; smallest sequence length is 28 and the longest is 5,290. Subsets of smaller size ranging from 20K, 40K, $\ldots$, 320K were extracted from the 640K input for scalability tests. The platform used for scalability test was the {\it Chinook} supercomputer at the EMSL facility in Pacific Northwest National Laboratory. The supercomputer is a 160 TFlops Red Hat Linux system consisting of 2,310 HP DL185 nodes dual socket, 64-bit, Quad-core AMD 2.2 GHz Opteron processors. Each core has access to 4 GB RAM. The network interconnect is Infiniband. 
-
-In order to generate the tree index required for all input sets, we used our suffix tree construction code. On the 640K input, the program output a forest containing 167,870 subtrees. The construction was so quick that even a single processor run took only under 7 minutes on the 640K input. For readers interested in the scalability results for the suffix tree construction method, please refer to \cite{Kalyanaraman07}.
-
-%In what follows, we use $n$ to denote the number of input sequences, and $p$ to denote the number of processors used. 
-Even though 4 GB RAM was available to each core, to simulate a larger input scenario, each consumer was allowed to buffer only  $\frac{n}{2}$ randomly sampled sequences for all runs reported. In all our experiments, we fixed the subgroup size to 16 (i.e., 1 producer, 1 master, 14 consumers) based on preliminary empirical tests. 
-
-
 \subsection{Performance Evaluation}
 
 \begin{table*}[thb]
@@ -830,32 +822,36 @@ The run-time (in seconds) of \emph{pGraph} on various input and processor sizes.
 \centerline{(a) \hspace*{2.6in}(b)}
 \caption{
 (a) Speedup and (b) Parallel efficiency of {\it pGraph}. 
-The speedup computed are relative, and because the code was not run smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 32 was assumed for 160K on 32 processors. This assumption is valid because it is consistent with the speedups observed at the processor size for smaller inputs.
+The speedup computed are relative, and because the code was not run smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the speedups observed at the processor size for smaller inputs.
 }
 \label{figSpeedup}
 \end{figure*}
 
-Table~\ref{tabRuntime} shows the total parallel run-time of {\it pGraph} both as a function of $n$ and $p$. As can be observed, the run-time roughly halves each time the number of processors is doubled from $p=16$ to $1,024$, for all inputs tested. The speedup chart in Figure~\ref{figSpeedup}a confirms this linear scaling behavior, as all speedups were close to ideal. For instance, the speedups on all inputs were well above 900 on 1,024 processors (e.g., 947 for 640K). It is noteworthy that the linear speedup is achieved even on an input as small as 20K on up to 512 processors. These results demonstrate the effectiveness of load distribution strategies used in the proposed algorithm.
 
-Figure~\ref{figSpeedup}b shows the parallel efficiency of the system. As shown, the system is able to maintain an efficiency well over 90\% for nearly all inputs and processor sizes, implying a strong scaling behavior. For certain input and processor size combinations, $n=40K$ and $p=64$, the efficiency observed was greater than $100\%$ due to superlinear speedups at those points relative to the previous processor size. This could happen when the system does a slightly better job at load balancing when increased from a processor size of $\frac{p}{2}$ to a size of $p$.
+{\bf Consumer behavior: } At any given point of time, a consumer is in one of the following states: i) \emph{(align)} compute sequence alignment; or ii) \emph{(I/O)} load sequences for alignment; or iii) \emph{(comm)} send request to master; or iv) \emph{(idle)} wait for master to allocate pairs. Figure~\ref{figConsumerBreakdown} shows the breakdown of an average consumer as a function of $p$. 
 
-Table~\ref{tabRuntime} also shows the growth of run-time as a function of the input size. The growth in run-time with input size cannot be analytically determined as it is strictly input dependent. For the inputs tested, we observed the run-time to typically increase 2-4 times with doubling of $n$. Table~\ref{tabRuntime} also shows the number of pairs aligned as a function of the input size. Again, the growth of this term is input-dependent, while observations show that the increase is roughly 2-4 times with doubling of $n$. There are a few anomalous cases where the run-time growth is disproportionately higher than the growth in the number of pairs aligned --- e.g., observe rates of increase from 40K to 80K. We found the cause to be the result of a sudden increase in the input sequence length and standard deviation --- e.g., the mean$\pm\sigma$ of input sequence length increased from $205\pm 118$ in the 40K input to $256\pm 273$ in the 80K input, thereby implying increased computation costs for an average unit of alignment computation.
-
-
-
-To better understand the overall system's linear scaling behavior, we conducted a thorough study of the behavior of every component within our system. While we present below the results using $n=160K$ as a case study, the trends hold for all other inputs.
-
-
-
-{\bf Consumer behavior: } At any given point of time, a consumer is in one of the following states: i) \emph{(align)} compute sequence alignment; or ii) \emph{(I/O)} load sequences for alignment; or iii) \emph{(comm)} send request to master; or iv) \emph{(idle)} wait for master to allocate pairs. Figure~\ref{figConsumerBreakdown} shows the breakdown of an average consumer as a function of $p$. The results show that an average consumer spends more than 95\% of its time in alignment computation regardless of the value of $p$, indicating a healthy sign for scalability. Performing I/O consumes only about 4.5\% of the total time even though only half the number of sequences were locally cached. Time spent on all other calls is negligible. As a future improvement, we plan to totally eliminate I/O on consumers by having all the input sequences in $S$ loaded in a distributed fashion among all consumers within each subgroup, and using MPI one-sided communication to fetch the sequences over the network.
 
 \begin{figure}[thb]
 \centerline{
-						\includegraphics[angle=-90, scale=0.5]{csBreak.eps}
+						\includegraphics[angle=-90, scale=0.36]{fetch.eps}
             }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-Run-time breakdown for an average consumer ($n=160K$).
+Sequence statistics for an average consumer ($n=640K$).
+}
+
+\label{figConsumerFetch}
+\end{figure}
+
+
+
+\begin{figure}[thb]
+\centerline{
+						\includegraphics[angle=-90, scale=0.35]{csBreak.eps}
+            }
+%\centerline{(a) \hspace*{2.6in}(b)}
+\caption{
+Run-time breakdown for an average consumer ($n=640K$).
 }
 \label{figConsumerBreakdown}
 \end{figure}
@@ -868,7 +864,7 @@ Run-time breakdown for an average consumer ($n=160K$).
             }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-Run-time breakdown for an average master ($n=160K$).
+Run-time breakdown for an average master ($n=640K$).
 }
 \label{figMasterBreakdown}
 \end{figure}
@@ -879,7 +875,7 @@ Figure~\ref{figMBuffer} shows the status of a master's pair buffer during the co
 
 \begin{figure}[thb]
 \centerline{
-						\includegraphics[angle=-90, scale=0.3]{Group.pBuf.eps}
+						\includegraphics[angle=-90, scale=0.33]{Group.pBuf.eps}
             }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
@@ -888,7 +884,7 @@ The status of $M_{buf}$ on a master as execution progresses. The trend holds for
 \label{figMBuffer}
 \end{figure}
 
-{\bf Producer behavior:} The primary responsibility of a producer is to ensure that the master is fed with new batch of pairs whenever the latter needs it.  Figure~\ref{figProducer} shows the number of trees each producer processes within a system of 64 subgroups, and the number of pairs generated locally from those set of trees. The figure validates one aspect of the metagenomic protein sequence input that the number of trees does not necessarily correlate to the volume of pairs generated, as this term is tree-dependent. However, the uniformity in the pair generation time of all the producers (as shown in the top chart of Figure~\ref{figProducer}) demonstrates the effectiveness of our dynamic tree distribution scheme. Note that the pair generation time for all producers is only $\sim 11\%$ of the total run-time. This observation, coupled with the fact that the masters are idle for more than 99\% of their time, indicates a potential for exploring an alternative design where producers and masters can be collapsed. However, such an approach runs the risk of the master becoming less responsive to its consumers and therefore will have to be more carefully investigated.
+{\bf Producer behavior:} The primary responsibility of a producer is to ensure that the master is fed with new batch of pairs whenever the latter needs it.  Figure~\ref{figProducer} shows the number of trees each producer processes within a system of 64 subgroups, and the number of pairs generated locally from those set of trees.
 
 \begin{figure}[h]
 \centerline{
@@ -896,15 +892,14 @@ The status of $M_{buf}$ on a master as execution progresses. The trend holds for
 }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-(a) Plots showing the number of trees processed, the number of pairs generated and the run-time of the producer in each of the 64 subgroups for the 160K input.
+(a) Plots showing the number of trees processed, the number of pairs generated and the run-time of the producers in each of the 64 subgroups for the 640K input.
 }
 \label{figProducer}
 \end{figure}
 
 
 
-{\bf Supermaster behavior:} At any given point of time, the system's supermaster is in one of the following states: i) \emph{(producer polling)} checking for messages from producers; ii) \emph{(master polling)} checking status of masters.  Figure~\ref{figSupermasterBreakdown} shows that the supermaster spends roughly about 10\% to 15\% of its time the polling the producers and the remainder of the time polling the masters. This is consistent with our empirical observations, as producers finish roughly in the first 10\%-15\% of the program's execution time, and the remainder is spent on simply distributing and computing the alignment workload. 
-
+{\bf Supermaster behavior:} At any given point of time, the system's supermaster is in one of the following states: i) \emph{(producer polling)} checking for messages from producers; ii) \emph{(master polling)} checking status of masters. 
 
 
 \begin{figure}[thb]
@@ -913,15 +908,12 @@ The status of $M_{buf}$ on a master as execution progresses. The trend holds for
             }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-Run-time breakdown for the supermaster ($n=160K$).
+Run-time breakdown for the supermaster ($n=640K$).
 }
 \label{figSupermasterBreakdown}
 \end{figure}
 
-\emph{Does the supermaster really help in ensuring load is balanced across the subgroup boundaries?} To answer this question, we made a modified implementation --- one that uses supermaster only for distributing trees to producers but \emph{not} for redistributing pairs generated across groups. This modified implementation was tested against the default implementation where the supermaster is allowed to redistribute pairs as well. The results are shown in the plot in the lower half of Figure~\ref{figSPvalue}. As is evident, the scheme without the supermaster's redistribution mechanism pays a heavy penalty in performance as one particular subgroup (ID: 25) acts as a bottleneck for the entire system, delaying the program's completion time by at least 50\%. This is expected because a subgroup without support for redistributing its pairs is forced to get all its locally generated pairs aligned by its local consumers, and the combined variability in pair generation and alignment computation is likely to generate nonuniform workload and therefore create parallel bottlenecks. In contrast, the scheme with supermaster's involvement in redistribution would have helped out such bottleneck subgroups by redistributing their pairs to other subgroups (as corroborated by Figure~\ref{figSPvalue}). 
-
-The top portion of the Figure~\ref{figSPvalue} shows the difference in the number of pairs generated within a subgroup vs. the number of pairs aligned by that subgroup. The large difference is a manifestation of the supermaster's redistribution mechanism.
-
+\emph{Does the supermaster really help in ensuring load is balanced across the subgroup boundaries?} 
 \begin{figure}[h]
 \centerline{
 						%\epsfig{figure=speedup.eps,height=2.5in,width=3in}
@@ -930,43 +922,17 @@ The top portion of the Figure~\ref{figSPvalue} shows the difference in the numbe
 }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-The distribution of run-time and alignment computation over 64 subgroups (i.e., $p=1,024$) for the 160K input. The plot below shows the benefit of redistributing pairs across subgroups using the supermaster, and the plot above shows the difference in the number of pairs generated and aligned within each group. 
+The distribution of run-time and alignment computation over 64 subgroups (i.e., $p=1,024$) for the 640K input. The plot below shows the benefit of redistributing pairs across subgroups using the supermaster, and the plot above shows the difference in the number of pairs generated and aligned within each group. 
 }
 \label{figSPvalue}
 \end{figure}
 
 \subsection{Other parametric studies}
 
-{\bf Effect of string caching:}
-To check the effect of caching strings locally at each consumer, we repeated all our tests but with each consumer caching all $n$ sequences in its local memory\footnote{Table not shown due to lack of space.}. As expected there was a marginal improvement in consumer's run-times --- e.g., the new run on 160K using 1,204 processors took 563 s to complete, when compared to 600 s in the code that cached only $\frac{n}{2}$ strings (see Table~\ref{tabRuntime}). However, no significant differences were observed in the speedup or efficiency trends. 
-
-
-{\bf Effect of batchsize: }
-We studies the effect of changing the master to consumer batchsize ($b_2$) on performance.  smaller the value of $b_2$, the better granularity the master has to avoid load imbalance situations within its group (given the variance in alignment computation times). On the other hand, a larger value may prove better at decreasing the total number of communication rounds. In fact, if the batchsize is doubled, the master would communicate with each consumer half as less. To assess this trade-off, we varied batchsize from 500 through 8K and $p$ from 128 to 1,024, and measured the run-time of the system for $n=160K$ (under the setting of full string cache at the consumers). We observed that the break-even point for this trade-off appeared when batchsize was small (500 to 2K). In the interest of space, we show the results only for $p=1,024$ in Table~\ref{tabBatchsize}, but the trend holds for other processor sizes. 
-
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{cccccc}
-\colrule
-\raisebox{-5pt}[0pt][0pt]{$p$}& \multicolumn{5}{c}{Batchsize } \\ \cline{2-6}\\[-7pt] & 0.5K & 1K & 2K & 4K & 8K\\
-\colrule
-1,024  & 672 & 563 & 583 & 698 & 838  \\
-\colrule
-\end{tabular}
-\end{center}
-\caption{\label{tabBatchsize}
-Run-time (in sec) as a result of changing the batchsize from master to consumer on the 160K input. 
-%\vspace*{-0.2in}
-}
-\end{table}
-
-
 \section{Conclusions}
 \label{secConclusions}
 
-Protein sequence homology is a fundamental problem in protein bioinformatics, one that is becoming increasingly important owing to high potential for discovery and increasingly time consuming (millions of CPU hours) for large-scale data. In this paper, we presented a novel parallel algorithm for parallel protein sequence homology detection. Our approach, {\it pGraph}, is built on a hierarchical multiple-master multiple-worker model. The strengths of the approach lies in its ability to negotiate effectively between irregularity in the work generation phase and work processing phase, its ability to mask all overheads introduced due to data movement, and its ability to maintain a balanced system. Experimental results demonstrate linear scaling behavior virtually on all inputs tested up to 1,024 processors. Our findings are further corroborated through extensive parametric and system behavior studies. Though developed in the context of protein sequence clustering, the ideas in our method could be applied to a broader range of data-intensive applications where irregularity in work generation and/or work processing could pose serious problems in scalability. 
 
-Further improvements such as I/O elimination on the consumers have been planned. More parametric studies such as the effect of changing subgroup size and buffer sizes are required before scaling to larger parallel systems. Moving forward, we plan to test our implementation on much larger metagenomic data sets (e.g., on the 28.6 million ocean metagenomic data), and using more than 1,024 processors. 
 
 % use section* for acknowledgement
 \section*{Acknowledgment}

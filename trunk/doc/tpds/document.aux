@@ -56,7 +56,6 @@
 \citation{Smith81}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Master}}{5}}
 \newlabel{ms}{{2}{5}}
-\citation{Kalyanaraman07}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Consumer}}{6}}
 \newlabel{cs}{{3}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Implementation}{6}}
@@ -65,24 +64,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Results \& Discussion}{6}}
 \newlabel{secResults}{{4}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental setup}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Performance Evaluation}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  Run-time breakdown for an average consumer ($n=160K$). }}{7}}
-\newlabel{figConsumerBreakdown}{{4}{7}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  The run-time (in seconds) of \emph  {pGraph} on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) as a function of input size. }}{8}}
-\newlabel{tabRuntime}{{1}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  (a) Speedup and (b) Parallel efficiency of {\it  pGraph}. The speedup computed are relative, and because the code was not run smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 32 was assumed for 160K on 32 processors. This assumption is valid because it is consistent with the speedups observed at the processor size for smaller inputs. }}{8}}
-\newlabel{figSpeedup}{{3}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  Run-time breakdown for an average master ($n=160K$). }}{8}}
-\newlabel{figMasterBreakdown}{{5}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  The status of $M_{buf}$ on a master as execution progresses. The trend holds for all masters tested. }}{8}}
-\newlabel{figMBuffer}{{6}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  (a) Plots showing the number of trees processed, the number of pairs generated and the run-time of the producer in each of the 64 subgroups for the 160K input. }}{9}}
-\newlabel{figProducer}{{7}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  Run-time breakdown for the supermaster ($n=160K$). }}{9}}
-\newlabel{figSupermasterBreakdown}{{8}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  The distribution of run-time and alignment computation over 64 subgroups (i.e., $p=1,024$) for the 160K input. The plot below shows the benefit of redistributing pairs across subgroups using the supermaster, and the plot above shows the difference in the number of pairs generated and aligned within each group. }}{9}}
-\newlabel{figSPvalue}{{9}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Other parametric studies}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Performance Evaluation}{6}}
 \bibcite{Altschul90}{1}
 \bibcite{Apweiler04}{2}
 \bibcite{Bateman04}{3}
@@ -90,6 +72,14 @@
 \bibcite{Handelsman04}{5}
 \bibcite{Henikoff92}{6}
 \bibcite{Kalyanaraman07}{7}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  The run-time (in seconds) of \emph  {pGraph} on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) as a function of input size. }}{7}}
+\newlabel{tabRuntime}{{1}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  (a) Speedup and (b) Parallel efficiency of {\it  pGraph}. The speedup computed are relative, and because the code was not run smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the speedups observed at the processor size for smaller inputs. }}{7}}
+\newlabel{figSpeedup}{{3}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Other parametric studies}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{7}}
+\newlabel{secConclusions}{{5}{7}}
+\@writefile{toc}{\contentsline {section}{References}{7}}
 \bibcite{Kriventseva01}{8}
 \bibcite{Weiner73}{9}
 \bibcite{Needleman70}{10}
@@ -99,8 +89,17 @@
 \bibcite{Venter01}{14}
 \bibcite{Wu08}{15}
 \bibcite{Yooseph07}{16}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces  Run-time (in sec) as a result of changing the batchsize from master to consumer on the 160K input. }}{10}}
-\newlabel{tabBatchsize}{{2}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{10}}
-\newlabel{secConclusions}{{5}{10}}
-\@writefile{toc}{\contentsline {section}{References}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  Sequence statistics for an average consumer ($n=640K$). }}{8}}
+\newlabel{figConsumerFetch}{{4}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  Run-time breakdown for an average consumer ($n=640K$). }}{8}}
+\newlabel{figConsumerBreakdown}{{5}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  Run-time breakdown for an average master ($n=640K$). }}{8}}
+\newlabel{figMasterBreakdown}{{6}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  The status of $M_{buf}$ on a master as execution progresses. The trend holds for all masters tested. }}{8}}
+\newlabel{figMBuffer}{{7}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  (a) Plots showing the number of trees processed, the number of pairs generated and the run-time of the producers in each of the 64 subgroups for the 640K input. }}{8}}
+\newlabel{figProducer}{{8}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  Run-time breakdown for the supermaster ($n=640K$). }}{9}}
+\newlabel{figSupermasterBreakdown}{{9}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  The distribution of run-time and alignment computation over 64 subgroups (i.e., $p=1,024$) for the 640K input. The plot below shows the benefit of redistributing pairs across subgroups using the supermaster, and the plot above shows the difference in the number of pairs generated and aligned within each group. }}{9}}
+\newlabel{figSPvalue}{{10}{9}}
