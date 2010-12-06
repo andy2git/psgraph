@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  20 NOV 2010 21:21
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  6 DEC 2010 00:25
 entering extended mode
  %&-line parsing enabled.
 **document.tex
@@ -307,20 +307,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 678--679
 
  []
 
-[5]
+[5] [6]
+
+LaTeX Warning: Reference `tabInputTree' on page 7 undefined on input line 795.
+
+
+LaTeX Warning: Citation `Ghoting09' on page 7 undefined on input line 795.
+
+File: csBreak.eps Graphic file (type eps)
+<csBreak.eps>
 File: speedup.eps Graphic file (type eps)
  <speedup.eps>
 File: efficiency.eps Graphic file (type eps)
- <efficiency.eps>
+ <efficiency.eps> [7]
+Underfull \hbox (badness 2343) in paragraph at lines 891--892
+[]\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 File: fetch.eps Graphic file (type eps)
- <fetch.eps>
-File: csBreak.eps Graphic file (type eps)
- <csBreak.eps>
+
+<fetch.eps>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8]
 File: msBreak.eps Graphic file (type eps)
- <msBreak.eps>
-[6]
+
+<msBreak.eps>
 File: Group.pBuf.eps Graphic file (type eps)
- <Group.pBuf.eps>
+ <Group.pBuf.eps> [9]
 File: producer.eps Graphic file (type eps)
  <producer.eps>
 
@@ -333,20 +350,18 @@ File: subgroups.eps Graphic file (type eps)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[10] [11] (./document.aux)
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: There were undefined references.
 
- [7]
-[8] [9
-
-] (./document.aux) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 1986 strings out of 493849
- 29883 string characters out of 3149230
- 98238 words of memory out of 3000000
- 5257 multiletter control sequences out of 15000+200000
+ 1992 strings out of 493849
+ 29956 string characters out of 3149230
+ 96238 words of memory out of 3000000
+ 5263 multiletter control sequences out of 15000+200000
  29150 words of font info for 74 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
  32i,12n,24p,2186b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (9 pages, 59936 bytes).
+Output written on document.dvi (11 pages, 78592 bytes).

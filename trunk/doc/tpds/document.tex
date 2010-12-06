@@ -375,7 +375,7 @@
 % can use linebreaks \\ within to get better formatting as desired
 \title{
 %Improving the scalability of protein sequence clustering for large-scale metagenomic data sets
-{\it pGraph}: a scalable parallel algorithm for large-scale protein sequence homology detection 
+{\it pGraph}: Constructing Large-Scale Protein Sequence Homology Graphs Efficiently on Distributed Memory Machines
 }
 
 
@@ -785,7 +785,63 @@ The {\it pGraph} code was implemented in C/MPI. All parameters described in the 
 
 \subsection{Experimental setup} 
 
-\subsection{Performance Evaluation}
+{\bf Input data:} The {\it pGraph} implementations were tested using an arbitrary collection of $2.56\times 10^6$ ($n$) amino acid sequences representing an ocean metagenomic data set available at the CAMERA metagenomics data archive \cite{}. The sum of the length of the sequences ($m$) in this set is 390,345,218, and the mean$\pm\sigma$ is $152.48\pm 167.25$; the smallest sequence has 1 residues and longest 32,794 residues. Smaller size subsets containing 20K, 40K, 80K, $\ldots$, $1.28\times 10^6$  were derived and used for scalability tests.
+
+\noindent{\bf Experimental platform: } All tests were performed on the {\it Chinook} supercomputer at the EMSL facility in Pacific Northwest National Laboratory. This is a 160 TF supercomputer running Red Hat Linux and consists of 2,310 HP DL185 nodes with dual socket, 64-bit, Quad-core AMD 2.2 GHz Opteron processors with an upper limit of 4 GB RAM per core. The network interconnect is Infiniband. A global 297 TB distributed LUSTRE file system is available to all nodes. 
+
+
+\noindent{\bf pGraph-specific settings: } Even though the Chinook platform supports access to 4 GB RAM per core, in all our runs, we assumed a memory upper bound of $O(\frac{m}{p_c})$ per MPI process, where $p_c$ is the number of consumers in a subgroup. This was done to emulate a more realistic use-case on any distributed memory machine. At the start of execution, all consumers in a subgroup load the input sequences in a distributed even fashion such that each consumer receives a unique $O(\frac{m}{p_c})$ fraction of the input. The locally available set of sequences is referred to as the ``static cache''. Any additional sequence that is temporarily fetched into local memory during alignments is treated as part of a constant space ``dynamic cache'' buffer.
+
+In order to generate the suffix tree index required for all input sets, a suffix tree construction code from one of our earlier developments \cite{Kalyanaraman07} was used. The tree index statistics on the different input sets are shown in Table~\ref{tabInputTree}. Because the construction was quick, trees were generated just using a single CPU. Note that there are parallel implementations \cite{Kalyanaraman07,Ghoting09} already available that can be used for larger inputs. For all our runs, we assume that the tree index is already built using any method of choice and stored in the disk.
+
+For all the performance results presented in Sections~\ref{secComp} and \ref{secPerf}, we set the subgroup size to 16 and the number of producers per subgroup to 2 (to approximate a producer:consumer ratio of 1:8 within each subgroup). The effect of changing these parameters are later studied in Section~\ref{secParameters}.
+
+\begin{table*}[thb]
+\begin{center}
+\begin{tabular}{c|c|c|c|c|}
+\colrule
+No. input  & Total sequence & No. subtrees& No. tree & Construction time  \\
+sequences & length & in the forest & nodes & (in secs; single CPU) \\
+ \colrule
+ 20K & 3,852,622 & 133,639 & 5,721,111 & 3\\
+ 40K & 8,251,063 & 149,501 & 12,318,567 & 6 \\
+ 80K & 20,600,384 & 158,207 & 30,952,989 & 26\\
+ 160K & 43,480,130 & 159,596 & 66,272,332 & 56\\
+ 320K & 86,281,743 & 159,991 & 128,766,176 & 108\\
+ 640K & 160,393,750 & 160,016 & 237,865,379 & 205\\
+ 1,280K & 222,785,671 & 160,000 & 306,132,294 & 300\\
+ 2,560K& 392,905,218 & 160,000 & 533,746,500 & 520\\
+\colrule
+\end{tabular}
+\end{center}
+\caption{\label{tabInputTrees}
+Sequence and suffix tree index statistics for different input sets.
+}
+\end{table*}
+
+\subsection{Comparative evaluation: $pGraph_{I/O}$ vs. $pGraph_{nb}$}
+\label{secComp}
+
+
+At first, we compare the two versions of our software, $pGraph_{I/O}$ and $pGraph_{nb}$, which  use I/O and non-blocking communication, respectively, for fetching sequences not in the local string cache during alignment at consumers. Figure~\ref{figConsumerBreakdown} shows the runtime breakdown of an average consumer under each implementation, on varying number of processors for the 640K input. Both implementations scale linearly with increasing processor size. However, in $pGraph_{I/O}$, alignment time accounted only for $\sim 80$\% of the total run-time, and the remaining 20\% of the time is dominated primarily by I/O, for all processor sizes. In contrast, for $pGraph_{nb}$ nearly all of the run-time was spent performing alignments leaving the overhead associated with non-blocking communication negligible. Consequently, the non-blocking version is 20\% faster than the I/O version. The trends observed hold for other data sets tested as well (data not shown). The results show the effectiveness of the masking strategies used in the non-blocking implementation and more importantly, its ability to effectively eliminate overheads associated with dynamic sequence fetches through the network. This coupled with the linear scaling behavior observed for $pGraph_{nb}$ makes it the implementation of choice. Note that the linear scaling behavior of  $pGraph_{I/O}$ can primarily be attributed to the availability of a fast, parallel I/O system such as Lustre. For systems which do not have such a sophisticated I/O system in place, the I/O overheads are expected to become even more pronounced and could negatively impact speedup. 
+
+In what follows, we present all of our performance evaluation using only $pGraph_{nb}$ as our default implementation.
+
+
+
+\begin{figure}[thb]
+\centerline{
+						\includegraphics[angle=-90, scale=0.3]{csBreak.eps}
+            }
+%\centerline{(a) \hspace*{2.6in}(b)}
+\caption{
+Comparison of the I/O and non-blocking communication versions of {\it pGraph}.  Shown are the runtime breakdown for an average consumer between the two versions. All runs were performed on the $640K$ input sequence set. The results show the effectiveness of the non-blocking communication version in eliminating sequence fetch overhead.
+}
+\label{figConsumerBreakdown}
+\end{figure}
+
+\subsection{Performance evaluation for $pGraph_{nb}$}
+\label{secPerf}
 
 \begin{table*}[thb]
 \begin{center}
@@ -806,7 +862,7 @@ Input number & \multicolumn{8}{c||}{Number of processors ($p$)}& Number of pairs
 \end{tabular}
 \end{center}
 \caption{\label{tabRuntime}
-The run-time (in seconds) of \emph{pGraph} on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) as a function of input size.
+The run-time (in seconds) for $pGraph_{nb}$ on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) for each input as a measure of work.
 %\vspace*{-0.2in}
 }
 \end{table*}
@@ -822,13 +878,25 @@ The run-time (in seconds) of \emph{pGraph} on various input and processor sizes.
 \centerline{(a) \hspace*{2.6in}(b)}
 \caption{
 (a) Speedup and (b) Parallel efficiency of {\it pGraph}. 
-The speedup computed are relative, and because the code was not run smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the speedups observed at the processor size for smaller inputs.
+The speedup and efficiency computed are relative, and because the code was not run on smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the linear speedup trends observed at that processor size for smaller inputs.
 }
 \label{figSpeedup}
 \end{figure*}
 
+Table~\ref{tabRuntime} shows the total parallel runtime for a range of input sizes (20K $\ldots$ 2,560K) and processor sizes (16 $\ldots$ 2,048). The large input sizes scale linearly up to 2,048 processors and more notably, inputs even as small as 20K scale linearly up to 512 processors. The speedup chart is shown in Figure~\ref{figSpeedup}a. All speedups are calculated relative to the least processor size run corresponding to each input. The smallest run had 16 processors because it is the subgroup size. The highest speedup ($2,004\times$) was achieved for the 2,560K data on 2,048 processors. Figure~\ref{figSpeedup}b shows the parallel efficiency of the system. As shown, the system is able to maintain an efficiency above 90\% for most inputs. Also note that for several inputs, parallel efficiency slightly \emph{increases} with processor size for smaller number of processors (e.g., 80K on $p:32\rightarrow$ 64). This superlinear behavior can be attributed to the minor increase in the number of consumers (relative to the whole system size) --- i.e., owing to the way in which the processor space is partitioned, the number of consumers more than doubles when the whole system size is doubled (e.g., when $p$ increases from 16 to 32, the number of consumers increases from 12 to 25). And this increased availability contributes more significantly for smaller system sizes --- e.g., when $p$ increases from 16 to 32, the one extra consumer adds 4\% more consumer power to the system. This effect however diminishes for larger system sizes.
 
-{\bf Consumer behavior: } At any given point of time, a consumer is in one of the following states: i) \emph{(align)} compute sequence alignment; or ii) \emph{(I/O)} load sequences for alignment; or iii) \emph{(comm)} send request to master; or iv) \emph{(idle)} wait for master to allocate pairs. Figure~\ref{figConsumerBreakdown} shows the breakdown of an average consumer as a function of $p$. 
+
+Table~\ref{tabRuntime} also shows run-time increase as a function of input number of sequences. Although this function cannot be analytically determined because of its input-dependency, the number of alignments needed to be performed can serve as a good indicator. However, Table~\ref{tabRuntime} shows that in some cases the run-time increase is not necessarily proportional to the number of pairs aligned --- e.g., note that a $3\times$ increase in alignment load results in as much as a $16\times$ increase in run-time, when $n$ increases from 40K to 80K. Upon further investigation, we found the cause to be the difference in the sequence lengths between both these data sets --- both mean and standard deviation of the sequence lengths increased from 205$\pm$118 for the 40K input to 256$\pm$273 for the 80K input, thereby implying an increased cost for computing an average unit of alignment. 
+
+To better understand the overall system's linear scaling behavior and identify potential improvements, we conducted a thorough system-wide component-by-component study using $n=640K$ as a case study. 
+
+
+{\bf Consumer behavior: } At any given point of time, a consumer in $pGraph_{nb}$ is in one of the following states: i) \emph{(align)} compute sequence alignment; or ii) \emph{(comm)} communicate to fetch sequences or serve other consumers, or send pair request to master; or iii) \emph{(idle)} wait for master to allocate pairs. As shown in Figure~\ref{figConsumerBreakdown}, an average consumer in $pGraph_{nb}$ spends well over 98\% of the total time computing alignments. This desired behavior can be attributed to the combined effectiveness of our masking strategies, communication protocols and the local sequence buffer management strategy. The fact that the idle time is negligible demonstrates the merits of sending timely requests to the master depending on the state of the local pair buffer. Given that the sequence request patterns are completely random and sequence fetches are done asynchronously between consumers, the fact that the contribution from such communication is negligible indicates the effectiveness our strategy to overlap communication with alignment work. Keeping a small subgroup size (16 in our experiments) is also a notable contributor to the reason why the overhead due to sequence fetches, both at the requester and sender, is negligible. For larger subgroup sizes, this asynchronous wait times can increase.
+
+The local sequence management strategy also plays an important role. Note that each consumer only stores $O(\frac{m}{p_c})$ characters of the input in the static cache. Figure~\ref{figConsumerFetch} shows the statistics relating to sequence fetches carried out at every step as the algorithm proceeds at a consumer. As the top chart shows, the probability of finding a sequence in the local static cache is generally low, thereby implying that most of the sequences required for alignment computation need to be fetched over network. While the middle chart confirms this high need for communication, it can be noted that the peaks and valleys in this chart do not necessarily correspond to that of the top chart. This is because of the temporary availability of sequences in the fixed size dynamic sequence buffer (bottom chart), which serves to reduce the overall number of sequences fetched from other consumers.
+ 
+
+
 
 
 \begin{figure}[thb]
@@ -837,26 +905,18 @@ The speedup computed are relative, and because the code was not run smaller proc
             }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-Sequence statistics for an average consumer ($n=640K$).
+Statistics of sequence use (and fetch) on an average consumer ($n=640K$, $p=1,024$).
+The topmost chart shows number of sequences successfully found in the local static cache during any iteration. {\it (Andy: to change this to show \#seqs found in static cache/\#seqs needed at that iteration --- show as percentage)}
+The next chart shows the number of sequences actually fetched over the network at a given iteration. The bottom chart shows the number of sequences stored in the dynamic cache at a given iteration.
 }
 
 \label{figConsumerFetch}
 \end{figure}
 
 
+{\bf Master behavior:} The master within a subgroup is in one of the following states at any given point of execution: i) \emph{(idle)} waiting for consumer requests or new pairs from the local producer(s); or ii) \emph{(comm)} sending pairs to a consumer; or iii) \emph{(comp)} performing local operations to manage subgroup. Figure~\ref{figMasterBreakdown} shows that the master is available (i.e., idle) to serve its local subgroup nearly all of its time. This shows the merit of maintaining manageably small subgroups in our design. 
+The effectiveness of the master to provide pairs in a timely fashion to its consumers is also important. Figure~\ref{figMBuffer} shows the status of a master's pair buffer during the course of the program's execution. As can be seen, the master is able to maintain the size of its pair buffer steadily despite the nonuniformity between the rates at which the pairs are generated at producers and processed in consumers. The sawtooth pattern is because of the master's receiving protocol which is to listen to only its consumers when the buffer size exceeds a fixed threshold. 
 
-\begin{figure}[thb]
-\centerline{
-						\includegraphics[angle=-90, scale=0.35]{csBreak.eps}
-            }
-%\centerline{(a) \hspace*{2.6in}(b)}
-\caption{
-Run-time breakdown for an average consumer ($n=640K$).
-}
-\label{figConsumerBreakdown}
-\end{figure}
-
-{\bf Master behavior:} At any given point of time, a master within a subgroup is in one of the following states: i) \emph{(idle)} waiting for consumer requests; or ii) \emph{(comm)} sending pairs to a consumer; or iii) \emph{(comp)} performing queue and pair buffer operations. Ideally, in the interest of master's availability, one would expect the master to be idle most of the time. Figure~\ref{figMasterBreakdown} shows that this is indeed the case, with each master spending nearly all its time idle. This shows the merit of maintaining manageably small subgroups in our design. 
 
 \begin{figure}[thb]
 \centerline{
@@ -869,38 +929,34 @@ Run-time breakdown for an average master ($n=640K$).
 \label{figMasterBreakdown}
 \end{figure}
 
-
-Figure~\ref{figMBuffer} shows the status of a master's pair buffer during the course of the program's execution. As can be seen, the master is able to maintain the size of its pair buffer steadily. This shows that the priority protocol implemented by the master is highly effective. Maintaining a steady size at the master's pair buffer is critical to ensure that the inflow and outflow of work are regulated. The result is significant especially considering the nonuniformity in the rates at which pairs are generated from the producer, and pairs are aligned at the consumers.
-
-
 \begin{figure}[thb]
 \centerline{
-						\includegraphics[angle=-90, scale=0.33]{Group.pBuf.eps}
+						\includegraphics[angle=-90, scale=0.3]{Group.pBuf.eps}
             }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-The status of $M_{buf}$ on a master as execution progresses. The trend holds for all masters tested.
+The status of $M_{buf}$ on a typical master as execution progresses (subgroup size 16). 
 }
 \label{figMBuffer}
 \end{figure}
 
-{\bf Producer behavior:} The primary responsibility of a producer is to ensure that the master is fed with new batch of pairs whenever the latter needs it.  Figure~\ref{figProducer} shows the number of trees each producer processes within a system of 64 subgroups, and the number of pairs generated locally from those set of trees.
+{\bf Producer behavior:} The primary responsibility of producers is to keep the system saturated with work by generating sequence pairs from trees and sending them to the local master (or the supermaster) in fixed size batches. Figure~\ref{figProducer} shows the number of trees processed at each producer and the number of pairs generated from those set of trees. Although there is a visible correlation between the number of trees and the number of pairs generated for this run, the correlation no longer holds if the sizes of the trees were to be taken into account (data not shown). {\it (Andy to verify)} Despite this variability, our implementation is able to balance the workload devoted to pair generation across producers, as can be observed from the run-time chart in Figure~\ref{figProducer}. This demonstrates the effectiveness of our dynamic tree distribution scheme. 
+
+Note that, even with two producers per subgroup, the pair generation time for all producers is $\sim$$400$s, which is roughly about $25\%$ of the total execution time for the 640K input. This implies that pair generation is still a substantial part of the run-time that could make the merging of the roles of master and producers not so attractive.
+
+{\it Andy: I have assumed here that the fraction of the total time (400s) that a producer is idle is negligible. Is this right? On a related note, I can't understand the following: If the idle time for producers during pair generation is negligible AND since there are two producers per subgroup, it implies that almost $50\%$ of the alignment time is pair generation time. Since there are 13 consumers per subgroup, this implies a ratio of 1:26 for pair gen time: pair alignment time. This seems contradicting to our 1:8 assumption. Can you clarify? Does your 1:8 ratio account for time to communicate and if so, as part of which (align or gen)?}
 
 \begin{figure}[h]
 \centerline{
             \includegraphics[angle=-90, scale=0.33]{producer.eps}
 }
-%\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-(a) Plots showing the number of trees processed, the number of pairs generated and the run-time of the producers in each of the 64 subgroups for the 640K input.
+Plots showing producer statistics on the number of trees processed, the number of pairs generated and the run-time of each of the 128 producers (i.e., 64 subgroups) for the 640K input.
 }
 \label{figProducer}
 \end{figure}
 
-
-
-{\bf Supermaster behavior:} At any given point of time, the system's supermaster is in one of the following states: i) \emph{(producer polling)} checking for messages from producers; ii) \emph{(master polling)} checking status of masters. 
-
+{\bf Supermaster behavior:} At any given point of time, the system's supermaster is in one of the following states: i) \emph{(producer polling)} checking for messages from producers, to either receive tree request or pairs for redistribution; ii) \emph{(master polling)} checking status of masters to redistribute pairs.  Figure~\ref{figSupermasterBreakdown} shows that the supermaster spends roughly about 25-30\% of its time the polling the producers and the remainder of the time polling the masters. This is consistent with our empirical observations, as producers finish roughly in the first 10\%-15\% of the program's execution time, and the remainder is spent on simply distributing and computing the alignment workload. 
 
 \begin{figure}[thb]
 \centerline{
@@ -913,7 +969,9 @@ Run-time breakdown for the supermaster ($n=640K$).
 \label{figSupermasterBreakdown}
 \end{figure}
 
-\emph{Does the supermaster really help in ensuring load is balanced across the subgroup boundaries?} 
+
+\emph{Does the supermaster's role of redistributing pairs for alignment across subgroups help?} To answer this question, we implemented a modified version --- one that uses supermaster only for distributing trees to producers but \emph{not} for redistributing pairs generated across groups. This modified implementation was compared against the default implementation, and the results are shown in Figure~\ref{figSPvalue}. As is evident, the scheme without pair redistribution creates skewed run-times across subgroups and introduces bottleneck subgroups that slow down the system by up to 40\%. This is expected because a subgroup without support for redistributing its pairs may get overloaded with more pairs and/or pairs that need more alignment time, and this combined variability could easily generate nonuniform workload. This shows that the supermaster is a necessary intermediary among subgroups for maintaining overall balance in both pair generation and alignment.
+
 \begin{figure}[h]
 \centerline{
 						%\epsfig{figure=speedup.eps,height=2.5in,width=3in}
@@ -922,12 +980,20 @@ Run-time breakdown for the supermaster ($n=640K$).
 }
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
-The distribution of run-time and alignment computation over 64 subgroups (i.e., $p=1,024$) for the 640K input. The plot below shows the benefit of redistributing pairs across subgroups using the supermaster, and the plot above shows the difference in the number of pairs generated and aligned within each group. 
+The distribution of run-time over 64 subgroups (i.e., $p=1,024$) for the 640K input, with and without the supermaster's role in pair redistribution. The chart demonstrates that the merits of the supermaster's intervention.
 }
 \label{figSPvalue}
 \end{figure}
 
-\subsection{Other parametric studies}
+\newpage
+
+
+
+\subsection{Parameter studies}
+\label{secParameters}
+
+{\it Andy: to give charts/tables for i) subgroup size study; and ii) multiple producers study.} 
+
 
 \section{Conclusions}
 \label{secConclusions}
