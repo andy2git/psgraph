@@ -1,5 +1,6 @@
 reset
-set term post color 
+#set term post color 
+set term post 
 set out 'csBreak.eps'
 set key top right
 
@@ -18,4 +19,4 @@ plot \
 newhistogram "I/O version", \
 "csBreak.dat" using 2:xtic(1) title "Align time", '' u 3 title "Idle time", '' u 4 title "I/O time", '' u 5 title "Comm. time", \
 newhistogram "Non-blocking version", \
- 'csBreak.nb.dat' using 2:xtic(1) title "Align time", '' u 3 title "Idle time", '' u 4 title  "NB. overhead", '' u 5 title "Comm. time"
+'csBreak.nb.dat' using 2:xtic(1) title "Align time", '' u 3 title "Idle time", '' u 4 title  "NB. overhead", '' u 5 title "Comm. time"
