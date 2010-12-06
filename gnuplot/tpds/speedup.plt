@@ -1,6 +1,6 @@
 reset
-#set term post color 
-set term post
+set term post color 
+#set term post
 set out 'speedup.eps'
 
 set size 0.7

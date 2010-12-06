@@ -64,7 +64,31 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Results \& Discussion}{6}}
 \newlabel{secResults}{{4}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental setup}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Performance Evaluation}{6}}
+\citation{Kalyanaraman07}
+\citation{Kalyanaraman07}
+\citation{Ghoting09}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Comparative evaluation: $pGraph_{I/O}$ vs. $pGraph_{nb}$}{7}}
+\newlabel{secComp}{{4.2}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  Comparison of the I/O and non-blocking communication versions of {\it  pGraph}. Shown are the runtime breakdown for an average consumer between the two versions. All runs were performed on the $640K$ input sequence set. The results show the effectiveness of the non-blocking communication version in eliminating sequence fetch overhead. }}{7}}
+\newlabel{figConsumerBreakdown}{{3}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Performance evaluation for $pGraph_{nb}$}{7}}
+\newlabel{secPerf}{{4.3}{7}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  Sequence and suffix tree index statistics for different input sets. }}{8}}
+\newlabel{tabInputTrees}{{1}{8}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces  The run-time (in seconds) for $pGraph_{nb}$ on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) for each input as a measure of work. }}{8}}
+\newlabel{tabRuntime}{{2}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  (a) Speedup and (b) Parallel efficiency of {\it  pGraph}. The speedup and efficiency computed are relative, and because the code was not run on smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the linear speedup trends observed at that processor size for smaller inputs. }}{9}}
+\newlabel{figSpeedup}{{4}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  Statistics of sequence use (and fetch) on an average consumer ($n=640K$, $p=1,024$). The topmost chart shows number of sequences successfully found in the local static cache during any iteration. {\it  (Andy: to change this to show \#seqs found in static cache/\#seqs needed at that iteration --- show as percentage)} The next chart shows the number of sequences actually fetched over the network at a given iteration. The bottom chart shows the number of sequences stored in the dynamic cache at a given iteration. }}{9}}
+\newlabel{figConsumerFetch}{{5}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  Run-time breakdown for an average master ($n=640K$). }}{9}}
+\newlabel{figMasterBreakdown}{{6}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  The status of $M_{buf}$ on a typical master as execution progresses (subgroup size 16). }}{10}}
+\newlabel{figMBuffer}{{7}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  Plots showing producer statistics on the number of trees processed, the number of pairs generated and the run-time of each of the 128 producers (i.e., 64 subgroups) for the 640K input. }}{10}}
+\newlabel{figProducer}{{8}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  Run-time breakdown for the supermaster ($n=640K$). }}{10}}
+\newlabel{figSupermasterBreakdown}{{9}{10}}
 \bibcite{Altschul90}{1}
 \bibcite{Apweiler04}{2}
 \bibcite{Bateman04}{3}
@@ -72,14 +96,6 @@
 \bibcite{Handelsman04}{5}
 \bibcite{Henikoff92}{6}
 \bibcite{Kalyanaraman07}{7}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  The run-time (in seconds) of \emph  {pGraph} on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) as a function of input size. }}{7}}
-\newlabel{tabRuntime}{{1}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  (a) Speedup and (b) Parallel efficiency of {\it  pGraph}. The speedup computed are relative, and because the code was not run smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the speedups observed at the processor size for smaller inputs. }}{7}}
-\newlabel{figSpeedup}{{3}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Other parametric studies}{7}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{7}}
-\newlabel{secConclusions}{{5}{7}}
-\@writefile{toc}{\contentsline {section}{References}{7}}
 \bibcite{Kriventseva01}{8}
 \bibcite{Weiner73}{9}
 \bibcite{Needleman70}{10}
@@ -89,17 +105,10 @@
 \bibcite{Venter01}{14}
 \bibcite{Wu08}{15}
 \bibcite{Yooseph07}{16}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  Sequence statistics for an average consumer ($n=640K$). }}{8}}
-\newlabel{figConsumerFetch}{{4}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  Run-time breakdown for an average consumer ($n=640K$). }}{8}}
-\newlabel{figConsumerBreakdown}{{5}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  Run-time breakdown for an average master ($n=640K$). }}{8}}
-\newlabel{figMasterBreakdown}{{6}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  The status of $M_{buf}$ on a master as execution progresses. The trend holds for all masters tested. }}{8}}
-\newlabel{figMBuffer}{{7}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  (a) Plots showing the number of trees processed, the number of pairs generated and the run-time of the producers in each of the 64 subgroups for the 640K input. }}{8}}
-\newlabel{figProducer}{{8}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  Run-time breakdown for the supermaster ($n=640K$). }}{9}}
-\newlabel{figSupermasterBreakdown}{{9}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  The distribution of run-time and alignment computation over 64 subgroups (i.e., $p=1,024$) for the 640K input. The plot below shows the benefit of redistributing pairs across subgroups using the supermaster, and the plot above shows the difference in the number of pairs generated and aligned within each group. }}{9}}
-\newlabel{figSPvalue}{{10}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  The distribution of run-time over 64 subgroups (i.e., $p=1,024$) for the 640K input, with and without the supermaster's role in pair redistribution. The chart demonstrates that the merits of the supermaster's intervention. }}{11}}
+\newlabel{figSPvalue}{{10}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Parameter studies}{11}}
+\newlabel{secParameters}{{4.4}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{11}}
+\newlabel{secConclusions}{{5}{11}}
+\@writefile{toc}{\contentsline {section}{References}{11}}
