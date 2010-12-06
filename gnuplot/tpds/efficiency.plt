@@ -1,5 +1,6 @@
 reset
-set term post color 
+#set term post color 
+set term post 
 set out 'efficiency.eps'
 
 set size 0.7
