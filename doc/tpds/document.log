@@ -285,43 +285,30 @@ Underfull \hbox (badness 1642) in paragraph at lines 571--572
 
 Underfull \hbox (badness 10000) in paragraph at lines 571--572
 
- []
+                           
+                                                  
+l.516             }
+                   
+? 
+./document.tex:516: Emergency stop.
+ ...                                              
+                                                  
+l.516             }
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-[4]
-Underfull \hbox (badness 2213) in paragraph at lines 619--620
-[]\OT1/ppl/m/n/10 As for serv-ing con-sumers, the mas-ter main-tains
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 619--620
-
- []
-
-
-Underfull \hbox (badness 1838) in paragraph at lines 678--679
-\OT1/ppl/m/n/10 to en-sure that the se-quences needed are avail-able
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 678--679
-
- []
-
-[5] [6]
-
-LaTeX Warning: Reference `tabInputTree' on page 7 undefined on input line 795.
-
-
-LaTeX Warning: Citation `Ghoting09' on page 7 undefined on input line 795.
-
-File: csBreak.eps Graphic file (type eps)
-<csBreak.eps>
-File: speedup.eps Graphic file (type eps)
- <speedup.eps>
-File: efficiency.eps Graphic file (type eps)
- <efficiency.eps> [7]
-Underfull \hbox (badness 2343) in paragraph at lines 891--892
-[]\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
+ 
+Here is how much of TeX's memory you used:
+ 2288 strings out of 493848
+ 34248 string characters out of 3149207
+ 94104 words of memory out of 3000000
+ 5554 multiletter control sequences out of 15000+200000
+ 40933 words of font info for 87 fonts, out of 3000000 for 9000
+ 717 hyphenation exceptions out of 8191
+ 32i,6n,21p,2186b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
+./document.tex:516:  ==> Fatal error occurred, no output PDF file produced!
+ bet-ter un-der-stand the over-all sys-tem's lin-ear
  []
 
 
