@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  6 DEC 2010 00:25
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  15 DEC 2010 23:00
 entering extended mode
  %&-line parsing enabled.
 **document.tex
@@ -285,44 +285,60 @@ Underfull \hbox (badness 1642) in paragraph at lines 571--572
 
 Underfull \hbox (badness 10000) in paragraph at lines 571--572
 
-                           
-                                                  
-l.516             }
-                   
-? 
-./document.tex:516: Emergency stop.
- ...                                              
-                                                  
-l.516             }
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+ []
 
- 
-Here is how much of TeX's memory you used:
- 2288 strings out of 493848
- 34248 string characters out of 3149207
- 94104 words of memory out of 3000000
- 5554 multiletter control sequences out of 15000+200000
- 40933 words of font info for 87 fonts, out of 3000000 for 9000
- 717 hyphenation exceptions out of 8191
- 32i,6n,21p,2186b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
-./document.tex:516:  ==> Fatal error occurred, no output PDF file produced!
- bet-ter un-der-stand the over-all sys-tem's lin-ear
+[4]
+Underfull \hbox (badness 2213) in paragraph at lines 619--620
+[]\OT1/ppl/m/n/10 As for serv-ing con-sumers, the mas-ter main-tains
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 619--620
 
-File: fetch.eps Graphic file (type eps)
+ []
 
-<fetch.eps>
+
+Underfull \hbox (badness 1838) in paragraph at lines 678--679
+\OT1/ppl/m/n/10 to en-sure that the se-quences needed are avail-able
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 678--679
+
+ []
+
+[5]
+Underfull \vbox (badness 5119) has occurred while \output is active []
+
+ [6]
+
+LaTeX Warning: Reference `tabInputTree' on page 7 undefined on input line 803.
+
+
+LaTeX Warning: Citation `Ghoting09' on page 7 undefined on input line 803.
+
+File: csBreak.eps Graphic file (type eps)
+<csBreak.eps>
+File: speedup.eps Graphic file (type eps)
+ <speedup.eps>
+File: efficiency.eps Graphic file (type eps)
+ <efficiency.eps> [7]
+Underfull \hbox (badness 2343) in paragraph at lines 899--900
+[]\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
+ []
+
+
+Underfull \vbox (badness 5189) has occurred while \output is active []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-File: msBreak.eps Graphic file (type eps)
+File: fetch.eps Graphic file (type eps)
 
-<msBreak.eps>
+<fetch.eps>
+File: msBreak.eps Graphic file (type eps)
+ <msBreak.eps>
 File: Group.pBuf.eps Graphic file (type eps)
  <Group.pBuf.eps> [9]
 File: producer.eps Graphic file (type eps)
@@ -331,13 +347,9 @@ File: producer.eps Graphic file (type eps)
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: spBreak.eps Graphic file (type eps)
-<spBreak.eps>
+<spBreak.eps> [10]
 File: subgroups.eps Graphic file (type eps)
- <subgroups.eps>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[10] [11] (./document.aux)
+ <subgroups.eps> [11] (./document.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -345,10 +357,10 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  1992 strings out of 493849
  29956 string characters out of 3149230
- 96238 words of memory out of 3000000
+ 97487 words of memory out of 3000000
  5263 multiletter control sequences out of 15000+200000
  29150 words of font info for 74 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
- 32i,12n,24p,2186b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,12n,24p,2186b,606s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (11 pages, 78592 bytes).
+Output written on document.dvi (11 pages, 79332 bytes).

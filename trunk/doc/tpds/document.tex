@@ -686,38 +686,46 @@ Before aligning a batch of pairs, the consumer has to ensure that the sequences 
   linenodelimiter=.
 }
 \begin{algorithmic}[1]
-
-    \STATE $\psi$: number of sequences to be cached statically
+    \STATE $g$: number of consumers in the same subgroup
+    \STATE $\psi=\frac{n}{g}$: number of sequences to be cached statically
     \STATE {EMPTY, HALF, QUARTER}: $0$, $\frac{b_2}{2}$ and $\frac{b_2}{4}$ buffer status
-   
     \STATE $S_{cache}\leftarrow$ load $\psi$ sequences from I/O
       
-    \STATE $Recv_{C\leftarrow M}\leftarrow$post nonblocking receive for master
-    \WHILE {\TRUE} 
-        \IF {$|C_{buf}|>0$} 
-            \STATE Prefetch sequences $\notin S_{cache}$ for next batch of pairs
-            \IF {END signal from master}
-                \STATE {break while loop}
-            \ELSE 
-                \STATE Extract and align next pair in $C_{buf}$
+    \STATE $Recv\leftarrow$post nonblocking receive
+    \WHILE {\TRUE}
+    	    \IF {{$Recv$} completed}
+            	\IF {Sequence request from consumer $c_{k}$}
+			\STATE Pack sequences and send them out to $c_{k}$
+			\STATE $Recv\leftarrow$post nonblocking receive
+            	\ELSIF {Sequences from other consumer}
+			\STATE Unpack sequences to dynamically cache
+			\STATE $Recv\leftarrow$post nonblocking receive
+            	\ELSIF {Pairs from master}
+		        \STATE Insert pairs into $C_{buf}$
+			\STATE Prepare sequence requests for each consumer
+			\STATE Send sequence requests to other consumers
+			\STATE $Recv\leftarrow$post nonblocking receive
+	        \ENDIF
+	    \ELSE
+	    	\IF {$C_{buf} > 0$}
+			\STATE /* Align a pair if their seqs. are ready */
+	    		\STATE extract next pair $(i, j)$ from $C_{buf}$
+			\IF {both $s_i$ and $s_j$ are ready}
+				\STATE Align sequences $s_{i}$ and $s_{j}$
+			\ELSE
+				\STATE Append pair $(i, j)$ at the end of the $C_{buf}$
+			\ENDIF
+			
+			\STATE /* Report $C_{buf}$ status back to master */
+			\IF {$C_{buf}$=$\frac{b_2}{2}$}
+				\STATE Send HALF status to master
+			\ELSIF {$C_{buf}$=$\frac{b_2}{4}$}
+				\STATE Send {\bf QUARTER} status to master
+			\ELSIF {$C_{buf}= 0$}
+				\STATE Send {\bf EMPTY} status to master
+			\ENDIF
+		\ENDIF
             \ENDIF
-        \ENDIF
-        
-        \IF {$|C_{buf}|=0$ \AND $Recv_{C\leftarrow M}$ \emph{not} completed}
-            \STATE Send {\bf EMPTY} status to master
-            \STATE Wait for pairs from master
-        \ENDIF
-
-        \IF {$Recv_{C\leftarrow M}$ \emph{not} completed}
-            \IF {$|C_{buf}| = \frac{b_2}{2}$}
-                \STATE Send {\bf HALF} status to  master
-            \ELSIF {$|C_{buf}| = \frac{b_2}{4}$}
-                \STATE Send {\bf QUARTER} status to  master
-            \ENDIF
-        \ELSE
-        		\STATE Insert received pairs into $C_{buf}$
-        		\STATE $Recv_{C\leftarrow M}\leftarrow$post nonblocking receive for master
-        \ENDIF
     \ENDWHILE
 \end{algorithmic}
 \end{algorithm}
