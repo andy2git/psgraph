@@ -686,10 +686,12 @@ Before aligning a batch of pairs, the consumer has to ensure that the sequences 
   linenodelimiter=.
 }
 \begin{algorithmic}[1]
-    \STATE $g$: number of consumers in the same subgroup
-    \STATE $\psi=\frac{n}{g}$: number of sequences to be cached statically
-    \STATE {EMPTY, HALF, QUARTER}: $0$, $\frac{b_2}{2}$ and $\frac{b_2}{4}$ buffer status
+    \STATE $P_{c}$: number of consumers in the same subgroup
+    \STATE $n_{s}$: number of sequences to be cached statically
+
     \STATE $S_{cache}\leftarrow$ load $\psi$ sequences from I/O
+    
+    \STATE {EMPTY, HALF, QUARTER}: $0$, $\frac{b_2}{2}$ and $\frac{b_2}{4}$ buffer status
       
     \STATE $Recv\leftarrow$post nonblocking receive
     \WHILE {\TRUE}
