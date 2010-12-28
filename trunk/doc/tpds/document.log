@@ -1,5 +1,6 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  15 DEC 2010 23:00
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  27 DEC 2010 12:59
 entering extended mode
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **document.tex
 (./document.tex
@@ -196,171 +197,448 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 370.
 LaTeX Font Info:    ... okay on input line 370.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 370.
 LaTeX Font Info:    ... okay on input line 370.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 447.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 450.
 
  (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 447.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 450.
 
-** ATTENTION: \keywords is deprecated (line 447). Use \IEEEkeywords instead.
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 447.
+** ATTENTION: \keywords is deprecated (line 450). Use \IEEEkeywords instead.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 450.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <11> on input line 447.
+(Font)              <11> on input line 450.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7.69997> on input line 447.
+(Font)              <7.69997> on input line 450.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5.5> on input line 447.
-LaTeX Font Info:    Try loading font information for U+pzd on input line 447.
+(Font)              <5.5> on input line 450.
+LaTeX Font Info:    Try loading font information for U+pzd on input line 450.
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/upzd.fd
 File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
-** ATTENTION: \keywords is deprecated (line 447). Use \IEEEkeywords instead.
+** ATTENTION: \keywords is deprecated (line 450). Use \IEEEkeywords instead.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 447.
+(Font)              <8> on input line 450.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 447.
+(Font)              <6> on input line 450.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 447.
-LaTeX Font Info:    Try loading font information for OMS+ppl on input line 447.
+(Font)              <5> on input line 450.
+LaTeX Font Info:    Try loading font information for OMS+ppl on input line 450.
 
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omsppl.fd
 File: omsppl.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ppl/m/it' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 447.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 450.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 459.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 462.
 LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <12> not available
-(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 459.
+(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 462.
+
+
+LaTeX Warning: Citation `Needleman70' on page 1 undefined on input line 465.
+
+
+LaTeX Warning: Citation `Smith81' on page 1 undefined on input line 465.
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 466.
- [1
+(Font)              <7> on input line 465.
+
+LaTeX Warning: Citation `Kriventseva01' on page 1 undefined on input line 467.
+
+
+LaTeX Warning: Citation `Handelsman04' on page 1 undefined on input line 467.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 1 undefined on input line 467.
+
+
+LaTeX Warning: Citation `Apweiler04' on page 1 undefined on input line 469.
+
+
+LaTeX Warning: Citation `Bateman04' on page 1 undefined on input line 469.
+
+
+LaTeX Warning: Citation `Enright02' on page 1 undefined on input line 469.
+
+
+LaTeX Warning: Citation `Kriventseva01' on page 1 undefined on input line 469.
+
+
+LaTeX Warning: Citation `Olman07' on page 1 undefined on input line 469.
+
+
+LaTeX Warning: Citation `Altschul90' on page 1 undefined on input line 469.
+
+
+LaTeX Warning: Citation `Needleman70' on page 1 undefined on input line 469.
+
+
+LaTeX Warning: Citation `Smith81' on page 1 undefined on input line 469.
+
+[1
 
 
 ]
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 476.
- [2]
-LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 501.
 
-Underfull \hbox (badness 10000) in paragraph at lines 501--502
+LaTeX Warning: Citation `Weiner73' on page 2 undefined on input line 476.
+
+
+LaTeX Warning: Citation `Needleman70' on page 2 undefined on input line 481.
+
+
+LaTeX Warning: Citation `Smith81' on page 2 undefined on input line 481.
+
+
+LaTeX Warning: Reference `secResults' on page 2 undefined on input line 481.
+
+
+LaTeX Warning: Reference `secResults' on page 2 undefined on input line 482.
+
+
+LaTeX Warning: Citation `KalyanaramanJPDC07' on page 2 undefined on input line 
+483.
+
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 485.
+
+Underfull \hbox (badness 2689) in paragraph at lines 491--492
+[]\OT1/ppl/m/n/10 Our par-al-lel ap-proach rep-re-sents a hy-brid vari-
+ []
+
+[2]
+
+LaTeX Warning: Reference `secRelatedWork' on page 3 undefined on input line 496
+.
+
+
+LaTeX Warning: Reference `secMethods' on page 3 undefined on input line 496.
+
+
+LaTeX Warning: Reference `secResults' on page 3 undefined on input line 496.
+
+
+LaTeX Warning: Reference `secConclusions' on page 3 undefined on input line 496
+.
+
+
+LaTeX Warning: Citation `Needleman70' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `Smith81' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `Altschul90' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `Apweiler04' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `Bateman04' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `Enright02' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `Kriventseva01' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `Olman07' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `CAMERA' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `IMG/M' on page 3 undefined on input line 504.
+
+
+LaTeX Warning: Citation `NCBI' on page 3 undefined on input line 504.
+
+
+Underfull \hbox (badness 2865) in paragraph at lines 504--505
+\OT1/ppl/m/n/10 Sequence ho-mol-ogy be-tween two biomolec-u-lar se-
+ []
+
+
+LaTeX Warning: Citation `Altschul90' on page 3 undefined on input line 506.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 3 undefined on input line 506.
+
+
+LaTeX Warning: Citation `Wu08' on page 3 undefined on input line 508.
+
+
+LaTeX Warning: Citation `Wu08' on page 3 undefined on input line 508.
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 3 undefined on input line 508.
+
+
+
+LaTeX Warning: Citation `Venter01' on page 3 undefined on input line 510.
+
+
+LaTeX Warning: Citation `Yooseph07' on page 3 undefined on input line 510.
+
+LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 516.
+
+Underfull \hbox (badness 1824) in paragraph at lines 516--517
+\OT1/ppl/m/n/10 in-put pro-tein se-quences. As-sum-ing $\OMS/cmsy/m/n/10 j\OML/
+cmm/m/it/10 s\OMS/cmsy/m/n/10 j$ \OT1/ppl/m/n/10 de-notes the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 516--517
 
  []
 
 
-Underfull \hbox (badness 3557) in paragraph at lines 503--504
+Underfull \hbox (badness 3557) in paragraph at lines 518--519
 \OT1/ppl/b/n/10 Problem state-ment: \OT1/ppl/m/n/10 Given a set $\OML/cmm/m/it/
 10 S$ \OT1/ppl/m/n/10 of $\OML/cmm/m/it/10 n$ \OT1/ppl/m/n/10 pro-tein
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 503--504
+Underfull \hbox (badness 10000) in paragraph at lines 518--519
 
  []
 
+[3]
 File: icppFram.eps Graphic file (type eps)
-<icppFram.eps>
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 523.
- (./figPClust.pstex_t
+ <icppFram.eps>
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 4 undefined on input line 536.
+
+
+
+LaTeX Warning: Reference `figFramework' on page 4 undefined on input line 536.
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 4 undefined on input line 538.
+
+
+
+LaTeX Warning: Citation `Weiner73' on page 4 undefined on input line 538.
+
+
+LaTeX Warning: Citation `Weiner73' on page 4 undefined on input line 538.
+
+
+LaTeX Warning: Citation `McCreight76' on page 4 undefined on input line 538.
+
+
+LaTeX Warning: Citation `Ukkonen90' on page 4 undefined on input line 538.
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 4 undefined on input line 538.
+
+
+
+LaTeX Warning: Citation `Ghoting09' on page 4 undefined on input line 538.
+
+(./figPClust.pstex_t
 File: figPClust.pstex Graphic file (type eps)
- <figPClust.pstex>) [3]
-Underfull \hbox (badness 10000) in paragraph at lines 558--566
+ <figPClust.pstex>)
+
+LaTeX Warning: Reference `figPClust' on page 4 undefined on input line 568.
+
+
+Underfull \hbox (badness 3826) in paragraph at lines 567--569
+[]\OT1/ppl/m/n/10 Our method uses a hi-er-ar-chi-cal multiple-master
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 572--580
 
  []
 
 
-Underfull \hbox (badness 1466) in paragraph at lines 571--572
+LaTeX Warning: Citation `Kalyanaraman07' on page 5 undefined on input line 583.
+
+
+
+LaTeX Warning: Reference `pd' on page 5 undefined on input line 585.
+
+
+Underfull \hbox (badness 1466) in paragraph at lines 585--586
 \OT1/ppl/m/n/10 from the su-per-mas-ter. The pro-ducer then starts to
  []
 
 
-Underfull \hbox (badness 1642) in paragraph at lines 571--572
+Underfull \hbox (badness 1642) in paragraph at lines 585--586
 \OT1/ppl/m/n/10 This is im-ple-mented us-ing a non-block-ing send so
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 571--572
+Underfull \hbox (badness 10000) in paragraph at lines 585--586
 
  []
 
-[4]
-Underfull \hbox (badness 2213) in paragraph at lines 619--620
+
+LaTeX Warning: Reference `ms' on page 5 undefined on input line 630.
+
+[5]
+Underfull \hbox (badness 2213) in paragraph at lines 634--635
 []\OT1/ppl/m/n/10 As for serv-ing con-sumers, the mas-ter main-tains
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 619--620
+Underfull \hbox (badness 3942) in paragraph at lines 634--635
+\OT1/ppl/m/n/10 re-port to the mas-ter. The pri-or-ity rep-re-sents the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--635
 
  []
 
 
-Underfull \hbox (badness 1838) in paragraph at lines 678--679
-\OT1/ppl/m/n/10 to en-sure that the se-quences needed are avail-able
- []
+LaTeX Warning: Citation `Smith81' on page 6 undefined on input line 686.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 678--679
+LaTeX Warning: Reference `cs' on page 6 undefined on input line 686.
 
- []
 
-[5]
-Underfull \vbox (badness 5119) has occurred while \output is active []
+Underfull \vbox (badness 3769) has occurred while \output is active []
 
  [6]
 
-LaTeX Warning: Reference `tabInputTree' on page 7 undefined on input line 803.
+LaTeX Warning: Reference `sp' on page 7 undefined on input line 742.
+
+[7]
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 8 undefined on input line 809.
 
 
-LaTeX Warning: Citation `Ghoting09' on page 7 undefined on input line 803.
+
+LaTeX Warning: Reference `tabInputTree' on page 8 undefined on input line 809.
+
+
+LaTeX Warning: Citation `Kalyanaraman07' on page 8 undefined on input line 809.
+
+
+
+LaTeX Warning: Citation `Ghoting09' on page 8 undefined on input line 809.
+
+
+LaTeX Warning: Reference `tabInputTree' on page 8 undefined on input line 809.
+
+
+LaTeX Warning: Reference `secComp' on page 8 undefined on input line 811.
+
+
+LaTeX Warning: Reference `secPerf' on page 8 undefined on input line 811.
+
+
+LaTeX Warning: Reference `secParameters' on page 8 undefined on input line 811.
+
+
+
+LaTeX Warning: Reference `figConsumerBreakdown' on page 8 undefined on input li
+ne 840.
 
 File: csBreak.eps Graphic file (type eps)
 <csBreak.eps>
 File: speedup.eps Graphic file (type eps)
  <speedup.eps>
 File: efficiency.eps Graphic file (type eps)
- <efficiency.eps> [7]
-Underfull \hbox (badness 2343) in paragraph at lines 899--900
+ <efficiency.eps>
+
+LaTeX Warning: Reference `tabRuntime' on page 8 undefined on input line 900.
+
+
+LaTeX Warning: Reference `figSpeedup' on page 8 undefined on input line 900.
+
+
+LaTeX Warning: Reference `figSpeedup' on page 8 undefined on input line 900.
+
+[8]
+
+LaTeX Warning: Reference `tabRuntime' on page 9 undefined on input line 903.
+
+
+LaTeX Warning: Reference `tabRuntime' on page 9 undefined on input line 903.
+
+
+Underfull \hbox (badness 2343) in paragraph at lines 905--906
 []\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
  []
 
 
+LaTeX Warning: Reference `figConsumerBreakdown' on page 9 undefined on input li
+ne 908.
+
+
 Underfull \vbox (badness 5189) has occurred while \output is active []
 
+ [9]
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: Reference `figConsumerFetch' on page 10 undefined on input line 
+910.
 
- [8]
+
+Underfull \vbox (badness 3179) has occurred while \output is active []
+
 File: fetch.eps Graphic file (type eps)
 
 <fetch.eps>
+
+LaTeX Warning: Reference `figMasterBreakdown' on page 10 undefined on input lin
+e 930.
+
+
+LaTeX Warning: Reference `figMBuffer' on page 10 undefined on input line 931.
+
+[10]
 File: msBreak.eps Graphic file (type eps)
  <msBreak.eps>
 File: Group.pBuf.eps Graphic file (type eps)
- <Group.pBuf.eps> [9]
-File: producer.eps Graphic file (type eps)
- <producer.eps>
+ <Group.pBuf.eps>
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Reference `figProducer' on page 11 undefined on input line 956.
+
+
+LaTeX Warning: Reference `figProducer' on page 11 undefined on input line 956.
+
+File: producer.eps Graphic file (type eps)
+<producer.eps>
+
+LaTeX Warning: Reference `figSupermasterBreakdown' on page 11 undefined on inpu
+t line 974.
 
 File: spBreak.eps Graphic file (type eps)
-<spBreak.eps> [10]
+<spBreak.eps>
+
+LaTeX Warning: Reference `figSPvalue' on page 11 undefined on input line 988.
+
+[11]
 File: subgroups.eps Graphic file (type eps)
- <subgroups.eps> [11] (./document.aux)
+ <subgroups.eps>
+
+LaTeX Warning: Reference `figGroupStudy' on page 12 undefined on input line 101
+0.
+
+File: groupSize.eps Graphic file (type eps)
+<groupSize.eps> [12] [13
+
+] (./document.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 1992 strings out of 493849
- 29956 string characters out of 3149230
- 97487 words of memory out of 3000000
- 5263 multiletter control sequences out of 15000+200000
- 29150 words of font info for 74 fonts, out of 3000000 for 9000
+ 1998 strings out of 493849
+ 30025 string characters out of 3149230
+ 98705 words of memory out of 3000000
+ 5269 multiletter control sequences out of 15000+200000
+ 28481 words of font info for 73 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
- 32i,12n,24p,2186b,606s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,12n,24p,2446b,606s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (11 pages, 79332 bytes).
+Output written on document.dvi (13 pages, 92516 bytes).

@@ -65,7 +65,7 @@
 %
 \documentclass[10pt,journal,letterpaper,compsoc]{IEEEtran}
 % Add the compsocconf option for Computer Society conferences.
-%
+% 
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
 % \documentclass[conference]{../sty/IEEEtran}
@@ -389,7 +389,7 @@
 % note need leading \protect in front of \\ to get a newline within \thanks as
 % \\ is fragile and will error, could use \hfil\break instead.
 E-mail: \{cwu2, ananth\}@eecs.wsu.edu
-\IEEEcompsocthanksitem W.R Cannon is with Pacific Northwest National Laboratory, Richland, WA. 99352.\protect\\
+\IEEEcompsocthanksitem W.R. Cannon is with Pacific Northwest National Laboratory, Richland, WA. 99352.\protect\\
 E-mail: william.cannon@pnl.gov}
 \thanks{}}
 
@@ -427,7 +427,10 @@ E-mail: william.cannon@pnl.gov}
 \IEEEcompsoctitleabstractindextext{%
 \begin{abstract}
 %\boldmath
-Protein sequence homology detection is a fundamental problem in computational molecular biology, with a pervasive application in nearly all analyses that aim to structurally and functionally characterize protein molecules. While detecting homology between two protein sequences is computationally inexpensive, detecting pairwise homology at a large-scale becomes prohibitive, requiring millions of CPU hours. Yet, there is currently no efficient method available to parallelize this kernel. In this paper, we present the key characteristics that make this problem particularly hard to parallelize, and then propose a new parallel algorithm that is suited for large-scale protein sequence data. Our method, called {\it pGraph}, is designed using a hierarchical multiple-master multiple-worker model, where the processor space is partitioned into subgroups and the hierarchy helps in ensuring the workload is load balanced fashion despite the inherent irregularity that may originate in the input. Experimental evaluation demonstrates that our method scales linearly on all input sizes tested (up to 640K sequences) on a 1,024 node supercomputer. In addition to demonstrating strong scaling, we present an extensive study of the various components of the system and related parametric studies. 
+Constructing graphs 
+
+
+Protein sequence homology detection is a fundamental problem in computational molecular biology, with a pervasive application in nearly all analyses that aim to structurally and functionally characterize protein molecules. While detecting the homology between two protein sequences is relatively inexpensive, detecting pairwise homology at a large-scale can become computationally prohibitive for modern inputs, often requiring millions of CPU hours. Yet, there is currently no efficient method available to parallelize this kernel. In this paper, we present the key characteristics that make this problem particularly hard to parallelize, and then propose a new parallel algorithm that is suited for large-scale protein sequence data. Our method, called {\it pGraph}, is designed using a hierarchical multiple-master multiple-worker model, where the processor space is partitioned into subgroups and the hierarchy helps in ensuring the workload is load balanced fashion despite the inherent irregularity that may originate in the input. Experimental evaluation demonstrates that our method scales linearly on all input sizes tested (up to 640K sequences) on a 1,024 node supercomputer. In addition to demonstrating strong scaling, we present an extensive study of the various components of the system and related parametric studies. 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -459,53 +462,60 @@ Parallel protein sequence homology detection; parallel sequence graph constructi
 \section{Introduction}
 \label{secIntroduction}
 
-Protein sequence homology detection is a fundamental problem in computational molecular biology, where given a set of protein sequences, the goal is to identify \emph{highly similar pairs of sequences}. In graph-theoretic terms, if we were to represent the input protein sequences as vertices and pairwise sequence similarity as edges, then the problem of pairwise homology detection is equivalent of constructing the graph. 
+Protein sequence homology detection is a fundamental problem in computational molecular biology. Given a set of protein sequences, the goal is to identify all highly ``similar'' pairs of sequences, where similarity constraints are typically determined using an alignment model (e.g., \cite{Needleman70,Smith81}). In graph-theoretic terms, the protein sequence homology detection problem can be thought of as constructing an undirected graph $G(V,E)$, where $V$ is the set of input protein sequences and $E$ is the set of edges $(v_i,v_j)$ such that the sequences corresponding to $v_i$ and $v_j$ are highly similar.
 
-Homology detection is widely used in nearly all analyses targeted at functional and structural characterization of protein molecules \cite{Kriventseva01}. Most notably, the operation is heavily used in clustering applications, where the problem is to partition the input sequences such that all proteins that are ``related'' to one another by a pre-defined degree of sequence homology are grouped together. 
-%In graph-theoretic terms, if we were to represent the input protein sequences as vertices and pairwise sequence similarity as edges, then the problem of clustering is to find maximal cliques. In practice, however, owing to errors in sequence data and other biological considerations (e.g., functionally related proteins could differ at the sequence level), the problem is one of finding dense subgraphs \cite{Yooseph07}. 
-Clustering has become highly significant of late because of its potential to uncover thousands of previously unknown proteins from metagenomic data sets. Metagenomics \cite{Handelsman04}, which is a rapidly emerging sub-field, involves the study of environmental microbial communities using novel genomic tools. In 2007, a single study that surveyed an ocean microbiota \cite{Yooseph07} resulted in the discovery of nearly $4\times 10^3$ previously unknown protein families, significantly expanding the protein universe as we know it. As protein families are defined as groups of functionally related proteins, homology detection and clustering play a central role during family identification. 
+Homology detection is widely used in nearly all analyses targeted at functional and structural characterization of protein molecules \cite{Kriventseva01}. Most notably, it is used as a precursor step to clustering, which aims at partitioning sequences into closely-knit groups of functionally and/or structurally related proteins called ``families''. In graph-theoretic terms, this is equivalent of finding maximal cliques. However, in practice, owing to errors in sequence data and other biological considerations (e.g., functionally related proteins could differ at the sequence level), the problem becomes one of finding densely connected subgraphs. Protein sequence clustering is gaining importance of late because of its potential to uncover and functinally annotate environmental microbial communities (aka.  metagenomic data) \cite{Handelsman04}. For instance, a single study in 2007 that surveyed an ocean microbiota \cite{Yooseph07} resulted in the discovery of nearly $4\times 10^3$ previously unknown protein families, significantly expanding the protein universe as we know it. %Homology detection and clustering play a central role during family identification. 
 
-While there are numerous software options available for protein sequence clustering (e.g., \cite{Apweiler04,Bateman04,Enright02,Kriventseva01,Olman07}), all of them assume that the graph is already constructed and available as input. However, modern-day use-cases such as the ocean metagenomic sequence clustering suggest that this is not the case. This is because these large-scale projects generate sequence information of their own and hence will have to contend with detecting the sequence homology among all new sequences and against sequence information generated from previous projects. For example, the ocean metagenomic project alone generated more than 17 million new protein (ORF) sequences and this set was analyzed alongside over 11 million  sequences downloaded from public protein sequence databanks (for a total of 28.6 million sequences). Consequently, the most dominant phase of computation in the entire analysis was the detection of pairwise sequence homology, which alone took $10^6$ CPU hours, even after using heuristic approaches to compute homology \cite{Yooseph07}. Our own experience with the homology detection phase \cite{Wu08} is further confirmation for the challenges that confront this problem.
+While there are a number of programs available for protein sequence clustering (e.g., \cite{Apweiler04,Bateman04,Enright02,Kriventseva01,Olman07}), all of them assume that the graph can be easily built or is readily available as input. However, modern-day use-cases suggest otherwise. Large-scale projects generate millions of \emph{new} sequences that need to be matched against themselves and against sequences already available from previous sequencing projects. For example, the ocean metagenomic project generated more than 17 million new sequences and this set was analyzed alongside 11 million sequences in public protein sequence databanks (for a total of 28.6 million sequences). Consequently, the most time-dominant step during analysis was homology detection, which alone accounted for $10^6$ CPU hours despite the use of faster approximation heuristics such as BLAST \cite{Altschul90} to determine homology. Ideally, dynamic programming algorithms that guarantee alignment optimality \cite{Needleman70,Smith81} should be the method of choice as they are generally more sensitive but the associated high cost of computation coupled with a lack of support in software for coarse-level parallelism have impeded their application under large-scale settings.
 
-In this paper, we propose a new parallel algorithm for carrying out sequence homology detection of 
-large-scale protein sequence data. Through detection, the resulting output is the sequence graph which can be directly used as input for the subsequent clustering step.
+In this paper, we address the problem of parallelizing homology graph construction on massive protein sequence data sets, and one that will enable the use of the optimality-guaranteeing dynamic programming algorithms as the basis for pairwise homology detection (or equivalently, edge detection). Although at the offset the problem may appear inherently parallel (because the evaluation of each edge is an independent task), several practical considerations make it a non-trivial problem.
 
-Developing a scalable solution for this problem using parallel processing is essential for this emerging application domain as it can help reduce the time to solution and enable larger data sets to be analyzed. The problem also has several attributes that make it interesting from the standpoint of parallel algorithm development. (i) {\bf Input size:} Firstly, the problem is data-intensive. Tens of millions of protein sequences are already available from public repositories (e.g., CAMERA \url{http://camera.calit2.net/}). (ii) {\bf Work processing rate:} The rate at which work is processed could be highly irregular. Detecting pairwise sequence homology is equivalent to the problem of finding optimal alignment \cite{Smith81}, the time for which is proportional to the product of lengths of the strings being aligned. However, due to the large variance in the input protein sequence length, the time to process each unit of work could also vary significantly, as will be shown in Section~\ref{secResults}.  (iii) {\bf Work generation rate:} To avoid a brute-force all-against-all sequence comparison, a string index such as suffix tree \cite{Weiner73} or look-up table \cite{Altschul90} is used so that only pairs satisfying an exact matching criterion need to be further evaluated \cite{Wu08, Yooseph07}. However, the rate at which the pairs are generated could be irregular. For instance, same sized portions of the suffix tree index could result in the generation of drastically different number of sequence pairs for alignment, as will be shown in Section~\ref{secResults}. {\it A priori} stocking of pairs that require alignment is also not an option because of a worst-case quadratic explosion of work. (iv) {\bf Local availability of data:}  Finally, the ready in-memory availability of sequence data during alignment processing cannot be guaranteed under distributed memory machine setting because of large input sizes. Alternatively, moving computation to data is also virtually impossible because a pair listed for alignment work could involve any two input sequence. The algorithm proposed in this paper addresses all these challenges.
+Firstly, the problem is data-intensive, even more so than its DNA counterpart. While the known protein universe is relatively small, modern use-cases, particularly in metagenomics, generate millions of DNA sequences first and then convert them into amino acid sequences corresponding to all six reading frames for evaluation as candidate proteins, resulting in a 6$\times$ increase in data volume for analysis\footnote{Henceforth for simplicity of exposition, we will use the terms ``amino acid sequences'' and ``protein sequences'' interchangeably.}. Tens of millions of such amino acid sequences are already available from public repositories (e.g., CAMERA web portal: \url{http://camera.calit2.net/}). Large data size creates two complications.  
+\begin{compactenum}[i)]
+\item
+ A brute-force all-against-all sequence comparison strategy to detect the presence of edges becomes practically unfeasible due to the quadratic explosion of alignment work. Instead, a filtering based strategy, one that short-lists a smaller subset of sequence pairs based on their potential to pass the alignment criteria prior to actually computing the alignments, needs to be used. In practice, exact matching filters that deploy string data structures such as suffix trees \cite{Weiner73} have been shown to be most effective way to reduce alignment work without compromising on quality \cite{}. While the time consumed by these advanced filters for pair generation is relatively less when compared to alignment computation, it is certainly not negligible. From a parallel implementation standpoint, this means that we could not use a standard work distribution tool (such as Condor \cite{}), as work generation also needs to be parallelized dynamically alongside work processing. 
+\item
+A large data size also means that the local availability of sequences during alignment processing cannot be guaranteed under the distributed memory machine setting. Alternatively, moving computation to data is also virtually impossible because a pair identified for alignment work could involve arbitrary sequences and is totally data-dependent. 
+\end{compactenum}
 
+Secondly, handling amino acid sequence data gives rise to some unique \emph{irregularity} issues that need to be contended with during parallelization. i) Assuming ``work'' refers to a pair of sequences designated for alignment computation, \emph{the time to process each unit of work could be highly variable}. This is because the time for aligning two sequences using dynamic programming takes time proportional to the product of the lengths of the two sequences \cite{Needleman70,Smith81}. And, amino acid sequences tend to have a substantial variability in their lengths, as we will also shown in Section~\ref{secResults}. 
+ii) For amino acid data, \emph{the rate at which work is generated could also be highly non-uniform}. For instance, similar sized portions of the suffix tree index could yield drastically different number of sequence pairs, as will be shown in Section~\ref{secResults}. {\it A priori} stocking of pairs that require alignment is simply not an option because of a worst-case quadratic requirement.
+These challenges do not typically arise when dealing with DNA data directly and as a result DNA tools do not necessarily carry over for amino acid sequence analysis. For instance, in genome sequencing projects the lengths of DNA sequences derived from modern day DNA sequencers are typically of a very short fixed range. This coupled with the nature of sampling typically renders the work generation and processing rates uniform, and this has allowed the deployment of more traditional parallel models \cite{KalyanaramanJPDC07}. In case of metagenomics protein sequence clustering projects, even though parts of the amino acid sequences input are derived from DNA data, the higher variability in sequence lengths is a result of the translation done on the assembled products of DNA assembly (i.e., not raw DNA sequences).
 
 \subsection{Contributions}
 \label{secContributions}
 
-In this paper, we present a novel algorithm for carrying out large-scale protein sequence homology detection. Our algorithm, called {\it pGraph}\footnote{stands for ``\underline{p}rotein sequence homology \underline{Graph} construction''}, is designed to take advantage of the large-scale memory and compute power available from distributed memory parallel machines. The method uses a hierarchical multiple-master multiple-worker model to dynamically distribute tasks corresponding to both work generation and work processing in a load balanced fashion. The processor space is organized into subgroups with each subgroup consisting of a producer (for work generation), a master (for work distribution) and a fixed number of workers acting as consumers of work. This producer-consumer model of organizing a subgroup helps decouple work generation from work processing. In addition, a dedicated supermaster is tasked with the responsibility of ensuring that the tasks are evenly shared among subgroups. The multiple-master model also helps avoid single point bottlenecks.
 
-Experimental results show that this new approach achieves linear scaling on 1,024 nodes for the range of input tested (up to 640,000 sequences). More notably, the method was able to maintain parallel efficiency at more than 90\% over all processor size tested. In addition to scalability results, we also present a thorough report on the system behavior by components. Though presented in the context of protein sequence graph construction, our method could be extended to other data-intensive applications where there is irregularity in work generation and/or in work processing. 
+In this paper, we present a new algorithm to carry out large-scale protein sequence homology detection. Our algorithm, called {\it pGraph}\footnote{stands for ``\underline{p}arallel construction of protein sequence homology \underline{Graph}''}, is designed to take advantage of the large-scale memory and compute power available from distributed memory parallel machines. The output is the set of edges in the sequence homology graph which can be readily used as input for subsequent post-processing steps such as clustering. 
 
+Our parallel approach represents a hybrid variant between hierarchical multiple-master/worker and producer-consumer models. The processor space is organized into fixed-size subgroups; each subgroup comprises of possibly multiple ``producers'' (for pair generation), a local master (for work distribution) and a fixed number of ``consumers'' (for alignment computation). A dedicated global master (``supermaster'') manages the workload across subgroups. The producer-consumer division, partly inspired by the Map Reduce parallel paradigm, helps decouple the two major operations in the code, while also providing user-level control to configure system resources as per input demands. These techniques combined with other base principles in parallel program design for distributed memory computers have allowed us to accommodate the use of quality-enhancing dynamic programming algorithms for evaluating alignments and determining homology at a massive scale. 
+
+Experimental results show that pGraph achieves linear scaling on a 2,048 processor distributed memory cluster for a wide range of inputs ranging from as small as 20,000 sequences to 2,560,000 sequences. Furthermore, the implementation is able to maintain more than 90\% parallel efficiency despite the considerable volume of data movement and the dedication of resources to the hierarchy hierarchy. In addition to these strong scaling results, we present a thorough anatomical study of the system-wide behavior by its different components. We evaluate and compare two models of our algorithm, one that uses I/O and another that uses interprocess communication, for fetching sequences required for alignment computation. 
+
+Though presented in the context of protein sequence graph construction, we expect that the basic design principles of our approach can extend to other similar data-intensive scientific applications that involve irregularities and unpredictability concerning work generation, work processing and input data movement.
 The paper is organized as follows. Section~\ref{secRelatedWork} presents the current state of art for parallel sequence homology detection. Section~\ref{secMethods} presents our proposed method and implementation details. Experimental results are presented and discussed in Section~\ref{secResults}, and Section~\ref{secConclusions} concludes the paper.
 
-
+%The highlights of the parallel design are as follows: The method uses a hierarchical multiple-master multiple-worker model to dynamically distribute tasks corresponding to both work generation and work processing in a load balanced fashion. The processor space is organized into subgroups with each subgroup comprising of possibly multiple ``producers'' (for work generation), a local master (for work distribution) and a fixed number of workers acting as ``consumers'' of work. This producer-consumer model of organizing processors helps decouple work generation from work processing. In addition, a dedicated global master (``supermaster'') is tasked with the responsibility of managing the workload across subgroups. Each node stores only a portion of the input set of sequences. We implemented and tested two versions, one that uses I/O and another that uses interprocess communication, for sequence fetches during alignment computation.
 
 
 \section{Related Work}
 \label{secRelatedWork}
 
-Sequence homology between two protein sequences can be evaluated using rigorous optimal alignment algorithms \cite{Needleman70,Smith81} or heuristic alignment methods such as BLAST \cite{Altschul90}. Protein sequence clustering is a well researched topic with numerous algorithms and software tools (e.g., \cite{Apweiler04,Bateman04,Enright02,Kriventseva01,Olman07}). While sequence homology is a fundamental computational kernel within clustering applications, there are currently no efficient parallel algorithms. In order to accommodate for the $10^6$ CPU hours, the ocean metagenomics project \cite{Yooseph07} used an {\it ad hoc} parallel strategy, where an all-against-all sequence comparison using BLAST was manually partitioned across 125 dual processors systems and 128 16-processor nodes each containing between 16GB-64GB of RAM. 
+Sequence homology between two biomolecular sequences can be evaluated either using rigorous optimal alignment algorithms in time proportional to product of the sequence lengths \cite{Needleman70,Smith81}, or using faster, approximation heuristic methods such as BLAST and its numerous variants \cite{Altschul90}. Detecting the presence or absence of pairwise homology over a set of protein/amino acid sequences, which is the subject of this article, can be modeled as a homology graph construction problem with numerous applications (e.g., \cite{Apweiler04,Bateman04,Enright02,Kriventseva01,Olman07}). The rapid adoption of cost-effective, high throughput sequencing technologies is contributing  millions of new sequences  into sequence repositories \cite{CAMERA,IMG/M,NCBI}. As a result, detection of pairwise homology from these large data sets is becoming a daunting computational task. 
 
-Recently, we proposed a parallel method \cite{Wu08} for the problem of protein clustering. The main contribution of this method was that it showed how to break a single large graph problem into multiple disjoint subproblems. This was achieved by first enumerating all connected components so that the individual components can be post-processed independently for dense subgraph detection. However, detecting connected components also involves enumerating all the edges of the graph through sequence homology detection. While performance tests demonstrated linear scaling up to 128 processors for 160,000 sequences, the phase for pairwise sequence homology detection failed to scale linearly for larger number of processors \cite{Wu08}. The cause for the slowdown was primarily the irregularity that was observed between pair generation and alignment computation. Interestingly, the same scheme had demonstrated linear scaling on DNA sequence clustering problems earlier \cite{Kalyanaraman07}. This is the motivation behind our newly proposed design which decouples the work generation (producer) from work processing (consumer).
+One option is to adapt the use of the BLAST algorithm \cite{Altschul90}, which is a method originally designed for performing sequence database search (query vs. database), by setting both the query and database sets to the same input set of sequences. For instance, the ocean metagenomics survey project \cite{Yooseph07} used BLAST to perform all-against-all sequence comparison. This took $10^6$ CPU hours --- a task that was parallelized, albeit in an {\it ad hoc} manner, by manually partitioning across 125 dual processors systems and 128 16-processor nodes each containing between 16GB-64GB of RAM. Several parallel tools are available for BLAST --- the most notable tools being mpiBLAST \cite{} and ScalaBLAST \cite{}. These methods run the serial version of NCBI BLAST \cite{} at their cores, while offering a high degree of coarse-level parallelism and have demonstrated scaling  to high-end parallel machines. In addition to being relatively quicker, BLAST also provides a statistical score of significance for comparing a query sequence against a database of sequences. These advantages are however offset by the fact that any BLAST based solution is really an approximation heuristic, while the use of dynamic programming algorithms guarantees alignment optimality. It has been shown that computing optimal alignments helps improve sensitivity to varying degrees in practice \cite{} and sensitivity is an ubiquitous challenge with metagenomics data processing (due to its high fragmented nature of sampling). Another less desirable side effect of using BLAST for protein sequence data is that it uses the lookup table data structure which is limited to detection of only short, fixed-length exact matches between pairs of sequences. This results in more pairs to be evaluated. Other string data structures such as suffix trees provide more specificity when it comes to the choice of pairs to evaluate due to their ability to detect longer, variable-length matches. 
 
-Our observations of a higher complexity for metagenomic protein data when compared to DNA data are consistent with other previous studies. For example, in the human genome assembly project \cite{Venter01}, the all-against-all sequence homology detection of roughly 28 million DNA sequences consumed only $10^4$ CPU hours. Contrast this with the $10^6$ CPU hours observed for analyzing roughly the same number of protein sequences in the ocean metagenomic project \cite{Yooseph07}.
+The purpose of this paper is to investigate the development of a new parallel library that supports large-scale homology detection based on optimal alignment computation. As part of one of our earlier efforts to implement parallel sequence clustering \cite{Wu08}, we implemented a master-worker framework for homology detection based on optimal alignment computation. While performance tests demonstrated linear scaling up to 128 processors for 160,000 sequences, the phase for pairwise sequence homology detection failed to scale linearly for larger number of processors \cite{Wu08}. The cause for the slowdown was primarily the irregular rates at which pairs were generated and processed. Interestingly, the same scheme had demonstrated linear scaling on DNA sequence clustering problems earlier \cite{Kalyanaraman07}, further corroborating the unique challenges that stem from analyzing protein sequences.
+
+Our observations of a higher complexity for metagenomic protein data when compared to DNA data are consistent with other previous studies. For example, in the human genome assembly project \cite{Venter01}, the all-against-all sequence homology detection of roughly 28 million DNA sequences consumed only $10^4$ CPU hours. Contrast this with the $10^6$ CPU hours observed for analyzing roughly the same number of protein sequences in the ocean metagenomic project despite the use of much faster hardware \cite{Yooseph07}.
 
 
 \section{Methods}
 \label{secMethods}
 
-\noindent{\bf Notation:} Let $S=\{s_1,s_2,\ldots s_n\}$ denote the set of $n$ input protein sequences, and Let $p$ denote the set of processors. Let $G=(V,E)$ denote a graph defined as $V=S$ and $E=\{(s_i,s_j)$ $|$ $s_i$ and $s_j$ have a significant sequence similarity\}.\\
+\noindent{\bf Notation:} Let $S=\{s_1,s_2,\ldots s_n\}$ denote the set of $n$ input protein sequences. Assuming $|s|$ denotes the length of sequence $s$, let $m=\Sigma_{i=1}^n |s_i|$ and $\ell=\frac{m}{n}$. Let $G=(V,E)$ denote a graph defined as $V=S$ and $E=\{(s_i,s_j)$ $|$ $s_i$ and $s_j$ are ``similar'', defined as per pre-defined alignment cutoffs\}. We use the term ``pair'' in this paper to refer to an arbitrary pair of sequences $(s_i,s_j)$. \\
 
 \noindent{\bf Problem statement:} Given a set $S$ of $n$ protein sequences and $p$ processors, the protein sequence graph construction problem is to construct $G$ in parallel.\\
-
-Given $S$, the primary question is to detect if there exists an edge between any two vertices. While it is computationally inexpensive to determine an optimal alignment between two average-length protein sequences, performing hundreds of millions to billions of alignment computations could be highly prohibitive (e.g., \cite{Wu08, Yooseph07}).  There are two independent ways to reduce the computational burden --- one is to use algorithmic heuristics (see Section~\ref{secGeneratingPairs}) and another is to use high performance computing (see Section~\ref{secMasterSlave}).
-
-%\subsection{Computin}
-%\label{secAlgorithm}
 
 
 
@@ -520,12 +530,14 @@ Tree-based filtering scheme used by our approach for protein sequence homology d
 \label{figFramework}
 \end{figure}
 
-\subsubsection{Generating pairs}
+\subsection{Pair generation}
 \label{secGeneratingPairs}
 
-A brute-force approach to detect the presence of an edge is to enumerate all possible pairs of sequences and retain only those as edges which pass the alignment test. Such an approach would evaluate $n\choose 2$ pairs for alignment, and hence is not a scalable solution. Alternatively, since alignments represent approximate matching, the presence of long exact matches can be used as a necessary but not sufficient condition \cite{Kalyanaraman07}. This approach can filter out a significant fraction of poor quality pairs and thereby reduce the number of pairs aligned significantly (e.g., by $>70\%$ \cite{Wu08}).  Figure~\ref{figFramework} illustrates the tree based filtering scheme.
+A brute-force approach to detect the presence of an edge is to enumerate all possible pairs of sequences and retain only those as edges which pass the alignment test. Such an approach would evaluate $n\choose 2$ pairs for alignment, and hence is not a scalable solution. Alternatively, since alignments represent approximate matching, the presence of long exact matches can be used as a necessary but not sufficient condition \cite{Kalyanaraman07}. This approach can filter out a significant fraction of poor quality pairs and thereby reduce the number of pairs to be aligned significantly. Suffix tree based filters provide one of the best filters (e.g., anywhere between 70\% to over 99\% as we will show later in the experimental results).  Figure~\ref{figFramework} illustrates the tree based filtering scheme.
 
-To implement exact matching, we use the maximal match detection algorithm described in \cite{Kalyanaraman07}. This method generates only those pairs that show high promise for passing the alignment test. It first builds a Generalized Suffix Tree (GST) data structure \cite{Weiner73} as a string index for the strings in $S$. The tree index is generated as a forest of subtrees and then the individual subtrees are traversed to generate pairs. The pair generation process may exhibit nonuniformity in the sense that subtrees with the similar size could produce drastically different number of pairs and/or at different rates (as shown in Section~\ref{secResults}). This is because the composition of a subtree is purely data-dependent and if a section of subtree receives a highly repetitive fraction of the input sequences then it is bound to generate a disproportionately large number of pairs. The tree construction code outputs the GST as a forest of subtrees on to the file system, with a small fixed number of sub-trees in each file.
+To implement exact matching using suffix trees, we use the optimal pair generation algorithm described in \cite{Kalyanaraman07}, which detects and reports all pairs that share a maximal match of a minimum length $\psi$. The algorithm first builds a Generalized Suffix Tree (GST) data structure \cite{Weiner73} as a string index for the strings in $S$ and then traverses the tree in a bottom-up fashion to generate pairs from different nodes. Suffix tree construction is a well studied problem in both serial and parallel, and any of the standard, serial linear-time construction methods \cite{Weiner73,McCreight76,Ukkonen90} can be used, or efficient disttributed memory codes can be used for parallelism \cite{Kalyanaraman07,Ghoting09}.  Either way, the tree index can be generated in one preprocessing step and stored in the disk\footnote{Note that there are also other, more space-efficient alternatives to suffix trees such as suffix arrays and enhanced suffix arrays, which can also be equivalently used to generate these pairs, although the pair generation code has to be changed. We omit those details from this article as they are not the focus here. That said the challenges dealt with the tree would still remain with these other representations.}. 
+
+For our purpose, we generate the tree index as a forest of disjoint subtrees emerging at a specified depth $\leq\psi$, so that the individual subtrees can be independently traversed in parallel to generate pairs. Given that the value of $\psi$ is typically a small user-specified constant, the choice for cutting depth is restricted too. This implies that the size distribution of the resulting subtrees can be \emph{nonuniform} and is input dependent. It is also to be noted that, even though the pair generation algorithm runs in time bound by the number of output pairs, the process of generation itself could also be \emph{nonuniform} --- in that, subtrees of similar size could produce different number of pairs and/or at different rates, and the behavior is input-dependent. For instance, if a section of subtree receives a highly repetitive fraction of the input sequences then it is bound to generate a disproportionately large number of pairs.  On the other hand, a small value for the cutting depth is not a limiting factor when it comes to the number of subtrees, sufficient to support a high degree of parallelism. This is because the number of subtrees is expected to grow exponentially with the cutting depth; for instance, a cutting depth as small as 4 on a tree built out of protein sequences (alphabet size 20) could produce around $160K$ trees (as shown in experimental results). 
 
 
 %\subsubsection{Computing an alignment}
@@ -548,10 +560,12 @@ The hierarchical multiple-master multiple-worker design of the {\it pGraph} appr
 }
 \label{figPClust}
 \end{figure}
+We present here an efficient parallel algorithm to construct the homology graph $G$ using the suffix tree index constructed in the previous step and the input sequence set $S$. There are two major operations that need to be performed in parallel: i) generate pairs from the tree index; ii) compute sequence alignments on those pairs. 
 
-In this section, we present a novel and efficient parallel algorithm to compute sequence alignments on the pairs generated from the tree index and output edges of the graph $G$. Our method uses a hierarchical multiple-master multiple-worker model to counter the challenges posed by inherent irregularities of pair generation and alignment rates. 
+%and iii) output edges of the graph $G$ that satisfy an alignment cutoff. 
 
-The system architecture is illustrated in Figure~\ref{figPClust}. The inputs include the sequence set $S$ and the tree index $T$. The tree index is available as a forest of $k$ subtrees, which we denote as $T=\{t_1,t_2,\ldots t_k\}$. In both theory and practice, the value of $k$ tends to be of the order of $n$, which is good for parallel distribution for large values of $n$. The output of {\it pGraph} is the set of all edges of the form $(s_i,s_j)$ s.t., the sequences $s_i$ and $s_j$ pass the alignment test based on user-defined cutoffs. Given $p$ processors and a small number $q\geq 3$, the parallel system is partitioned as follows: i) one processor is designated to act as the \emph{supermaster} for the entire system; and ii) the remaining $p-1$ processors are partitioned into $m$ subgroups such that each subgroup has exactly $q$ processors\footnote{With the possible exception of one subgroup which may obtain less than $q$ processors if $(p-1)\%q\ne 0$.}. Furthermore, a subgroup is internally organized with one processor designated to the role of a \emph{producer}, another to the role of a \emph{master}, and the remaining $q-2$ processors to the role of a \emph{consumer}. 
+Our method uses a hierarchical multiple-master multiple-worker model to counter the challenges posed by inherent irregularities of pair generation and alignment rates. 
+The system architecture is illustrated in Figure~\ref{figPClust}. The inputs include the sequence set $S$ and the tree index $T$. The tree index is available as a forest of $k$ subtrees, which we denote as $T=\{t_1,t_2,\ldots t_k\}$. In both theory and practice, the value of $k$ tends to be of the order of $n$, which is good for parallel distribution for large values of $n$. The output of {\it pGraph} is the set of all edges of the form $(s_i,s_j)$ s.t., the sequences $s_i$ and $s_j$ pass the alignment test based on user-defined cutoffs. Given $p$ processors and a small number $q\geq 3$, the parallel system is partitioned as follows: i) one processor is designated to act as the \emph{supermaster} for the entire system; and ii) the remaining $p-1$ processors are partitioned into $m$ subgroups such that each subgroup has exactly $q$ processors\footnote{With the possible exception of one subgroup which may obtain less than $q$ processors if $(p-1)\%q\ne 0$.}. Furthermore, a subgroup is internally organized with $r$ processors designated to the role of a \emph{producer}, one processor to the role of a \emph{master}, and the remaining $q-r-1$ processors to the role of a \emph{consumer}. 
 
 At a high level, the producers are responsible for pair generation, the masters for distributing the alignment workload within their respective subgroups, and the consumers for computing alignments. The supermaster plays a supervisory role to ensure load is distributed evenly among subgroups. Nevertheless, there are several design considerations that need to be taken into account. In what follows, we explain these factors and present algorithms and protocols for each component in the system. 
 
@@ -568,7 +582,7 @@ $b_2\leftarrow$ batch size (for pairs) from master to consumer;\\
 \noindent{\bf Producer: }
 The primary responsibility of a producer is to load a subset of subtrees in $T$ and generate pairs using the maximal matching algorithm in \cite{Kalyanaraman07}. Pairs could be allocated for alignment computation by communicating them to the local master in the subgroup and have the master assign pairs to its consumers. However, such an approach runs the risk of a potential bottleneck situation where a producer receives a subtree that generates a significantly large volume of pairs and/or generate pairs that take significantly long alignment times. Another issue is the timing of communicating the pairs for alignment allocation. The memory limitation at the producer limits the size of $P_{buf}$ used for temporary pair storage. On the other hand, immediately dispatching the pairs as they are generated may increase communication overhead or may overrun $M_{buf}$. Assigning subtrees to producers will also have to be done dynamically at a fine granular level as otherwise it may result in nonuniform distribution of pairs across subgroups. 
 
-To overcome the above challenges, the algorithm shown in Algorithm~\ref{pd} is followed. Initially, a producer fetches a batch of subtrees (available as a single file) from the supermaster. The producer then starts to generate and enqueue pairs into $P_{buf}$. Subsequently, the producer dequeues and sends $b_1$ pairs to the master. This is implemented using a nonblocking send so that when the master is not yet ready to accept pairs, the producer can continue to generate pairs, thereby allowing masking of communication. After processing the current batch of subtrees, the producer requests another batch from the supermaster. Once there are no more subtrees available, the producers dispatch pairs to both master \emph{and} supermaster, depending on whoever is responsive to their nonblocking sends. This strategy gives the producer an option of redistributing its pairs to other subgroups (via supermaster) if the local master is busy. In fact, we show in the experimental section that the strategy of using the supermaster route pays off significantly and ensures the system is load balanced. \\
+To overcome the above challenges, the algorithm shown in Algorithm~\ref{pd} is followed. Initially, a producer fetches a batch of subtrees (available as a single file) from the supermaster. The producer then starts to generate and enqueue pairs into $P_{buf}$. Subsequently, the producer dequeues and sends $b_1$ pairs to the master. This is implemented using a nonblocking send so that when the master is not yet ready to accept pairs, the producer can continue to generate pairs, thereby allowing masking of communication. After processing the current batch of subtrees, the producer requests another batch from the supermaster. Once there are no more subtrees available, the producers dispatch the rest of pairs to both master \emph{and} supermaster, depending on whoever is responsive to their nonblocking sends. This strategy gives the producer an option of redistributing its pairs to other subgroups (via supermaster) if the local master is busy. In fact, we show in the experimental section that the strategy of using the supermaster route pays off significantly and ensures the system is load balanced. \\
 
 \begin{algorithm}
 \caption{Producer}
@@ -583,18 +597,19 @@ To overcome the above challenges, the algorithm shown in Algorithm~\ref{pd} is f
         \STATE $T_i \leftarrow$ received subtrees from supermaster 
         \IF{$T_i = \emptyset$}
             \STATE {break while loop}
-        \ENDIF
-        \REPEAT
-            \IF{$P_{buf}$ is not FULL}
-                \STATE Generate at most $b_1$ pairs from $T_i$
-                \STATE Insert new pairs into $P_{buf}$
-            \ENDIF
-            \IF{$send_{P\rightarrow M}$ completed}
-                \STATE Extract at most $b_1$ pairs from $P_{buf}$
-                \STATE $send_{P\rightarrow M}\leftarrow$ {\it Isend} extracted pairs to master
-            \ENDIF
-        \UNTIL{$T_i = \emptyset$}
-        \STATE Request a batch of subtrees from supermaster
+        \ELSE
+        	\REPEAT
+           	 	\IF{$P_{buf}$ is not FULL}
+                		\STATE Generate at most $b_1$ pairs from $T_i$
+                		\STATE Insert new pairs into $P_{buf}$
+            		\ENDIF
+            	\IF{$send_{P\rightarrow M}$ completed \OR NO pending {\it Isend}}
+                	\STATE Extract at most $b_1$ pairs from $P_{buf}$
+                	\STATE $send_{P\rightarrow M}\leftarrow$ {\it Isend} extracted pairs to master
+            	\ENDIF
+        	\UNTIL{$T_i = \emptyset$}
+        	\STATE Request a batch of subtrees from supermaster
+	\ENDIF
     \ENDWHILE
     \STATE /* Flush remaining pairs */
     \WHILE {$P_{buf} \neq \emptyset$}
@@ -612,16 +627,11 @@ To overcome the above challenges, the algorithm shown in Algorithm~\ref{pd} is f
 
 
 \noindent{\bf Master: }
-The primary responsibility of a master is to ensure all consumers in its subgroup are always busy with alignment computation. The main challenge in this setup is to ensure that a master's local buffer for storing pairs ($M_{buf}$) is not overrun by an overactive producer or is starved due to a slow producer. Either of these could happen because the pair generation rate is data-dependent. The above challenge is overcome as follows (see Algorithm~\ref{ms}).  
+The primary responsibility of a master is to ensure all consumers in its subgroup are always busy with alignment computation. The main challenge is to ensure that a master can timely response to its local consumers, such that no consumer gets starved for pairs. Another challenge is that a master's local buffer should be able to accommodate the producers' irregular pair generate rate when supplying pairs to its consumers. Ideally, we could store as many pairs as possible on the local buffer of a master, however, pairs stored on a local master cannot be redistributed back to other subgroups, thus pushing all pairs into a master node might run the risk of load-balancing issue in the ending stage. Also keeping receiving pairs from producers could affect the responsiveness to its consumers. The above challenges are overcome as follows (see Algorithm~\ref{ms}). 
 
-Initially, to ensure that there is a steady supply and dispatch of pairs, the master listens for messages from both its producer and consumers. However, once $|M_{buf}|$ reaches a preset limit called $\tau$, the master realizes that its producer has been more active than the rate at which pairs are processed at its consumers, and therefore shuts off listening to its producer, while only dispatching pairs to its consumers until $|M_{buf}|\leq\tau$. The rationale for this strategy is the practical expectation that pair generation tends to happen much faster than pair alignment. More importantly, this strategy helps to keep the consumers always busy with alignment computation. Since consumers are the majority in the system, this has a direct scalability implication. When the  producer has exhausted sending all its pairs, the master can fallback on the supermaster to provide pairs. 
+Initially, to ensure that there is a steady supply and dispatch of pairs, the master listens for messages from both its producers and consumers. However, once $|M_{buf}|$ reaches a preset limit called $\tau$, the master realizes that its suppliers (could be producers or supermaster) have been overactive, and therefore shuts off listening to its suppliers, while only dispatching pairs to its consumers until $|M_{buf}|\leq\tau$. The rationale for this strategy is the practical observation that pair generation tends to happen much faster than pair alignment. More importantly, this strategy reduces the risk that the master could be overrun by its suppliers, therefore causes the starvation problem on its consumers. In practice, we did observe the overactive suppliers scenario if no limit is set in $M_{buf}$.  When the producers cannot timely provides pairs to its master node, the {\it supermaster} could help the master node to have a steady supply.
 
-As for serving consumers, the master maintains a priority queue, which keeps track of each of its consumers based on the latter's most recent status report to the master. Priority is defined based on the number of pairs left to be processed at the consumer's $C_{buf}$. Priority is implemented in the master as follows: at any given iteration, pairs are allocated in batches of size $b_2$ and send to consumers in the decreasing (or, nonincreasing) order of priority. While frequent updates from consumers could help the master to better assess the situation on each consumer, such a scheme will also increase communication overhead. As a tradeoff, we implement a priority queue by maintaining only three levels of priority depending on the condition of a consumer's $C_{buf}$: $\frac{1}{2}$-empty, $\frac{3}{4}$-empty, and completely empty. This also implies that the master, instead of pushing pairs on to consumers, waits for consumers to take the initiative in requesting pairs, while reacting in the order of their current workload status. \\
-
-
-
-
-
+As for serving consumers, the master maintains a priority queue, which keeps track of each of its consumers based on the latter's most recent status report to the master. The priority represents the criticality of the requests sent from consumers, and is defined based on the number of the pairs left at the consumers' $C_{buf}$. If a consumer has $\frac{1}{2}|C_{buf}|$ pairs left, then it only requires $\frac{1}{2}|C_{buf}|$ pairs to fill in its buffer. However it does not have the same priority as a $\frac{1}{4}$ request or $0$ request, as the later conditions are more critical and require immediate attention from the master node. While frequent updates from consumers could help the master to better assess the situation on each consumer, such a scheme will also increase communication overhead. As a tradeoff, we implement a priority queue by maintaining only three levels of priority depending on the condition of a consumer's $C_{buf}$: $\frac{1}{2}$-empty, $\frac{3}{4}$-empty, and completely empty. This also implies that the master, instead of pushing pairs on to consumers, waits for consumers to take the initiative in requesting pairs, while reacting in the order of their current workload status. \\
 
 
 \begin{algorithm}
@@ -673,9 +683,11 @@ As for serving consumers, the master maintains a priority queue, which keeps tra
 
 
 \noindent{\bf Consumer: }
-The primary responsibility of the consumer is to compute optimal alignments using the Smith-Waterman algorithm \cite{Smith81} for the pairs allocated to it by its master and output results. The main challenge is to ensure that a consumer does not starve for work. The consumer follows Algorithm~\ref{cs}. The consumer maintains a fixed size pair buffer $C_{buf}$. When the master sends a new batch of $b_2$ pairs, it starts processing them one at a time. When $C_{buf}$ reaches half size, the consumer sends out a message to the master updating its new buffer status, and continues processing of the remaining pairs in $C_{buf}$. At this stage, it also posts a nonblocking receive to accept new pairs from master while it is computing alignments. The send is also implemented as nonblocking to allow for further communication masking. Another message is sent out at the $\frac{1}{4}$ stage, but only after checking the status of the previous receive. If the master had sent pairs in the meantime, then the pairs are inserted into $C_{buf}$ and the processing continues. Alternatively, if there were no messages from the master and $C_{buf}$ becomes empty, the consumer sends another message to inform the master that it is starving and waits for the master to reply.
+The primary responsibility of the consumer is to compute optimal alignments using the Smith-Waterman algorithm \cite{Smith81} for the pairs allocated to it by its master and output results. To perform sequence alignment, one challenge is to ensure the sequences needed are available in its local buffer. However, the local memory on a consumer might not be always sufficient to store the entire set of the input sequences ($S$). Another challenge is to ensure that a consumer does not starve for work. To solve the above challenges, the consumer follows Algorithm~\ref{cs}. 
 
-Before aligning a batch of pairs, the consumer has to ensure that the sequences needed are available in the local memory. While the local memory on a consumer may not be always sufficient to store the entire set of input sequences ($S$), it could be used to cache many strings. We use a parameter $\psi \leq n$ for this purpose. At initialization, all consumers load an arbitrary collection $\psi$ sequences from I/O. This statically allocated buffer is then used as a string cache during alignment computation. Only strings which are not in the local cache are fetched from I/O.\\
+Each consumer maintains a fixed size pair buffer $C_{buf}$ and sequence cache $\mathcal{S}_{c}$. The sequence cache ($\mathcal{S}_{c}$) is divided into two parts: (1) statically sequence cache $\mathcal{S}_{s}$ (preloaded from I/O) and (2) dynamically sequence cache $\mathcal{S}_{d}$ (dynamically fetched from other consumers). Ideally, we would load as many sequences as possible to the statically cache $\mathcal{S}_{s}$ to reduce the fetching overhead. From scalability study perspective, only a partition of input sequence $S$ is stored in $\mathcal{S}_{s}$. The dynamically sequence cache stores sequences which will be used subsequently; otherwise they will be freed to save more memory space. When a consumer receives a batch of new pairs from its master, it first identify the sequences which are not present in $\mathcal{S}_{s}$ and $\mathcal{S}_{d}$, then it will send out sequence requests to other respective consumers. When a consumer receives a sequence request from another consumer, it will pack the related sequences and send them back in a nonblocking way immediately. When sequences are received, a consumer will unpack the sequences into the $\mathcal{S}_{d}$. Before aligning a pair, the consumer has to ensure that the sequences needed are available. However, in practice requested sequences are coming back in a totally different order. If this is the case, the pair cannot be processed immediately, and will be appended to the end of $C_{buf}$. When $C_{buf}$ reaches its half size, the consumer sends (nonblocking) out a message to the master updating its new buffer status, and continues processing the remaining pairs in $C_{buf}$. At this stage, it also posts a nonblocking receive to accept new pairs from master. The send is implemented as nonblocking to allow further communication masking. Another message is sent out at the $\frac{1}{4}$ stage. If the previous $\frac{1}{2}$ message has not been processed on master yet, then the $\frac{1}{4}$ message will overwrite the old message on master side. As we mentioned in master section, $\frac{1}{4}$ message has a higher priority than $\frac{1}{2}$ message, thus it will be processed faster. If $C_{buf}$ becomes empty, the consumer sends an {\it empty} message to inform master that it is starving and waits for the master to reply. The {\it empty} message will be processed immediately on the master, as it is a critical condition. 
+
+For the dynamically sequence cache management, 
 
 
 \begin{algorithm}
@@ -686,45 +698,37 @@ Before aligning a batch of pairs, the consumer has to ensure that the sequences 
   linenodelimiter=.
 }
 \begin{algorithmic}[1]
-    \STATE $P_{c}$: number of consumers in the same subgroup
+    \STATE $\Delta=\{0, \frac{b_2}{4}, \frac{b_2}{2}\}$: {\bf empty, quarter, half} buffer status
     \STATE $n_{s}$: number of sequences to be cached statically
-
-    \STATE $S_{cache}\leftarrow$ load $\psi$ sequences from I/O
+    \STATE $\mathcal{S}_{s}$: statically cached sequences
+    \STATE $ \mathcal{S}_{d}$: dynamically cached sequences
+    \STATE $recv\leftarrow$post nonblocking receive
+    \STATE $\mathcal{S}_{s}\leftarrow$ load $n_{s}$ sequences from I/O
     
-    \STATE {EMPTY, HALF, QUARTER}: $0$, $\frac{b_2}{2}$ and $\frac{b_2}{4}$ buffer status
-      
-    \STATE $Recv\leftarrow$post nonblocking receive
     \WHILE {\TRUE}
-    	    \IF {{$Recv$} completed}
+    	    \IF {{$recv$} completed}
             	\IF {Sequence request from consumer $c_{k}$}
 			\STATE Pack sequences and send them out to $c_{k}$
-			\STATE $Recv\leftarrow$post nonblocking receive
+			\STATE $recv\leftarrow$post nonblocking receive
             	\ELSIF {Sequences from other consumer}
-			\STATE Unpack sequences to dynamically cache
-			\STATE $Recv\leftarrow$post nonblocking receive
+			\STATE  $\mathcal{S}_{d}\leftarrow$ unpack received sequences
+			\STATE $recv\leftarrow$post nonblocking receive
             	\ELSIF {Pairs from master}
 		        \STATE Insert pairs into $C_{buf}$
-			\STATE Prepare sequence requests for each consumer
+			\STATE Identify sequences to fetch from others
 			\STATE Send sequence requests to other consumers
-			\STATE $Recv\leftarrow$post nonblocking receive
+			\STATE $recv\leftarrow$post nonblocking receive
 	        \ENDIF
 	    \ELSE
-	    	\IF {$C_{buf} > 0$}
-			\STATE /* Align a pair if their seqs. are ready */
-	    		\STATE extract next pair $(i, j)$ from $C_{buf}$
-			\IF {both $s_i$ and $s_j$ are ready}
+	    	\IF {$|C_{buf}| > 0$}
+	    		\STATE Extract next pair $(i, j)$ from $C_{buf}$
+			\IF {$s_i, s_j \in \mathcal{S}_{s}\cup\mathcal{S}_{d}$}
 				\STATE Align sequences $s_{i}$ and $s_{j}$
 			\ELSE
 				\STATE Append pair $(i, j)$ at the end of the $C_{buf}$
 			\ENDIF
-			
-			\STATE /* Report $C_{buf}$ status back to master */
-			\IF {$C_{buf}$=$\frac{b_2}{2}$}
-				\STATE Send HALF status to master
-			\ELSIF {$C_{buf}$=$\frac{b_2}{4}$}
-				\STATE Send {\bf QUARTER} status to master
-			\ELSIF {$C_{buf}= 0$}
-				\STATE Send {\bf EMPTY} status to master
+			\IF {$|C_{buf}| \in \Delta$}
+				\STATE Report $|C_{buf}|$ status to master
 			\ENDIF
 		\ENDIF
             \ENDIF
@@ -752,7 +756,7 @@ The second task of the supermaster is to serve as a conduit for pairs to be redi
 }
 \begin{algorithmic}[1]
 	\STATE Let $P=\{p_1, p_2, ...\}$ be the set of active producers
-	\STATE $Recv_{S\leftarrow P}\leftarrow$ Post a nonblocking receive for producers
+	\STATE $recv_{S\leftarrow P}\leftarrow$ Post a nonblocking receive for producers
 		\WHILE{$|P| \neq 0$}
 			
 	    
@@ -767,13 +771,13 @@ The second task of the supermaster is to serve as a conduit for pairs to be redi
 		    %    \STATE go to next iteration
 		    %	\ENDIF	    
 		    \STATE /* Serve the producers*/        
-		    \IF{$Recv_{S\leftarrow P}$ completed}
+		    \IF{$recv_{S\leftarrow P}$ completed}
 		        \IF{$msg\equiv$ subtree request}
 		             \STATE Send a batch of subtrees ($T_i$) to corresponding producer
 		        \ELSIF{$msg\equiv$ pairs} 
 			        \STATE Insert pairs in $S_{buf}$
 		        \ENDIF
-		        \STATE $Recv_{S\leftarrow P}\leftarrow$ Post a nonblocking receive for producers
+		        \STATE $recv_{S\leftarrow P}\leftarrow$ Post a nonblocking receive for producers
 		    \ENDIF
 	    
 	    
@@ -795,14 +799,16 @@ The {\it pGraph} code was implemented in C/MPI. All parameters described in the 
 
 \subsection{Experimental setup} 
 
+
 {\bf Input data:} The {\it pGraph} implementations were tested using an arbitrary collection of $2.56\times 10^6$ ($n$) amino acid sequences representing an ocean metagenomic data set available at the CAMERA metagenomics data archive \cite{}. The sum of the length of the sequences ($m$) in this set is 390,345,218, and the mean$\pm\sigma$ is $152.48\pm 167.25$; the smallest sequence has 1 residues and longest 32,794 residues. Smaller size subsets containing 20K, 40K, 80K, $\ldots$, $1.28\times 10^6$  were derived and used for scalability tests.
+
 
 \noindent{\bf Experimental platform: } All tests were performed on the {\it Chinook} supercomputer at the EMSL facility in Pacific Northwest National Laboratory. This is a 160 TF supercomputer running Red Hat Linux and consists of 2,310 HP DL185 nodes with dual socket, 64-bit, Quad-core AMD 2.2 GHz Opteron processors with an upper limit of 4 GB RAM per core. The network interconnect is Infiniband. A global 297 TB distributed LUSTRE file system is available to all nodes. 
 
 
 \noindent{\bf pGraph-specific settings: } Even though the Chinook platform supports access to 4 GB RAM per core, in all our runs, we assumed a memory upper bound of $O(\frac{m}{p_c})$ per MPI process, where $p_c$ is the number of consumers in a subgroup. This was done to emulate a more realistic use-case on any distributed memory machine. At the start of execution, all consumers in a subgroup load the input sequences in a distributed even fashion such that each consumer receives a unique $O(\frac{m}{p_c})$ fraction of the input. The locally available set of sequences is referred to as the ``static cache''. Any additional sequence that is temporarily fetched into local memory during alignments is treated as part of a constant space ``dynamic cache'' buffer.
 
-In order to generate the suffix tree index required for all input sets, a suffix tree construction code from one of our earlier developments \cite{Kalyanaraman07} was used. The tree index statistics on the different input sets are shown in Table~\ref{tabInputTree}. Because the construction was quick, trees were generated just using a single CPU. Note that there are parallel implementations \cite{Kalyanaraman07,Ghoting09} already available that can be used for larger inputs. For all our runs, we assume that the tree index is already built using any method of choice and stored in the disk.
+To generate the suffix tree index required for all input sets, a construction code from one of our earlier developments \cite{Kalyanaraman07} was used. The suffix tree index for each input is generated as a forest of subtrees, one for each unique $k-mer$ in the input. We used $k=4$ for all trees. The tree index statistics for the different input sets are shown in Table~\ref{tabInputTree}. A single CPU was used to generate the trees for all our experiments because the tree construction is quick and expected to scale linearly with input size, as shown in the table. For larger inputs, any of the already available parallel implementations can be used \cite{Kalyanaraman07,Ghoting09}. Table~\ref{tabInputTree} also shows the number of subtrees generated for each input set. As $k$ was used, the total   For all our runs, we assume that the tree index is already built using any method of choice and stored in the disk.
 
 For all the performance results presented in Sections~\ref{secComp} and \ref{secPerf}, we set the subgroup size to 16 and the number of producers per subgroup to 2 (to approximate a producer:consumer ratio of 1:8 within each subgroup). The effect of changing these parameters are later studied in Section~\ref{secParameters}.
 
@@ -916,8 +922,7 @@ The local sequence management strategy also plays an important role. Note that e
 %\centerline{(a) \hspace*{2.6in}(b)}
 \caption{
 Statistics of sequence use (and fetch) on an average consumer ($n=640K$, $p=1,024$).
-The topmost chart shows number of sequences successfully found in the local static cache during any iteration. {\it (Andy: to change this to show \#seqs found in static cache/\#seqs needed at that iteration --- show as percentage)}
-The next chart shows the number of sequences actually fetched over the network at a given iteration. The bottom chart shows the number of sequences stored in the dynamic cache at a given iteration.
+The topmost chart shows the percentage of sequences successfully found locally in the static cache during any iteration. The next two charts show the corresponding percentages of sequences that needed to be feteched (communicated) from other consumers, and found locally in the dynamic cache, respectively.
 }
 
 \label{figConsumerFetch}
@@ -952,9 +957,11 @@ The status of $M_{buf}$ on a typical master as execution progresses (subgroup si
 
 {\bf Producer behavior:} The primary responsibility of producers is to keep the system saturated with work by generating sequence pairs from trees and sending them to the local master (or the supermaster) in fixed size batches. Figure~\ref{figProducer} shows the number of trees processed at each producer and the number of pairs generated from those set of trees. Although there is a visible correlation between the number of trees and the number of pairs generated for this run, the correlation no longer holds if the sizes of the trees were to be taken into account (data not shown). {\it (Andy to verify)} Despite this variability, our implementation is able to balance the workload devoted to pair generation across producers, as can be observed from the run-time chart in Figure~\ref{figProducer}. This demonstrates the effectiveness of our dynamic tree distribution scheme. 
 
-Note that, even with two producers per subgroup, the pair generation time for all producers is $\sim$$400$s, which is roughly about $25\%$ of the total execution time for the 640K input. This implies that pair generation is still a substantial part of the run-time that could make the merging of the roles of master and producers not so attractive.
+Note that, even with two producers per subgroup, the pair generation time for all producers is $\sim$$400$s, which is roughly about $25\%$ of the total execution time for the 640K input. In general, pair generation occupies a substantial enough part of the run-time to warrant against merging the roles of master and producers. The increased memory capacity to stock pairs that are pending alignment computation further supports a decoupled design.
 
+\begin{comment}
 {\it Andy: I have assumed here that the fraction of the total time (400s) that a producer is idle is negligible. Is this right? On a related note, I can't understand the following: If the idle time for producers during pair generation is negligible AND since there are two producers per subgroup, it implies that almost $50\%$ of the alignment time is pair generation time. Since there are 13 consumers per subgroup, this implies a ratio of 1:26 for pair gen time: pair alignment time. This seems contradicting to our 1:8 assumption. Can you clarify? Does your 1:8 ratio account for time to communicate and if so, as part of which (align or gen)?}
+\end{comment}
 
 \begin{figure}[h]
 \centerline{
@@ -999,10 +1006,22 @@ The distribution of run-time over 64 subgroups (i.e., $p=1,024$) for the 640K in
 
 
 
-\subsection{Parameter studies}
+\subsection{Other parametric studies}
 \label{secParameters}
 
-{\it Andy: to give charts/tables for i) subgroup size study; and ii) multiple producers study.} 
+We studied the effect of subgroup size on $pGraph_{nb}$'s performance by varying the subgroup sizes from 8, 16, 32, $\ldots$ to  512, and keeping the total processor size fixed at 1,024 on the 640K input. In all our experiments, a producer:consumer ratio of 1:8 ratio was approximately maintained within each subgroup. For example, a subgroup with 8 processors will contain 1 producer, 1 master and 6 consumers; whereas a subgroup with 512 processors will contain 64 producers, 1 master and 447 consumers. Note that a larger group size implies less number of subgroups to manage for the supermaster and also more importantly, more number of consumers to contribute to alignment computation. However, as the number of consumers per subgroup increase, the overheads associated with the local master response time and for sequence fetches from other consumers also increase. Therefore, it is increasingly possible that a consumer may spend more time waiting (or idle) for data.  Figure~\ref{figGroupStudy} shows the parallel run-time and the portion of it that an average consumer spends idle waiting either for pairs from the local master or for sequences from other consumers. As expected, we find that the total time reduces initially due to faster alignment computation, before starting to increase again due to increased consumer idle time. In fact, the figure shows an empirically optimal run-time is achieved when the subgroup size is between 16 and 32. Even though this optimal breakeven point is data dependent, the general trend should hold for other inputs.
+
+\begin{figure}[h]
+\centerline{
+						\includegraphics[angle=-90, scale=0.33]{groupSize.eps}
+}
+%\centerline{(a) \hspace*{2.6in}(b)}
+\caption{
+Chart showing the effect of changing the group size on performance. All runs were performed on the 640K input, keeping the total number of processors fixed at 1,024. 
+}
+\label{figGroupStudy}
+\end{figure}
+
 
 
 \section{Conclusions}
