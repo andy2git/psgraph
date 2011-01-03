@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  3 JAN 2011 00:26
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  3 JAN 2011 00:33
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -349,9 +349,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 705--708
  []
 
 [7]
-Underfull \vbox (badness 2521) has occurred while \output is active []
-
-
 
 LaTeX Warning: Citation `Ghoting09' on page 8 undefined on input line 830.
 
@@ -416,4 +413,4 @@ Here is how much of TeX's memory you used:
  717 hyphenation exceptions out of 8191
  32i,12n,24p,1678b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (14 pages, 100056 bytes).
+Output written on document.dvi (14 pages, 100136 bytes).
