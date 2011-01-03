@@ -15,9 +15,12 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
 \newlabel{secIntroduction}{{1}{1}}
 \citation{Weiner73}
+\citation{KalyanaramanJPDC07}
+\citation{KalyanaramanNAR03}
 \citation{Needleman70}
 \citation{Smith81}
 \citation{KalyanaramanJPDC07}
+\citation{Dean08}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Contributions}{2}}
 \newlabel{secContributions}{{1.1}{2}}
 \citation{Needleman70}
@@ -33,6 +36,12 @@
 \citation{NCBI}
 \citation{Altschul90}
 \citation{Yooseph07}
+\citation{Darling03}
+\citation{Oehmen06}
+\citation{AddPapersAtTheEndOfBib}
+\citation{Majumder10}
+\citation{KalyanaramanTPDS03}
+\citation{KalyanaramanJPDC07}
 \citation{Wu08}
 \citation{Wu08}
 \citation{Kalyanaraman07}
@@ -50,14 +59,13 @@
 \citation{Ukkonen90}
 \citation{Kalyanaraman07}
 \citation{Ghoting09}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  Tree-based filtering scheme used by our approach for protein sequence homology detection. $GST$ stands for Generalized Suffix Tree. }}{4}}
-\newlabel{figFramework}{{1}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Pair generation}{4}}
 \newlabel{secGeneratingPairs}{{3.1}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  The hierarchical multiple-master multiple-worker design of the {\it  pGraph} approach showing the interaction of the individual components within and outside the subgroups. }}{4}}
-\newlabel{figPClust}{{2}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  The hierarchical multiple-master multiple-worker design of the {\it  pGraph} approach showing the interaction of the individual components within and outside the subgroups. }}{4}}
+\newlabel{figPClust}{{1}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}{\it  pGraph}: Parallel graph construction}{4}}
 \newlabel{secMasterSlave}{{3.2}{4}}
+\citation{Kalyanaraman07}
 \citation{Kalyanaraman07}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Producer}}{5}}
 \newlabel{pd}{{1}{5}}
@@ -66,59 +74,64 @@
 \newlabel{ms}{{2}{6}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Consumer}}{7}}
 \newlabel{cs}{{3}{7}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Supermaster}}{7}}
-\newlabel{sp}{{4}{7}}
 \citation{Kalyanaraman07}
 \citation{Kalyanaraman07}
 \citation{Ghoting09}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Supermaster}}{8}}
+\newlabel{sp}{{4}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Implementation}{8}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Results \& Discussion}{8}}
 \newlabel{secResults}{{4}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental setup}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Comparative evaluation: $pGraph_{I/O}$ vs. $pGraph_{nb}$}{8}}
-\newlabel{secComp}{{4.2}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Performance evaluation for $pGraph_{nb}$}{8}}
-\newlabel{secPerf}{{4.3}{8}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  Sequence and suffix tree index statistics for different input sets. }}{9}}
 \newlabel{tabInputTrees}{{1}{9}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces  The run-time (in seconds) for $pGraph_{nb}$ on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) for each input as a measure of work. }}{9}}
-\newlabel{tabRuntime}{{2}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  Comparison of the I/O and non-blocking communication versions of {\it  pGraph}. Shown are the runtime breakdown for an average consumer between the two versions. All runs were performed on the $640K$ input sequence set. The results show the effectiveness of the non-blocking communication version in eliminating sequence fetch overhead. }}{9}}
-\newlabel{figConsumerBreakdown}{{3}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  (a) Speedup and (b) Parallel efficiency of {\it  pGraph}. The speedup and efficiency computed are relative, and because the code was not run on smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the linear speedup trends observed at that processor size for smaller inputs. }}{10}}
-\newlabel{figSpeedup}{{4}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  Statistics of sequence use (and fetch) on an average consumer ($n=640K$, $p=1,024$). The topmost chart shows the percentage of sequences successfully found locally in the static cache during any iteration. The next two charts show the corresponding percentages of sequences that needed to be feteched (communicated) from other consumers, and found locally in the dynamic cache, respectively. }}{10}}
-\newlabel{figConsumerFetch}{{5}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  Run-time breakdown for an average master ($n=640K$). }}{11}}
-\newlabel{figMasterBreakdown}{{6}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  The status of $M_{buf}$ on a typical master as execution progresses (subgroup size 16). }}{11}}
-\newlabel{figMBuffer}{{7}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  Plots showing producer statistics on the number of trees processed, the number of pairs generated and the run-time of each of the 128 producers (i.e., 64 subgroups) for the 640K input. }}{11}}
-\newlabel{figProducer}{{8}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Comparative evaluation: $pGraph_{I/O}$ vs. $pGraph_{nb}$}{9}}
+\newlabel{secComp}{{4.2}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Performance evaluation for $pGraph_{nb}$}{9}}
+\newlabel{secPerf}{{4.3}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  Comparison of the I/O and non-blocking communication versions of {\it  pGraph}. Shown are the runtime breakdown for an average consumer between the two versions. All runs were performed on the $640K$ input sequence set. The results show the effectiveness of the non-blocking communication version in eliminating sequence fetch overhead. }}{9}}
+\newlabel{figConsumerBreakdown}{{2}{9}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces  The run-time (in seconds) for $pGraph_{nb}$ on various input and processor sizes. An entry `-' means that the corresponding run was not performed. The last column shows the number of pairs aligned (in millions) for each input as a measure of work. }}{10}}
+\newlabel{tabRuntime}{{2}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  (a) Speedup and (b) Parallel efficiency of {\it  pGraph}. The speedup and efficiency computed are relative, and because the code was not run on smaller processor sizes for larger inputs, the reference speedups at the beginning processor size were assumed at linear rate --- e.g., a relative speedup of 64 was assumed for 160K on 64 processors. This assumption is valid because it is consistent with the linear speedup trends observed at that processor size for smaller inputs. }}{10}}
+\newlabel{figSpeedup}{{3}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  Statistics of sequence use (and fetch) on an average consumer ($n=640K$, $p=1,024$). The topmost chart shows the percentage of sequences successfully found locally in the static cache during any iteration. The next two charts show the corresponding percentages of sequences that needed to be feteched (communicated) from other consumers, and found locally in the dynamic cache, respectively. }}{11}}
+\newlabel{figConsumerFetch}{{4}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  Run-time breakdown for an average master ($n=640K$). }}{11}}
+\newlabel{figMasterBreakdown}{{5}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  The status of $M_{buf}$ on a typical master as execution progresses (subgroup size 16). }}{11}}
+\newlabel{figMBuffer}{{6}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  Plots showing producer statistics on the number of trees processed, the number of pairs generated and the run-time of each of the 128 producers (i.e., 64 subgroups) for the 640K input. }}{12}}
+\newlabel{figProducer}{{7}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  Run-time breakdown for the supermaster ($n=640K$). }}{12}}
+\newlabel{figSupermasterBreakdown}{{8}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  The distribution of run-time over 64 subgroups (i.e., $p=1,024$) for the 640K input, with and without the supermaster's role in pair redistribution. The chart demonstrates that the merits of the supermaster's intervention. }}{12}}
+\newlabel{figSPvalue}{{9}{12}}
+\citation{Yooseph07}
+\citation{Yooseph07}
 \bibcite{Altschul90}{1}
 \bibcite{Apweiler04}{2}
 \bibcite{Bateman04}{3}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  Run-time breakdown for the supermaster ($n=640K$). }}{12}}
-\newlabel{figSupermasterBreakdown}{{9}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  The distribution of run-time over 64 subgroups (i.e., $p=1,024$) for the 640K input, with and without the supermaster's role in pair redistribution. The chart demonstrates that the merits of the supermaster's intervention. }}{12}}
-\newlabel{figSPvalue}{{10}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Other parametric studies}{12}}
-\newlabel{secParameters}{{4.4}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  Chart showing the effect of changing the group size on performance. All runs were performed on the 640K input, keeping the total number of processors fixed at 1,024. }}{12}}
-\newlabel{figGroupStudy}{{11}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{12}}
-\newlabel{secConclusions}{{5}{12}}
-\@writefile{toc}{\contentsline {section}{References}{12}}
-\bibcite{Enright02}{4}
-\bibcite{Handelsman04}{5}
-\bibcite{Henikoff92}{6}
-\bibcite{Kalyanaraman07}{7}
-\bibcite{Kriventseva01}{8}
-\bibcite{Weiner73}{9}
-\bibcite{Needleman70}{10}
-\bibcite{Olman07}{11}
-\bibcite{Pipenbacher02}{12}
-\bibcite{Smith81}{13}
-\bibcite{Venter01}{14}
-\bibcite{Wu08}{15}
-\bibcite{Yooseph07}{16}
+\bibcite{Darling03}{4}
+\bibcite{Dean08}{5}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Other parametric studies}{13}}
+\newlabel{secParameters}{{4.4}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  Chart showing the effect of changing the group size on performance. All runs were performed on the 640K input, keeping the total number of processors fixed at 1,024. }}{13}}
+\newlabel{figGroupStudy}{{10}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{13}}
+\newlabel{secConclusions}{{5}{13}}
+\@writefile{toc}{\contentsline {section}{References}{13}}
+\bibcite{Enright02}{6}
+\bibcite{Handelsman04}{7}
+\bibcite{Henikoff92}{8}
+\bibcite{Kalyanaraman07}{9}
+\bibcite{Kriventseva01}{10}
+\bibcite{Weiner73}{11}
+\bibcite{Needleman70}{12}
+\bibcite{Oehmen06}{13}
+\bibcite{Olman07}{14}
+\bibcite{Pipenbacher02}{15}
+\bibcite{Smith81}{16}
+\bibcite{Venter01}{17}
+\bibcite{Wu08}{18}
+\bibcite{Yooseph07}{19}
