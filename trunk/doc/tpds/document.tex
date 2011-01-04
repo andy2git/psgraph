@@ -502,7 +502,7 @@ Sequence homology between two biomolecular sequences can be evaluated either usi
 
 One option is to adapt the use of the BLAST algorithm \cite{Altschul90}, which is a method originally designed for performing sequence database search (query vs. database), by setting both the query and database sets to the same input set of sequences. For instance, the ocean metagenomics survey project \cite{Yooseph07} used BLAST to perform all-against-all sequence comparison. This took $10^6$ CPU hours --- a task that was parallelized, albeit in an {\it ad hoc} manner, by manually partitioning across 125 dual processors systems and 128 16-processor nodes each containing between 16GB-64GB of RAM. Several parallel tools are available for BLAST --- the most notable tools being mpiBLAST \cite{Darling03} and ScalaBLAST \cite{Oehmen06}. These methods run the serial version of NCBI BLAST at their cores, while offering a high degree of coarse-level parallelism and have demonstrated scaling  to high-end parallel machines. In addition to being relatively quicker, BLAST also provides a statistical score of significance for comparing a query sequence against a database of sequences. 
 
-The use of BLAST based techniques however comes with reduced sensitivity as the underlying algorithm is really an approximation heuristic for computing alignments \cite{AddPapersAtTheEndOfBib}. Comparatively, the dynamic programming algorithms offer alignment optimality but are generally an order of magnitude slower. Nevertheless, sensitivity is becoming a significant concern of late, especially when dealing with metagenomics data processing because of its highly fragmented nature of sampling. Another less desirable side effect of using BLAST for protein sequence data is that it uses the lookup table data structure which is limited to detection of only short, fixed-length matches between pairs of sequences. This results in more pairs to be evaluated. Other string data structures such as suffix trees provide more specificity when it comes to the choice of pairs to evaluate due to their ability to detect longer, variable-length matches. Consequently, there has been a flurry of efforts targeted at achieving hardware-level acceleration of the dynamic programming algorithms for sequence alignment on different architectures \cite{Majumder10}. Interestingly, there is a dearth in research that has targeted at achieving coarse-level parallelism for carrying out alignment computations at large scale. There have been a few efforts for DNA sequence analysis \cite{KalyanaramanTPDS03,KalyanaramanJPDC07}, but carrying out protein sequence homology detection at a large-scale has not been addressed.
+The use of BLAST based techniques however comes with reduced sensitivity as the underlying algorithm is really an approximation heuristic for computing alignments \cite{Pearson91,Shpaer96}. Comparatively, the dynamic programming algorithms offer alignment optimality but are generally an order of magnitude slower. Nevertheless, sensitivity is becoming a significant concern of late, especially when dealing with metagenomics data processing because of its highly fragmented nature of sampling. Another less desirable side effect of using BLAST for protein sequence data is that it uses the lookup table data structure which is limited to detection of only short, fixed-length matches between pairs of sequences. This results in more pairs to be evaluated. Other string data structures such as suffix trees provide more specificity when it comes to the choice of pairs to evaluate due to their ability to detect longer, variable-length matches. Consequently, there has been a flurry of efforts targeted at achieving hardware-level acceleration of the dynamic programming algorithms for sequence alignment on different architectures \cite{Majumder10}. Interestingly, there is a dearth in research that has targeted at achieving coarse-level parallelism for carrying out alignment computations at large scale. There have been a few efforts for DNA sequence analysis \cite{KalyanaramanTPDS03,KalyanaramanJPDC07}, but carrying out protein sequence homology detection at a large-scale has not been addressed.
 
 
 %These advantages are however offset by the fact that any BLAST based solution is really an approximation heuristic, while the use of dynamic programming algorithms guarantees alignment optimality. It has been shown that computing optimal alignments helps improve sensitivity to varying degrees in practice \cite{} and sensitivity is an ubiquitous challenge with metagenomics data processing (due to its high fragmented nature of sampling). 
@@ -515,7 +515,7 @@ Our observations of a higher complexity for metagenomic protein data when compar
 \section{Methods}
 \label{secMethods}
 
-\noindent{\bf Notation:} Let $S=\{s_1,s_2,\ldots s_n\}$ denote the set of $n$ input protein sequences. Assuming $|s|$ denotes the length of sequence $s$ and $m=\Sigma_{i=1}^n |s_i|$ denotes the total length of $S$. Let $G=(V,E)$ denote a graph defined as $V=S$ and $E=\{(s_i,s_j)$ $|$ $s_i$ and $s_j$ are ``similar'', defined as per pre-defined alignment cutoffs\}. We use the term ``pair'' in this paper to refer to an arbitrary pair of sequences $(s_i,s_j)$. \\
+\noindent{\bf Notation:} Let $S=\{s_1,s_2,\ldots s_n\}$ denote the set of $n$ input protein sequences. Assuming $|s|$ denotes the length of sequence $s$ and $m=\Sigma_{i=1}^n |s_i|$ denotes the total length of all sequences in $S$. Let $G=(V,E)$ denote a graph defined as $V=S$ and $E=\{(s_i,s_j)$ $|$ $s_i$ and $s_j$ are ``similar'', defined as per pre-defined alignment cutoffs\}. We use the term ``pair'' in this paper to refer to an arbitrary pair of sequences $(s_i,s_j)$. \\
 
 \noindent{\bf Problem statement:} Given a set $S$ of $n$ protein sequences and $p$ processors, the protein sequence graph construction problem is to construct $G$ in parallel.\\
 
@@ -538,7 +538,7 @@ Our observations of a higher complexity for metagenomic protein data when compar
 A brute-force approach to detect the presence of an edge is to enumerate all possible  pairs of sequences ($n\choose 2$) and retain only those as edges which pass the alignment test. Alternatively, since alignments represent approximate matching, the presence of long exact matches can be used as a necessary but not sufficient condition \cite{Kalyanaraman07}. This approach can filter out a significant fraction of poor quality pairs and thereby reduce the number of pairs to be aligned significantly. Suffix tree based filters provide one of the best filters --- for instance, anywhere between 65\% to over 99\% savings for our experiments shown later in the results section. 
 
 
-To implement exact matching using suffix trees, we use the optimal pair generation algorithm described in \cite{Kalyanaraman07}, which detects and reports all pairs that share a maximal match of a minimum length $\psi$. The algorithm first builds a Generalized Suffix Tree (GST) data structure \cite{Weiner73} as a string index for the strings in $S$ and then traverses the tree in a bottom-up fashion to generate pairs from different nodes. Suffix tree construction is a well studied problem in both serial and parallel, and any of the standard, serial linear-time construction methods \cite{Weiner73,McCreight76,Ukkonen90} can be used, or efficient disttributed memory codes can be used for parallelism \cite{Kalyanaraman07,Ghoting09}.  Either way, the tree index can be generated in one preprocessing step and stored in the disk\footnote{Note that there are other, more space-efficient alternatives to suffix trees such as suffix arrays and enhanced suffix arrays, which can also be equivalently used to generate these pairs with some appropriate changes to the pair generation code. We omit those details from this article as they are not the focus here. That said the type of challenges dealt with the tree during parallel pair generation and the solutions proposed would still carry over to these other representations.}. 
+To implement exact matching using suffix trees, we use the optimal pair generation algorithm described in \cite{Kalyanaraman07}, which detects and reports all pairs that share a maximal match of a minimum length $\psi$. The algorithm first builds a Generalized Suffix Tree (GST) data structure \cite{Weiner73} as a string index for the strings in $S$ and then traverses the tree in a bottom-up fashion to generate pairs from different nodes. Suffix tree construction is a well studied problem in both serial and parallel, and any of the standard, serial linear-time construction methods \cite{McCreight76,Ukkonen90,Weiner73} can be used, or efficient distributed memory codes can be used for parallelism \cite{Ghoting09,Kalyanaraman07}.  Either way, the tree index can be generated in one preprocessing step and stored in the disk\footnote{Note that there are other, more space-efficient alternatives to suffix trees such as suffix arrays and enhanced suffix arrays, which can also be equivalently used to generate these pairs with some appropriate changes to the pair generation code. We omit those details from this article as they are not the focus here. That said the type of challenges dealt with the tree during parallel pair generation and the solutions proposed would still carry over to these other representations.}. 
 
 For our purpose, we generate the tree index as a forest of disjoint subtrees emerging at a specified depth $\leq\psi$, so that the individual subtrees can be independently traversed in parallel to generate pairs. Given that the value of $\psi$ is typically a small user-specified constant, the choice for the cutting depth is restricted too. This implies that the size distribution of the resulting subtrees can be \emph{nonuniform} and is input dependent. It is also to be noted that, even though the pair generation algorithm runs in time bound by the number of output pairs, the process of generation itself could also be \emph{nonuniform} --- in that, subtrees of similar size could produce different number of pairs and/or at different rates, and the behavior is input-dependent. For instance, if a section of subtree receives a highly repetitive fraction of the input sequences then it is bound to generate a disproportionately large number of pairs.  On the other hand, a small value for the cutting depth is not a limiting factor when it comes to the number of subtrees, sufficient to support a high degree of parallelism. This is because the number of subtrees is expected to grow exponentially with the cutting depth; for instance, a cutting depth as small as 4 on a tree built out of protein sequences (alphabet size 20) could produce around $160K$ trees (as shown in experimental results). 
 
@@ -697,9 +697,9 @@ To test and compare these two models, we implemented both two versions: $pGraph_
 
 
 
-The consumer for $pGraph_{nb}$ follows Algorithm~\ref{cs}. Each consumer maintains a fixed size pair buffer $C_{buf}$ and sequence cache $\mathcal{S}_{c}$. The sequence cache ($\mathcal{S}_{c}$) is divided into two parts: (i) a static sequence cache $\mathcal{S}_{s}$ of size $O(\frac{m}{c})$ (preloaded from I/O) and (2) a dynamic sequence cache $\mathcal{S}_{d}$ --- a transient buffer to store dynamically fetched from other consumers. During initialization, the consumers within \emph{each subgroup} load the input sequence set $S$ into their respective $\mathcal{S}_{c}$ in a distributed manner such that each consumer gets a unique contiguous $O(\frac{m}{c})$ fraction of input bytes. The assumption that the collective memory of all the $c$ consumers in a subgroup is sufficient to load $S$ is without loss of generality because the subgroup size can be increased proportional to the input size.  This strategy of storing the entire sequence set within each subgroup also has the advantage that communications related to sequence fetches can be kept local to a subgroup, thereby reducing hotspot issues.
+The consumer for $pGraph_{nb}$ follows Algorithm~\ref{cs}. Each consumer maintains a fixed size pair buffer $C_{buf}$ and sequence cache $\mathcal{S}_{c}$. The sequence cache ($\mathcal{S}_{c}$) is divided into two parts: (i) a static sequence cache $\mathcal{S}_{s}$ of size $O(\frac{m}{c})$ (preloaded from I/O); and (2) a dynamic sequence cache $\mathcal{S}_{d}$ --- a transient buffer to store dynamically fetched sequences from other consumers. During initialization, the consumers within \emph{each subgroup} load the input sequence set $S$ into their respective $\mathcal{S}_{c}$ in a distributed manner such that each consumer gets a unique contiguous $O(\frac{m}{c})$ fraction of input bytes. The assumption that the collective memory of all the $c$ consumers in a subgroup is sufficient to load $S$ is without loss of generality because the subgroup size can be increased proportional to the input size.  This strategy of storing the entire sequence set within each subgroup also has the advantage that communications related to sequence fetches can be kept local to a subgroup, thereby reducing hotspot issues.
 
-When a consumer receives a batch of new pairs from its master, it first identifies the sequences which are not present in $\mathcal{S}_{s}$ and $\mathcal{S}_{d}$, and subsequently sends out sequence requests to those consumers in the same subgroup that contains those sequences. When a consumer receives a batch of requests from another consumer, it will pack the related sequences and dispatch them using a nonblocking send.  When the remote sequences arrive, the requesting consumer will unpack the sequences into the $\mathcal{S}_{d}$. A separate counter is maintained with each sequence entry in $\mathcal{S}_{d}$ to keep track of the number of pairs to be aligned in $C_{buf}$ that require that sequence. If at any stage, if the counter becomes zero then the memory allocated for this sequence is released. In this way, significant communications could be avoided, and Figure~\ref{figConsumerFetch} illustrates the effectiveness of this strategy. Also the worst-case dynamic sequence cache is $2|C_{buf}|$, so there is no risk for the dynamic cache to overrun the local memory.
+When a consumer receives a batch of new pairs from its master, it first identifies the sequences which are not present in $\mathcal{S}_{s}$ and $\mathcal{S}_{d}$, and subsequently sends out sequence requests to those consumers in the same subgroup that contains those sequences. When a consumer receives a batch of requests from another consumer, it will pack the related sequences and dispatch them using a nonblocking send.  When the remote sequences arrive, the requesting consumer will unpack the sequences into the $\mathcal{S}_{d}$. A separate counter is maintained with each sequence entry in $\mathcal{S}_{d}$ to keep track of the number of pairs to be aligned in $C_{buf}$ that require that sequence. If at any stage, if the counter becomes zero then the memory allocated for this sequence is released. In this way, significant communications ($\sim 60$\%) could be saved, and Figure~\ref{figConsumerFetch} illustrates the effectiveness of this strategy. Also the worst-case dynamic sequence cache is $2|C_{buf}|$, so there is no risk for the dynamic cache to overrun the local memory.
 
 %Before aligning a pair, the consumer has to ensure that the sequences needed are available. However, in practice requested sequences are coming back in a totally different order. If this is the case, the pair cannot be processed immediately, and will be appended to the end of $C_{buf}$. 
 The consumer also sends reports of its $C_{buf}$ size to its local master in a timely fashion. The states are $\frac{1}{2}$-empty, $\frac{3}{4}$-empty, and completely empty. Once a status is sent, the consumer continues to process the remaining pairs in $C_{buf}$. 
@@ -716,7 +716,7 @@ If $C_{buf}$ becomes empty, the consumer sends an {\it empty} message to inform 
   linenodelimiter=.
 }
 \begin{algorithmic}[1]
-    \STATE $\Delta=\{0, \frac{b_2}{4}, \frac{b_2}{2}\}$: {\bf empty, quarter, half} buffer status
+    \STATE $\Delta=\{0, \frac{1}{4}, \frac{1}{2}\}|C_{buf}|$: {\bf empty, quarter, half} buffer status
     \STATE $n_{s}$: number of sequences to be cached statically
     \STATE $\mathcal{S}_{s}$: static sequence cache
     \STATE $ \mathcal{S}_{d}$: dynamic sequence cache
@@ -797,13 +797,9 @@ The second task of the supermaster is to serve as a conduit for pairs to be redi
 			        \STATE Insert pairs in $S_{buf}$
 		        \ENDIF
 		        \STATE $recv_{S\leftarrow P}\leftarrow$ Post a nonblocking receive for producers
-		    \ENDIF
-	    
-	    
+		    \ENDIF    
     \ENDWHILE
-
 	\STATE Distribute remaining pairs to all masters in a round-robin way
-	\STATE Send END signal to all masters
 \end{algorithmic}
 \end{algorithm}
 
@@ -827,7 +823,7 @@ The {\it pGraph} code was implemented in C/MPI. All parameters described in the 
 
 \noindent{\bf {\it pGraph}-specific settings: } Even though the Chinook platform supports access to 4 GB RAM per core, in all our runs, we assumed a memory upper bound of $O(\frac{m}{c})$ per MPI process, where $c$ is the number of consumers in a subgroup. This was done to emulate a more realistic use-case on any distributed memory machine. At the start of execution, all consumers in a subgroup load the input sequences in a distributed even fashion such that each consumer receives a unique $O(\frac{m}{c})$ fraction of the input. The locally available set of sequences is referred to as the ``static sequence cache''. Any additional sequence that is temporarily fetched into local memory during alignments is treated as part of a constant space ``dynamic sequence cache''.
 
-To generate the suffix tree index required for all input sets, a construction code from one of our earlier developments \cite{Kalyanaraman07} was used. The suffix tree index for each input is generated as a forest of subtrees, one for each unique $k-mer$ in the input. We used $k=4$ for all trees. The tree index statistics for the different input sets are shown in Table~\ref{tabInputTrees}. A single CPU was used to generate the trees for all our experiments because the tree construction is quick and expected to scale linearly with input size, as shown in the table. For larger inputs, any of the already available parallel implementations can be used \cite{Kalyanaraman07,Ghoting09}. Table~\ref{tabInputTrees} also shows the number of subtrees generated for each input set. As $k$ was used, the total   For all our runs, we assume that the tree index is already built using any method of choice and stored in the disk.
+To generate the suffix tree index required for all input sets, a construction code from one of our earlier developments \cite{Kalyanaraman07} was used. The suffix tree index for each input is generated as a forest of subtrees, one for each unique $k-mer$ in the input. We used $k=4$ for all trees. The tree index statistics for the different input sets are shown in Table~\ref{tabInputTrees}. A single CPU was used to generate the trees for all our experiments because the tree construction is quick and expected to scale linearly with input size, as shown in the table. For larger inputs, any of the already available parallel implementations can be used \cite{Ghoting09,Kalyanaraman07}. Table~\ref{tabInputTrees} also shows the number of subtrees generated for each input set. As $k$ was used, the total   For all our runs, we assume that the tree index is already built using any method of choice and stored in the disk.
 
 For all the performance results presented in Sections~\ref{secComp} and \ref{secPerf}, we set the subgroup size to 16 and the number of producers per subgroup to 2 (to approximate a producer:consumer ratio of 1:7 within each subgroup). The effect of changing these parameters are later studied in Section~\ref{secParameters}.
 
@@ -1121,6 +1117,11 @@ A.J. Enright, S. Van Dongen, and S.A. Ouzounis
 \newblock {\em Nucleic Acids Research}, 30(7):1575--1584, 2002.
 
 
+\bibitem{Ghoting09}
+A. Ghoting and K. Makarychev.
+\newblock Indexing genomic sequences on the IBM Blue Gene.
+\newblock In {\em Proc. ACM/IEEE conference on Supercomputing}, pp. 1--11, 2009.
+
 \bibitem{Handelsman04}
 J.~Handelsman
 \newblock {Metagenomics: Application of genomics to uncultured microorganisms}.
@@ -1143,6 +1144,12 @@ A.~Kalyanaraman, S.J. Emrich, P.S. Schnable, and S.~Aluru.
 E.V. Kriventseva, M. Biswas, and R. Apweiler.
 \newblock Clustering and analysis of protein families
 \newblock{\em Current Opinion in Structural Biology}, 11(3):334-339, 2001.
+
+
+\bibitem{McCreight76}
+E. McCreight.
+\newblock A space economical suffix tree construction algorithm.
+\newblock {\em  Journal of the ACM}, 23:262--272, 1976
 
 
 \bibitem{Weiner73}
@@ -1169,17 +1176,31 @@ V. Olman, F. Mao, H. Wu, and Y. Xu.
 \newblock{\em IEEE/ACM Transaction on Computational Biology and Bioinformatics}, 5(2):344--352, 2007.
 
 
+\bibitem{Pearson91}
+W.R. Pearson.
+\newblock Searching protein sequence libraries: Comparison of the sensitivity and selectivity of the Smith-Waterman and FASTA algorithms.
+\newblock{\em Genomics}, 11(3):635--650, 1991.
+
 \bibitem{Pipenbacher02}
 P.~Pipenbacher {\it et al.}
 \newblock {ProClust}: improved clustering of protein sequences with an extended graph-based approach.
 \newblock {\em Bioinformatics}, 18(S2):S182--S191, 2002.
 
 
+\bibitem{Shpaer96}
+E.G. Shpaer, M. Robinson, D. Yee {\it et al.}
+\newblock Sensitivity and selectivity in protein similarity searches: a comparison of Smith-Waterman in hardware to BLAST and FASTA.
+\newblock {\em Genomics}, 38(2):179-191, 1996
+
 \bibitem{Smith81}
 T.F. Smith and M.S. Waterman.
 \newblock Identification of common molecular subsequences.
 \newblock {\em Journal of Molecular Biology}, 147:195--197, 1981.
 
+\bibitem{Ukkonen90}
+E. Ukkonen
+\newblock A linear-time algorithm for finding approximate shortest common superstrings.
+\newblock {\em Algorithmica},5(1):313--323, 1990
 
 \bibitem{Venter01}
 J.C. Venter {\it et al.}
@@ -1200,16 +1221,7 @@ S.~Yooseph {\it et al.}
 \newblock {\em {PLoS Biology}}, 5(3):e16 doi:10.1371/journal.pbio.0050016,
   2007.
 
-W.R. Pearson.
-Searching protein sequence libraries: Comparison of the sensitivity and selectivity of the Smith-Waterman and FASTA algorithms.
-Genomics, 11(3):635-650, 1991.
 
-
-EUGENE G. SHPAER, MAX ROBINSON, DAVID YEE, JAMES D. CANDLIN,
-ROBERT MINES, AND TIM HUNKAPILLER.
-Sensitivity and Selectivity in Protein Similarity Searches: A
-Comparison of Smith–Waterman in Hardware to BLAST and FASTA.
-GENOMICS 38, 179–191 (1996).
 
 Wu Feng's paper saying SW has greater than 60\% sensitivity or something like that
 
