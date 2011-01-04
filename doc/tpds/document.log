@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  3 JAN 2011 00:33
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  4 JAN 2011 15:25
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -276,10 +276,6 @@ Underfull \hbox (badness 2865) in paragraph at lines 501--502
  []
 
 
-LaTeX Warning: Citation `AddPapersAtTheEndOfBib' on page 3 undefined on input l
-ine 505.
-
-
 LaTeX Warning: Citation `Majumder10' on page 3 undefined on input line 505.
 
 
@@ -314,15 +310,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 520--521
 
  []
 
-
-LaTeX Warning: Citation `McCreight76' on page 4 undefined on input line 541.
-
-
-LaTeX Warning: Citation `Ukkonen90' on page 4 undefined on input line 541.
-
-
-LaTeX Warning: Citation `Ghoting09' on page 4 undefined on input line 541.
-
 (./figPClust.pstex_t
 File: figPClust.pstex Graphic file (type eps)
  <figPClust.pstex>) [4]
@@ -349,10 +336,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 705--708
  []
 
 [7]
-
-LaTeX Warning: Citation `Ghoting09' on page 8 undefined on input line 830.
-
-
 Underfull \vbox (badness 1253) has occurred while \output is active []
 
  [8]
@@ -363,7 +346,7 @@ File: speedup.eps Graphic file (type eps)
  <speedup.eps>
 File: efficiency.eps Graphic file (type eps)
  <efficiency.eps> [9]
-Underfull \hbox (badness 2343) in paragraph at lines 926--927
+Underfull \hbox (badness 2343) in paragraph at lines 922--923
 []\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
  []
 
@@ -390,14 +373,11 @@ File: subgroups.eps Graphic file (type eps)
 <subgroups.eps> [12]
 File: groupSize.eps Graphic file (type eps)
  <groupSize.eps>
-Underfull \hbox (badness 1406) in paragraph at lines 1050--1051
+Underfull \hbox (badness 1406) in paragraph at lines 1046--1047
 \OT1/ppl/m/n/10 In this pa-per, we pre-sented a novel par-al-lel al-go-
  []
 
-[13]
-Missing character: There is no – in font pplr7t!
-Missing character: There is no – in font pplr7t!
- [14
+[13] [14
 
 ] (./document.aux)
 
@@ -405,12 +385,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2001 strings out of 493849
- 30077 string characters out of 3149230
+ 2002 strings out of 493849
+ 30074 string characters out of 3149230
  94238 words of memory out of 3000000
- 5273 multiletter control sequences out of 15000+200000
+ 5274 multiletter control sequences out of 15000+200000
  28481 words of font info for 73 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
  32i,12n,24p,1678b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (14 pages, 100136 bytes).
+Output written on document.dvi (14 pages, 100636 bytes).
