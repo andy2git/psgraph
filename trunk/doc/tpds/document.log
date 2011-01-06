@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  4 JAN 2011 15:25
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  5 JAN 2011 22:46
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -241,89 +241,64 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 ]
-
-LaTeX Warning: Citation `KalyanaramanJPDC07' on page 2 undefined on input line 
-473.
-
-
-LaTeX Warning: Citation `KalyanaramanNAR03' on page 2 undefined on input line 4
-73.
-
-
-LaTeX Warning: Citation `KalyanaramanJPDC07' on page 2 undefined on input line 
-480.
-
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 482.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 484.
 
-Underfull \hbox (badness 2689) in paragraph at lines 488--489
+Underfull \hbox (badness 2689) in paragraph at lines 490--491
 []\OT1/ppl/m/n/10 Our par-al-lel ap-proach rep-re-sents a hy-brid vari-
  []
 
 [2]
-
-LaTeX Warning: Citation `CAMERA' on page 3 undefined on input line 501.
-
-
-LaTeX Warning: Citation `IMG/M' on page 3 undefined on input line 501.
-
-
-LaTeX Warning: Citation `NCBI' on page 3 undefined on input line 501.
-
-
-Underfull \hbox (badness 2865) in paragraph at lines 501--502
+Underfull \hbox (badness 2865) in paragraph at lines 503--504
 \OT1/ppl/m/n/10 Sequence ho-mol-ogy be-tween two biomolec-u-lar se-
  []
 
-
-LaTeX Warning: Citation `Majumder10' on page 3 undefined on input line 505.
-
-
-LaTeX Warning: Citation `KalyanaramanTPDS03' on page 3 undefined on input line 
-505.
-
-
-LaTeX Warning: Citation `KalyanaramanJPDC07' on page 3 undefined on input line 
-505.
-
 LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 518.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 519.
 
-Underfull \hbox (badness 1824) in paragraph at lines 518--519
+Underfull \hbox (badness 1824) in paragraph at lines 519--520
 \OT1/ppl/m/n/10 in-put pro-tein se-quences. As-sum-ing $\OMS/cmsy/m/n/10 j\OML/
 cmm/m/it/10 s\OMS/cmsy/m/n/10 j$ \OT1/ppl/m/n/10 de-notes the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--519
+Underfull \hbox (badness 10000) in paragraph at lines 519--520
 
  []
 
 [3]
-Underfull \hbox (badness 3557) in paragraph at lines 520--521
+Underfull \hbox (badness 3557) in paragraph at lines 521--522
 \OT1/ppl/b/n/10 Problem state-ment: \OT1/ppl/m/n/10 Given a set $\OML/cmm/m/it/
 10 S$ \OT1/ppl/m/n/10 of $\OML/cmm/m/it/10 n$ \OT1/ppl/m/n/10 pro-tein
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--521
+Underfull \hbox (badness 10000) in paragraph at lines 521--522
 
  []
 
 (./figPClust.pstex_t
 File: figPClust.pstex Graphic file (type eps)
- <figPClust.pstex>) [4]
-Underfull \hbox (badness 10000) in paragraph at lines 575--583
+ <figPClust.pstex>
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 30.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)) [4]
+Underfull \hbox (badness 10000) in paragraph at lines 576--584
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 588--589
+Underfull \hbox (badness 10000) in paragraph at lines 589--590
 
  []
 
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 639--643
+
+Underfull \vbox (badness 1348) has occurred while \output is active []
+
+ [5]
+Underfull \hbox (badness 10000) in paragraph at lines 640--644
 
  []
 
@@ -331,27 +306,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 639--643
 Underfull \vbox (badness 1400) has occurred while \output is active []
 
  [6]
-Underfull \hbox (badness 10000) in paragraph at lines 705--708
+Underfull \hbox (badness 10000) in paragraph at lines 706--709
 
  []
 
-[7]
-Underfull \vbox (badness 1253) has occurred while \output is active []
 
- [8]
+Underfull \vbox (badness 2318) has occurred while \output is active []
+
+ [7]
+[8]
 File: csBreak.eps Graphic file (type eps)
-
-<csBreak.eps>
+ <csBreak.eps>
 File: speedup.eps Graphic file (type eps)
  <speedup.eps>
 File: efficiency.eps Graphic file (type eps)
  <efficiency.eps> [9]
-Underfull \hbox (badness 2343) in paragraph at lines 922--923
+Underfull \hbox (badness 2343) in paragraph at lines 924--925
 []\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2486) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -373,24 +348,20 @@ File: subgroups.eps Graphic file (type eps)
 <subgroups.eps> [12]
 File: groupSize.eps Graphic file (type eps)
  <groupSize.eps>
-Underfull \hbox (badness 1406) in paragraph at lines 1046--1047
+Underfull \hbox (badness 1406) in paragraph at lines 1048--1049
 \OT1/ppl/m/n/10 In this pa-per, we pre-sented a novel par-al-lel al-go-
  []
 
 [13] [14
 
-] (./document.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (./document.aux) ) 
 Here is how much of TeX's memory you used:
- 2002 strings out of 493849
- 30074 string characters out of 3149230
+ 2034 strings out of 493849
+ 30554 string characters out of 3149230
  94238 words of memory out of 3000000
- 5274 multiletter control sequences out of 15000+200000
- 28481 words of font info for 73 fonts, out of 3000000 for 9000
+ 5302 multiletter control sequences out of 15000+200000
+ 28697 words of font info for 74 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
- 32i,12n,24p,1678b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,10n,24p,1678b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (14 pages, 100636 bytes).
+Output written on document.dvi (14 pages, 101336 bytes).
