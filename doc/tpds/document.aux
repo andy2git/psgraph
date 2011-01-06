@@ -19,7 +19,8 @@
 \citation{KalyanaramanNAR03}
 \citation{Needleman70}
 \citation{Smith81}
-\citation{KalyanaramanJPDC07}
+\citation{Venter01}
+\citation{Yooseph07}
 \citation{Dean08}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Contributions}{2}}
 \newlabel{secContributions}{{1.1}{2}}
@@ -32,7 +33,6 @@
 \citation{Kriventseva01}
 \citation{Olman07}
 \citation{CAMERA}
-\citation{IMG/M}
 \citation{NCBI}
 \citation{Altschul90}
 \citation{Yooseph07}
@@ -45,29 +45,27 @@
 \citation{KalyanaramanJPDC07}
 \citation{Wu08}
 \citation{Wu08}
-\citation{Kalyanaraman07}
-\citation{Venter01}
-\citation{Yooseph07}
+\citation{KalyanaramanJPDC07}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{3}}
 \newlabel{secRelatedWork}{{2}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{3}}
 \newlabel{secMethods}{{3}{3}}
-\citation{Kalyanaraman07}
-\citation{Kalyanaraman07}
+\citation{KalyanaramanJPDC07}
+\citation{KalyanaramanJPDC07}
 \citation{Weiner73}
 \citation{McCreight76}
 \citation{Ukkonen90}
 \citation{Weiner73}
 \citation{Ghoting09}
-\citation{Kalyanaraman07}
+\citation{KalyanaramanJPDC07}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Pair generation}{4}}
 \newlabel{secGeneratingPairs}{{3.1}{4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  The hierarchical multiple-master multiple-worker design of the {\it  pGraph} approach showing the interaction of the individual components within and outside the subgroups. }}{4}}
 \newlabel{figPClust}{{1}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}{\it  pGraph}: Parallel graph construction}{4}}
 \newlabel{secMasterSlave}{{3.2}{4}}
-\citation{Kalyanaraman07}
-\citation{Kalyanaraman07}
+\citation{KalyanaramanJPDC07}
+\citation{KalyanaramanJPDC07}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Producer}}{5}}
 \newlabel{pd}{{1}{5}}
 \citation{Smith81}
@@ -75,19 +73,20 @@
 \newlabel{ms}{{2}{6}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Consumer}}{7}}
 \newlabel{cs}{{3}{7}}
-\citation{Kalyanaraman07}
+\citation{CAMERA}
+\citation{KalyanaramanJPDC07}
 \citation{Ghoting09}
-\citation{Kalyanaraman07}
+\citation{KalyanaramanJPDC07}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Supermaster}}{8}}
 \newlabel{sp}{{4}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Implementation}{8}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Results \& Discussion}{8}}
 \newlabel{secResults}{{4}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental setup}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Comparative evaluation: $pGraph_{I/O}$ vs. $pGraph_{nb}$}{8}}
+\newlabel{secComp}{{4.2}{8}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  Sequence and suffix tree index statistics for different input sets. }}{9}}
 \newlabel{tabInputTrees}{{1}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Comparative evaluation: $pGraph_{I/O}$ vs. $pGraph_{nb}$}{9}}
-\newlabel{secComp}{{4.2}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Performance evaluation for $pGraph_{nb}$}{9}}
 \newlabel{secPerf}{{4.3}{9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  Comparison of the I/O and non-blocking communication versions of {\it  pGraph}. Shown are the runtime breakdown for an average consumer between the two versions. All runs were performed on the $640K$ input sequence set. The results show the effectiveness of the non-blocking communication version in eliminating sequence fetch overhead. }}{9}}
@@ -113,8 +112,9 @@
 \bibcite{Altschul90}{1}
 \bibcite{Apweiler04}{2}
 \bibcite{Bateman04}{3}
-\bibcite{Darling03}{4}
-\bibcite{Dean08}{5}
+\bibcite{CAMERA}{4}
+\bibcite{Darling03}{5}
+\bibcite{Dean08}{6}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Other parametric studies}{13}}
 \newlabel{secParameters}{{4.4}{13}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  Chart showing the effect of changing the group size on performance. All runs were performed on the 640K input, keeping the total number of processors fixed at 1,024. }}{13}}
@@ -122,22 +122,26 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{13}}
 \newlabel{secConclusions}{{5}{13}}
 \@writefile{toc}{\contentsline {section}{References}{13}}
-\bibcite{Enright02}{6}
-\bibcite{Ghoting09}{7}
-\bibcite{Handelsman04}{8}
-\bibcite{Henikoff92}{9}
-\bibcite{Kalyanaraman07}{10}
-\bibcite{Kriventseva01}{11}
-\bibcite{McCreight76}{12}
-\bibcite{Weiner73}{13}
-\bibcite{Needleman70}{14}
-\bibcite{Oehmen06}{15}
-\bibcite{Olman07}{16}
-\bibcite{Pearson91}{17}
-\bibcite{Pipenbacher02}{18}
-\bibcite{Shpaer96}{19}
-\bibcite{Smith81}{20}
-\bibcite{Ukkonen90}{21}
-\bibcite{Venter01}{22}
-\bibcite{Wu08}{23}
-\bibcite{Yooseph07}{24}
+\bibcite{Enright02}{7}
+\bibcite{Ghoting09}{8}
+\bibcite{Handelsman04}{9}
+\bibcite{Henikoff92}{10}
+\bibcite{Majumder10}{11}
+\bibcite{NCBI}{12}
+\bibcite{KalyanaramanTPDS03}{13}
+\bibcite{KalyanaramanNAR03}{14}
+\bibcite{KalyanaramanJPDC07}{15}
+\bibcite{Kriventseva01}{16}
+\bibcite{McCreight76}{17}
+\bibcite{Weiner73}{18}
+\bibcite{Needleman70}{19}
+\bibcite{Oehmen06}{20}
+\bibcite{Olman07}{21}
+\bibcite{Pearson91}{22}
+\bibcite{Pipenbacher02}{23}
+\bibcite{Shpaer96}{24}
+\bibcite{Smith81}{25}
+\bibcite{Ukkonen90}{26}
+\bibcite{Venter01}{27}
+\bibcite{Wu08}{28}
+\bibcite{Yooseph07}{29}
