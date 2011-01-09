@@ -1,5 +1,6 @@
 reset
-set term post color
+#set term post color
+set term post
 set out 'groupSize.eps'
 set key top right
 
