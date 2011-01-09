@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  9 JAN 2011 12:03
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  9 JAN 2011 13:05
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -371,18 +371,14 @@ Underfull \hbox (badness 1983) in paragraph at lines 1167--1170
 ys-tem for
  []
 
-[14] (./document.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[14] (./document.aux) ) 
 Here is how much of TeX's memory you used:
  2045 strings out of 493849
  30673 string characters out of 3149230
- 98697 words of memory out of 3000000
+ 97697 words of memory out of 3000000
  5312 multiletter control sequences out of 15000+200000
  29366 words of font info for 75 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
  32i,10n,24p,1660b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (14 pages, 105636 bytes).
+Output written on document.dvi (14 pages, 105584 bytes).
