@@ -1,16 +1,16 @@
 reset
-set term post color 
+set term post
 set out 'subgroups.eps'
 
 set grid
 set multiplot
-set yrange[1000:2000]
+set yrange[800:2200]
 set key bottom right
 set label 1 "Run time (secs)" at graph -0.1, graph 0.5 center rotate
 #set ylabel "Run time (secs)"
 set xlabel "Subgroup ID"
 set xtics 5
-set ytics (1200, 1400, 1600, 1800)
+set ytics (1000, 1200, 1400, 1600, 1800,2000)
 set size 1,1.0
 set origin 0.0,0.0
 set bmargin 3

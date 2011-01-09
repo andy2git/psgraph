@@ -1,5 +1,5 @@
 reset
-set term post color 
+set term post
 set out 'fetch.eps'
 
 set grid
