@@ -634,6 +634,7 @@ More specifically,  we follow the algorithm shown in Algorithm~\ref{pd}. Initial
             \STATE $send_{P\rightarrow S}\leftarrow$ {\it Isend} extracted pairs to supermaster
         \ENDIF
     \ENDWHILE
+    \STATE Send an END signal to Supermaster
 \end{algorithmic}
 \end{algorithm}
 
@@ -696,7 +697,7 @@ While frequent updates from consumers could help the master to better assess the
                 \STATE Waiting consumer requests
             \ENDIF
     \ENDWHILE
-    \STATE Send END signal to consumers
+    \STATE Send END signals to all consumers
 \end{algorithmic}
 \end{algorithm}
 
@@ -816,6 +817,7 @@ The second task of the supermaster is to serve as a conduit for pairs to be redi
 		    \ENDIF    
     \ENDWHILE
 	\STATE Distribute remaining pairs to all masters in a round-robin way
+	\STATE Send END signals to all  masters
 \end{algorithmic}
 \end{algorithm}
 

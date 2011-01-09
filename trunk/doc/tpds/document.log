@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  9 JAN 2011 09:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  9 JAN 2011 09:56
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -308,12 +308,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 598--599
  []
 
 [5]
-Underfull \hbox (badness 1688) in paragraph at lines 650--655
+Underfull \hbox (badness 1688) in paragraph at lines 651--656
 \OT1/ppl/m/n/10 As a trade-off, we im-ple-ment a pri-or-ity queue by
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 650--655
+Underfull \hbox (badness 10000) in paragraph at lines 651--656
 
  []
 
@@ -321,7 +321,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 650--655
 Underfull \vbox (badness 1400) has occurred while \output is active []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 719--722
+Underfull \hbox (badness 10000) in paragraph at lines 720--723
 
  []
 
@@ -332,7 +332,7 @@ File: speedup.eps Graphic file (type eps)
  <speedup.eps>
 File: efficiency.eps Graphic file (type eps)
  <efficiency.eps> [9]
-Underfull \hbox (badness 2343) in paragraph at lines 942--943
+Underfull \hbox (badness 2343) in paragraph at lines 944--945
 []\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
  []
 
@@ -340,35 +340,30 @@ Underfull \hbox (badness 2343) in paragraph at lines 942--943
 Underfull \vbox (badness 5189) has occurred while \output is active []
 
  [10]
-File: fetch.eps Graphic file (type eps)
-
-<fetch.eps>
 Underfull \vbox (badness 3492) has occurred while \output is active []
 
+File: fetch.eps Graphic file (type eps)
 
-Underfull \vbox (badness 1635) has occurred while \output is active []
-
- [11]
+<fetch.eps> [11]
 File: msBreak.eps Graphic file (type eps)
-
-<msBreak.eps>
+ <msBreak.eps>
 File: Group.pBuf.eps Graphic file (type eps)
  <Group.pBuf.eps>
 File: producer.eps Graphic file (type eps)
  <producer.eps>
 File: spBreak.eps Graphic file (type eps)
- <spBreak.eps> [12]
+ <spBreak.eps>
+[12]
 File: subgroups.eps Graphic file (type eps)
-
-<subgroups.eps>
+ <subgroups.eps>
 File: groupSize.eps Graphic file (type eps)
  <groupSize.eps>
-Underfull \hbox (badness 1406) in paragraph at lines 1064--1065
+Underfull \hbox (badness 1406) in paragraph at lines 1066--1067
 \OT1/ppl/m/n/10 In this pa-per, we pre-sented a novel par-al-lel al-go-
  []
 
 [13]
-Underfull \hbox (badness 1983) in paragraph at lines 1165--1168
+Underfull \hbox (badness 1983) in paragraph at lines 1167--1170
 \OT1/ppl/m/it/8 al.  \OT1/ppl/m/n/8 IMG/M: a data man-age-ment and anal-y-sis s
 ys-tem for
  []
@@ -377,10 +372,10 @@ ys-tem for
 Here is how much of TeX's memory you used:
  2043 strings out of 493849
  30655 string characters out of 3149230
- 97880 words of memory out of 3000000
+ 98984 words of memory out of 3000000
  5310 multiletter control sequences out of 15000+200000
  29366 words of font info for 75 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
  32i,10n,24p,1660b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (14 pages, 105552 bytes).
+Output written on document.dvi (14 pages, 105664 bytes).
