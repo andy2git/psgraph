@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  5 JAN 2011 22:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2009.11.7)  8 JAN 2011 19:12
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -253,27 +253,28 @@ Underfull \hbox (badness 2865) in paragraph at lines 503--504
 \OT1/ppl/m/n/10 Sequence ho-mol-ogy be-tween two biomolec-u-lar se-
  []
 
+[3]
 LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 519.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 521.
 
-Underfull \hbox (badness 1824) in paragraph at lines 519--520
+Underfull \hbox (badness 1824) in paragraph at lines 521--522
 \OT1/ppl/m/n/10 in-put pro-tein se-quences. As-sum-ing $\OMS/cmsy/m/n/10 j\OML/
 cmm/m/it/10 s\OMS/cmsy/m/n/10 j$ \OT1/ppl/m/n/10 de-notes the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 519--520
+Underfull \hbox (badness 10000) in paragraph at lines 521--522
 
  []
 
-[3]
-Underfull \hbox (badness 3557) in paragraph at lines 521--522
+
+Underfull \hbox (badness 3557) in paragraph at lines 523--524
 \OT1/ppl/b/n/10 Problem state-ment: \OT1/ppl/m/n/10 Given a set $\OML/cmm/m/it/
 10 S$ \OT1/ppl/m/n/10 of $\OML/cmm/m/it/10 n$ \OT1/ppl/m/n/10 pro-tein
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--522
+Underfull \hbox (badness 10000) in paragraph at lines 523--524
 
  []
 
@@ -285,83 +286,101 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 30.
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )) [4]
-Underfull \hbox (badness 10000) in paragraph at lines 576--584
+Underfull \hbox (badness 10000) in paragraph at lines 583--591
 
  []
 
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 593.
 
-Underfull \hbox (badness 10000) in paragraph at lines 589--590
-
+Underfull \hbox (badness 6032) in paragraph at lines 598--599
+\OT1/ppl/m/n/10 an-other batch of sub-trees from the su-per-mas-ter.
  []
 
 
-Underfull \vbox (badness 1348) has occurred while \output is active []
-
- [5]
-Underfull \hbox (badness 10000) in paragraph at lines 640--644
-
+Underfull \hbox (badness 6284) in paragraph at lines 598--599
+\OT1/ppl/m/n/10 Once there are no more sub-trees avail-able, the
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 598--599
+
+ []
+
+[5]
+Underfull \hbox (badness 1688) in paragraph at lines 650--655
+\OT1/ppl/m/n/10 As a trade-off, we im-ple-ment a pri-or-ity queue by
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 650--655
+
+ []
+
+[6]
 Underfull \vbox (badness 1400) has occurred while \output is active []
 
- [6]
-Underfull \hbox (badness 10000) in paragraph at lines 706--709
+
+Underfull \hbox (badness 10000) in paragraph at lines 719--722
 
  []
 
-
-Underfull \vbox (badness 2318) has occurred while \output is active []
-
- [7]
-[8]
+[7] [8]
 File: csBreak.eps Graphic file (type eps)
  <csBreak.eps>
 File: speedup.eps Graphic file (type eps)
  <speedup.eps>
 File: efficiency.eps Graphic file (type eps)
  <efficiency.eps> [9]
-Underfull \hbox (badness 2343) in paragraph at lines 924--925
+Underfull \hbox (badness 2343) in paragraph at lines 942--943
 []\OT1/ppl/m/n/10 To bet-ter un-der-stand the over-all sys-tem's lin-ear
  []
 
 
-Underfull \vbox (badness 2486) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5189) has occurred while \output is active []
 
  [10]
 File: fetch.eps Graphic file (type eps)
 
 <fetch.eps>
+Underfull \vbox (badness 3492) has occurred while \output is active []
+
+
+Underfull \vbox (badness 1635) has occurred while \output is active []
+
+ [11]
 File: msBreak.eps Graphic file (type eps)
- <msBreak.eps>
+
+<msBreak.eps>
 File: Group.pBuf.eps Graphic file (type eps)
- <Group.pBuf.eps> [11]
+ <Group.pBuf.eps>
 File: producer.eps Graphic file (type eps)
  <producer.eps>
 File: spBreak.eps Graphic file (type eps)
- <spBreak.eps>
+ <spBreak.eps> [12]
 File: subgroups.eps Graphic file (type eps)
 
-<subgroups.eps> [12]
+<subgroups.eps>
 File: groupSize.eps Graphic file (type eps)
  <groupSize.eps>
-Underfull \hbox (badness 1406) in paragraph at lines 1048--1049
+Underfull \hbox (badness 1406) in paragraph at lines 1064--1065
 \OT1/ppl/m/n/10 In this pa-per, we pre-sented a novel par-al-lel al-go-
  []
 
-[13] [14
+[13]
+Underfull \hbox (badness 1983) in paragraph at lines 1165--1168
+\OT1/ppl/m/it/8 al.  \OT1/ppl/m/n/8 IMG/M: a data man-age-ment and anal-y-sis s
+ys-tem for
+ []
 
-] (./document.aux) ) 
+[14] (./document.aux) ) 
 Here is how much of TeX's memory you used:
- 2034 strings out of 493849
- 30554 string characters out of 3149230
- 94238 words of memory out of 3000000
- 5302 multiletter control sequences out of 15000+200000
- 28697 words of font info for 74 fonts, out of 3000000 for 9000
+ 2043 strings out of 493849
+ 30655 string characters out of 3149230
+ 97880 words of memory out of 3000000
+ 5310 multiletter control sequences out of 15000+200000
+ 29366 words of font info for 75 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
- 32i,10n,24p,1678b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,10n,24p,1660b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on document.dvi (14 pages, 101336 bytes).
+Output written on document.dvi (14 pages, 105504 bytes).
