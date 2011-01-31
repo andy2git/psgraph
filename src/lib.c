@@ -22,6 +22,11 @@ int power(int base, int n){
     return p;
 }
 
+/* compute 2^x */
+int pow2(int x){
+    return 1 << x;
+}
+
 /* return the integer floor */
 int flr(int dividend, int divisor){
     return (dividend % divisor) ? (dividend/divisor+1) : (dividend/divisor);
