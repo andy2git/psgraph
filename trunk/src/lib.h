@@ -6,6 +6,7 @@
 #include "type.h"
 
 int power(int base, int n);
+int pow2(int x);
 int flr(int dividend, int divisor);
 
 #endif /* end of lib.h */
