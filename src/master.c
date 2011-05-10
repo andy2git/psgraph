@@ -1,32 +1,11 @@
-/*
- * $Rev: 810 $ 
- * $Date: 2010-09-15 22:40:44 -0700 (Wed, 15 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- * Each subgroup has ONLY one master, whose reponsibilities are:
- *  1. recv pairs from producers, and supermaster
- *  2. send pairs to consumers based on their pBuf status
- */
-
 #include "master.h"
 
 /* -----------------------------------------------------------------------------*
  *
- * NOTE:when enBuf() pairs from producer's side. All pairs including the TAG_E pairs
+ * when enBuf() pairs from producer's side. All pairs including the TAG_E pairs
  * will be put into pBuf. However, when deBuf() from pBuf, ending pairs TAG_E 
  * will not be poped out.
  *
- * @param master  -
- * @param groupID -
- * @param gSize   -
- * @param procs   -
- * @param nSeqs   -
- * @param cfgFile - 
- * @param msgMdt  -
- * @param comm    -
  * ----------------------------------------------------------------------------*/
 void master(int master, int groupID, int gSize, int pdSize, int procs, int nSeqs, char *cfgFile, MPI_Datatype msgMdt, MPI_Comm *comm){
     PBUF pBuf;
@@ -38,8 +17,8 @@ void master(int master, int groupID, int gSize, int pdSize, int procs, int nSeqs
     MSG *rvMsg = NULL;
     int rvMaxBatch;
     int rvMsgCnt;
-    int rvEp = 0; 
-    int ENDSIG = 1;   /* #(ending signals) to be received */
+    int rvEp = 0; /* #(recv ended producers) */
+    int ENDSIG = 1;  /* #(ending signals) to be received */
     MPI_Request lReq;
     MPI_Status lStat;
     int lDone;
@@ -125,12 +104,14 @@ void master(int master, int groupID, int gSize, int pdSize, int procs, int nSeqs
     MPI_Irecv(rvMsg, rvMaxBatch, msgMdt, MPI_ANY_SOURCE, MPI_ANY_TAG, *comm, &lReq);
     while(1){
         if(pBuf.data >= rvMaxBatch){
+
             /* ----------------------------------------------*
-             *  supposed to recv from consumers ONLY
+             *   Recv ONLY requests from consumers 
              * ----------------------------------------------*/
+        
             MPI_Test(&lReq, &lDone, &lStat);
             if(lDone == 1){
-                if(rvMsg[0].tag == TAG_P){
+                if(rvMsg[0].tag == TAG_P){           
                     MPI_Get_count(&lStat, msgMdt, &rvMsgCnt);
                     printf("Group[%d] - master[%d]: recv %d pairs from -PD%d!\n", groupID, master, rvMsgCnt, lStat.MPI_SOURCE);
 
@@ -341,7 +322,7 @@ void master(int master, int groupID, int gSize, int pdSize, int procs, int nSeqs
 
             for(i = sRank; i <= eRank; i++){
                 t1 = cTime();
-                MPI_Ssend(&endMsg, 1, msgMdt, i, MSG_MC_TAG, *comm);
+                MPI_Send(&endMsg, 1, msgMdt, i, MSG_MC_TAG, *comm);
                 t2 = cTime();
                 cmTime += (t2 - t1);
 
@@ -364,19 +345,6 @@ void master(int master, int groupID, int gSize, int pdSize, int procs, int nSeqs
                 }
             }while(endCnt != cmSize);
 
-            
-            endMsg.tag = TAG_K;
-            endMsg.id1 = 0; /* rank of master */
-            endMsg.id2 = 0;
-
-            for(i = sRank; i <= eRank; i++){
-                t1 = cTime();
-                MPI_Ssend(&endMsg, 1, msgMdt, i, MSG_MC_TAG, *comm);
-                t2 = cTime();
-                cmTime += (t2 - t1);
-
-                printf("Group[%d] - master[%d] sending KILL msg to cs[%d]!\n", groupID, master, i);
-            }
 
             break; /* break the while(1) loop */
         }

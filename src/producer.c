@@ -1,17 +1,3 @@
-/*
- * $Rev: 806 $ 
- * $Date: 2010-09-12 12:57:22 -0700 (Sun, 12 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- * Producer reads suffix files from disk, and generate pairs.
- * It sends pairs both to master and supermaster. When sending is
- * not completed, it will cache pairs in its local buffer to 
- * accormadate later slow pair generation rate (it could happen!).
- */
-
 #include "producer.h"
 
 int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile, int nSeqs, 
@@ -25,11 +11,6 @@ int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile,
     int fIndex;
     MPI_Status fStat;
     MSG fEndMsg;
-
-    /* duplicated entried reduction
-     * used in genPairs(). save alloc/free time */
-    int *dup = NULL;   
-    char *line = NULL; /* used in loadForest(). save alloc/free time */
     
 
     MSG endMsg;
@@ -41,6 +22,7 @@ int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile,
     int chunkSize;
     int sdMsgCnt;
     int mDone = 1;        /* sending to master done? */
+
 
     MPI_Request sReq;
     MPI_Status sStat;
@@ -54,8 +36,7 @@ int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile,
     double t1, t2;
     double pTime = 0.0f;
     double sTime = 0.0f;
-    double iTime = 0.0f;    /* wait time when local pBuf is full during pair generation */
-    double aTime = 0.0f;    /* asyn time when issending() pairs during pair generation */
+    double iTime = 0.0f;
     double t3, t4;
     
 
@@ -68,9 +49,6 @@ int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile,
     initBuf(&pBuf, pBufSize);
     chunk = emalloc(chunkSize*(sizeof *chunk));
     sBuf = emalloc(sBufSize*(sizeof *sBuf));
-
-    dup = emalloc(nSeqs*(sizeof *dup));
-    line = emalloc(STREE_MAX_LEN*(sizeof *line));
 
     fEndMsg.tag = TAG_F;
     fEndMsg.id1 = 0;
@@ -97,8 +75,7 @@ int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile,
         fclose(fp);
         
         t3 = cTime();
-        processForest(groupID, master, frFile, cfgFile, nSeqs, dup, line, &pBuf, pBufSize, 
-                            &isStart, chunk, chunkSize, &iTime, &aTime, &request, msgMdt, comm);
+        processForest(groupID, master, frFile, cfgFile, nSeqs, &pBuf, pBufSize, &isStart, chunk, chunkSize, &iTime, &request, msgMdt, comm);
         t4 = cTime();
         printf("Group[%d] - process fd[%d] in <%.2lf> secs!\n", groupID, fIndex, t4 - t3);
 
@@ -107,14 +84,9 @@ int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile,
         printf("Group[%d] - PD send out done signal for fd[%d] to sp!\n", groupID, fIndex);
 
     }
-
-    /* dup and line are used in pair generation, NOT NEEDED ANY MORE */
-    free(dup);
-    free(line);
-
     t2 = cTime();
-    pTime += (t2 - t1);
 
+    pTime += (t2 - t1);
 
     /* -------------------------------------------------------------------*/
     /* pair generation task are done, and need to empty the pairs in pBuf */
@@ -179,8 +151,7 @@ int producer(int master, int spMaster, int groupID, char *frPath, char *cfgFile,
     free(chunk);
     free(sBuf);
     freeBuf(&pBuf);
-    printf("Group[%d] - PRODUCER DONE, pair generate in <%.2lf> secs, ending send <%.2lf> secs, idle <%.2lf> secs, asyn <%.2lf>secs \n", 
-            groupID, pTime, sTime, iTime, aTime);
+    printf("Group[%d] - PRODUCER DONE, pair generate in <%.2lf> secs, ending send <%.2lf> secs, idle <%.2lf> secs \n", groupID, pTime, sTime, iTime);
 
     return 1;
 }

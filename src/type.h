@@ -1,8 +1,6 @@
 #ifndef TYPE_H_
 #define TYPE_H_
 
-#include <mpi.h>
-
 #define COLOR_PD 0
 #define COLOR_SM 1
 #define COLOR_MS 2
@@ -14,18 +12,6 @@
 #define MSG_SM_TAG 4
 #define MSG_PS_TAG 5
 #define MSG_SP_TAG 6
-#define MSG_CR_TAG 7   /* seq request tag */
-#define MSG_CS_TAG 8   /* seq string tag */
-
-
-/* tag to differentiate msg flowing in the system */
-#define TAG_P 'P'  /* pair workload from producer */
-#define TAG_C 'C'  /* Job request from consumer */
-#define TAG_E 'E'  /* ending of pairs */
-#define TAG_S 'S'  /* stop signal for program */
-#define TAG_T 'T'  /* ending signal of subgroup */
-#define TAG_F 'F'  /* end signal for tree file */
-#define TAG_K 'K'  /* final end singla */
 
 
 /* for consumer request */
@@ -40,15 +26,16 @@
 #define SIGMA 26   /* size of alphabet, '*'->'J' */
 
 
+#define TAG_P 'P'  /* pair workload from producer */
+#define TAG_C 'C'  /* Job request from consumer */
+#define TAG_E 'E'  /* ending of pairs */
+#define TAG_S 'S'  /* stop signal for program */
+#define TAG_T 'T'  /* ending signal of subgroup */
+#define TAG_F 'F'  /* end signal for tree file */
+
 #define MAX_FILENAME_LEN 200
 #define FILE_STOP -1
 
-
-/* seq. str. stat */
-#define SEQ_N 0  /* seq. str is empty */
-#define SEQ_S 1  /* statically cached locally */
-#define SEQ_R 2  /* req. sent out already */
-#define SEQ_F 3  /* seq. str fetched locally */
 
 typedef unsigned int uint;
 typedef unsigned long ulong;
@@ -56,15 +43,34 @@ typedef unsigned long long u64;
 enum {NO = 0, YES = 1};
 enum {FALSE = 0, TRUE = 1};
 
-
-/* NOTE: if you are changing this struct,
-   make sure to change the dtype.h accordingly
- */
 typedef struct msg {
     char tag;    /* 'P', 'C', 'E' or 'A' */
     int id1;     /* s1 & rank */
     int id2;     /* s2 & status */
 }MSG;
+
+typedef struct pbuf{
+    int head;
+    int tail;
+    int data;
+    struct msg *buf;
+}PBUF;
+
+typedef struct req{
+    int rank;
+    struct req *next;
+}REQ;
+
+typedef struct cReq{
+    struct req *queue;
+    struct req *stMem; /* pre-allocated static mem */
+}CREQ;
+
+/* consumers struct on super master */
+typedef struct csm{
+    int id;
+    struct csm *next;
+}CSM;
 
 
 /**
@@ -86,22 +92,47 @@ typedef struct stnode{
     struct suff *lset[SIGMA];    /* subtree's nodes branched according to left characters */
 }STNODE;
 
+typedef struct forest{
+    int stSize;
+    int maxDepth;         /* maxium depth of stree used for couting sort */
+    struct stnode *stree;
+    struct suff *sf; 
+}FOREST;
+
 /**
  * seq info for fasta file
  */
 typedef struct seq{
-    
-    /* isReady TAG
-     * ----------------------------------------------------------------
-       0: not ready       #define SEQ_N 0  - seq. str is empty
-       1: precached       #define SEQ_S 1  - statically cached locally
-       2: req. sent out   #define SEQ_R 2  - req. sent out already
-       3: seq. str ready  #define SEQ_F 3  - seq. str fetched locally
-     */
-    char stat;      /* seq string is ready for not? */
-    char *str;      /* actual string of fasta file */
-    int strLen;     /* string length */
-    int cnt;        /* counter for seq usage */
+    char *str;  /* actual string of fasta file */
+    int strLen; /* string length */
 }SEQ;
+
+/**
+ * CELL for dynamic alignment
+
+ */
+typedef struct cell{
+    int score;           /* alignment score */
+    int ndig;            /* #(matches) */
+    int alen;            /* alignment length */
+}CELL;
+
+
+/**
+ * parameters packed in struct
+ */
+typedef struct param{
+    int AOL;             /* AlignOverLongerSeq */
+    int SIM;             /* MatchSimilarity */
+    int OS;              /* OptimalScoreOverSelfScore */
+}PARAM;
+
+/**
+ * statistics packed in struct 
+ */
+typedef struct work{
+    int nAlign;
+    int nPairs;
+}WORK;
 
 #endif /* end of type.h */

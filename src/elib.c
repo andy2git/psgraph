@@ -1,24 +1,8 @@
-/*
- * $Rev: 775 $ 
- * $Date: 2010-09-01 10:36:27 -0700 (Wed, 01 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #include "elib.h"
 
 static char *name = NULL;    /* program name */
 static size_t space = 0;     /* keep track of allocated mem */
 
-/* ----------------------------------------------*
- * duplicate a copy of *s. 
- * NOTE: new piece of memory is allocated
- *
- * @param s - pointer to string to be copied
- * ----------------------------------------------*/
 char *estrdup(char *s){
     char *t = NULL;
     int need;
@@ -34,22 +18,12 @@ char *estrdup(char *s){
     return t;
 }
 
-/* ----------------------------------------------*
- * print error msg on stderr
- *
- * @param msg - error msg to be printed
- * ----------------------------------------------*/
 
 void error(char *msg){
     fprintf(stderr, "LOG - ERROR: %s\n", msg);
 }
 
 
-/* ----------------------------------------------*
- * print error msg on stderr
- *
- * @param fmt - 
- * ----------------------------------------------*/
 void eprintf(char *fmt, ...){
 
     va_list args;
@@ -70,12 +44,6 @@ void eprintf(char *fmt, ...){
 }
 
 
-/* ----------------------------------------------*
- * allocate n size memory
- * NOTE: equeliant to malloc and NULL check
- *
- * @param n - size of memory
- * ----------------------------------------------*/
 void *emalloc(size_t n){
     void *p = NULL;
     
@@ -88,13 +56,6 @@ void *emalloc(size_t n){
 }
 
 
-/* ----------------------------------------------*
- * allocate nmember size sized elems
- * NOTE: equeliant to calloc and NULL check
- *
- * @param nmemb - #elems
- * @param size - elem size
- * ----------------------------------------------*/
 void *ecalloc(size_t nmemb, size_t size){
     void *p = NULL;
 
@@ -107,12 +68,6 @@ void *ecalloc(size_t nmemb, size_t size){
     return p;
 }
 
-/* ---------------------------------------------*
- * open a file, and returns a file handler
- * 
- * @param fileName - file name
- * @param mode - file open mode
- * ---------------------------------------------*/
 
 void *efopen(char *fileName, char *mode){
     FILE *fp = NULL;

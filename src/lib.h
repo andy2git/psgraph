@@ -6,7 +6,6 @@
 #include "type.h"
 
 int power(int base, int n);
-int pow2(int x);
-int flr(int dividend, int divisor);
+int leaf_key_cmp(const void *vp1, const void *vp2);
 
 #endif /* end of lib.h */

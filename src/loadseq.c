@@ -1,104 +1,169 @@
-/*
- * $Rev: 776 $ 
- * $Date: 2010-09-01 10:40:43 -0700 (Wed, 01 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #include "loadseq.h"
 
 /* -----------------------------------------------------------------------*
- * cache part of seqs according to its rank
+ * cache fasta sequences into *seqs wrt *idList
  *
- * @param rank - local rank 
- * @param groupSize - gourp size
- * @param sRank - starting rank of consumer
  * @param seqFile - fasta sequence file
- * @param seqs - fasta seqs structure 
  * @param nSeqs - total #sequences in fasta file
+ * @param idList - an array indicating which seqs need to be loaded
+ * @param seqs - sequence struct array
+ * @param seqSize - #(seqs) to be loaded in *seqs
  *
- * @returns #seqs loaded locally
  * -----------------------------------------------------------------------*/
-
-int loadStaticSeqs(int rank, int sRank, char *seqFile, SEQ *seqs, int nSeqs, int maxSeqRange, int *maxSeqLen){
-    FILE *fp = NULL;
+int cacheSeqs(char *seqFile, SEQ *seqs, int nSeqs, int *idList, int seqSize, int msl){
     char *line = NULL;
     int strLen;
-
-    int ind;        /* seq. ind across the fasta file */
-    int sInd;       /* starting seq. index */
-    int eInd;       /* ending seq. index */
-    
-
-    sInd = maxSeqRange*(rank - sRank);
-    eInd = sInd + maxSeqRange - 1;
-    eInd = (eInd > nSeqs-1) ? (nSeqs-1) : eInd;
-
-    printf("rank=%d, sInd=%d, eInd=%d\n", rank, sInd, eInd);
+    int index = -1;
+    int flag = 0;
+    int seqCnt = 0;
+    FILE *fp = NULL;
+    int maxSeqLen = 0;
 
     fp = efopen(seqFile, "r");
-
-    ind = 0;
-    *maxSeqLen = 0;
     line = emalloc(MAX_FASTA_LINE_LEN*(sizeof *line));
+
     while(fgets(line, MAX_FASTA_LINE_LEN, fp)){
-
-        /* skip fasta file header */
-        if(line[0] == FASTA_TAG) continue;
-
-        strLen = strlen(line) - 1 ; 
+        strLen = strlen(line);
         assert(strLen < MAX_FASTA_LINE_LEN);
-        line[strLen] = '\0';
 
-        if(*maxSeqLen < strLen) *maxSeqLen = strLen;
-
-        if(ind >= sInd && ind <= eInd){
-            seqs[ind].stat = SEQ_S;
-            seqs[ind].str = estrdup(line);
-            seqs[ind].strLen = strLen;
-            seqs[ind].cnt = 0;
-        }else{
-            seqs[ind].stat = SEQ_N;
-            seqs[ind].str = NULL;
-            seqs[ind].strLen = strLen;
-            seqs[ind].cnt = 0;
+        line[strLen-1] = '\0';
+        if(msl == 1){
+            if(strLen > maxSeqLen) maxSeqLen = strLen;
         }
-        ind++;
+        
+        if(line[0] == FASTA_FLAG){
+            index++;
+            if(idList[index] == 1){
+                flag = 1;
+            }
+
+        } else if(flag == 1 && isalpha(line[0])){
+            seqs[index].strLen = strLen - 1; 
+            seqs[index].str = estrdup(line);
+            seqCnt++;
+
+            /* loading finished here, no need to continue */
+            if(seqCnt == seqSize && msl == 0) break;
+            flag = 0;
+        }
     }
 
     free(line);
     fclose(fp);
 
-    return (eInd - sInd + 1);
+    return maxSeqLen;
 }
 
-/* -----------------------------------------------------------------------*
- * free seqs according to passing tag to release some memory
+
+
+/* ---------------------------------------------------*
+ * free memory used by *seqs
+ * 
+ * @param seqs - sequence structure
+ * @param ids - free seq[i] iff (ids[i] == 1)
+ * @param nSeqs - #(seqs)
  *
- * @param seqs - 
- * @param nSeqs - #seqs
- * @param tag - mark which seqs need to be released
- * -----------------------------------------------------------------------*/
-void freeSeqs(SEQ *seqs, int nSeqs, int tag){
+ * ---------------------------------------------------*/
+void freeSeqs(SEQ *seqs, int *ids, int nSeqs){
     int i;
+    int cnt = 0;
     
-    /* free dynamically fetched seqs */
-    if(tag == 0){
-        for(i = 0; i < nSeqs; i++){
-            if(seqs[i].stat == SEQ_F && seqs[i].cnt == 0){
-                free(seqs[i].str);
-                seqs[i].stat = SEQ_N;
-            }
+    for(i = 0; i < nSeqs; i++){
+        if(ids[i] == 1){
+            cnt++;
+            free(seqs[i].str);
+            ids[i] = 0;
         }
-    /* free statically cached seqs */
-    }else if(tag == 1){
-        for(i = 0; i < nSeqs; i++){
-            if(seqs[i].stat == SEQ_S) free(seqs[i].str);
+    }
+
+}
+
+
+/* ---------------------------------------------------*
+ * generate random *ids for loading seqs
+ *
+ * @param ids - which elems need to be loaded
+ * @param idSize - the size of *ids
+ * @param idCnt - #(elems) needs to be filled
+ * 
+ * ---------------------------------------------------*/
+void randIds(int *ids, int idSize, int idCnt){
+    int i; 
+    int r;
+    int j;
+    
+    /* need to cache all seqs */
+    if(idCnt >= idSize){
+        for(i = 0; i < idSize; i++)
+            ids[i] = 1;
+
+        return;
+    }
+
+    /* init all ids */
+    for(i = 0; i < idSize; i++){
+        ids[i] = 0;
+    }
+
+    for(i = 0; i < idCnt; i++){
+        r = rand()%idSize;
+        if(ids[r] == 0) ids[r] = 1;
+        else{
+            /* linear probing to find first empty spot */
+            for(j = 0; j < idSize; j++){
+
+                /* find first spot */
+                if(ids[j] == 0){
+                    ids[j] = 1;
+                    break; 
+                }
+            }
         }
     }
 }
 
+/* -------------------------------------------------------------*
+ * check against statically cached seqs in *cIds, then mark down
+ * which seqs are required to be loaded from disk. 
+ * 
+ * NOTE: every time check only min(batch, pBuf->data) in pBuf
+ *
+ * @param cIds - a map indicating statically cached seqs
+ * @param dIds - a map indicating the dynamically required seqs
+ * @param nSeqs - total #(fasta seqs)
+ * @param pBuf - pair buf 
+ * @param pBufSize - pair buffer size
+ * @param batch - expected batch size need to check *pBuf
+ *
+ * -------------------------------------------------------------*/
+int filterIds(int *cIds, int *dIds, int nSeqs, PBUF *pBuf, int pBufSize, int batch){
+    int i;
+    int tail;
+    int elems;
 
+    /* init dIds into 0 */
+    for(i = 0; i < nSeqs; i++){
+        dIds[i] = 0;
+    }
+
+    elems = (pBuf->data >= batch)? batch : pBuf->data;
+
+    tail = pBuf->tail;
+    for(i = 0; i < elems; i++){
+        if(pBuf->buf[tail].tag == TAG_E) continue;
+        if(pBuf->buf[tail].tag == TAG_S) continue;
+
+        if(cIds[pBuf->buf[tail].id1] == 0) dIds[pBuf->buf[tail].id1] = 1;
+        if(cIds[pBuf->buf[tail].id2] == 0) dIds[pBuf->buf[tail].id2] = 1;
+
+        tail++;
+        tail %= pBufSize;
+    }
+    
+    int cnt = 0;
+    for(i = 0; i < nSeqs; i++){
+        if(dIds[i] == 1) cnt++;
+    }
+
+    return cnt;
+}

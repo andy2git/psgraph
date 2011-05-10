@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <semaphore.h>
 #include <time.h>
-#include <mpi.h>
+
+#include "mpi.h"
 #include "type.h"
 #include "elib.h"
 #include "lib.h"

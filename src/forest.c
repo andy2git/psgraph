@@ -1,13 +1,3 @@
-/*
- * $Rev: 806 $ 
- * $Date: 2010-09-12 12:57:22 -0700 (Sun, 12 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #include "forest.h"
 
 /* ----------------------------------------------------------------*
@@ -22,13 +12,14 @@
  * @return #strees loaded in
  * 
  * ----------------------------------------------------------------*/
-int loadForest(FILE *fp, FOREST *forest, int frSize, char *line, int sIndex, int *tIndex){
+
+int loadForest(FILE *fp, FOREST *forest, int frSize, int sIndex, int *tIndex){
     int fIndex = -1;
     int eIndex = sIndex + frSize - 1;
-
-    /* allocate it on heap to save valuable stack space */
+    char line[STREE_MAX_LEN]; /* TODO how to know it in advance? */
     int stSize;
     int stIndex = -1;
+
     int sfIndex = 0;
     int sfSize;
     int m;   /* index for lset */
@@ -37,7 +28,6 @@ int loadForest(FILE *fp, FOREST *forest, int frSize, char *line, int sIndex, int
 
     STNODE *st = NULL;
     SUFFIX *sf = NULL;
-
 
     while(fgets(line, STREE_MAX_LEN, fp)){
         strLen = strlen(line);
@@ -100,7 +90,6 @@ int loadForest(FILE *fp, FOREST *forest, int frSize, char *line, int sIndex, int
         assert(stIndex == stSize - 1);
     }
 
-
     return (fIndex+1);
 } 
 
@@ -114,8 +103,8 @@ int loadForest(FILE *fp, FOREST *forest, int frSize, char *line, int sIndex, int
  * @param pBufSize - pair buffer size
  *
  * ----------------------------------------------------------------*/
-void processForest(int groupID, int master, char *frFile, char *cfgFile, int nSeqs, int *dup, char *line, PBUF *pBuf, int pBufSize, int *isStart, 
-                        MSG *chunk, int chunkSize, double *iTime, double *aTime, MPI_Request *request, MPI_Datatype msgMdt, MPI_Comm *comm){
+void processForest(int groupID, int master, char *frFile, char *cfgFile, int nSeqs, PBUF *pBuf, int pBufSize, int *isStart, 
+                        MSG *chunk, int chunkSize, double *iTime, MPI_Request *request, MPI_Datatype msgMdt, MPI_Comm *comm){
 
     int frSize = getCfgVal(cfgFile, "PD_ForestSize");
     int exactMatch = getCfgVal(cfgFile, "ExactMatchLen");
@@ -125,22 +114,18 @@ void processForest(int groupID, int master, char *frFile, char *cfgFile, int nSe
     FILE *fp = NULL;
     int tIndex = -1;
     int *srtIndex = NULL;  /* sorted array based on stnode.depth */
+    int *dup = NULL;       /* duplicated entried reduction */
     int i;
     double t1, t2;
-    double t3, t4;
     u64 nPairs;
 
-    t3 = cTime();
-
     fp = efopen(frFile, "r");
+    dup = emalloc(nSeqs*(sizeof *dup));
 
-    while(1){
+    do{
         t1 = cTime();
-        cnt = loadForest(fp, forest, frSize, line, sIndex, &tIndex);
+        cnt = loadForest(fp, forest, frSize, sIndex, &tIndex);
         t2 = cTime();
-
-        if(cnt == 0) break; /* break of while(1) loop */
-
         printf("Group[%d] - PD: %d strees loaded from <%s> in <%.2lf> secs, cnt=%d\n", groupID, cnt, frFile, (t2-t1), cnt);
 
         for(i = 0; i < cnt; i++){
@@ -151,27 +136,22 @@ void processForest(int groupID, int master, char *frFile, char *cfgFile, int nSe
             t2 = cTime();
             printf("Group[%d] - PD: stNodes sorted in <%.2lf> secs\n", groupID, (t2-t1));
 
-            t1 = cTime();
             nPairs = genPairs(master, forest[i].stree, srtIndex, forest[i].stSize, nSeqs, exactMatch, 
-                            dup, pBuf, pBufSize, chunk, chunkSize, isStart, iTime, aTime, msgMdt, request, comm);
-            t2 = cTime();
+                            dup, pBuf, pBufSize, chunk, chunkSize, isStart, iTime, msgMdt, request, comm);
 
-            printf("Group[%d] - PD: <%llu> pairs generated from <%s> in <%.2lf>secs\n", groupID, nPairs, frFile, (t2-t1));
+            printf("Group[%d] - PD: <%llu> pairs generated from <%s>\n", groupID, nPairs, frFile);
             
 
             free(srtIndex);
         }
 
         freeForest(forest, cnt);
+        
         sIndex += cnt;
-    }
+    }while(cnt > 0);
 
+    free(dup);
     fclose(fp);
-
-    t4 = cTime();
-
-    printf("Group[%d] - PD: DONE process <%s> in <%.2lf> secs\n", groupID, frFile, (t4-t3));
-
 }
 
 

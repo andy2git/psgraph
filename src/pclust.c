@@ -1,20 +1,9 @@
-/*
- * $Rev: 810 $ 
- * $Date: 2010-09-15 22:40:44 -0700 (Wed, 15 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
 
 #include "mpi.h"
-#include "lib.h"
 #include "type.h"
 #include "timer.h"
 #include "cfg.h"
@@ -30,8 +19,8 @@ static char gOutPath[MAX_FILENAME_LEN];
 static char gSeqFile[MAX_FILENAME_LEN];
 static int gN;   /* #(fasta seqs) */
 static int gF;   /* #(tree files) */
-static int groupSize;  
-static int pdSize;  /* #producers in each subgroup */
+static int groupSize;  /* #producers */
+static int pdSize;
 
 int optCK(int rank, int argc, char **argv);
 
@@ -58,7 +47,7 @@ int main(int argc, char **argv){
 
     if(optCK(gRank, argc, argv) != 7){
         if(gRank == 0){
-            printf("Usage : %s -f {forestpath} -s {fasta} -n {#seqs} -c {cfgfile} -g {groupsize} -p {pdSize}-o {outputpath}\n", argv[0]);
+            printf("Usage : %s -f {forest path} -s {fasta} -n {#seqs} -c {cfg file} -g {group size} -p {pdSize} -o {output path}\n", argv[0]);
         }
 	    exit(-1);
     }
@@ -70,7 +59,7 @@ int main(int argc, char **argv){
     int nGroup;
     
     /* TODO: need to check a group has at least 3 procs */
-    nGroup = flr(procs, groupSize);
+    nGroup = procs/groupSize;
 
     if(gRank == 0){
         printf("---------------------------------------------------\n");
@@ -132,7 +121,7 @@ int main(int argc, char **argv){
 
     MPI_Type_free(&msgMdt);
     MPI_Finalize();
-    return EXIT_SUCCESS;
+    exit(EXIT_SUCCESS);
 }
 
 
@@ -144,7 +133,7 @@ int optCK(int rank, int argc, char **argv){
 		switch (option){
 		    case '?':
                 if(rank == 0){
-                    printf("Usage : %s -f {forestpath} -s {fasta} -n {#seqs} -c {cfgfile} -g {groupsize} -p {pdSize} -o {outputpath}\n", argv[0]);
+                    printf("Usage : %s -f {forest path} -s {fasta} -n {#seqs} -c {cfg file} -g {group size} -p {pdSize} -o {output path}\n", argv[0]);
                 }
 			    exit(-1);
 		    case 'f':
@@ -159,16 +148,16 @@ int optCK(int rank, int argc, char **argv){
                 gN = atoi(optarg);
 			    cnt++;
 			    break;
-		    case 'p':
-                pdSize = atoi(optarg);
-			    cnt++;
-			    break;
             case 'c':
                 strcpy(gCfgFile, optarg);
                 cnt++;
                 break;
             case 'g':
                 groupSize = atoi(optarg);
+                cnt++;
+                break;
+            case 'p':
+                pdSize = atoi(optarg);
                 cnt++;
                 break;
             case 'o':

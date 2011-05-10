@@ -1,379 +1,332 @@
-/*
- * $Rev: 810 $ 
- * $Date: 2010-09-15 22:40:44 -0700 (Wed, 15 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- * This file ONLY performs consumers task!
- *  1. recv pairs from master node
- *  2. report status to master node
- *  3. send strs to other consumers if needed
- *  4. pairwise seq. alignment! - most import one!!
- */
-
 #include "consumer.h"
 
-/* 
- * @param master
- * @param groupID
- * @param groupSize
- * @param rank
- * @param seqFile
- * @param nSeqs
- * @param cfgFile
- * @param outPath
- * @param msgMdt
- * @param comm
+/* ---------------------------------------------------------*
  *
- */
-void consumer(int master, int groupID, int groupSize, int pdSize, int rank, char *seqFile, int nSeqs, char *cfgFile, char *outPath,
+ * @param rank - local rank
+ *
+ *
+ * ---------------------------------------------------------*/
+void consumer(int master, int groupID, int gSize, int pdSize, int rank, char *seqFile, int nSeqs, char *cfgFile, char *outPath,
                  MPI_Datatype msgMdt, MPI_Comm *comm){
 
-    int isEnd = 0;
-    int edge;
+    MPI_Request request;
+    MPI_Status status;
+
+    MSG *msg = NULL;
+    MSG cReq;
+    int isSent = 0;
+    MPI_Request sdReq;
+    MPI_Status sdStat;
+
+    int csSize; /* consumer size within each subgroup */
+
+    int rvMaxBatch;
+    int rvMsgCnt;
     int completed;
-    int csSize;
-    int sRank;
-    int shrinkSize = 1;
+    int bufLimit;
     int swtch = 1;
+    int shrinkSize = 1;
 
     FILE *fp = NULL;
     char outFile[MAX_NAME_LEN];
 
+
     PBUF pBuf;
     int pBufSize;     
-    int pBufLimit;
-
-    /* seqs structure */
+    MSG pair;
+    u64 nAln = 0UL;
+    
     SEQ *seqs = NULL;
-    int maxSeqRange;
     int maxSeqLen = 0;
 
-    /* -------------------------- *
-     *         recv info
-     * -------------------------- */
+    /* statically cached seqs */
+    int *cIds = NULL; 
+    int cSeqSize;
 
-    /* recved pairs from master */
-    MSG *msg = NULL;
-    int rvMaxBatch;
-    int rvMsgCnt;
+    /* dynamically loaded seqs */
+    int *dIds = NULL; 
+    int dBatchSize;
+    int dCnt = 0;  /* seqs not in *cIds */
+    int pCnt = 0;
 
-    /* seqReq buffer for recving seq request */
-    int *rvReqBuf = NULL; 
-    int rvReqBufSize;      
-    int rvReqBufCnt;
-
-    /* recved seq strs */
-    char *rvStr = NULL;
-    int maxStrSize;
-    int rvStrSize;
-    char *upBuf = NULL;
-
-    /* ------------ *
-       0 - msg
-       1 - seq req
-       2 - seq 
-     * ------------ */
-    MPI_Request rvReq[IRECV_NUM];
-    MPI_Status rvStat;
-    int rvInd;
-
-
-    /* -------------------------- *
-     *         send info
-     * -------------------------- */
-    SPOOL sPool;
-    int sPoolSize;
-
-    RPOOL rPool;
-    int rPoolSize;
-    int *map = NULL; /* for track down res. */
-    int mapSize;
-
-    CPOOL cPool;
-    int cPoolSize;
-
-    MSG csMsg;
-
-    /* -------------------------- *
-     *       seq. alignment 
-     * -------------------------- */
     CELL result;
-    MSG pair;
     int f1, f2;
+    int flag = 0;
 
     CELL **tbl = NULL;
     int **del = NULL;
     int **ins = NULL;
     PARAM param;
 
-    double aTime = 0.0f;    /* alignment time */
-    double a2aTime = 0.0f;  /* all-to-all overhead */
-    double ioTime = 0.0f;   /* output edges into disk */
-    double wTime = 0.0f;    /* loop waiting time */
-    double t1, t2;
-    u64 nAln = 0ul;
-    u64 nFetIds = 0ul;
-    u64 nLoop = 0ul;
-    u64 nByte = 0ul;
-    u64 nStat = 0ul;
-    u64 nSave = 0ul;
 
+    /*----------------*
+     * time profiling *
+     *----------------*/
+    double wTime = 0.0f;  /* waiting time */
+    double aTime = 0.0f;  /* alignment time */
+    double ioTime = 0.0f; /* io time */
+    double asTime = 0.0f;  /* MPI asyn comm time */
+    double sTime = 0.0f;  /* MPI syn comm time */
+    double tTime = 0.0f;  /* MPI Test time */
+    double t1, t2;
+
+
+    csSize = gSize - pdSize - 1;
 
     /* cached seqs size */
-    shrinkSize = getCfgVal(cfgFile, "Buf_ShrinkSize");
+    //cSeqSize = getCfgVal(cfgFile, "CS_NumOfPreCachedSeqs");
+    cSeqSize = nSeqs/csSize;
+    dBatchSize = getCfgVal(cfgFile, "CS_MaxDynamicSeqs");
     rvMaxBatch = getCfgVal(cfgFile, "CS_PairRecvMaxBatch");
+    shrinkSize = getCfgVal(cfgFile, "Buf_ShrinkSize");
     param.AOL = getCfgVal(cfgFile, "AlignOverLongerSeq");
     param.SIM = getCfgVal(cfgFile, "MatchSimilarity");
     param.OS = getCfgVal(cfgFile, "OptimalScoreOverSelfScore");
     
-
-    sRank = master + pdSize + 1;    
-    csSize = groupSize - pdSize - 1; 
-    pBufLimit = rvMaxBatch;
-    maxSeqRange = flr(nSeqs, csSize);
-    rvReqBufSize = maxSeqRange;
-
-    sPoolSize = 2*csSize;
-    rPoolSize = 4*csSize;
-    cPoolSize = 4*R_SIZE;
-    mapSize = groupSize;
+    
+    bufLimit = rvMaxBatch;
     pBufSize = 8*rvMaxBatch;  /* maximum buffer size */
+    initBuf(&pBuf, pBufSize);
 
     seqs = emalloc(nSeqs*(sizeof *seqs));
-
-    /* load partial seqs locally */
-    loadStaticSeqs(rank, sRank, seqFile, seqs, nSeqs, maxSeqRange, &maxSeqLen);
-    
-    /* STR FORMAT: CNT id str\0 id str\0 .... */
-    maxStrSize = maxRangeSum(seqs, nSeqs, maxSeqRange);
-    maxStrSize += ((maxSeqRange+1)*sizeof(int)); /* +1 for CNT */
-
-
-    initBuf(&pBuf, pBufSize);
-    initSPool(&sPool, sPoolSize, maxStrSize);
-    map = malloc(mapSize*(sizeof *map));
-    initRPool(&rPool, rPoolSize, maxSeqRange);
-    initCPool(&cPool, cPoolSize);
-
-
+    cIds = emalloc(nSeqs*(sizeof *cIds));
+    dIds = ecalloc(nSeqs, sizeof *dIds);  /* ids need to be loaded in */
     msg = emalloc(rvMaxBatch*(sizeof *msg));
-    rvStr = emalloc(maxStrSize*(sizeof *rvStr));
-    rvReqBuf = emalloc(rvReqBufSize*(sizeof *rvReqBuf));
-    upBuf = emalloc((maxSeqLen+1)*(sizeof *upBuf)); /* +1 for '\0' at the end */
-
 
     /* open file for output */
     sprintf(outFile, "%s/pout_%d_%d", outPath, groupID, rank);
     fp = efopen(outFile, "w");
 
-    /* allocate mem for seq alignment */
+
+    /* cache some static random seqs */
+    randIds(cIds, nSeqs, cSeqSize);
+    maxSeqLen = cacheSeqs(seqFile, seqs, nSeqs, cIds, cSeqSize, 1); 
+
     assert(NROW == 2);
     tbl = allocTBL(NROW, maxSeqLen);
     del = allocINT(NROW, maxSeqLen);
     ins = allocINT(NROW, maxSeqLen);
 
 
-    printf("Group[%d] - cs%d, My master is %d, csSize=%d\n", groupID, rank, master, csSize);
-    printf("Group[%d] - cs%d, rvmaxBatch=%d, rvReqBufSize=%d, maxStrSize=%d\n", groupID, rank, rvMaxBatch, rvReqBufSize, maxStrSize);
+    printf("Group[%d] - cs%d, My master is %d\n", groupID, rank, master);
+    t1 = cTime();
+    MPI_Irecv(msg, rvMaxBatch, msgMdt, MPI_ANY_SOURCE, MSG_MC_TAG, *comm, &request);
+    t2 = cTime();
+    asTime += (t2 - t1);
 
-    MPI_Irecv(msg, rvMaxBatch, msgMdt, MPI_ANY_SOURCE, MSG_MC_TAG, *comm, rvReq);
-    MPI_Irecv(rvReqBuf, rvReqBufSize, MPI_INT, MPI_ANY_SOURCE, MSG_CR_TAG, *comm, rvReq+1);
-    MPI_Irecv(rvStr, maxStrSize, MPI_PACKED, MPI_ANY_SOURCE, MSG_CS_TAG, *comm, rvReq+2);
-
+    flag = 1;
     while(1){
-        t1 = cTime();
-        MPI_Testany(IRECV_NUM, rvReq, &rvInd, &completed, &rvStat);
-        t2 = cTime();
-        wTime += (t2 -t1);
-        if(completed) {
-            switch(rvInd){
-                /* -----------------------------*
-                 * pairs from master
-                 * -----------------------------*/
-                case 0:
-                    MPI_Get_count(&rvStat, msgMdt, &rvMsgCnt);
-                    //printf("Group[%d] - cs%d, recv %d pairs from master\n", groupID, rank, rvMsgCnt);
-                    enBuf(&pBuf, pBufSize, msg, rvMsgCnt);
 
-                    /* shrink rvMaxBatch Size for better Load Balancing */
-                    if(swtch == 1 && (shrinkSize*rvMsgCnt == rvMaxBatch || shrinkSize*rvMsgCnt*2 == rvMaxBatch)) {
-                        pBufLimit /= shrinkSize;
-                        swtch = 0;
-                    }  
+        if(pBuf.data > 0){
+            
+            if(pCnt == 0){
+                t1 = cTime();
 
-                    if(msg[0].tag == TAG_S || msg[0].tag == TAG_K){
-                        /* NO NEED TO PREPARE SEQS FOR THIS MSG */
-                    }else{
-                        t1 = cTime();
-                        prepSeqReq(sRank, msg, rvMsgCnt, seqs, nSeqs, map, mapSize, &rPool, rPoolSize, maxSeqRange, &nFetIds, &nStat, &nSave);
-                        sendSeqReq(rank, sRank, &rPool, rPoolSize, map, mapSize, comm);
+                /* initially nothing will happen for freeSeqs() */
+                freeSeqs(seqs, dIds, nSeqs);
 
-                        /* free those unneeded seqs */
-                        freeSeqs(seqs, nSeqs, 0);
-                        t2 = cTime();
-                        a2aTime += (t2 - t1);
-                    }
+                dCnt = filterIds(cIds, dIds, nSeqs, &pBuf, pBufSize, dBatchSize);
 
-                    MPI_Irecv(msg, rvMaxBatch, msgMdt, MPI_ANY_SOURCE, MSG_MC_TAG, *comm, rvReq);
-                    break;
-                /* -----------------------------*
-                 * seq reqs from other consumer
-                 * -----------------------------*/
-                case 1:
-                    t1 = cTime();
-                    MPI_Get_count(&rvStat, MPI_INT, &rvReqBufCnt);
-                    //printf("Group[%d] - cs%d, recv %d seq. Req. from other consumers\n", groupID, rank, rvReqBufCnt);
+                /* cacheSeqs will call fopen(), so try to avoid cacheSeqs() */
+                if(dCnt > 0){
+                    //printf("Group[%d] - cs%d: need to cache %d seqs\n", groupID, rank, dCnt);
+                    cacheSeqs(seqFile, seqs, nSeqs, dIds, dCnt, 0);
+                }
 
-                    prepStr(rank, rvReqBuf, rvReqBufCnt, seqs, nSeqs, rvStat.MPI_SOURCE, &sPool, sPoolSize, maxStrSize, comm);
-                    t2 = cTime();
-                    a2aTime += (t2 - t1);
-                    
-                    //printf("Group[%d] - cs%d, send str to cs%d\n", groupID, rank, rvStat.MPI_SOURCE);
+                t2 = cTime();
+                ioTime += (t2 - t1);
 
-                    MPI_Irecv(rvReqBuf, rvReqBufSize, MPI_INT, MPI_ANY_SOURCE, MSG_CR_TAG, *comm, rvReq+1);
-                    break;
-                /* -----------------------------*
-                 * seq str from other consumer
-                 * -----------------------------*/
-                case 2:
-                    t1 = cTime();
-                    MPI_Get_count(&rvStat, MPI_CHAR, &rvStrSize);
-                    //printf("Group[%d] - cs%d, recv %d strs from cs%d\n", groupID, rank, rvStrSize, rvStat.MPI_SOURCE);
+                /* #pairs's seqs have been covered */
+                pCnt = (pBuf.data >= dBatchSize)? dBatchSize : pBuf.data;;
+            }
+            
 
-                    upackStr(rvStr, rvStrSize, seqs, nSeqs, upBuf, &nByte, comm);
-                    t2 = cTime();
-                    a2aTime += (t2 - t1);
+            /* Align sequences */
+            t1 = cTime();
+            pCnt--;
+            deBuf(&pBuf, pBufSize, &pair, 1, NULL);
 
-                    MPI_Irecv(rvStr, maxStrSize, MPI_PACKED, MPI_ANY_SOURCE, MSG_CS_TAG, *comm, rvReq+2);
-                    break;
-                default: 
-                    eprintf("Group[%d] - rank %d recv some UNEXPECTED MSG from rank %d", groupID, rank, rvStat.MPI_SOURCE);
+
+            /* end of program, send all left alignment results */
+            if(pair.tag == TAG_S){
+                cReq.tag = TAG_S;
+                cReq.id1 = 0;
+                cReq.id2 = 0;
+                
+                printf("Group[%d] - CS%d sending stop signal to Master=%d\n", groupID, rank, master);
+                MPI_Ssend(&cReq, 1, msgMdt, master, MSG_CM_TAG, *comm);
+                
+                printf("Group[%d] - CS%d, Idle <%lf> secs, I/O <%.2lf> secs, Align [%llu] pairs in <%.2lf> secs, asyn <%.2lf> secs, syn <%.2lf> secs, test <%.2lf> secs\n",
+                         groupID, rank, wTime, ioTime, nAln, aTime, asTime, sTime, tTime);
+
+                /* END OF THE PROGRAM */
+                break;
             }
 
+            f1 = pair.id1;
+            f2 = pair.id2;
+            
+            #ifdef DEBUG
+            printf("--------------------------\n");
+            printf("[%d=%d, %d=%d]\n", f1, seqs[f1].strLen, f2, seqs[f2].strLen);
+            printf("%s\n", seqs[f1].str);
+            printf("%s\n", seqs[f2].str);
+            printf("--------------------------\n");
+            #endif
+            
+            assert(seqs[f1].strLen < maxSeqLen);
+            assert(seqs[f2].strLen < maxSeqLen);
 
-        }else{
-            if(pBuf.data > 0){
-                deBuf(&pBuf, pBufSize, &pair, 1, NULL);            
-                f1 = pair.id1;
-                f2 = pair.id2;
+            affineGapAlign(seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &result, tbl, del, ins);
+            t2 = cTime();
+            aTime += (t2 - t1);
 
-                /* NO MORE PAIRS WILL COME IN FROM MASTER,
-                 * BUT SOME PAIRS MIGHT STILL BE PENDED IN PBUF
-                 */
-                if(pair.tag == TAG_S) {
-                    isEnd = 1;
-                    continue;
-                }
+            if(isEdge(&result, seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &param)){
+                t1 = cTime();
+                fprintf(fp, "%d#%d\n", f1, f2);
+                t2 = cTime();
+                ioTime += (t2 - t1);
+            }
 
-                /* NEED TO STOP THE PROGRAM */
-                if(pair.tag == TAG_K){
-                    printf("Group[%d] - cs%d, recv KILL signal from master\n", groupID, rank);
-                    printf("Group[%d] - CS%d, Align [%llu] pairs <%.2lf> secs."
-                            " nFetIds=%llu  nStat=%llu nSave=%llu -A2A <%.2lf> secs. [%llu] of wasted Loops. nBytes=%llu. "
-                            "wTime=%.2lf secs, ioTime = %.2lf secs\n",
-                                groupID, rank, nAln, aTime, 
-                                nFetIds, nStat, nSave, a2aTime, nLoop, nByte,
-                                wTime, ioTime);
-                    break; /* BREAK WHIILE(1) LOOP TO END THE PROGRAM */
-                }
+        }
 
-                /* append the unready pair at the end of the pBuf */
-                if(seqs[f1].stat == SEQ_R || seqs[f2].stat == SEQ_R) {
-                    t1 = cTime();
-                    enBuf(&pBuf, pBufSize, &pair, 1);
-                    nLoop++;
-                    t2 = cTime();
-                    wTime += (t2 - t1);
-                    continue; /* conitnue to  while(1) */
-                }
-
-                //printf("rank=%d [%d=%d, stat=%d, %d=%d, stat=%d]\n", rank, f1, seqs[f1].strLen, seqs[f1].stat, f2, seqs[f2].strLen, seqs[f2].stat);
-
-                /*assert(seqs[f1].stat);
-                assert(seqs[f2].stat);
-                assert(seqs[f1].strLen <= maxSeqLen);
-                assert(seqs[f2].strLen <= maxSeqLen);
-                printf("--------------------------\n");
-                printf("[%d=%d, stat=%d, %d=%d, stat=%d]\n", f1, seqs[f1].strLen, seqs[f1].stat, f2, seqs[f2].strLen, seqs[f2].stat);
-                printf("%s\n", seqs[f1].str);
-                printf("%s\n", seqs[f2].str);
-                printf("--------------------------\n");*/
-
-                seqs[f1].cnt--;
-                seqs[f2].cnt--;
-                nAln++;
+        /* proc has nothing to do, so it will wait there */
+        if(pBuf.data <= 0 && completed == 0){ 
+            
+            if(flag == 1){
+                flag = 0;
 
                 t1 = cTime();
-                affineGapAlign(seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &result, tbl, del, ins);
-                edge = isEdge(&result, seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &param);
+                MPI_Wait(&request, &status);
+                completed = 1;
                 t2 = cTime();
-                aTime += (t2 - t1);
-                if(edge){
-                    t1 = cTime();
-                    fprintf(fp, "%d#%d\n", f1, f2);
-                    t2 = cTime();
-                    ioTime += (t2 - t1);
-                } 
+                wTime += (t2-t1);
+                printf("Group[%d] - cs%d waiting recv for <%.2lf>secs\n", groupID, rank, t2-t1);
 
-
-                /* ---------------------------------------------------*
-                 * after a pair of seq. alignment, check pBuf stataus
-                 * and send appropriate csReq to master for pairs 
-                 * ---------------------------------------------------*/
-                if(2*pBuf.data == pBufLimit){
-                    /* send out 1/2 req. to master */ 
-                    sendStat(rank, master, R_HALF, &cPool, cPoolSize, msgMdt, comm);
-                    printf("Group[%d] - cs%d: 1/2 req send out to master\n", groupID, rank);
-                }
-            
-                if(pBuf.data == 0){
-                    /* send out 0/0 req. to master */
-                    sendStat(rank, master, R_NONE, &cPool, cPoolSize, msgMdt, comm);
-                    printf("Group[%d] - cs%d: 0/0 req send out to master\n", groupID, rank);
-                }
             }else{
-                /* No more pairs coming in, and pBuf.data = 0, 
-                 * TIME TO STOP? NO WAY!!! YOU HAVE TO WAIT!!
-                 * OTHER CONSUMERS MIGHT STILL NEED TO COMMUNICATE
-                 * WITH YOU. SO YOU SHOULD KEEP ALIVE UNTIL MASTER
-                 * NODE NOTIFIES YOU LATER!!!
-                 */ 
-                if(isEnd == 1){ 
-                    csMsg.tag = TAG_S;
-                    csMsg.id1 = 0;
-                    csMsg.id2 = 0;
-     
-                    printf("Group[%d] - CS%d sending stop signal to Master=%d\n", groupID, rank, master);
-                    MPI_Ssend(&csMsg, 1, msgMdt, master, MSG_CM_TAG, *comm);
-                    isEnd = 0;
+
+                /* wait for 1/2 req sent out */
+                if(isSent == 1) {
+                    t1 = cTime();
+                    MPI_Wait(&sdReq, &sdStat);
+                    isSent = 0;
+                    t2 = cTime();
+                    wTime += (t2-t1);
+                    printf("Group[%d] - cs%d waiting 1/2 req <%.2lf>secs\n", groupID, rank, t2-t1);
                 }
+                
+                
+                /* waiting for recving pairs from master */
+                t1 = cTime();
+                MPI_Wait(&request, &status);
+                completed = 1;
+                t2 = cTime();
+                wTime += (t2-t1);
+                printf("Group[%d] - cs%d waiting recv for <%.2lf>secs\n", groupID, rank, t2-t1);
+
+
+
+                /* -------------------------------*
+                 *       0/0 request sending 
+                 * -------------------------------*/
+                cReq.tag = TAG_C;
+                cReq.id1 = rank;
+                cReq.id2 = R_NONE;
+    
+                t1 = cTime();
+                MPI_Issend(&cReq, 1, msgMdt, master, MSG_CM_TAG, *comm, &sdReq);
+                isSent = 1;
+                t2 = cTime();
+                sTime += (t2 - t1);
+
+                printf("Group[%d] - cs%d: 0/0 req send out to Master%d in <%.2lf>\n", groupID, rank, master, t2 - t1);
             }
+        }else{
+            t1 = cTime();
+            MPI_Test(&request, &completed, &status);
+            t2 = cTime();
+            tTime += (t2 - t1);
+        }
+
+    
+        if(completed == 0){ /* Irecv not completed */
+            if(2*pBuf.data == bufLimit){
+
+                /* wait for 0/0 req sent out */
+                if(isSent == 1) {
+                    t1 = cTime();
+                    MPI_Wait(&sdReq, &sdStat);
+                    isSent = 0;
+                    t2 = cTime();
+                    wTime += (t2-t1);
+                    printf("Group[%d] - cs%d waiting 0/0 req <%.2lf>secs\n", groupID, rank, t2-t1);
+                }
+
+
+                /* -------------------------------*
+                 *       1/2 request sending 
+                 * -------------------------------*/
+                cReq.tag = TAG_C;
+                cReq.id1 = rank;
+                cReq.id2 = R_HALF;
+                
+                t1 = cTime();
+                MPI_Issend(&cReq, 1, msgMdt, master, MSG_CM_TAG, *comm, &sdReq);
+                isSent = 1;
+                t2 = cTime();
+                sTime += (t2 - t1);
+            
+                printf("Group[%d] - cs%d: 1/2 req send out to Master%d in <%.2lf> secs\n", groupID, rank, master, t2 - t1);
+    
+            } 
+        }else if(completed == 1){
+            
+            t1 = cTime();
+            MPI_Get_count(&status, msgMdt, &rvMsgCnt);
+            t2 = cTime();
+            tTime += (t2 - t1);
+
+            printf("Group[%d] - cs%d: recved %d from Master%d, data=%d, PBUFSize=%d\n",
+                     groupID, rank, rvMsgCnt, master, pBuf.data, pBufSize);
+
+
+            enBuf(&pBuf, pBufSize, msg, rvMsgCnt);
+            nAln += rvMsgCnt;
+
+            /* shrink rvMaxBatch Size for better Load Balancing */
+            if(swtch == 1 && (shrinkSize*rvMsgCnt == rvMaxBatch || shrinkSize*rvMsgCnt*2 == rvMaxBatch)) {
+                bufLimit /= shrinkSize;
+                swtch = 0;
+            }
+
+
+            t1 = cTime();
+            MPI_Irecv(msg, rvMaxBatch, msgMdt, MPI_ANY_SOURCE, MSG_MC_TAG, *comm, &request);
+            t2 = cTime();
+            asTime += (t2 - t1);
+
+            printf("Group[%d] - cs%d: posting Irecv\n", groupID, rank);
+            completed = 0;
+        }else{
+            printf("Group[%d] - [cs%d] : something is WRONG!\n", groupID, rank);
+            exit(0);
         }
     }
 
+    
+    printf("Group[%d] - [cs%d] : I AM DONE!\n", groupID, rank);
 
     /* free memory */
-    freeRPool(&rPool, rPoolSize);
-    free(map);
-    freeSPool(&sPool, sPoolSize);
-    freeCPool(&cPool);
-    freeBuf(&pBuf);
-    free(msg);
-
-    freeSeqs(seqs, nSeqs, 1);
-    free(seqs);
-
-    free(rvStr);
-    free(rvReqBuf);
-    free(upBuf);
-
+    freeSeqs(seqs, cIds, nSeqs);
+    fclose(fp);
 
     freeTBL(tbl, NROW);
     freeINT(del, NROW);
     freeINT(ins, NROW);
 
-    fclose(fp);
+    freeBuf(&pBuf);
+    free(seqs);
+    free(cIds);
+    free(dIds);
+    free(msg);
 }

@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include <mpi.h>
+
+#include "mpi.h"
 #include "type.h"
 #include "timer.h"
 #include "buffer.h"

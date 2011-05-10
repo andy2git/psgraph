@@ -1,13 +1,3 @@
-/*
- * $Rev: 804 $ 
- * $Date: 2010-09-12 12:19:33 -0700 (Sun, 12 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #include "pairs.h"
 
 /*---------------------------------------------------------------*
@@ -29,7 +19,7 @@
  *
  *---------------------------------------------------------------*/
 u64 genPairs(int master, STNODE *stNodes, int *srtIndex, int nStNodes, int nSeqs, int EM, int *dup, PBUF *pBuf, int pBufSize, 
-            MSG *chunk, int chunkSize, int *isStart, double *iTime, double *aTime, MPI_Datatype msgMdt, MPI_Request *request, MPI_Comm *comm){
+            MSG *chunk, int chunkSize, int *isStart, double *iTime, MPI_Datatype msgMdt, MPI_Request *request, MPI_Comm *comm){
     int i;
     int j;
     int r;
@@ -45,7 +35,6 @@ u64 genPairs(int master, STNODE *stNodes, int *srtIndex, int nStNodes, int nSeqs
     u64 nPairs = 0;
     double t1, t2;
 
-
     /* srtIndex maintain an order of NON-increasing depth of stNodes[] */
     for(i = 0; i < nStNodes; i++){
         sIndex = srtIndex[i];
@@ -57,7 +46,7 @@ u64 genPairs(int master, STNODE *stNodes, int *srtIndex, int nStNodes, int nSeqs
 
         if(stnode->depth >= EM-1){
             if(stnode->rLeaf == sIndex){ /* leaf node */
-                procLeaf(master, stnode->lset, pBuf, pBufSize, chunk, chunkSize, isStart, &nPairs, iTime, aTime, msgMdt, request, comm);
+                procLeaf(master, stnode->lset, pBuf, pBufSize, chunk, chunkSize, isStart, &nPairs, iTime, msgMdt, request, comm);
             }else{                       /* internal node */
                 eIndex = stnode->rLeaf;
 
@@ -79,8 +68,7 @@ u64 genPairs(int master, STNODE *stNodes, int *srtIndex, int nStNodes, int nSeqs
                                                     dup[p->sid] = p->sid;
                                                 }else{
                                                     continue;
-                                                }
-
+                                                } 
 
                                                 for(q = stNodes[n].lset[t]; q != NULL; q = q->next){
                                                     f1 = p->sid;
@@ -103,10 +91,7 @@ u64 genPairs(int master, STNODE *stNodes, int *srtIndex, int nStNodes, int nSeqs
 
                                                         /* buf is almost full, so deBuf will definitely get some pairs out */
                                                         deBuf(pBuf, pBufSize, chunk, chunkSize, NULL);
-                                                        t1 = cTime();    
                                                         MPI_Issend(chunk, chunkSize, msgMdt, master, MSG_PM_TAG, *comm, request);
-                                                        t2 = cTime();    
-                                                        *aTime += (t2 - t1);
                                                         enBuf(pBuf, pBufSize, &msg, 1);
                                                         continue;
                                                     }
@@ -175,8 +160,8 @@ u64 genPairs(int master, STNODE *stNodes, int *srtIndex, int nStNodes, int nSeqs
  * @param pBuf -
  * @param pBufSize - 
  *---------------------------------------------------------------*/
-void procLeaf(int master, SUFFIX **lset, PBUF *pBuf, int pBufSize, MSG *chunk, int chunkSize, int *isStart, u64 *nPairs, 
-                    double *iTime, double *aTime, MPI_Datatype msgMdt, MPI_Request *request, MPI_Comm *comm){
+void procLeaf(int master, SUFFIX **lset, PBUF *pBuf, int pBufSize, MSG *chunk, int chunkSize, int *isStart, u64 *nPairs, double *iTime,
+            MPI_Datatype msgMdt, MPI_Request *request, MPI_Comm *comm){
     int i;
     int j;
     SUFFIX *p = NULL;
@@ -213,10 +198,7 @@ void procLeaf(int master, SUFFIX **lset, PBUF *pBuf, int pBufSize, MSG *chunk, i
 
                             /* cbuf is almost full, so deBuf() will definitely get some pairs */
                             deBuf(pBuf, pBufSize, chunk, chunkSize, NULL);
-                            t1 = cTime();   
                             MPI_Issend(chunk, chunkSize, msgMdt, master, MSG_PM_TAG, *comm, request);
-                            t2 = cTime();
-                            *aTime += (t2 - t1);
                             enBuf(pBuf, pBufSize, &msg, 1);
                             continue;
                         }
@@ -265,10 +247,7 @@ void procLeaf(int master, SUFFIX **lset, PBUF *pBuf, int pBufSize, MSG *chunk, i
 
                                 /* buf is almost full, so deBuf() will definitely get some pairs */
                                 deBuf(pBuf, pBufSize, chunk, chunkSize, NULL);
-                                t1 = cTime();
                                 MPI_Issend(chunk, chunkSize, msgMdt, master, MSG_PM_TAG, *comm, request);
-                                t2 = cTime();
-                                *aTime += (t2 - t1);
                                 enBuf(pBuf, pBufSize, &msg, 1);
                                 continue;
                             }

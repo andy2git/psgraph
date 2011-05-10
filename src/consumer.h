@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
-#include <mpi.h>
+
+#include "mpi.h"
 #include "type.h"
 #include "timer.h"
 #include "dtype.h"
@@ -13,14 +14,10 @@
 #include "buffer.h"
 #include "loadseq.h"
 #include "dynamic.h"
-#include "cslib.h"
-#include "rpool.h"
-#include "spool.h"
 
 #define MAX_NAME_LEN 100
-#define IRECV_NUM 3
 
-void consumer(int master, int groupID, int groupSize, int pdSize, int rank, char *seqFile, int nSeqs, char *cfgFile, char *outPath,
+void consumer(int master, int groupID, int gSize, int pdSize, int rank, char *seqFile, int nSeqs, char *cfgFile, char *outPath,
                  MPI_Datatype msgMdt, MPI_Comm *comm);
 
 #endif /* end of consumer.h */

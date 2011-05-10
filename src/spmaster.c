@@ -1,31 +1,5 @@
-/*
- * $Rev: 810 $ 
- * $Date: 2010-09-15 22:40:44 -0700 (Wed, 15 Sep 2010) $ 
- * $Author: Andy $
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- * Supermaster is in charge of suffix trees dispatch and pairs 
- * redistribution among subgroups!
- * 
- * Pairs on supermaster are buffered from producers (when they are 
- * done with pair generation, and have some surplus pairs). In this
- * way, subgroup w/o enough pairs supply are helped by supermaster
- * for pairs supply.
- */
-
 #include "spmaster.h"
 
-/* -----------------------------------------------------*
- * @param gSize - subgroup size
- * @param pdSize - #(producers) in each subgroup
- * @param nGroup - #(groups) in the whole system
- * @param procs - total #processors
- * @param cfgFile - configuration file to read parameters
- * @param msgMdt - derived mpi msg type
- * @param nFiles - #(max. number of forest files)
- * -----------------------------------------------------*/
 void spMaster(int gSize, int pdSize, int nGroup, int procs, char *cfgFile, MPI_Datatype msgMdt, int nFiles){
     MPI_Request rvReq;
     MPI_Status rvStat; 
@@ -40,7 +14,7 @@ void spMaster(int gSize, int pdSize, int nGroup, int procs, char *cfgFile, MPI_D
     PBUF pBuf;
     int pBufSize;
 
-    MSG **sBuf = NULL;  /* sBuf is allocated for all master nodes in each subgroup */
+    MSG **sBuf = NULL;
     int *start = NULL;
     int *done = NULL;
     int *sent = NULL;
