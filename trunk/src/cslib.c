@@ -1,6 +1,6 @@
 /*
- * $Rev: 808 $ 
- * $Date: 2010-09-15 15:37:53 -0700 (Wed, 15 Sep 2010) $ 
+ * $Rev$ 
+ * $Date$ 
  * $Author$
  *
  * Copyright 2010 Washington State University. All rights reserved.
