@@ -1,3 +1,13 @@
+/*
+ * $Rev$ 
+ * $Date$ 
+ * $Author$
+ *
+ * Copyright 2010 Washington State University. All rights reserved.
+ * ----------------------------------------------------------------
+ *
+ */
+
 #ifndef CONSUMER_H_
 #define CONSUMER_H_
 

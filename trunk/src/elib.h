@@ -1,3 +1,13 @@
+/*
+ * $Rev$ 
+ * $Date$ 
+ * $Author$
+ *
+ * Copyright 2010 Washington State University. All rights reserved.
+ * ----------------------------------------------------------------
+ *
+ */
+
 #ifndef E_LIB_H_
 #define E_LIB_H_
 
