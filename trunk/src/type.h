@@ -86,6 +86,7 @@ typedef struct stnode{
     struct suff *lset[SIGMA];    /* subtree's nodes branched according to left characters */
 }STNODE;
 
+
 /**
  * seq info for fasta file
  */
