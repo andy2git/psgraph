@@ -1,3 +1,13 @@
+/*
+ * $Rev$ 
+ * $Date$ 
+ * $Author$
+ *
+ * Copyright 2010 Washington State University. All rights reserved.
+ * ----------------------------------------------------------------
+ *
+ */
+
 #ifndef TYPE_H_
 #define TYPE_H_
 

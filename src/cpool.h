@@ -1,3 +1,13 @@
+/*
+ * $Rev$ 
+ * $Date$ 
+ * $Author$
+ *
+ * Copyright 2010 Washington State University. All rights reserved.
+ * ----------------------------------------------------------------
+ *
+ */
+
 #ifndef CPOOL_H_
 #define CPOOL_H_
 
