@@ -1,7 +1,7 @@
 /*
  * $Rev: 810 $ 
  * $Date: 2010-09-15 22:40:44 -0700 (Wed, 15 Sep 2010) $ 
- * $Author: Andy $
+ * $Author$
  *
  * Copyright 2010 Washington State University. All rights reserved.
  * ----------------------------------------------------------------
