@@ -28,7 +28,7 @@
  * @param comm
  *
  */
-void consumer(int master, int groupID, int groupSize, int pdSize, int rank, char *seqFile, int nSeqs, char *cfgFile, char *outPath,
+void consumer(int master, int groupID, int groupSize, int pdSize, int rank, char *seqFile, int nSeqs, int mark, char *cfgFile, char *outPath,
                  MPI_Datatype msgMdt, MPI_Comm *comm){
 
     int isEnd = 0;
@@ -307,7 +307,13 @@ void consumer(int master, int groupID, int groupSize, int pdSize, int rank, char
                 nAln++;
 
                 t1 = cTime();
-                affineGapAlign(seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &result, tbl, del, ins);
+                if(mark == 0){
+                    affineGapAlign(seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &result, tbl, del, ins);
+                }else if(mark == 1){
+                    affineGapGlobalAlign(seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &result, tbl, del, ins);
+                }else{
+                    printf("wrong mark=%d, pls check your -m options\n", mark);
+                }
                 edge = isEdge(&result, seqs[f1].str, seqs[f1].strLen, seqs[f2].str, seqs[f2].strLen, &param);
                 t2 = cTime();
                 aTime += (t2 - t1);

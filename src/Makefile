@@ -1,8 +1,8 @@
 CC = mpicc
 LD = mpicc
 TARGET	= pclust
-CFLAGS  = -Wall -c -g
-XFLAGS  = -Wall -c -g
+CFLAGS  = -Wall -c -O2
+XFLAGS  = -Wall -c -O2
 LIBS	= -lm
 OBJECTS = elib.o \
     cfg.o \

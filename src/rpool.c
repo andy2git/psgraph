@@ -5,14 +5,7 @@
  *
  * Copyright 2010 Washington State University. All rights reserved.
  * ----------------------------------------------------------------
- * This file maintains a pool of seq. req. resource. 
- * A resource takes the following format:
- *   ----------------------
- *    char stat;
- *    int *ids;
- *    int cnt;
- *    MPI_Request req; 
- *   ----------------------
+ *
  */
 
 #include "rpool.h"

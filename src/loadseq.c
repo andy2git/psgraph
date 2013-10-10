@@ -55,14 +55,12 @@ int loadStaticSeqs(int rank, int sRank, char *seqFile, SEQ *seqs, int nSeqs, int
 
         if(*maxSeqLen < strLen) *maxSeqLen = strLen;
 
-        
-        /* cache seqs into mem if they are under the range */
         if(ind >= sInd && ind <= eInd){
             seqs[ind].stat = SEQ_S;
             seqs[ind].str = estrdup(line);
             seqs[ind].strLen = strLen;
             seqs[ind].cnt = 0;
-        }else{/* just store the seq. length info in the *seqs struct */
+        }else{
             seqs[ind].stat = SEQ_N;
             seqs[ind].str = NULL;
             seqs[ind].strLen = strLen;

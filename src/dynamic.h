@@ -1,13 +1,3 @@
-/*
- * $Rev$ 
- * $Date$ 
- * $Author$
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #ifndef DYNAMIC_H_
 #define DYNAMIC_H_
 
@@ -70,6 +60,7 @@ void freeINT(int **tbl, int nrow);
 
 void ffineGapAlign(char *s1, int s1Len, char *s2, int s2Len, CELL *result, CELL **tbl, int **del, int **ins);
 void affineGapAlign(char *s1, int s1Len, char *s2, int s2Len, CELL *result, CELL **tbl, int **del, int **ins);
+void affineGapGlobalAlign(char *s1, int s1Len, char *s2, int s2Len, CELL *result, CELL **tbl, int **del, int **ins);
 void printRow(CELL **tbl, int i, int ncol);
 
 int isEdge(CELL *result, char *s1, int s1Len, char *s2, int s2Len, PARAM *param);
