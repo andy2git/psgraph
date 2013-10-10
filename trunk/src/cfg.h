@@ -1,13 +1,3 @@
-/*
- * $Rev$ 
- * $Date$ 
- * $Author$
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #ifndef CFG_H_
 #define CFG_H_
 

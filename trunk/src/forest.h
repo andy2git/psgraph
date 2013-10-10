@@ -1,13 +1,3 @@
-/*
- * $Rev$ 
- * $Date$ 
- * $Author$
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #ifndef STREE_H_
 #define STREE_H_
 

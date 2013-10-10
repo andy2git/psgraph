@@ -1,13 +1,3 @@
-/*
- * $Rev$ 
- * $Date$ 
- * $Author$
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #ifndef TYPE_H_
 #define TYPE_H_
 
@@ -95,7 +85,6 @@ typedef struct stnode{
     int rLeaf;                  /* right most leaf index */
     struct suff *lset[SIGMA];    /* subtree's nodes branched according to left characters */
 }STNODE;
-
 
 /**
  * seq info for fasta file

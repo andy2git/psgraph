@@ -349,6 +349,113 @@ void affineGapAlign(char *s1, int s1Len, char *s2, int s2Len, CELL *result, CELL
     * result = * maxRecord;
 }
 
+void affineGapGlobalAlign(char *s1, int s1Len, char *s2, int s2Len, CELL *result, CELL **tbl, int **del, int **ins){
+    int i, j;
+    int maxScore;
+    CELL * maxRecord;
+
+    CELL * tblCR;
+    CELL * tblPR;
+    int  * delCR;
+    int  * delPR;
+
+    tblCR = tbl[0];
+    delCR = del[0];
+
+    /* init first row of 3 tables */
+    tblCR[0].score = 0;
+    tblCR[0].ndig = 0;
+    tblCR[0].alen = 0;
+    delCR[0] = 0;
+    
+    for (j = 1; j <= s2Len; j++){
+        tblCR[j].score = OPEN + j * GAP;
+        tblCR[j].ndig = 0;
+        tblCR[j].alen = 0;
+
+        delCR[j] = MIN_VAL;
+    }
+
+    maxScore  = tblCR[s2Len].score;
+    maxRecord = tblCR + s2Len;
+
+    for (i = 1; i <= s1Len; i++){
+        char ch1 = s1[i-1];
+        int * BlosumRow = blosum62[map[ch1 - 'A']];
+
+        int cr = CROW(i);
+        int pr = PROW(i);
+        tblCR  = tbl[cr];
+        tblPR  = tbl[pr];
+        delCR  = del[cr];
+        delPR  = del[pr];
+
+        /* j = 0 */
+        int ins    = MIN_VAL;
+
+        int Nscore = tblPR[0].score;
+        int Nndig  = tblPR[0].ndig;
+        int Nalen  = tblPR[0].alen;
+
+        int Wscore = OPEN + i * GAP;
+        int Wndig  = 0;
+        int Walen  = 0;
+
+        delCR[0]       = OPEN + i * GAP;
+        tblCR[0].score = Wscore;
+        tblCR[0].ndig  = Wndig;
+        tblCR[0].alen  = Walen;
+
+        for (j = 1; j <= s2Len; j++){
+            char ch2    = s2[j-1];
+            int NWscore = Nscore;
+            int NWndig  = Nndig;
+            int NWalen  = Nalen;
+
+            Nscore = tblPR[j].score;
+            Nndig  = tblPR[j].ndig;
+            Nalen  = tblPR[j].alen;
+
+            int up   = MAX(Nscore + OPEN, delPR[j]) + GAP;
+            int left = MAX(Wscore + OPEN, ins     ) + GAP;
+            int dig  = NWscore + BlosumRow[map[ch2 - 'A']];
+
+            delCR[j] = up;
+            ins      = left;
+            
+            if ((dig >= up) && (dig >= left)) {
+                Wscore = dig;
+                Wndig  = NWndig + (ch1 == ch2);
+                Walen  = NWalen + 1;
+            } else if (up >= left) {
+                Wscore = up;
+                Wndig  = Nndig;
+                Walen  = Nalen + 1;
+            } else {
+                Wscore = left;
+                Wndig  = Wndig;
+                Walen  = Walen + 1;
+            }
+
+            tblCR[j].score = Wscore;
+            tblCR[j].ndig  = Wndig;
+            tblCR[j].alen  = Walen;
+        }
+
+        /* comment out for global alignment */
+        /* if (Wscore > maxScore) {maxScore = Wscore; maxRecord = tblCR + s2Len;} */
+ 
+    } /* end of i loop */
+
+    /* tblCR = tbl[ CROW(s1Len) ];
+    for (j = 0; j <= s2Len; j++)
+        if (tblCR[j].score > maxScore) {maxScore = tblCR[j].score; maxRecord = tblCR + j;}
+        *result = *maxRecord;
+     */       
+
+    tblCR = tbl[ CROW(s1Len) ];
+    *result = tblCR[s2Len];
+}
 
 void printRow(CELL **tbl, int i, int ncol){
     int j;

@@ -1,13 +1,3 @@
-/*
- * $Rev$ 
- * $Date$ 
- * $Author$
- *
- * Copyright 2010 Washington State University. All rights reserved.
- * ----------------------------------------------------------------
- *
- */
-
 #ifndef CONSUMER_H_
 #define CONSUMER_H_
 
@@ -30,7 +20,7 @@
 #define MAX_NAME_LEN 100
 #define IRECV_NUM 3
 
-void consumer(int master, int groupID, int groupSize, int pdSize, int rank, char *seqFile, int nSeqs, char *cfgFile, char *outPath,
+void consumer(int master, int groupID, int groupSize, int pdSize, int rank, char *seqFile, int nSeqs, int mark, char *cfgFile, char *outPath,
                  MPI_Datatype msgMdt, MPI_Comm *comm);
 
 #endif /* end of consumer.h */

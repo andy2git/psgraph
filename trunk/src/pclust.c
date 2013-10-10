@@ -24,6 +24,7 @@
 #include "spmaster.h"
 
 
+/* static variables for getopt() */
 static char gCfgFile[MAX_FILENAME_LEN];
 static char gForestPath[MAX_FILENAME_LEN];
 static char gOutPath[MAX_FILENAME_LEN];
@@ -32,6 +33,7 @@ static int gN;   /* #(fasta seqs) */
 static int gF;   /* #(tree files) */
 static int groupSize;  
 static int pdSize;  /* #producers in each subgroup */
+static int gM;   /* global or semiglobal algnment */
 
 int optCK(int rank, int argc, char **argv);
 
@@ -56,9 +58,9 @@ int main(int argc, char **argv){
     //setbuf(stdout, (char *)0);
     //setbuf(stderr, (char *)0);
 
-    if(optCK(gRank, argc, argv) != 7){
+    if(optCK(gRank, argc, argv) != 8){
         if(gRank == 0){
-            printf("Usage : %s -f {forestpath} -s {fasta} -n {#seqs} -c {cfgfile} -g {groupsize} -p {pdSize}-o {outputpath}\n", argv[0]);
+            printf("Usage : %s -f {forestpath} -s {fasta} -n {#seqs} -m {0 or 1} -c {cfgfile} -g {groupsize} -p {pdSize} -o {outputpath}\n", argv[0]);
         }
 	    exit(-1);
     }
@@ -83,7 +85,7 @@ int main(int argc, char **argv){
         printf("---------------------------------------------------\n");
 
         if(procs%groupSize > 0 && procs%groupSize < 4){
-            printf("wrong group Size and procs ratio\n");
+            printf("wrong group Size and procs ratio, procs=%d, groupsize=%d\n", procs, groupSize);
         }
     }
 
@@ -124,7 +126,7 @@ int main(int argc, char **argv){
     }else{
         lm = 0;
         if(groupID >= nGroup) groupSize -= 1;
-        consumer(lm, groupID, groupSize, pdSize, key, gSeqFile, gN, gCfgFile, gOutPath, msgMdt, &intraComm);
+        consumer(lm, groupID, groupSize, pdSize, key, gSeqFile, gN, gM, gCfgFile, gOutPath, msgMdt, &intraComm);
         t2 = cTime();
         printf("CS%d: finished in <%.2lf> secs\n", gRank, t2-t1);
     }
@@ -140,11 +142,11 @@ int optCK(int rank, int argc, char **argv){
 	int option;
 	int cnt = 0;
 	
-	while(-1 != (option = getopt(argc, argv, "f:s:n:c:g:p:o:"))){
+	while(-1 != (option = getopt(argc, argv, "f:s:n:c:g:p:o:m:"))){
 		switch (option){
 		    case '?':
                 if(rank == 0){
-                    printf("Usage : %s -f {forestpath} -s {fasta} -n {#seqs} -c {cfgfile} -g {groupsize} -p {pdSize} -o {outputpath}\n", argv[0]);
+                    printf("Usage : %s -f {forestpath} -s {fasta} -n {#seqs} -m {0 or 1} -c {cfgfile} -g {groupsize} -p {pdSize} -o {outputpath}\n", argv[0]);
                 }
 			    exit(-1);
 		    case 'f':
@@ -169,6 +171,10 @@ int optCK(int rank, int argc, char **argv){
                 break;
             case 'g':
                 groupSize = atoi(optarg);
+                cnt++;
+                break;
+            case 'm':
+                gM = atoi(optarg);
                 cnt++;
                 break;
             case 'o':
